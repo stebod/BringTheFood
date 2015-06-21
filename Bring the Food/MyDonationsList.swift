@@ -18,12 +18,12 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
     private var secondaryMessageLabel: UILabel?
     private let textCellIdentifier = "TextCell"
     private var requestStatus: RequestStatus?
-    var delegate: DisplayDetail? = nil
+    var delegate: DisplayMyDetail? 
     
     
     
     // Initializer
-    public init(myAvailableDonationsList: [StoredDonation]!, myBookedDonationsList: [StoredDonation]!, myHistoricDonationsList: [StoredDonation]!){
+    public init(myAvailableDonationsList: [MyDonation]!, myBookedDonationsList: [MyDonation]!, myHistoricDonationsList: [MyDonation]!){
         donations.append(DonationsList(donationName: "Available donations", donationList: myAvailableDonationsList))
         donations.append(DonationsList(donationName: "Booked donations", donationList: myBookedDonationsList))
         donations.append(DonationsList(donationName: "Historic donations", donationList: myHistoricDonationsList))
@@ -172,10 +172,10 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
 
 struct DonationsList {
     
-    var donationsList : [StoredDonation]!
+    var donationsList : [MyDonation]!
     var donationName: String
 
-    init(donationName: String, donationList: [StoredDonation]!){
+    init(donationName: String, donationList: [MyDonation]!){
         self.donationName = donationName
         self.donationsList = donationList
     }

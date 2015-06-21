@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol DisplayDetail {
-    func displayDetail(chosenDonation: StoredDonation)
+protocol DisplayBookedDetail {
+    func displayDetail(chosenDonation: BookedDonation)
 }

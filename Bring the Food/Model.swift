@@ -22,11 +22,11 @@ public class Model : NSObject{
     
     // per fare in modo che il costruttore non sia accessibile all'esterno della classe
     private override init() {
-        let othersDon = [StoredDonation]()
+        let othersDon = [OthersDonation]()
         self.othersDonations = OthersDonationsList(othersDonationsList: othersDon)
-        let myAvDon = [StoredDonation]()
-        let myBookedDon = [StoredDonation]()
-        let myHistDon = [StoredDonation]()
+        let myAvDon = [MyDonation]()
+        let myBookedDon = [MyDonation]()
+        let myHistDon = [MyDonation]()
         self.myDonations = MyDonationsList(myAvailableDonationsList: myAvDon, myBookedDonationsList: myBookedDon, myHistoricDonationsList: myHistDon)
         let myBooks = [BookedDonation]()
         self.myBookings = BookingsList(bookingsList: myBooks)

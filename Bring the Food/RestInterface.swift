@@ -380,13 +380,15 @@ public class RestInterface : NSObject{
                     if self.cachedRequest(notification_key)! {
                         self.storeResponseInCache(notification_key, data: data)
                     }
-                    ModelUpdater.getInstance().notifySuccess(notification_key, data: data)
+                    ModelUpdater.getInstance().notifySuccess(notification_key, data: data, cachedResponse: false)
                 case 400, 401, 403, 404, 409, 422: ModelUpdater.getInstance().notifyDataError(notification_key)
                 default :
                     if self.cachedRequest(notification_key)! {
                         self.lookForResponseInCache(notification_key, networkStatus: RequestStatus.NETWORK_ERROR)
                     }
-                    ModelUpdater.getInstance().notifyNetworkError(notification_key)
+                    else {
+                        ModelUpdater.getInstance().notifyNetworkError(notification_key)
+                    }
                 }
             }
             else{
@@ -394,7 +396,9 @@ public class RestInterface : NSObject{
                 if self.cachedRequest(notification_key)! {
                     self.lookForResponseInCache(notification_key, networkStatus: RequestStatus.DEVICE_ERROR)
                 }
-                ModelUpdater.getInstance().notifyDeviceError(notification_key)
+                else{
+                    ModelUpdater.getInstance().notifyDeviceError(notification_key)
+                }
             }
         })
         
@@ -417,7 +421,7 @@ public class RestInterface : NSObject{
         
         if data != nil {
             
-            ModelUpdater.getInstance().notifySuccess(notificationKey, data: data!)
+            ModelUpdater.getInstance().notifySuccess(notificationKey, data: data!, cachedResponse: true)
             
         } else {
             if networkStatus == RequestStatus.DEVICE_ERROR {

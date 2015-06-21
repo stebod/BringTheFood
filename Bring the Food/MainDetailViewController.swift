@@ -28,7 +28,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var emailLabel: UILabel!
     
     // Variables populated from prepareForSegue
-    var donation: StoredDonation?
+    var donation: OthersDonation?
     
     // Private variables
     private let regionRadius: CLLocationDistance = 250

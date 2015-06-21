@@ -66,7 +66,7 @@ public class ModelUpdater : NSObject{
         )
     }
     
-    public func notifySuccess(notification_key : String, data : NSData){
+    public func notifySuccess(notification_key : String, data : NSData, cachedResponse : Bool!){
         
         //parsing json
         var jsonError: NSError?
@@ -79,11 +79,19 @@ public class ModelUpdater : NSObject{
                 
                 handleData(notification_key, json: json)
                 
-                NSNotificationCenter.defaultCenter().postNotificationName(
-                    notification_key,
-                    object: self,
-                    userInfo: ["info" : HTTPResponseData(RequestStatus.SUCCESS)]
-                )
+                if !cachedResponse! {
+                    NSNotificationCenter.defaultCenter().postNotificationName(
+                        notification_key,
+                        object: self,
+                        userInfo: ["info" : HTTPResponseData(RequestStatus.SUCCESS)]
+                    )
+                } else {
+                    NSNotificationCenter.defaultCenter().postNotificationName(
+                        notification_key,
+                        object: self,
+                        userInfo: ["info" : HTTPResponseData(RequestStatus.CACHE)]
+                    )
+                }
             }
             else{
                 //if !success
@@ -110,9 +118,9 @@ public class ModelUpdater : NSObject{
             RestInterface.getInstance().setUserCredentials(userId, singleAccessToken: singleAccessToken)
             
         case getMyDonationNotificationKey :
-            var availableDonationList = [StoredDonation]()
-            var bookedDonationList = [StoredDonation]()
-            var historicDonationList = [StoredDonation]()
+            var availableDonationList = [MyDonation]()
+            var bookedDonationList = [MyDonation]()
+            var historicDonationList = [MyDonation]()
             var resultList : [NSDictionary]! = json["result"] as! [NSDictionary]!
             for e in resultList {
                 
@@ -168,7 +176,7 @@ public class ModelUpdater : NSObject{
             Model.getInstance().setMyDonationsList(myList)
             
         case getOthersDonationNotificationKey :
-            var othersDonationList = [StoredDonation]()
+            var othersDonationList = [OthersDonation]()
             var resultList : [NSDictionary]! = json["result"] as! [NSDictionary]!
             for e in resultList {
                 

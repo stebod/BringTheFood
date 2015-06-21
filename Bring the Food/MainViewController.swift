@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, FilterProtocol, DisplayDetail {
+class MainViewController: UIViewController, FilterProtocol, DisplayOthersDetail {
     
     // Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -19,7 +19,7 @@ class MainViewController: UIViewController, FilterProtocol, DisplayDetail {
     // Private variables
     private var filterState: FilterState = FilterState()
     private var othersDonationsList: OthersDonationsList?
-    private var chosenDonation: StoredDonation?
+    private var chosenDonation: OthersDonation?
     
     // Observers
     private weak var donationsObserver: NSObjectProtocol?
@@ -116,7 +116,7 @@ class MainViewController: UIViewController, FilterProtocol, DisplayDetail {
     }
     
     // Delegate for triggering detail segue
-    func displayDetail(chosenDonation: StoredDonation) {
+    func displayDetail(chosenDonation: OthersDonation) {
         self.chosenDonation = chosenDonation
         performSegueWithIdentifier("goToDetail", sender: nil)
     }

@@ -12,19 +12,19 @@ import UIKit
 public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     // Private variables
-    private var othersDonationsList: [StoredDonation]!
-    private var othersDonationsFilteredList: [StoredDonation]!
+    private var othersDonationsList: [OthersDonation]!
+    private var othersDonationsFilteredList: [OthersDonation]!
     private var emptyTableView: UIView?
     private var mainMessageLabel: UILabel?
     private var secondaryMessageLabel: UILabel?
     private let textCellIdentifier = "TextCell"
     private var requestStatus: RequestStatus?
-    var delegate: DisplayDetail? = nil
+    var delegate: DisplayOthersDetail? 
     
     
     
     // Initializer
-    public init(othersDonationsList: [StoredDonation]!){
+    public init(othersDonationsList: [OthersDonation]!){
         self.othersDonationsList = othersDonationsList
         othersDonationsFilteredList = othersDonationsList
     }
@@ -140,7 +140,7 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
     }
     
     // Check if each donation match the filtering criteria
-    private func respectFilter(filterState: FilterState, donation: StoredDonation) -> Bool {
+    private func respectFilter(filterState: FilterState, donation: OthersDonation) -> Bool {
         if(donation.getProductType().description == "fresh" && !filterState.isFreshFood){
             return false
         }

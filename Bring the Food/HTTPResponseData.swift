@@ -19,5 +19,5 @@ public class HTTPResponseData : AnyObject{
 }
 
 public enum RequestStatus {
-    case NOT_LOGGED_IN, DEVICE_ERROR, NETWORK_ERROR, DATA_ERROR, SUCCESS
+    case NOT_LOGGED_IN, DEVICE_ERROR, NETWORK_ERROR, DATA_ERROR, SUCCESS, CACHE
 }

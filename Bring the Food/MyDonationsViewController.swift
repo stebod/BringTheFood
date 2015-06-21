@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyDonationsViewController: UIViewController, DisplayDetail {
+class MyDonationsViewController: UIViewController, DisplayMyDetail {
     
     // Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -17,7 +17,7 @@ class MyDonationsViewController: UIViewController, DisplayDetail {
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
     
     // Private variables
-    private var chosenDonation: StoredDonation?
+    private var chosenDonation: MyDonation?
     
     // Observers
     private weak var donationsObserver:NSObjectProtocol?
@@ -90,7 +90,7 @@ class MyDonationsViewController: UIViewController, DisplayDetail {
     }
     
     // Delegate for triggering detail segue
-    func displayDetail(chosenDonation: StoredDonation) {
+    func displayDetail(chosenDonation: MyDonation) {
         self.chosenDonation = chosenDonation
         performSegueWithIdentifier("goToMyDetail", sender: nil)
     }
