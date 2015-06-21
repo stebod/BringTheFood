@@ -43,10 +43,6 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate {
     
     
     
-    deinit{
-        println("detail")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()
