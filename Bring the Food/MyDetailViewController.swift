@@ -59,6 +59,11 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate {
         imageDownloader?.downloadImage()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(userImageObserver)
+        super.viewWillDisappear(animated)
+    }
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }

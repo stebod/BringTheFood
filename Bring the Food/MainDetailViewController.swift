@@ -43,6 +43,10 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate {
     
     
     
+    deinit{
+        println("detail")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()
@@ -50,7 +54,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate {
     
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
-        imageDownloader = ImageDownloader(url: donation!.getSupplier().getImageURL())
+        imageDownloader = ImageDownloader(url: donation?.getSupplier().getImageURL())
         // Register notification center observer
         userImageObserver = NSNotificationCenter.defaultCenter().addObserverForName(imageDownloadNotificationKey,
             object: imageDownloader,
@@ -59,6 +63,11 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate {
         imageDownloader?.downloadImage()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(userImageObserver)
+        super.viewWillDisappear(animated)
+    }
+
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
