@@ -13,6 +13,10 @@ class SettingsViewController: UIViewController {
     // Outlets
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var availabilityLabel: UILabel!
     
     // Interface colors
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
@@ -27,6 +31,10 @@ class SettingsViewController: UIViewController {
     private var imageDownloader: ImageDownloader?
     
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
@@ -52,6 +60,9 @@ class SettingsViewController: UIViewController {
         if(response?.status == RequestStatus.SUCCESS){
             let user = Model.getInstance().getCurrentUser()
             nameLabel.text = user?.getName()
+            emailLabel.text = user?.getEmail()
+            phoneLabel.text = user?.getPhone()
+            addressLabel.text = user?.getAddress().getLabel()
             imageDownloader = ImageDownloader(url: user?.getImageURL())
             // Register notification center observer
             userImageObserver = NSNotificationCenter.defaultCenter().addObserverForName(imageDownloadNotificationKey,
