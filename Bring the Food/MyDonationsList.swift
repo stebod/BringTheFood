@@ -29,6 +29,21 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
         donations.append(DonationsList(donationName: "Historic donations", donationList: myHistoricDonationsList))
     }
     
+
+    public func getBookedDonationsWithId(donationId : Int!) -> MyDonation? {
+        for donList in donations {
+            if donList.donationName == "Booked donations" {
+                for temp in donList.donationsList {
+                    if temp.getId() == donationId {
+                        return temp
+                    }
+                }
+                return nil
+            }
+        }
+        return nil
+    }
+    
     // Set number of section in table
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if(!donations[0].donationsList.isEmpty || !donations[1].donationsList.isEmpty || !donations[2].donationsList.isEmpty){

@@ -67,6 +67,16 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
     //*********************************************************************************
     // MY DONATION PROTOCOL
     //*********************************************************************************
+    public func downloadDonationCollector(){
+        if !(self.isValid! && self.hasOpenBookings!){
+            return
+        }
+        RestInterface.getInstance().getCollectorOfDonation(self.id)
+    }
+    
+    public func getId() -> Int! {
+        return self.id
+    }
     
     public func getHasOpenBookings() -> Bool!{
         return hasOpenBookings
