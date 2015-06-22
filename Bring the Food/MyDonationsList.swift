@@ -173,7 +173,7 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
     }
 }
 
-struct DonationsList {
+public struct DonationsList {
     
     var donationsList : [MyDonation]!
     var donationName: String
