@@ -12,8 +12,7 @@ import UIKit
 public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate  {
     
     // Private variables
-    private var currentBookingsList: [BookedDonation]!
-    private var historicBookingsList: [BookedDonation]!
+    private var donations: [DonationsList]! = []
     private var emptyTableView: UIView?
     private var mainMessageLabel: UILabel?
     private var secondaryMessageLabel: UILabel?
@@ -24,13 +23,13 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     
     // Initializer
     public init(currentBookingsList: [BookedDonation]!, historicBookingsList: [BookedDonation]!){
-        self.currentBookingsList = currentBookingsList
-        self.historicBookingsList = historicBookingsList
+        donations.append(DonationsList(donationName: "Not withdrawn donations", donationList: currentBookingsList))
+        donations.append(DonationsList(donationName: "Withdrawn donations", donationList: historicBookingsList))
     }
     
     // Set number of section in table
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if(currentBookingsList.count > 0){
+        if(!donations[0].donationsList.isEmpty || !donations[1].donationsList.isEmpty){
             if(emptyTableView != nil){
                 emptyTableView?.hidden = true
             }
@@ -55,14 +54,16 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     
     // Set number of rows in each section
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentBookingsList.count
+        let donationsInSection = donations[section]
+        return donationsInSection.donationsList.count
     }
     
     // Build the cell
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         
-        let row = indexPath.row
+        let donationsInSection = donations[indexPath.section]
+        let donation = donationsInSection.donationsList[indexPath.row]
         let mainLabel = cell.viewWithTag(1000) as! UILabel
         let addressLabel = cell.viewWithTag(1001) as! UILabel
         let expirationLabel = cell.viewWithTag(1002) as! UILabel
@@ -72,7 +73,7 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
         let ltIcon = cell.viewWithTag(1006) as! UIImageView
         let portionIcon = cell.viewWithTag(1007) as! UIImageView
         
-        mainLabel.text = currentBookingsList[row].getDescription()
+        mainLabel.text = donation.getDescription()
         addressLabel.numberOfLines = 2
         let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
         if (iOS8) {
@@ -81,13 +82,13 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
             let screenWidth = UIScreen.mainScreen().bounds.width
             addressLabel.preferredMaxLayoutWidth = screenWidth - 89;
         }
-        addressLabel.text = currentBookingsList[row].getSupplier().getAddress().getLabel()
-        expirationLabel.text = String(currentBookingsList[row].getRemainingDays()) + "d"
-        if(currentBookingsList[row].getRemainingDays() > 20){
+        addressLabel.text = donation.getSupplier().getAddress().getLabel()
+        expirationLabel.text = String(donation.getRemainingDays()) + "d"
+        if(donation.getRemainingDays() > 20){
             alarmIcon.hidden = true
         }
-        amountLabel.text = "\(currentBookingsList[row].getParcelSize())"
-        let parcelUnit = currentBookingsList[row].getParcelUnit()
+        amountLabel.text = "\(donation.getParcelSize())"
+        let parcelUnit = donation.getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
             kgIcon.hidden = false
             ltIcon.hidden = true
@@ -111,16 +112,16 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let row = indexPath.row
-        println(currentBookingsList[row])
+        println("ciao")
     }
     
     // Set section titles
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if(requestStatus == RequestStatus.SUCCESS){
-            return "Booked donations"
+        if(requestStatus != RequestStatus.SUCCESS){
+            return donations[section].donationName + " (offline mode)"
         }
-        if(requestStatus == RequestStatus.CACHE){
-            return "Booked donations (offline mode)"
+        if(requestStatus != RequestStatus.CACHE){
+            return donations[section].donationName
         }
         return ""
     }
@@ -169,5 +170,16 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
         emptyTableView!.addConstraint(yConstraint)
         tableView.backgroundView = emptyTableView;
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    }
+}
+
+private struct DonationsList {
+    
+    var donationsList : [BookedDonation]!
+    var donationName: String
+    
+    init(donationName: String, donationList: [BookedDonation]!){
+        self.donationName = donationName
+        self.donationsList = donationList
     }
 }
