@@ -81,12 +81,12 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
             let screenWidth = UIScreen.mainScreen().bounds.width
             addressLabel.preferredMaxLayoutWidth = screenWidth - 89;
         }
-        addressLabel.text = bookingsList[row].getSupplier().getAddress().getLabel()
-        expirationLabel.text = String(bookingsList[row].getRemainingDays()) + "d"
+        addressLabel.text = currentBookingsList[row].getSupplier().getAddress().getLabel()
+        expirationLabel.text = String(currentBookingsList[row].getRemainingDays()) + "d"
         if(currentBookingsList[row].getRemainingDays() > 20){
             alarmIcon.hidden = true
         }
-        amountLabel.text = "\(bookingsList[row].getParcelSize())"
+        amountLabel.text = "\(currentBookingsList[row].getParcelSize())"
         let parcelUnit = currentBookingsList[row].getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
             kgIcon.hidden = false
