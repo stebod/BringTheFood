@@ -256,46 +256,64 @@ public class ModelUpdater : NSObject{
             var currentBookings = [BookedDonation]()
             var historicBookings = [BookedDonation]()
             var resultList : [NSDictionary]! = json["result"] as! [NSDictionary]!
+            
             for e in resultList {
                 
+                let bookingId = e["id"] as! Int!
                 
-                let isValid:Bool = e["live"] as! Bool!
-                let isBooked:Bool = e["has_open_bookings"] as! Bool!
+                // general info about the donation
+                let donId = e.valueForKeyPath("donation.id") as! Int!
+                let donDescription = e.valueForKeyPath("donation.description")  as! String!
+                let donParcelSize = e.valueForKeyPath("donation.parcel_size") as! Float!
+                let donParcelUnit = ParcelUnitFactory.getParcUnitFromString(e.valueForKeyPath("donation.unit") as! String!)
+                let untilDate = e.valueForKeyPath("donation.until") as! String!
+                let donProductDate = Date(dateString: prefix(untilDate, 10))
+                let donProductType = ProductTypeFactory.getProdTypeFromString(e.valueForKeyPath("donation.product_type") as! String!)
+                let donPhotoUrl = e.valueForKeyPath("donation.photo.medium") as! String!
+                let isValid:Bool = e.valueForKeyPath("donation.live") as! Bool!
+                let isBooked:Bool = e.valueForKeyPath("donation.has_open_bookings") as! Bool!
                 
-                if isValid && !isBooked {
-                    
-                    // general info about the donation
-                    let donId = e.valueForKeyPath("donation.id") as! Int!
-                    let donDescription = e.valueForKeyPath("donation.description")  as! String!
-                    let donParcelSize = e.valueForKeyPath("donation.parcel_size") as! Float!
-                    let donParcelUnit = ParcelUnitFactory.getParcUnitFromString(e.valueForKeyPath("donation.unit") as! String!)
-                    let untilDate = e.valueForKeyPath("donation.until") as! String!
-                    let donProductDate = Date(dateString: prefix(untilDate, 10))
-                    let donProductType = ProductTypeFactory.getProdTypeFromString(e.valueForKeyPath("donation.product_type") as! String!)
-                    let donPhotoUrl = e.valueForKeyPath("photo.medium") as! String!
-                    
-                    //Address of the donation
-                    let addressLabel = e.valueForKeyPath("address.label") as! String!
-                    let addressLatitude = e.valueForKeyPath("address.latitude") as! Float!
-                    let addressLongitude = e.valueForKeyPath("address.longitude") as! Float!
-                    var tempAddress = Address(label: addressLabel, latitude: addressLatitude,
-                        longitude: addressLongitude)
-                    
-                    // Supplier of the donation
-                    
-                    let supId = e.valueForKeyPath("supplier.id") as! Int!
-                    let supEmail = e.valueForKeyPath("supplier.email") as! String!
-                    let supName = e.valueForKeyPath("supplier.name") as! String!
-                    let supPhone = e.valueForKeyPath("supplier.phone") as! String!
-                    let supImageURL = e.valueForKeyPath("supplier.avatar") as! String!
-                    
-                    let supplier = User(id: supId, email: supEmail, name: supName, phone: supPhone, address: tempAddress, imageURL: supImageURL)
-                    
-                    var tempDonation = StoredDonation(id: donId, description: donDescription, parcelSize: donParcelSize, parcelUnit: donParcelUnit, productDate: donProductDate, productType: donProductType, photo_url: donPhotoUrl, supplier: supplier, isValid: isValid, hasOpenBookings: isBooked /* , collector: User!, bookingId: Int! */)
-                    
-                    //TODO:rivedere
+                //Address of the donation
+                let supAddressLabel = e.valueForKeyPath("donation.address.label") as! String!
+                let supAddressLatitude = e.valueForKeyPath("donation.address.latitude") as! Float!
+                let supAddressLongitude = e.valueForKeyPath("donation.address.longitude") as! Float!
+                var supAddress = Address(label: supAddressLabel, latitude: supAddressLatitude,
+                    longitude: supAddressLongitude)
+                
+                // Supplier of the donation
+                
+                let supId = e.valueForKeyPath("donation.supplier.id") as! Int!
+                let supEmail = e.valueForKeyPath("donation.supplier.email") as! String!
+                let supName = e.valueForKeyPath("donation.supplier.name") as! String!
+                let supPhone = e.valueForKeyPath("donation.supplier.phone") as! String!
+                let supImageURL = e.valueForKeyPath("donation.supplier.avatar") as! String!
+                
+                let supplier = User(id: supId, email: supEmail, name: supName, phone: supPhone, address: supAddress, imageURL: supImageURL)
+                
+                //Address of the donation
+                let colAddressLabel = e.valueForKeyPath("donation.address.label") as! String!
+                let colAddressLatitude = e.valueForKeyPath("donation.address.latitude") as! Float!
+                let colAddressLongitude = e.valueForKeyPath("donation.address.longitude") as! Float!
+                var colAddress = Address(label: colAddressLabel, latitude: colAddressLatitude,
+                    longitude: colAddressLongitude)
+                
+                //Collector of the donation
+                let colId = e.valueForKeyPath("collector.id") as! Int!
+                let colEmail = e.valueForKeyPath("collector.email") as! String!
+                let colName = e.valueForKeyPath("collector.name") as! String!
+                let colPhone = e.valueForKeyPath("collector.phone") as! String!
+                let colImageURL = e.valueForKeyPath("collector.avatar") as! String!
+                
+                let collector = User(id: colId, email: colEmail, name: colName, phone: colPhone, address: colAddress, imageURL: colImageURL)
+                
+                var tempDonation = StoredDonation(id: donId, description: donDescription, parcelSize: donParcelSize, parcelUnit: donParcelUnit, productDate: donProductDate, productType: donProductType, photo_url: donPhotoUrl, supplier: supplier, isValid: isValid, hasOpenBookings: isBooked, collector: collector, bookingId: bookingId)
+                
+                if isValid{
                     currentBookings.append(tempDonation)
+                } else {
+                    historicBookings.append(tempDonation)
                 }
+                
                 
             }
             
