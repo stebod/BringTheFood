@@ -10,6 +10,10 @@ import Foundation
 
 public protocol MyDonation : Donation {
 
+    func downloadDonationCollector()
+    
+    func getId() -> Int!
+    
     func getHasOpenBookings() -> Bool!
     
     func getCollector() -> User?

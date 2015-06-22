@@ -240,8 +240,7 @@ public class ModelUpdater : NSObject{
             Model.getInstance().setCurrentUser(user)
             
         case getSettingsResponseNotificationKey :
-            println("stop")
-            let localeString = json.valueForKeyPath("result.lang.locale") as! String!
+            
             let maxDistance = json.valueForKeyPath("result.charity.range") as! Int!
            
             let publishedSms = json.valueForKeyPath("result.notify_me_when.published.sms") as! Bool!
@@ -252,6 +251,11 @@ public class ModelUpdater : NSObject{
             let retractedEmail = json.valueForKeyPath("result.notify_me_when.retracted.email") as! Bool!
             let collectedSms = json.valueForKeyPath("result.notify_me_when.collected.sms") as! Bool!
             let collectedEmail = json.valueForKeyPath("result.notify_me_when.collected.email") as! Bool!
+            
+            let settings = ApplicationSettings(publishedSms: publishedSms, publishedEmail: publishedEmail, bookedSms: bookedSms, bookedEmail: bookedEmail, retractedSms: retractedSms, retractedEmail: retractedEmail, collectedSms: collectedSms, collectedEmail: collectedEmail, maxDistance: maxDistance)
+            
+            Model.getInstance().setMySettings(settings)
+            
         case getBookingsNotificationKey :
             var currentBookings = [BookedDonation]()
             var historicBookings = [BookedDonation]()
@@ -319,6 +323,35 @@ public class ModelUpdater : NSObject{
             
             let bookingsList = BookingsList(currentBookingsList: currentBookings, historicBookingsList: historicBookings)
             Model.getInstance().setMyBookings(bookingsList)
+            
+        case getCollectorOfDonationNotificationKey:
+            
+            var resultList : [NSDictionary]! = json["result"] as! [NSDictionary]!
+            
+            // le donazioni create da peer possono avere un solo beneficiario
+            let e = resultList[0]
+            
+            let donationId = e.valueForKeyPath("result.donation.id") as! Int!
+            
+            let addressLabel = e.valueForKeyPath("result.collector.address.label") as! String!
+            let addressLatitude = e.valueForKeyPath("result.collector.address.latitude") as! Float!
+            let addressLongitude = e.valueForKeyPath("result.collector.address.longitude") as! Float!
+            var userAddress = Address(label: addressLabel, latitude: addressLatitude,
+                longitude: addressLongitude)
+            
+            let userId = e.valueForKeyPath("result.collector.id") as! Int!
+            let userEmail = e.valueForKeyPath("result.collector.email") as! String!
+            let userName = e.valueForKeyPath("result.collector.name") as! String!
+            let userPhone = e.valueForKeyPath("result.collector.phone") as! String!
+            let userImageURL = e.valueForKeyPath("result.collector.avatar") as! String!
+            
+            let user = User(id: userId, email: userEmail, name: userName, phone: userPhone, address: userAddress, imageURL: userImageURL)
+            
+            let donationToUpdate:MyDonation? = Model.getInstance().getMyDonationsList().getBookedDonationsWithId(donationId)
+            
+            if donationToUpdate != nil{
+                donationToUpdate!.setCollector(user)
+            }
             
         default: break
             

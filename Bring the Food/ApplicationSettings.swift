@@ -19,9 +19,8 @@ public class ApplicationSettings{
     private var collectedSms: Bool!
     private var collectedEmail: Bool!
     private var maxDistance: Int!
-    private var locale: NSLocale!
     
-    public init(publishedSms : Bool!, publishedEmail : Bool!, bookedSms: Bool!, bookedEmail : Bool!, retractedSms : Bool!, retractedEmail : Bool!, collectedSms: Bool!, collectedEmail: Bool!, maxDistance: Int!, locale: NSLocale!){
+    public init(publishedSms : Bool!, publishedEmail : Bool!, bookedSms: Bool!, bookedEmail : Bool!, retractedSms : Bool!, retractedEmail : Bool!, collectedSms: Bool!, collectedEmail: Bool!, maxDistance: Int!){
         
         self.publishedSms = publishedSms
         self.publishedEmail = publishedEmail
@@ -32,6 +31,25 @@ public class ApplicationSettings{
         self.collectedSms = collectedSms
         self.collectedEmail = collectedEmail
         self.maxDistance = maxDistance
-        self.locale = locale
+    }
+    
+    public func getPublishedEmail() -> Bool! {
+        return self.publishedEmail
+    }
+
+    public func getBookedEmail() -> Bool! {
+        return self.bookedEmail
+    }
+    
+    public func getRetractedEmail() -> Bool!{
+        return self.retractedEmail
+    }
+    
+    public func getCollectedEmail() -> Bool!{
+        return self.collectedEmail
+    }
+    
+    public func getMaxDistance() -> Int!{
+        return self.maxDistance
     }
 }

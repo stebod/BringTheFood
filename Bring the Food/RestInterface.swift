@@ -198,6 +198,18 @@ public class RestInterface : NSObject{
         }
     }
     
+    public func getCollectorOfDonation(donationId: Int!){
+        if(isLoggedIn()){
+            var parameters:String = "?user_credentials=\(singleAccessToken)"
+            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/donations/\(donationId)/bookings" + parameters)!)
+            request.HTTPMethod = "GET"
+            sendRequest(request, notification_key: getCollectorOfDonationNotificationKey)
+        }
+        else{
+            ModelUpdater.getInstance().notifyNotLoggedInError(getCollectorOfDonationNotificationKey)
+        }
+    }
+    
     public func bookCurrentDonation(donationId : Int!){
         if(isLoggedIn()){
             var parameters:String = "?user_credentials=\(singleAccessToken)"

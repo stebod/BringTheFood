@@ -17,6 +17,7 @@ public let getMyDonationNotificationKey = "getMyDonationResponse"
 
 // rest notifications - "BOOKINGS" section
 public let getBookingsNotificationKey = "getBookingsReponse"
+public let getCollectorOfDonationNotificationKey = "getCollectorOfDonationReponse"
 public let bookingCreatedNotificationKey = "boookingCreatedResponse"
 public let unbookedNotificationKey = "boookingDeletedResponse"
 public let bookingCollectedNotificationKey = "boookingCollectedResponse"
