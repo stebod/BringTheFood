@@ -28,8 +28,9 @@ public class Model : NSObject{
         let myBookedDon = [MyDonation]()
         let myHistDon = [MyDonation]()
         self.myDonations = MyDonationsList(myAvailableDonationsList: myAvDon, myBookedDonationsList: myBookedDon, myHistoricDonationsList: myHistDon)
-        let myBooks = [BookedDonation]()
-        self.myBookings = BookingsList(bookingsList: myBooks)
+        let currBooks = [BookedDonation]()
+        let histBooks = [BookedDonation]()
+        self.myBookings = BookingsList(currentBookingsList: currBooks, historicBookingsList: histBooks)
         
         super.init()
     }
