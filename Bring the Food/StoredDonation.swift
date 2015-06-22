@@ -33,6 +33,17 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
     }
 
     
+    public convenience init(id:Int!, description: String!, parcelSize: Float!, parcelUnit: ParcelUnit!,
+        productDate: Date!, productType: ProductType!, photo_url:String!, supplier: User!, isValid: Bool!, hasOpenBookings: Bool!, collector: User!, bookingId: Int!){
+            
+        
+            self.init(id:id, description: description, parcelSize: parcelSize, parcelUnit: parcelUnit,
+                productDate: productDate, productType: productType, photo_url:photo_url, supplier: supplier, isValid: isValid, hasOpenBookings: hasOpenBookings)
+            
+            self.collector = collector
+            self.bookingId = bookingId
+    }
+    
     //*********************************************************************************
     // OTHERS DONATION PROTOCOL
     //*********************************************************************************
@@ -105,26 +116,7 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
     //*********************************************************************************
     // DONATION PROTOCOL
     //*********************************************************************************
-/*
-    override public func getDescription() -> String! {
-        return super.getDescription()
-    }
-    
-    override public func getParcelSize() -> Float! {
-        return super.getParcelSize()
-    }
-    
-    override public func getParcelUnit() -> ParcelUnit! {
-        return super.getParcelUnit()
-    }
-    
-    override public func getProductDate() -> Date! {
-        return super.getProductDate()
-    }
-    
-    override public func getProductType() -> ProductType! {
-        return super.getProductType()
-    } */
+
     
     public func getRemainingDays() -> Int!{
         

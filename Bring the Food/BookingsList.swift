@@ -12,7 +12,8 @@ import UIKit
 public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate  {
     
     // Private variables
-    private var bookingsList: [BookedDonation]!
+    private var currentBookingsList: [BookedDonation]!
+    private var historicBookingsList: [BookedDonation]!
     private var emptyTableView: UIView?
     private var mainMessageLabel: UILabel?
     private var secondaryMessageLabel: UILabel?
@@ -22,13 +23,14 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     
     
     // Initializer
-    public init(bookingsList: [BookedDonation]!){
-        self.bookingsList = bookingsList
+    public init(currentBookingsList: [BookedDonation]!, historicBookingsList: [BookedDonation]!){
+        self.currentBookingsList = currentBookingsList
+        self.historicBookingsList = historicBookingsList
     }
     
     // Set number of section in table
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if(bookingsList.count > 0){
+        if(currentBookingsList.count > 0){
             if(emptyTableView != nil){
                 emptyTableView?.hidden = true
             }
@@ -53,7 +55,7 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     
     // Set number of rows in each section
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bookingsList.count
+        return currentBookingsList.count
     }
     
     // Build the cell
@@ -70,7 +72,7 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
         let ltIcon = cell.viewWithTag(1006) as! UIImageView
         let portionIcon = cell.viewWithTag(1007) as! UIImageView
         
-        mainLabel.text = bookingsList[row].getDescription()
+        mainLabel.text = currentBookingsList[row].getDescription()
         addressLabel.numberOfLines = 2
         let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
         if (iOS8) {
@@ -81,11 +83,11 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
         }
         addressLabel.text = bookingsList[row].getSupplier().getAddress().getLabel()
         expirationLabel.text = String(bookingsList[row].getRemainingDays()) + "d"
-        if(bookingsList[row].getRemainingDays() > 20){
+        if(currentBookingsList[row].getRemainingDays() > 20){
             alarmIcon.hidden = true
         }
         amountLabel.text = "\(bookingsList[row].getParcelSize())"
-        let parcelUnit = bookingsList[row].getParcelUnit()
+        let parcelUnit = currentBookingsList[row].getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
             kgIcon.hidden = false
             ltIcon.hidden = true
@@ -109,7 +111,7 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let row = indexPath.row
-        println(bookingsList[row])
+        println(currentBookingsList[row])
     }
     
     // Set section titles

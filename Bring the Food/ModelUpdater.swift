@@ -191,7 +191,8 @@ public class ModelUpdater : NSObject{
                     let donDescription = e["description"] as! String!
                     let donParcelSize = e["parcel_size"] as! Float!
                     let donParcelUnit = ParcelUnitFactory.getParcUnitFromString(e["unit"] as! String!)
-                    let donProductDate = Date(dateString: (e["product_date"] as! String!))
+                    let untilDate = e["until"] as! String!
+                    let donProductDate = Date(dateString: prefix(untilDate, 10))
                     let donProductType = ProductTypeFactory.getProdTypeFromString(e["product_type"] as! String!)
                     let donPhotoUrl = e.valueForKeyPath("photo.medium") as! String!
                     
@@ -252,8 +253,53 @@ public class ModelUpdater : NSObject{
             let collectedSms = json.valueForKeyPath("result.notify_me_when.collected.sms") as! Bool!
             let collectedEmail = json.valueForKeyPath("result.notify_me_when.collected.email") as! Bool!
         case getBookingsNotificationKey :
-            var bookings = [BookedDonation]()
-            let bookingsList = BookingsList(bookingsList: bookings)
+            var currentBookings = [BookedDonation]()
+            var historicBookings = [BookedDonation]()
+            var resultList : [NSDictionary]! = json["result"] as! [NSDictionary]!
+            for e in resultList {
+                
+                
+                let isValid:Bool = e["live"] as! Bool!
+                let isBooked:Bool = e["has_open_bookings"] as! Bool!
+                
+                if isValid && !isBooked {
+                    
+                    // general info about the donation
+                    let donId = e.valueForKeyPath("donation.id") as! Int!
+                    let donDescription = e.valueForKeyPath("donation.description")  as! String!
+                    let donParcelSize = e.valueForKeyPath("donation.parcel_size") as! Float!
+                    let donParcelUnit = ParcelUnitFactory.getParcUnitFromString(e.valueForKeyPath("donation.unit") as! String!)
+                    let untilDate = e.valueForKeyPath("donation.until") as! String!
+                    let donProductDate = Date(dateString: prefix(untilDate, 10))
+                    let donProductType = ProductTypeFactory.getProdTypeFromString(e.valueForKeyPath("donation.product_type") as! String!)
+                    let donPhotoUrl = e.valueForKeyPath("photo.medium") as! String!
+                    
+                    //Address of the donation
+                    let addressLabel = e.valueForKeyPath("address.label") as! String!
+                    let addressLatitude = e.valueForKeyPath("address.latitude") as! Float!
+                    let addressLongitude = e.valueForKeyPath("address.longitude") as! Float!
+                    var tempAddress = Address(label: addressLabel, latitude: addressLatitude,
+                        longitude: addressLongitude)
+                    
+                    // Supplier of the donation
+                    
+                    let supId = e.valueForKeyPath("supplier.id") as! Int!
+                    let supEmail = e.valueForKeyPath("supplier.email") as! String!
+                    let supName = e.valueForKeyPath("supplier.name") as! String!
+                    let supPhone = e.valueForKeyPath("supplier.phone") as! String!
+                    let supImageURL = e.valueForKeyPath("supplier.avatar") as! String!
+                    
+                    let supplier = User(id: supId, email: supEmail, name: supName, phone: supPhone, address: tempAddress, imageURL: supImageURL)
+                    
+                    var tempDonation = StoredDonation(id: donId, description: donDescription, parcelSize: donParcelSize, parcelUnit: donParcelUnit, productDate: donProductDate, productType: donProductType, photo_url: donPhotoUrl, supplier: supplier, isValid: isValid, hasOpenBookings: isBooked)
+                    
+                    //TODO:rivedere
+                    currentBookings.append(tempDonation)
+                }
+                
+            }
+            
+            let bookingsList = BookingsList(currentBookingsList: currentBookings, historicBookingsList: historicBookings)
             Model.getInstance().setMyBookings(bookingsList)
             
         default: break
