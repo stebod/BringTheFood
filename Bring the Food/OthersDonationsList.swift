@@ -41,7 +41,7 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
             createEmptyView(tableView)
         }
         if(othersDonationsList.count == 0){
-            if(requestStatus == RequestStatus.SUCCESS){
+            if(requestStatus == RequestStatus.SUCCESS || requestStatus == RequestStatus.CACHE){
                 mainMessageLabel?.text = "No donations"
                 secondaryMessageLabel?.text = "Pull down to refresh"
             }
@@ -124,9 +124,10 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
         if(requestStatus == RequestStatus.SUCCESS){
             return "Available donations"
         }
-        else{
+        if(requestStatus == RequestStatus.CACHE){
             return "Available donations (offline mode)"
         }
+        return ""
     }
     
     // Set the filtering criteria
