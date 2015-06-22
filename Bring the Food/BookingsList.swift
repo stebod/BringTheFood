@@ -23,8 +23,8 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     
     // Initializer
     public init(currentBookingsList: [BookedDonation]!, historicBookingsList: [BookedDonation]!){
-        donations.append(DonationsList(donationName: "Not withdrawn donations", donationList: currentBookingsList))
-        donations.append(DonationsList(donationName: "Withdrawn donations", donationList: historicBookingsList))
+        donations.append(DonationsList(donationName: "Pending donations", donationList: currentBookingsList))
+        donations.append(DonationsList(donationName: "Collected donations", donationList: historicBookingsList))
     }
     
     // Set number of section in table
@@ -33,7 +33,7 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
             if(emptyTableView != nil){
                 emptyTableView?.hidden = true
             }
-            return 1
+            return donations.count
         }
         if(emptyTableView == nil){
             createEmptyView(tableView)
