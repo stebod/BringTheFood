@@ -39,7 +39,7 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
         if(emptyTableView == nil){
             createEmptyView(tableView)
         }
-        if(requestStatus == RequestStatus.SUCCESS){
+        if(requestStatus == RequestStatus.SUCCESS || requestStatus == RequestStatus.CACHE){
             mainMessageLabel?.text = "No donations"
             secondaryMessageLabel?.text = "Pull down to refresh"
         }
@@ -119,9 +119,10 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
         if(requestStatus == RequestStatus.SUCCESS){
             return "Booked donations"
         }
-        else{
+        if(requestStatus == RequestStatus.CACHE){
             return "Booked donations (offline mode)"
         }
+        return ""
     }
     
     // Set the status retrieved by rest interface for the current request

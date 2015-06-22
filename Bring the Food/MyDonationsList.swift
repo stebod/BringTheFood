@@ -40,7 +40,7 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
         if(emptyTableView == nil){
             createEmptyView(tableView)
         }
-        if(requestStatus == RequestStatus.SUCCESS){
+        if(requestStatus == RequestStatus.SUCCESS || requestStatus == RequestStatus.CACHE){
             mainMessageLabel?.text = "No donations"
             secondaryMessageLabel?.text = "Pull down to refresh"
         }
@@ -120,7 +120,10 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
         if(requestStatus != RequestStatus.SUCCESS){
             return donations[section].donationName + " (offline mode)"
         }
-        return donations[section].donationName
+        if(requestStatus != RequestStatus.CACHE){
+            return donations[section].donationName
+        }
+        return ""
     }
     
     // Set the status retrieved by rest interface for the current request
