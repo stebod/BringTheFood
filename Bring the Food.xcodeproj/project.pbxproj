@@ -72,6 +72,8 @@
 		B32759C11B34FD790082DCB5 /* MyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32759C01B34FD790082DCB5 /* MyDetailViewController.swift */; };
 		B32759C21B3500690082DCB5 /* MainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32759BE1B34FC950082DCB5 /* MainDetailViewController.swift */; };
 		B333D38B1B2042A000DBF44D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333D38A1B2042A000DBF44D /* LoginViewController.swift */; };
+		B346110D1B39A2CA000D13E2 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B346110C1B39A2CA000D13E2 /* AboutViewController.swift */; };
+		B346110F1B39A2FC000D13E2 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B346110E1B39A2FC000D13E2 /* NotificationSettingsViewController.swift */; };
 		B369EF621B34A7FF00E28079 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF611B34A7FF00E28079 /* FilterProtocol.swift */; };
 		B369EF641B34A81E00E28079 /* DisplayBookedDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */; };
 		B369EF651B34A85000E28079 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF611B34A7FF00E28079 /* FilterProtocol.swift */; };
@@ -142,6 +144,8 @@
 		B32759BE1B34FC950082DCB5 /* MainDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainDetailViewController.swift; sourceTree = "<group>"; };
 		B32759C01B34FD790082DCB5 /* MyDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDetailViewController.swift; sourceTree = "<group>"; };
 		B333D38A1B2042A000DBF44D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B346110C1B39A2CA000D13E2 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		B346110E1B39A2FC000D13E2 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
 		B3541BBF1B2F496800AA7F65 /* MyDonationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
 		B369EF611B34A7FF00E28079 /* FilterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterProtocol.swift; sourceTree = "<group>"; };
 		B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayBookedDetail.swift; sourceTree = "<group>"; };
@@ -260,11 +264,11 @@
 			children = (
 				3B4AE1591B2B5ACF00436903 /* Address.swift */,
 				3BFFF2D81B24A4CD002C2AD5 /* HTTPResponseData.swift */,
+				3B6F96BD1B2DF379004C9503 /* ParcelUnit.swift */,
 				3B132A9E1B28C3A000D8A09F /* Date.swift */,
 				3B99B1BC1B35FEF200E0BECA /* NSNotificationCenterKeys.swift */,
 				3B6F96C01B2DF517004C9503 /* ProductType.swift */,
 				3B99B1BF1B35FEFD00E0BECA /* MapsAPIKey.swift */,
-				3B6F96BD1B2DF379004C9503 /* ParcelUnit.swift */,
 				3B3441441B300B420080360D /* NSUserDefaultsKeys.swift */,
 				B3A30B0E1B32BBE200F733E0 /* FilterState.swift */,
 			);
@@ -280,10 +284,12 @@
 				B3DED4801B2CA00F00F9808D /* MainViewController.swift */,
 				B3541BBF1B2F496800AA7F65 /* MyDonationsViewController.swift */,
 				B384C52F1B2F73CF007DDAA2 /* BookingsViewController.swift */,
+				B38926391B35CF7100F4EAAF /* SettingsViewController.swift */,
 				B3BF98B11B2F97C000E79515 /* FilterViewController.swift */,
 				B32759BE1B34FC950082DCB5 /* MainDetailViewController.swift */,
 				B32759C01B34FD790082DCB5 /* MyDetailViewController.swift */,
-				B38926391B35CF7100F4EAAF /* SettingsViewController.swift */,
+				B346110C1B39A2CA000D13E2 /* AboutViewController.swift */,
+				B346110E1B39A2FC000D13E2 /* NotificationSettingsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -532,8 +538,10 @@
 				B32759C11B34FD790082DCB5 /* MyDetailViewController.swift in Sources */,
 				B369EF641B34A81E00E28079 /* DisplayBookedDetail.swift in Sources */,
 				3B4AE15A1B2B5ACF00436903 /* Address.swift in Sources */,
+				B346110F1B39A2FC000D13E2 /* NotificationSettingsViewController.swift in Sources */,
 				3B9501CB1B35FC5F00D2DC97 /* BookedDonation.swift in Sources */,
 				3B4AE1601B2B5AE700436903 /* BtfNotification.swift in Sources */,
+				B346110D1B39A2CA000D13E2 /* AboutViewController.swift in Sources */,
 				B3BF98B21B2F97C000E79515 /* FilterViewController.swift in Sources */,
 				B3E762131B2488FC004C631F /* SignInStep1ViewController.swift in Sources */,
 				3B9501C51B35FC4500D2DC97 /* MyDonation.swift in Sources */,

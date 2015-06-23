@@ -16,7 +16,9 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var availabilityLabel: UILabel!
+    @IBOutlet weak var scrollView: UIView!
+    @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var contentView: UIView!
     
     // Interface colors
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
@@ -34,6 +36,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpInterface()
     }
     
     override func viewWillAppear(animated:Bool) {
@@ -55,9 +58,13 @@ class SettingsViewController: UIViewController {
         return UIStatusBarStyle.LightContent
     }
     
+    
+    
     func fillUserData(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
-        if(response?.status == RequestStatus.SUCCESS){
+        if(response?.status == RequestStatus.SUCCESS || response?.status == RequestStatus.CACHE){
+            scrollView.hidden = false
+            emptyView.hidden = true
             let user = Model.getInstance().getCurrentUser()
             nameLabel.text = user?.getName()
             emailLabel.text = user?.getEmail()
@@ -70,6 +77,10 @@ class SettingsViewController: UIViewController {
                 queue: NSOperationQueue.mainQueue(),
                 usingBlock: {(notification:NSNotification!) in self.userImageHandler(notification)})
             imageDownloader?.downloadImage()
+        }
+        else{
+            scrollView.hidden = true
+            emptyView.hidden = false
         }
     }
     
@@ -88,5 +99,16 @@ class SettingsViewController: UIViewController {
             userImageView.image = UIImage(CGImage: CGImageCreateWithImageInRect(image!.CGImage, clippedRect))
         }
 
+    }
+    
+    private func setUpInterface(){
+        addressLabel.numberOfLines = 2
+        var leftConstraint = NSLayoutConstraint(item: contentView!, attribute: NSLayoutAttribute.Leading, relatedBy: .Equal,
+            toItem: self.view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0)
+        var rightConstraint = NSLayoutConstraint(item: contentView!, attribute: NSLayoutAttribute.Trailing, relatedBy: .Equal,
+            toItem: self.view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0)
+        self.view.addConstraint(leftConstraint)
+        self.view.addConstraint(rightConstraint)
+        emptyView.hidden = true
     }
 }

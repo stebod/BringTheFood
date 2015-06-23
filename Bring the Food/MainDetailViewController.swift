@@ -37,6 +37,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate {
     
     // Observers
     private weak var userImageObserver: NSObjectProtocol!
+    private weak var bookingObserver: NSObjectProtocol!
     
     // Image downloader
     private var imageDownloader: ImageDownloader?
@@ -70,6 +71,14 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func backButtonPressed(sender: UIButton) {
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    @IBAction func bookButtonPressed(sender: UIButton) {
+        bookingObserver = NSNotificationCenter.defaultCenter().addObserverForName(imageDownloadNotificationKey,
+            object: imageDownloader,
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in self.userImageHandler(notification)})
+        imageDownloader?.downloadImage()
     }
     
     // User interface settings
