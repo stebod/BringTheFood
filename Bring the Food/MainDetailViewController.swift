@@ -77,8 +77,8 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         bookingObserver = NSNotificationCenter.defaultCenter().addObserverForName(bookingCreatedNotificationKey,
             object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.userImageHandler(notification)})
-        imageDownloader?.downloadImage()
+            usingBlock: {(notification:NSNotification!) in self.bookingHandler(notification)})
+        donation!.book()
     }
     
     // User interface settings
@@ -184,6 +184,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
             alert.title = "Impossible to book"
             alert.message = "The donation is not bookable anymore"
             alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
@@ -191,6 +192,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
             alert.title = "No connection"
             alert.message = "Check you network connectivity and try again"
             alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
             alert.show()
         }
         else{
@@ -198,6 +200,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
             alert.title = "Booking performed"
             alert.message = "Top!"
             alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
             alert.show()
         }
     }
