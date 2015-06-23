@@ -70,6 +70,10 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
         RestInterface.getInstance().unbook(self.bookingId)
     }
     
+    public func getIsValid() -> Bool! {
+        return self.isValid
+    }
+    
     //*********************************************************************************
     // MY DONATION PROTOCOL
     //*********************************************************************************
