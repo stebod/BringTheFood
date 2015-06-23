@@ -239,7 +239,45 @@ class RestTest: XCTestCase {
         })
     }
     
-    
+    func testUpdateUserSettings(){
+        
+        let doneExpectation = expectationWithDescription("done")
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(settingsUpdatedNotificationKey,
+            object: ModelUpdater.getInstance(),
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in
+                let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+                if(response!.status == RequestStatus.SUCCESS){
+                    
+                    XCTAssert(true, "Pass")
+                    doneExpectation.fulfill()
+                }
+                else{
+                    XCTFail("Fail")
+                }
+        })
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(loginResponseNotificationKey,
+            object: ModelUpdater.getInstance(),
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in
+                let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+                if(response!.status == RequestStatus.SUCCESS){
+                    
+                    RestInterface.getInstance().updateSettings(true, bookedEmail: true, retractedEmail: true, collectedEmail: true, maxDistance: 30)
+                }
+                else{
+                    XCTFail("Fail")
+                }
+        })
+        
+        RestInterface.getInstance().sendLoginData("bodini.stefano@gmail.com",
+            password: "fedeealesonoalmiofianco")
+        self.waitForExpectationsWithTimeout(10, handler:{ error in
+            XCTAssertNil(error, "Error")
+        })
+    }
     
     
     //*********************************************************************************
