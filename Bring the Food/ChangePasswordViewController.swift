@@ -47,4 +47,8 @@ class ChangePasswordViewController: UIViewController,UIActionSheetDelegate {
         }
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
 }
