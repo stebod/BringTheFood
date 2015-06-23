@@ -91,10 +91,8 @@ class NotificationSettingsViewController: UIViewController {
     }
     
     func handleResponse(notification: NSNotification){
-        println("received")
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.SUCCESS){
-            println("success")
             let mySettings = Model.getInstance().getMySettings()
             currentDistance = mySettings?.getMaxDistance()
             updateDistanceButtonSet()

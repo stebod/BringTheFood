@@ -1245,16 +1245,23 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="book_button" translatesAutoresizingMaskIntoConstraints="NO" id="hpa-GA-7re">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNR-uI-CgR">
                                         <rect key="frame" x="509" y="26" width="71" height="28"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="71" id="Rym-yJ-luv"/>
-                                            <constraint firstAttribute="height" constant="28" id="j4Y-BX-XEt"/>
+                                            <constraint firstAttribute="height" constant="28" id="Jt7-aJ-stB"/>
+                                            <constraint firstAttribute="width" constant="71" id="f8o-yn-t1U"/>
                                         </constraints>
-                                    </imageView>
+                                        <state key="normal" image="book_button">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="bookButtonPressed:" destination="5qA-EO-kRj" eventType="touchUpInside" id="FjM-QT-7Aq"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="JOO-YW-hTI" firstAttribute="leading" secondItem="Q9P-8v-3m1" secondAttribute="leading" constant="-5" id="3vN-Lt-9zX"/>
+                                    <constraint firstItem="HNR-uI-CgR" firstAttribute="top" secondItem="Q9P-8v-3m1" secondAttribute="top" constant="26" id="5sE-Po-Xxa"/>
                                     <constraint firstItem="Td5-WG-ycD" firstAttribute="top" secondItem="mqW-cs-zVt" secondAttribute="bottom" constant="8" id="9ov-90-TuF"/>
                                     <constraint firstItem="r0a-Tb-x1r" firstAttribute="top" secondItem="XOe-8r-Abv" secondAttribute="bottom" constant="8" id="9wG-Qy-Fmw"/>
                                     <constraint firstAttribute="bottom" secondItem="jq2-Sj-Met" secondAttribute="bottom" constant="9" id="C1G-SR-4kp"/>
@@ -1268,16 +1275,15 @@
                                     <constraint firstItem="fwT-C5-CqN" firstAttribute="leading" secondItem="Q9P-8v-3m1" secondAttribute="leading" constant="15" id="b5K-DI-b80"/>
                                     <constraint firstItem="mqW-cs-zVt" firstAttribute="top" secondItem="JOO-YW-hTI" secondAttribute="bottom" constant="24" id="bhw-xx-a8e"/>
                                     <constraint firstItem="JOO-YW-hTI" firstAttribute="top" secondItem="r0a-Tb-x1r" secondAttribute="bottom" constant="-20" id="e5Z-TX-kLM"/>
-                                    <constraint firstItem="hpa-GA-7re" firstAttribute="top" secondItem="Q9P-8v-3m1" secondAttribute="top" constant="26" id="eWu-jK-jds"/>
                                     <constraint firstAttribute="trailing" secondItem="Td5-WG-ycD" secondAttribute="trailing" constant="20" id="eeM-Eu-q8b"/>
                                     <constraint firstAttribute="trailing" secondItem="mqW-cs-zVt" secondAttribute="trailing" constant="20" id="faM-fJ-o72"/>
                                     <constraint firstItem="jq2-Sj-Met" firstAttribute="top" secondItem="Td5-WG-ycD" secondAttribute="bottom" constant="8" id="iXV-TF-XBX"/>
                                     <constraint firstItem="XOe-8r-Abv" firstAttribute="top" secondItem="Q9P-8v-3m1" secondAttribute="top" constant="8" id="l67-KN-YsR"/>
-                                    <constraint firstItem="hpa-GA-7re" firstAttribute="leading" secondItem="XOe-8r-Abv" secondAttribute="trailing" constant="18" id="nx1-mB-uxV"/>
+                                    <constraint firstItem="HNR-uI-CgR" firstAttribute="leading" secondItem="XOe-8r-Abv" secondAttribute="trailing" constant="18" id="mEJ-pa-BlP"/>
                                     <constraint firstItem="fwT-C5-CqN" firstAttribute="top" secondItem="JOO-YW-hTI" secondAttribute="bottom" constant="40" id="sHp-fa-DHQ"/>
                                     <constraint firstAttribute="bottom" secondItem="JOO-YW-hTI" secondAttribute="bottom" constant="126" id="sos-aZ-dGv"/>
                                     <constraint firstAttribute="trailing" secondItem="r0a-Tb-x1r" secondAttribute="trailing" constant="-5" id="wCT-9m-utb"/>
-                                    <constraint firstAttribute="trailing" secondItem="hpa-GA-7re" secondAttribute="trailing" constant="20" id="wF9-u2-6DN"/>
+                                    <constraint firstAttribute="trailing" secondItem="HNR-uI-CgR" secondAttribute="trailing" constant="20" id="yVr-TG-tAP"/>
                                     <constraint firstAttribute="trailing" secondItem="jq2-Sj-Met" secondAttribute="trailing" constant="20" id="zyD-Sh-hJg"/>
                                 </constraints>
                             </scrollView>
