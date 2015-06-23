@@ -264,11 +264,11 @@
 			children = (
 				3B4AE1591B2B5ACF00436903 /* Address.swift */,
 				3BFFF2D81B24A4CD002C2AD5 /* HTTPResponseData.swift */,
+				3B6F96BD1B2DF379004C9503 /* ParcelUnit.swift */,
 				3B132A9E1B28C3A000D8A09F /* Date.swift */,
 				3B99B1BC1B35FEF200E0BECA /* NSNotificationCenterKeys.swift */,
 				3B6F96C01B2DF517004C9503 /* ProductType.swift */,
 				3B99B1BF1B35FEFD00E0BECA /* MapsAPIKey.swift */,
-				3B6F96BD1B2DF379004C9503 /* ParcelUnit.swift */,
 				3B3441441B300B420080360D /* NSUserDefaultsKeys.swift */,
 				B3A30B0E1B32BBE200F733E0 /* FilterState.swift */,
 			);

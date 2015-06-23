@@ -48,7 +48,7 @@ class SignInStep1ViewController: UIViewController {
     
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
-        // Register as notification center observer
+        // Register notification center observer
         mailObserver = NSNotificationCenter.defaultCenter().addObserverForName(mailAvailabilityResponseNotificationKey,
             object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
@@ -66,7 +66,7 @@ class SignInStep1ViewController: UIViewController {
     }
     
     override func viewWillDisappear(animated: Bool) {
-        // Unregister as notification center observer
+        // Unregister notification center observer
         NSNotificationCenter.defaultCenter().removeObserver(mailObserver!)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillShowObserver!)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillHideObserver!)
