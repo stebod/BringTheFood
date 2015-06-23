@@ -1883,6 +1883,7 @@
                     <connections>
                         <outlet property="addressLabel" destination="DnU-un-KLA" id="26f-3m-4ph"/>
                         <outlet property="avatarImageView" destination="MNZ-fZ-ZFF" id="nPp-cI-y5K"/>
+                        <outlet property="dropButton" destination="mBd-8r-udB" id="3ec-qE-6uf"/>
                         <outlet property="emailLabel" destination="Ezl-yX-fXv" id="wW5-VG-brw"/>
                         <outlet property="expirationLabel" destination="Cgo-7q-yLM" id="9YZ-oO-Csn"/>
                         <outlet property="foodQuantityLabel" destination="5PI-Zd-gug" id="Uap-aS-fQs"/>

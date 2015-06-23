@@ -27,6 +27,7 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var dropButton: UIButton!
     
     // Variables populated from prepareForSegue
     var donation: BookedDonation?
@@ -86,6 +87,9 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
     func setUpInterface() {
         mainLabel.numberOfLines = 2
         mainLabel.text = donation?.getDescription()
+        if(donation?.getIsValid() != true){
+            dropButton.enabled = false
+        }
         infoPanelView.layer.borderColor = UIMainColor.CGColor
         infoPanelView.layer.borderWidth = 1.0
         mapView.layer.borderColor = UIMainColor.CGColor
