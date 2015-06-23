@@ -592,7 +592,7 @@ class RestTest: XCTestCase {
                 }
         })
         
-        NSNotificationCenter.defaultCenter().addObserverForName(loginResponseNotificationKey,
+        NSNotificationCenter.defaultCenter().addObserverForName(getMyDonationNotificationKey,
             object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in
@@ -600,6 +600,21 @@ class RestTest: XCTestCase {
                 if(response!.status == RequestStatus.SUCCESS){
                     
                     RestInterface.getInstance().getCollectorOfDonation(200)
+                    
+                }
+                else{
+                    XCTFail("Fail")
+                }
+        })
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(loginResponseNotificationKey,
+            object: ModelUpdater.getInstance(),
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in
+                let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+                if(response!.status == RequestStatus.SUCCESS){
+                    
+                    Model.getInstance().downloadMyDonationsList()
                 }
                 else{
                     XCTFail("Fail")
