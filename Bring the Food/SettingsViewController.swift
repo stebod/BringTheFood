@@ -16,6 +16,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var scrollView: UIView!
+    @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var contentView: UIView!
     
     // Interface colors
@@ -61,6 +63,8 @@ class SettingsViewController: UIViewController {
     func fillUserData(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.SUCCESS || response?.status == RequestStatus.CACHE){
+            scrollView.hidden = false
+            emptyView.hidden = true
             let user = Model.getInstance().getCurrentUser()
             nameLabel.text = user?.getName()
             emailLabel.text = user?.getEmail()
@@ -75,7 +79,8 @@ class SettingsViewController: UIViewController {
             imageDownloader?.downloadImage()
         }
         else{
-            
+            scrollView.hidden = true
+            emptyView.hidden = false
         }
     }
     
@@ -104,5 +109,6 @@ class SettingsViewController: UIViewController {
             toItem: self.view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0)
         self.view.addConstraint(leftConstraint)
         self.view.addConstraint(rightConstraint)
+        emptyView.hidden = true
     }
 }
