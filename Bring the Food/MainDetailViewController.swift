@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import AddressBook
 
-class MainDetailViewController: UIViewController, MKMapViewDelegate {
+class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDelegate {
     
     // Outlets
     @IBOutlet weak var mapView: MKMapView!
@@ -74,11 +74,11 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func bookButtonPressed(sender: UIButton) {
-        bookingObserver = NSNotificationCenter.defaultCenter().addObserverForName(imageDownloadNotificationKey,
-            object: imageDownloader,
+        bookingObserver = NSNotificationCenter.defaultCenter().addObserverForName(bookingCreatedNotificationKey,
+            object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.userImageHandler(notification)})
-        imageDownloader?.downloadImage()
+            usingBlock: {(notification:NSNotification!) in self.bookingHandler(notification)})
+        donation!.book()
     }
     
     // User interface settings
@@ -175,6 +175,38 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate {
             avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
             avatarImageView.image = UIImage(CGImage: CGImageCreateWithImageInRect(image!.CGImage, clippedRect))
         }
+    }
+    
+    func bookingHandler(notification: NSNotification){
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response?.status == RequestStatus.DATA_ERROR){
+            let alert = UIAlertView()
+            alert.title = "Impossible to book"
+            alert.message = "The donation is not bookable anymore"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
+            let alert = UIAlertView()
+            alert.title = "No connection"
+            alert.message = "Check you network connectivity and try again"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else{
+            let alert = UIAlertView()
+            alert.title = "Booking performed"
+            alert.message = "Top!"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+    }
+    
+    func alertView(View: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
 
