@@ -1544,6 +1544,9 @@
                                         <state key="normal" image="drop_button">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="dropCollectButtonPressed:" destination="SSp-E7-1V8" eventType="touchUpInside" id="EDP-aA-SHS"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -1593,6 +1596,7 @@
                     <connections>
                         <outlet property="addressLabel" destination="xNj-tZ-DAc" id="fgL-vx-HVM"/>
                         <outlet property="avatarImageView" destination="Az5-JS-qCQ" id="lCb-p7-tZL"/>
+                        <outlet property="dropCollectButton" destination="qzu-vk-VM0" id="HlW-qv-vHM"/>
                         <outlet property="emailLabel" destination="FNU-uO-ZDw" id="2nB-P5-BDj"/>
                         <outlet property="expirationLabel" destination="jiM-ct-fQ1" id="iWl-NS-2zB"/>
                         <outlet property="foodQuantityLabel" destination="M1y-zz-uyG" id="U2H-IK-FtO"/>

@@ -209,6 +209,7 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
             alert.delegate = self
             alert.show()
         }
+        NSNotificationCenter.defaultCenter().removeObserver(bookingObserver)
     }
     
     // AlertView delegate
