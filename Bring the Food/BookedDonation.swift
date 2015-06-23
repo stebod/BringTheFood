@@ -11,4 +11,6 @@ import Foundation
 public protocol BookedDonation : Donation {
 
     func unbook()
+    
+    func getIsValid() -> Bool!
 }
