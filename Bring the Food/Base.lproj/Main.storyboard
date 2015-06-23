@@ -1885,7 +1885,7 @@
         <!--Notification Settings View Controller-->
         <scene sceneID="xBc-Qd-C6O">
             <objects>
-                <viewController id="npm-eQ-GHx" customClass="notificationSettingsViewController" customModule="Bring_the_Food" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="npm-eQ-GHx" customClass="NotificationSettingsViewController" customModule="Bring_the_Food" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WKa-Ir-jQO"/>
                         <viewControllerLayoutGuide type="bottom" id="nMG-lj-OMS"/>
@@ -1915,7 +1915,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="cancelButtonPressed:" destination="npm-eQ-GHx" eventType="touchUpInside" id="Uyu-kI-08S"/>
+                                            <action selector="cancelButtonPressed:" destination="npm-eQ-GHx" eventType="touchUpInside" id="1Dv-sK-Tld"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1946,7 +1946,7 @@
         <!--About View Controller-->
         <scene sceneID="z9k-wk-FmQ">
             <objects>
-                <viewController id="4sN-Jm-G6C" customClass="aboutViewController" customModule="Bring_the_Food" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4sN-Jm-G6C" customClass="AboutViewController" customModule="Bring_the_Food" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Psc-jO-y82"/>
                         <viewControllerLayoutGuide type="bottom" id="YFa-WA-83u"/>
@@ -1976,7 +1976,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="backButtonPressed:" destination="4sN-Jm-G6C" eventType="touchUpInside" id="Ohc-M2-F1f"/>
+                                            <action selector="backButtonPressed:" destination="4sN-Jm-G6C" eventType="touchUpInside" id="csy-qF-MVb"/>
                                         </connections>
                                     </button>
                                 </subviews>
