@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BookingsViewController: UIViewController {
+class BookingsViewController: UIViewController, DisplayBookedDetail {
     
     // Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -18,6 +18,7 @@ class BookingsViewController: UIViewController {
     
     // Observers
     private weak var donationsObserver:NSObjectProtocol?
+    private var chosenDonation: BookedDonation?
     
     // Refresh control
     private lazy var refreshControl: UIRefreshControl = {
@@ -55,6 +56,13 @@ class BookingsViewController: UIViewController {
         return UIStatusBarStyle.LightContent
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!){
+        if(segue.identifier == "goToBookingsDetail"){
+            var vc = segue.destinationViewController as! BookedDetailViewController
+            vc.donation = chosenDonation
+        }
+    }
+
     // User interface settings
     private func setUpInterface(){
         self.tableView.addSubview(self.refreshControl)
@@ -68,6 +76,7 @@ class BookingsViewController: UIViewController {
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         let bookingsList = Model.getInstance().getMyBookings()
         bookingsList.setRequestStatus(response!.status)
+        bookingsList.delegate = self
         tableView.dataSource = bookingsList
         tableView.delegate = bookingsList
         tableView.reloadData()
@@ -77,6 +86,12 @@ class BookingsViewController: UIViewController {
     // Refresh table content
     func handleRefresh(refreshControl: UIRefreshControl) {
         Model.getInstance().downloadMyBookings()
+    }
+    
+    // Delegate for triggering detail segue
+    func displayDetail(chosenDonation: BookedDonation) {
+        self.chosenDonation = chosenDonation
+        performSegueWithIdentifier("goToBookingsDetail", sender: nil)
     }
     
 }
