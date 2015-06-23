@@ -72,6 +72,7 @@
 		B32759C11B34FD790082DCB5 /* MyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32759C01B34FD790082DCB5 /* MyDetailViewController.swift */; };
 		B32759C21B3500690082DCB5 /* MainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32759BE1B34FC950082DCB5 /* MainDetailViewController.swift */; };
 		B333D38B1B2042A000DBF44D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333D38A1B2042A000DBF44D /* LoginViewController.swift */; };
+		B346110D1B39A2CA000D13E2 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B346110C1B39A2CA000D13E2 /* AboutViewController.swift */; };
 		B369EF621B34A7FF00E28079 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF611B34A7FF00E28079 /* FilterProtocol.swift */; };
 		B369EF641B34A81E00E28079 /* DisplayBookedDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */; };
 		B369EF651B34A85000E28079 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF611B34A7FF00E28079 /* FilterProtocol.swift */; };
@@ -142,6 +143,7 @@
 		B32759BE1B34FC950082DCB5 /* MainDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainDetailViewController.swift; sourceTree = "<group>"; };
 		B32759C01B34FD790082DCB5 /* MyDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDetailViewController.swift; sourceTree = "<group>"; };
 		B333D38A1B2042A000DBF44D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B346110C1B39A2CA000D13E2 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		B3541BBF1B2F496800AA7F65 /* MyDonationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
 		B369EF611B34A7FF00E28079 /* FilterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterProtocol.swift; sourceTree = "<group>"; };
 		B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayBookedDetail.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				B32759BE1B34FC950082DCB5 /* MainDetailViewController.swift */,
 				B32759C01B34FD790082DCB5 /* MyDetailViewController.swift */,
 				B38926391B35CF7100F4EAAF /* SettingsViewController.swift */,
+				B346110C1B39A2CA000D13E2 /* AboutViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				3B4AE15A1B2B5ACF00436903 /* Address.swift in Sources */,
 				3B9501CB1B35FC5F00D2DC97 /* BookedDonation.swift in Sources */,
 				3B4AE1601B2B5AE700436903 /* BtfNotification.swift in Sources */,
+				B346110D1B39A2CA000D13E2 /* AboutViewController.swift in Sources */,
 				B3BF98B21B2F97C000E79515 /* FilterViewController.swift in Sources */,
 				B3E762131B2488FC004C631F /* SignInStep1ViewController.swift in Sources */,
 				3B9501C51B35FC4500D2DC97 /* MyDonation.swift in Sources */,
