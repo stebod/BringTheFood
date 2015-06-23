@@ -284,10 +284,10 @@
 				B3DED4801B2CA00F00F9808D /* MainViewController.swift */,
 				B3541BBF1B2F496800AA7F65 /* MyDonationsViewController.swift */,
 				B384C52F1B2F73CF007DDAA2 /* BookingsViewController.swift */,
+				B38926391B35CF7100F4EAAF /* SettingsViewController.swift */,
 				B3BF98B11B2F97C000E79515 /* FilterViewController.swift */,
 				B32759BE1B34FC950082DCB5 /* MainDetailViewController.swift */,
 				B32759C01B34FD790082DCB5 /* MyDetailViewController.swift */,
-				B38926391B35CF7100F4EAAF /* SettingsViewController.swift */,
 				B346110C1B39A2CA000D13E2 /* AboutViewController.swift */,
 				B346110E1B39A2FC000D13E2 /* NotificationSettingsViewController.swift */,
 			);
