@@ -26,6 +26,8 @@ public protocol MyDonation : Donation {
     
     func canBeModified() -> Bool!
     
+    func canBeCollected() -> Bool!
+    
     func setCollector(collector : User!)
     
     func setBookingId(bookingId : Int!)

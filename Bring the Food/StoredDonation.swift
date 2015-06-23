@@ -104,6 +104,13 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
         self.bookingId = bookingId
     }
     
+    public func canBeCollected() -> Bool! {
+        if self.isValid! && self.hasOpenBookings! {
+            return true
+        }
+        return false
+    }
+    
     public func canBeModified() -> Bool! {
         if self.isValid! && !self.hasOpenBookings! {
             return true
