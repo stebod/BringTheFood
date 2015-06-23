@@ -1,16 +1,17 @@
 //
-//  DetailViewController.swift
+//  BookedDetailViewController.swift
 //  Bring the Food
 //
-//  Created by federico badini on 18/06/15.
+//  Created by federico badini on 23/06/15.
 //  Copyright (c) 2015 Federico Badini, Stefano Bodini. All rights reserved.
 //
+
 
 import UIKit
 import MapKit
 import AddressBook
 
-class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDelegate {
+class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDelegate {
     
     // Outlets
     @IBOutlet weak var mapView: MKMapView!
@@ -28,7 +29,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
     @IBOutlet weak var emailLabel: UILabel!
     
     // Variables populated from prepareForSegue
-    var donation: OthersDonation?
+    var donation: BookedDonation?
     
     // Private variables
     private let regionRadius: CLLocationDistance = 250
@@ -51,7 +52,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
     
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
-        imageDownloader = ImageDownloader(url: donation?.getSupplier().getImageURL())
+        imageDownloader = ImageDownloader(url: donation!.getSupplier().getImageURL())
         // Register notification center observer
         userImageObserver = NSNotificationCenter.defaultCenter().addObserverForName(imageDownloadNotificationKey,
             object: imageDownloader,
@@ -64,7 +65,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         NSNotificationCenter.defaultCenter().removeObserver(userImageObserver)
         super.viewWillDisappear(animated)
     }
-
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
@@ -73,12 +74,12 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    @IBAction func bookButtonPressed(sender: UIButton) {
-        bookingObserver = NSNotificationCenter.defaultCenter().addObserverForName(bookingCreatedNotificationKey,
+    @IBAction func dropButtonPressed(sender: UIButton) {
+        bookingObserver = NSNotificationCenter.defaultCenter().addObserverForName(unbookedNotificationKey,
             object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.bookingHandler(notification)})
-        donation!.book()
+        donation!.unbook()
     }
     
     // User interface settings
@@ -177,13 +178,13 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         }
     }
     
-    // Handle booking response
+    // Handle unbook response
     func bookingHandler(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Impossible to book"
-            alert.message = "The donation is not bookable anymore"
+            alert.title = "Impossible to unbook"
+            alert.message = "The donation is not unbookable anymore"
             alert.addButtonWithTitle("Dismiss")
             alert.delegate = self
             alert.show()
@@ -198,7 +199,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Booking performed"
+            alert.title = "Donation unbooked"
             alert.message = "Top!"
             alert.addButtonWithTitle("Dismiss")
             alert.delegate = self
@@ -211,30 +212,3 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         self.navigationController?.popViewControllerAnimated(true)
     }
 }
-
-
-class BtfAnnotation: NSObject, MKAnnotation {
-    let title: String
-    let subtitle: String
-    let address: String
-    let coordinate: CLLocationCoordinate2D
-    
-    init(title: String, offerer: String, address: String, coordinate: CLLocationCoordinate2D) {
-        self.title = title
-        self.subtitle = offerer
-        self.address = address
-        self.coordinate = coordinate
-        super.init()
-    }
-    
-    func mapItem() -> MKMapItem {
-        let addressDictionary = [String(kABPersonAddressStreetKey): address]
-        let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDictionary)
-        let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = title
-        
-        return mapItem
-    }
-}
-
-

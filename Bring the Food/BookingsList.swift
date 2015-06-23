@@ -18,7 +18,7 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     private var secondaryMessageLabel: UILabel?
     private let textCellIdentifier = "TextCell"
     private var requestStatus: RequestStatus?
-    
+    var delegate: DisplayBookedDetail?
     
     
     // Initializer
@@ -111,8 +111,7 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     // Handle click on tableView item
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let row = indexPath.row
-        println("ciao")
+        delegate?.displayDetail(donations[indexPath.section].donationsList[indexPath.row])
     }
     
     // Set section titles

@@ -74,6 +74,7 @@
 		B333D38B1B2042A000DBF44D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333D38A1B2042A000DBF44D /* LoginViewController.swift */; };
 		B346110D1B39A2CA000D13E2 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B346110C1B39A2CA000D13E2 /* AboutViewController.swift */; };
 		B346110F1B39A2FC000D13E2 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B346110E1B39A2FC000D13E2 /* NotificationSettingsViewController.swift */; };
+		B34611111B39D07F000D13E2 /* BookedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34611101B39D07F000D13E2 /* BookedDetailViewController.swift */; };
 		B369EF621B34A7FF00E28079 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF611B34A7FF00E28079 /* FilterProtocol.swift */; };
 		B369EF641B34A81E00E28079 /* DisplayBookedDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */; };
 		B369EF651B34A85000E28079 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF611B34A7FF00E28079 /* FilterProtocol.swift */; };
@@ -146,6 +147,7 @@
 		B333D38A1B2042A000DBF44D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B346110C1B39A2CA000D13E2 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		B346110E1B39A2FC000D13E2 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
+		B34611101B39D07F000D13E2 /* BookedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookedDetailViewController.swift; sourceTree = "<group>"; };
 		B3541BBF1B2F496800AA7F65 /* MyDonationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
 		B369EF611B34A7FF00E28079 /* FilterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterProtocol.swift; sourceTree = "<group>"; };
 		B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayBookedDetail.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				B32759C01B34FD790082DCB5 /* MyDetailViewController.swift */,
 				B346110C1B39A2CA000D13E2 /* AboutViewController.swift */,
 				B346110E1B39A2FC000D13E2 /* NotificationSettingsViewController.swift */,
+				B34611101B39D07F000D13E2 /* BookedDetailViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				3B8DD8601B2E114E009BC24C /* ImageDownloader.swift in Sources */,
 				3B9501CE1B35FC8700D2DC97 /* StoredDonation.swift in Sources */,
 				3B9501D11B35FCA400D2DC97 /* Donation.swift in Sources */,
+				B34611111B39D07F000D13E2 /* BookedDetailViewController.swift in Sources */,
 				B3FCE0011B2505BB00A86F7E /* SignInStep2ViewController.swift in Sources */,
 				3BFFF2DB1B24A4CD002C2AD5 /* HTTPResponseData.swift in Sources */,
 				B39374EF1B30162E0034473B /* MyDonationsViewController.swift in Sources */,
