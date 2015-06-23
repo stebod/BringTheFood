@@ -76,6 +76,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate {
     func setUpInterface() {
         mainLabel.numberOfLines = 2
         mainLabel.text = donation?.getDescription()
+        
         infoPanelView.layer.borderColor = UIMainColor.CGColor
         infoPanelView.layer.borderWidth = 1.0
         mapView.layer.borderColor = UIMainColor.CGColor
