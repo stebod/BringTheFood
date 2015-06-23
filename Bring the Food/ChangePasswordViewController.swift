@@ -23,7 +23,7 @@ class ChangePasswordViewController: UIViewController,UIActionSheetDelegate {
     }
     
     @IBAction func changePasswordButtonPressed(sender: UIButton) {
-        if(passwordTextField.text != ""){
+        if(passwordTextField.text == ""){
             let alert = UIAlertView()
             alert.title = "Error"
             alert.message = "Password may not be empty"
