@@ -204,6 +204,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
             alert.delegate = self
             alert.show()
         }
+        NSNotificationCenter.defaultCenter().removeObserver(bookingObserver)
     }
     
     // AlertView delegate

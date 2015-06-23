@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import AddressBook
 
-class MyDetailViewController: UIViewController, MKMapViewDelegate {
+class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDelegate {
     
     // Outlets
     @IBOutlet weak var mapView: MKMapView!
@@ -26,6 +26,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var dropCollectButton: UIButton!
     
     // Variables populated from prepareForSegue
     var donation: MyDonation?
@@ -37,6 +38,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate {
     
     // Observers
     private weak var userImageObserver: NSObjectProtocol!
+    private weak var dropCollectObserver: NSObjectProtocol!
     
     // Image downloader
     private var imageDownloader: ImageDownloader?
@@ -72,11 +74,36 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    @IBAction func dropCollectButtonPressed(sender: AnyObject) {
+        if(donation!.canBeModified() == true){
+            dropCollectObserver = NSNotificationCenter.defaultCenter().addObserverForName(donationDeletedNotificationKey,
+                object: ModelUpdater.getInstance(),
+                queue: NSOperationQueue.mainQueue(),
+                usingBlock: {(notification:NSNotification!) in self.deleteHandler(notification)})
+            donation?.delete()
+        }
+        else if(donation!.canBeCollected() == true){
+            dropCollectObserver = NSNotificationCenter.defaultCenter().addObserverForName(bookingCollectedNotificationKey,
+                object: ModelUpdater.getInstance(),
+                queue: NSOperationQueue.mainQueue(),
+                usingBlock: {(notification:NSNotification!) in self.collectHandler(notification)})
+            donation?.markAsCollected()
+        }
+    }
+    
     // User interface settings
     func setUpInterface() {
         mainLabel.numberOfLines = 2
         mainLabel.text = donation?.getDescription()
-        
+        if(donation!.canBeModified() == true){
+            dropCollectButton.setImage(UIImage(named: "delete_button"), forState: .Normal)
+        }
+        else {
+            dropCollectButton.setImage(UIImage(named: "collected_button"), forState: .Normal)
+            if(donation!.canBeCollected() == false){
+                dropCollectButton.enabled = false
+            }
+        }
         infoPanelView.layer.borderColor = UIMainColor.CGColor
         infoPanelView.layer.borderWidth = 1.0
         mapView.layer.borderColor = UIMainColor.CGColor
@@ -167,6 +194,71 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate {
             avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
             avatarImageView.image = UIImage(CGImage: CGImageCreateWithImageInRect(image!.CGImage, clippedRect))
         }
+    }
+    
+    // Handle donation collection
+    func collectHandler(notification: NSNotification){
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response?.status == RequestStatus.DATA_ERROR){
+            let alert = UIAlertView()
+            alert.title = "Impossible to mark as collected"
+            alert.message = "The donation is not markable as collected anymore"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
+            let alert = UIAlertView()
+            alert.title = "No connection"
+            alert.message = "Check you network connectivity and try again"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else{
+            let alert = UIAlertView()
+            alert.title = "Donation marked as collected"
+            alert.message = "Top!"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        NSNotificationCenter.defaultCenter().removeObserver(dropCollectObserver)
+    }
+    
+    // Handle donation deletion
+    func deleteHandler(notification: NSNotification){
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response?.status == RequestStatus.DATA_ERROR){
+            let alert = UIAlertView()
+            alert.title = "Impossible to delete donation"
+            alert.message = "The donation is not deletable anymore"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
+            let alert = UIAlertView()
+            alert.title = "No connection"
+            alert.message = "Check you network connectivity and try again"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else{
+            let alert = UIAlertView()
+            alert.title = "Donation correctly deleted"
+            alert.message = "Top!"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        NSNotificationCenter.defaultCenter().removeObserver(dropCollectObserver)
+    }
+    
+    // AlertView delegate
+    func alertView(View: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
 
