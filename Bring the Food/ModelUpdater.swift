@@ -331,20 +331,20 @@ public class ModelUpdater : NSObject{
             // le donazioni create da peer possono avere un solo beneficiario
             let e = resultList[0]
             
-            let bookingId = e.valueForKeyPath("result.id") as! Int!
-            let donationId = e.valueForKeyPath("result.donation.id") as! Int!
+            let bookingId = e.valueForKeyPath("id") as! Int!
+            let donationId = e.valueForKeyPath("donation.id") as! Int!
             
-            let addressLabel = e.valueForKeyPath("result.collector.address.label") as! String!
-            let addressLatitude = e.valueForKeyPath("result.collector.address.latitude") as! Float!
-            let addressLongitude = e.valueForKeyPath("result.collector.address.longitude") as! Float!
+            let addressLabel = e.valueForKeyPath("collector.address.label") as! String!
+            let addressLatitude = e.valueForKeyPath("collector.address.latitude") as! Float!
+            let addressLongitude = e.valueForKeyPath("collector.address.longitude") as! Float!
             var userAddress = Address(label: addressLabel, latitude: addressLatitude,
                 longitude: addressLongitude)
             
-            let userId = e.valueForKeyPath("result.collector.id") as! Int!
-            let userEmail = e.valueForKeyPath("result.collector.email") as! String!
-            let userName = e.valueForKeyPath("result.collector.name") as! String!
-            let userPhone = e.valueForKeyPath("result.collector.phone") as! String!
-            let userImageURL = e.valueForKeyPath("result.collector.avatar") as! String!
+            let userId = e.valueForKeyPath("collector.id") as! Int!
+            let userEmail = e.valueForKeyPath("collector.email") as! String!
+            let userName = e.valueForKeyPath("collector.name") as! String!
+            let userPhone = e.valueForKeyPath("collector.phone") as! String!
+            let userImageURL = e.valueForKeyPath("collector.avatar") as! String!
             
             let user = User(id: userId, email: userEmail, name: userName, phone: userPhone, address: userAddress, imageURL: userImageURL)
             
