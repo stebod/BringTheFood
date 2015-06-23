@@ -170,9 +170,8 @@ public class RestInterface : NSObject{
     
     public func deleteDonation(donation_id: Int){
         if(isLoggedIn()){
-            var parameters:String = "\(donation_id)" +
-            "?user_credentials=\(singleAccessToken)"
-            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/donations/" + parameters)!)
+            var parameters:String = "?user_credentials=\(singleAccessToken)"
+            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/donations/\(donation_id)" + parameters)!)
             request.HTTPMethod = "DELETE"
             sendRequest(request, notification_key: donationDeletedNotificationKey)
         }
@@ -232,7 +231,7 @@ public class RestInterface : NSObject{
     public func unbook(bookingId : Int!){
         if(isLoggedIn()){
             var parameters:String = "?user_credentials=\(singleAccessToken)"
-            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/my_bookings/\(bookingId)" + parameters)!)
+            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/bookings/\(bookingId)" + parameters)!)
             request.HTTPMethod = "DELETE"
             sendRequest(request, notification_key: unbookedNotificationKey)
         }
@@ -241,7 +240,7 @@ public class RestInterface : NSObject{
         }
     }
     
-/*    public func markBookingAsCollected(bookingId : Int!){
+    public func markBookingAsCollected(bookingId : Int!){
         if(isLoggedIn()){
             var parameters:String = "?user_credentials=\(singleAccessToken)"
             var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/bookings/\(bookingId)/collect" + parameters)!)
@@ -257,7 +256,7 @@ public class RestInterface : NSObject{
         else{
             ModelUpdater.getInstance().notifyNotLoggedInError(bookingCollectedNotificationKey)
         }
-    } */
+    }
     
     //*********************************************************************************
     // USERS
@@ -327,6 +326,42 @@ public class RestInterface : NSObject{
         }
         else{
             ModelUpdater.getInstance().notifyNotLoggedInError(getSettingsResponseNotificationKey)
+        }
+    }
+    
+    public func updateSettings(publishedEmail : Bool!, bookedEmail : Bool!, retractedEmail : Bool!, collectedEmail: Bool!, maxDistance: Int!){
+        if(isLoggedIn()){
+            var parameters:String = "?user_credentials=\(singleAccessToken)"
+            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/settings" + parameters)!)
+            request.HTTPMethod = "POST"
+
+            //preparo il body
+            var postString = "{ \"notify_me_when\" : {  "
+            postString += " \"published\": { "
+            postString += " \"sms\": \"false\", "
+            postString += " \"email\": \"\(publishedEmail)\" "
+            postString += "},  "
+            postString += " \"booked\": { "
+            postString += " \"sms\": \"false\", "
+            postString += " \"email\": \"\(bookedEmail)\" "
+            postString += "},  "
+            postString += " \"retracted\": { "
+            postString += " \"sms\": \"false\", "
+            postString += " \"email\": \"\(retractedEmail)\" "
+            postString += "},  "
+            postString += " \"collected\": { "
+            postString += " \"sms\": \"false\", "
+            postString += " \"email\": \"\(collectedEmail)\" "
+            postString += "} },  "
+            postString += " \"charity\" : {  "
+            postString += " \"range\": \(maxDistance) "
+            postString += "} }  "
+            println(postString)
+            request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+            sendRequest(request, notification_key: settingsUpdatedNotificationKey)
+        }
+        else{
+            ModelUpdater.getInstance().notifyNotLoggedInError(settingsUpdatedNotificationKey)
         }
     }
     

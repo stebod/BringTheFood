@@ -17,7 +17,7 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
     private let hasOpenBookings: Bool!
     
     private var collector: User?
-    private var bookingId: Int?
+    private var bookingId: Int!
     
     public init(id:Int!, description: String!, parcelSize: Float!, parcelUnit: ParcelUnit!,
         productDate: Date!, productType: ProductType!, photo_url:String!, supplier: User!, isValid: Bool!, hasOpenBookings: Bool!){
@@ -27,6 +27,7 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
             self.photo_url = photo_url
             self.isValid = isValid
             self.hasOpenBookings = hasOpenBookings
+            self.bookingId = 0
             
             super.init(description, parcelSize: parcelSize, parcelUnit: parcelUnit,
                 productDate: productDate, productType: productType)
@@ -48,20 +49,25 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
     // OTHERS DONATION PROTOCOL
     //*********************************************************************************
     
-    //TODO
     public func book(){
-        if !canBeModified() {
+        if !(self.isValid! && !self.hasOpenBookings!){
             return
         }
+        RestInterface.getInstance().bookCurrentDonation(self.id)
     }
     
     //*********************************************************************************
     // BOOKED DONATION PROTOCOL
     //*********************************************************************************
     
-    //TODO
     public func unbook(){
-    
+        if !(self.isValid! && self.hasOpenBookings!){
+            return
+        }
+        if self.bookingId == 0{
+            return
+        }
+        RestInterface.getInstance().unbook(self.bookingId)
     }
     
     //*********************************************************************************
@@ -108,18 +114,21 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
         }
     }
     
-    //TODO
     public func delete(){
-        if !canBeModified() {
+        if !(self.isValid! && !self.hasOpenBookings!) {
             return
         }
+        RestInterface.getInstance().deleteDonation(self.id)
     }
     
-    //TODO
     public func markAsCollected(){
         if !(self.isValid! && self.hasOpenBookings!){
             return
         }
+        if self.bookingId == 0{
+            return
+        }
+        RestInterface.getInstance().markBookingAsCollected(self.bookingId)
     }
     
     

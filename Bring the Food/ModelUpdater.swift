@@ -331,6 +331,7 @@ public class ModelUpdater : NSObject{
             // le donazioni create da peer possono avere un solo beneficiario
             let e = resultList[0]
             
+            let bookingId = e.valueForKeyPath("result.id") as! Int!
             let donationId = e.valueForKeyPath("result.donation.id") as! Int!
             
             let addressLabel = e.valueForKeyPath("result.collector.address.label") as! String!
@@ -351,6 +352,7 @@ public class ModelUpdater : NSObject{
             
             if donationToUpdate != nil{
                 donationToUpdate!.setCollector(user)
+                donationToUpdate!.setBookingId(bookingId)
             }
             
         default: break

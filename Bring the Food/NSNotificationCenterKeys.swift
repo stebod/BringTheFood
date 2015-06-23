@@ -29,6 +29,7 @@ public let mailAvailabilityResponseNotificationKey = "mailAvailabilityResponse"
 public let registrationResponseNotificationKey = "registrationResponse"
 public let userInfoResponseNotificationKey = "userInfoResponse"
 public let getSettingsResponseNotificationKey = "getSettingsResponse"
+public let settingsUpdatedNotificationKey = "settingsUpdatedResponse"
 
 // rest notifications - "NOTIFICATIONS" section
 public let getNotificationsResponseNotificationKey = "getNotificationsResponse"
