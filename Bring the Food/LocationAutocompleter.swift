@@ -10,6 +10,6 @@ import Foundation
 
 public class LocationAutocompleter {
 
-    
+        //QOS_CLASS_USER_INITIATED
 
 }

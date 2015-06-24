@@ -354,7 +354,8 @@ public class ModelUpdater : NSObject{
                 donationToUpdate!.setCollector(user)
                 donationToUpdate!.setBookingId(bookingId)
             }
-            
+        case logoutResponseNotificationKey :
+            RestInterface.getInstance().handleLogoutSucceded()
         default: break
             
         }

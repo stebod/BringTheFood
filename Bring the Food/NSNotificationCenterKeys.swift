@@ -30,6 +30,7 @@ public let registrationResponseNotificationKey = "registrationResponse"
 public let userInfoResponseNotificationKey = "userInfoResponse"
 public let getSettingsResponseNotificationKey = "getSettingsResponse"
 public let settingsUpdatedNotificationKey = "settingsUpdatedResponse"
+public let passwordChangedNotificationKey = "passwordChangedResponse"
 
 // rest notifications - "NOTIFICATIONS" section
 public let getNotificationsResponseNotificationKey = "getNotificationsResponse"

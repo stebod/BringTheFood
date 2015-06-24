@@ -61,6 +61,13 @@ public class RestInterface : NSObject{
         storeCredentials(userId, singleAccessToken: singleAccessToken)
     }
     
+    public func handleLogoutSucceded(){
+        singleAccessToken = ""
+        userId = 0
+        deletePersistedData()
+        clearImageCache()
+    }
+    
     private func storeCredentials(userId : Int, singleAccessToken:String){
 
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -92,6 +99,7 @@ public class RestInterface : NSObject{
         
         deleteurlcache()
 
+        defaults.synchronize()
     }
     
     private func deleteurlcache() {
@@ -274,17 +282,35 @@ public class RestInterface : NSObject{
             + "}"
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         sendRequest(request, notification_key: loginResponseNotificationKey)
-}
+    }
+    
+    public func changePassword(old_password: String!, new_password:String!){
+        
+        if(isLoggedIn()){
+            var parameters:String = "?user_credentials=\(singleAccessToken)"
+            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/change_password" + parameters)!)
+            request.HTTPMethod = "POST"
+            
+            //preparo il body                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            let postString = "{"
+                + "\"old_password\": \"\(old_password)\","
+                + "\"password\": \"\(new_password)\""
+                + "\"password_confirmation\": \"\(new_password)\""
+                + "}"
+            request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+            sendRequest(request, notification_key: passwordChangedNotificationKey)
+        }
+        else{
+            ModelUpdater.getInstance().notifyNotLoggedInError(passwordChangedNotificationKey)
+        }
+    }
     
     public func logout(){
         if(isLoggedIn()){
             var parameters:String = "?user_credentials=\(singleAccessToken)"
             var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/logout" + parameters)!)
             request.HTTPMethod = "GET"
-            singleAccessToken = ""
-            userId = 0
-            deletePersistedData()
-            clearImageCache()
+            
             sendRequest(request, notification_key: logoutResponseNotificationKey)
         }
         else{
