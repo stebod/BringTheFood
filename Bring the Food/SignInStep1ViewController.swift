@@ -80,9 +80,9 @@ class SignInStep1ViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "goToSignUpStep2") {
-            var DestViewController : SignInStep2ViewController = segue.destinationViewController as! SignInStep2ViewController
-            DestViewController.email = emailTextField.text
-            DestViewController.password = passwordTextField.text
+            var destViewController : SignInStep2ViewController = segue.destinationViewController as! SignInStep2ViewController
+            destViewController.email = emailTextField.text
+            destViewController.password = passwordTextField.text
         }
     }
     

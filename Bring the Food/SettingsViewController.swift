@@ -25,8 +25,6 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
     
     // Observers
     private weak var userSettingsObserver: NSObjectProtocol?
-    
-    // Observers
     private weak var userImageObserver: NSObjectProtocol!
     private weak var logoutObserver: NSObjectProtocol!
     
@@ -57,6 +55,17 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "goToChangeSettings") {
+            var destViewController : ChangeSettingsViewController = segue.destinationViewController as! ChangeSettingsViewController
+            destViewController.userImage = userImageView.image!
+            destViewController.name = nameLabel.text!
+            destViewController.email = emailLabel.text!
+            destViewController.phone = phoneLabel.text!
+            destViewController.address = addressLabel.text!
+        }
     }
     
     @IBAction func logOutButtonPressed(sender: UIButton) {

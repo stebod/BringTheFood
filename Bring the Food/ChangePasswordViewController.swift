@@ -8,10 +8,9 @@
 
 import UIKit
 
-class ChangePasswordViewController: UIViewController,UIActionSheetDelegate, UIAlertViewDelegate {
+class ChangePasswordViewController: UIViewController, UIAlertViewDelegate {
     
-    // Outlet
-    
+    // Outlets
     @IBOutlet weak var oldPasswordTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!

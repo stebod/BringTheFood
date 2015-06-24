@@ -58,6 +58,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
+        locationAutocompleter = LocationAutocompleter(delegate: self)
         // Register as notification center observer
         registrationObserver = NSNotificationCenter.defaultCenter().addObserverForName(registrationResponseNotificationKey,
             object: RestInterface.getInstance(),
@@ -78,7 +79,6 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         tapRecognizer.delegate = self
         tapRecognizer.numberOfTapsRequired = 1
         self.view.addGestureRecognizer(tapRecognizer)
-        locationAutocompleter = LocationAutocompleter(delegate: self)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -216,7 +216,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     
     // Handle registration
     private func registrationHandler(notification: NSNotification){
-        
+        // TODO: CHECK REGISTRATION
     }
     
     // Check if alert controller is available in the current iOS version    
