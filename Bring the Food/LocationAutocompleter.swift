@@ -22,7 +22,6 @@ public class LocationAutocompleter: NSObject, UITableViewDataSource, UITableView
     
     public func retreiveCompleteAddress(searchText: String!){
         
-        let searchText = "via A.Vivaldi"
         let placesClient = GMSPlacesClient()
         
         var data = [String]()
