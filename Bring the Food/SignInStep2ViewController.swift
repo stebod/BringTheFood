@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignInStep2ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate {
+class SignInStep2ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AddressCommunicator {
     
     // Outlets
     @IBOutlet weak var nameImageView: UIImageView!
@@ -75,7 +75,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         // Set tap recognizer on the view
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleTapOnView:")
         tapRecognizer.numberOfTapsRequired = 1
-        locationAutocompleter = LocationAutocompleter()
+        locationAutocompleter = LocationAutocompleter(delegate: self)
         self.view.addGestureRecognizer(tapRecognizer)
     }
     
@@ -344,6 +344,10 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         autocompleteTableView.delegate = locationAutocompleter
         autocompleteTableView.hidden = false
         autocompleteTableView.reloadData()
+    }
+    
+    func communicateAddress(address: String!){
+        addressTextField.text = address
     }
 }
 

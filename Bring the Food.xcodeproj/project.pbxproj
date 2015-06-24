@@ -81,6 +81,7 @@
 		B369EF641B34A81E00E28079 /* DisplayBookedDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */; };
 		B369EF651B34A85000E28079 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF611B34A7FF00E28079 /* FilterProtocol.swift */; };
 		B369EF661B34A85000E28079 /* DisplayBookedDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */; };
+		B38216231B3AF5CD00E831C0 /* AddressCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38216221B3AF5CD00E831C0 /* AddressCommunicator.swift */; };
 		B384C5301B2F73CF007DDAA2 /* BookingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B384C52F1B2F73CF007DDAA2 /* BookingsViewController.swift */; };
 		B389263A1B35CF7100F4EAAF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38926391B35CF7100F4EAAF /* SettingsViewController.swift */; };
 		B39374EF1B30162E0034473B /* MyDonationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3541BBF1B2F496800AA7F65 /* MyDonationsViewController.swift */; };
@@ -155,6 +156,7 @@
 		B3541BBF1B2F496800AA7F65 /* MyDonationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
 		B369EF611B34A7FF00E28079 /* FilterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterProtocol.swift; sourceTree = "<group>"; };
 		B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayBookedDetail.swift; sourceTree = "<group>"; };
+		B38216221B3AF5CD00E831C0 /* AddressCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressCommunicator.swift; sourceTree = "<group>"; };
 		B384C52F1B2F73CF007DDAA2 /* BookingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingsViewController.swift; sourceTree = "<group>"; };
 		B38926391B35CF7100F4EAAF /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B3A30B0E1B32BBE200F733E0 /* FilterState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterState.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */,
 				3BD4C79B1B36BC9C0007901E /* DisplayOthersDetail.swift */,
 				3BD4C79D1B36BCE90007901E /* DisplayMyDetail.swift */,
+				B38216221B3AF5CD00E831C0 /* AddressCommunicator.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 				3B4AE15C1B2B5ADB00436903 /* ApplicationSettings.swift in Sources */,
 				3B8DD8601B2E114E009BC24C /* ImageDownloader.swift in Sources */,
 				3B9501CE1B35FC8700D2DC97 /* StoredDonation.swift in Sources */,
+				B38216231B3AF5CD00E831C0 /* AddressCommunicator.swift in Sources */,
 				3B9501D11B35FCA400D2DC97 /* Donation.swift in Sources */,
 				B34611111B39D07F000D13E2 /* BookedDetailViewController.swift in Sources */,
 				B3FCE0011B2505BB00A86F7E /* SignInStep2ViewController.swift in Sources */,
