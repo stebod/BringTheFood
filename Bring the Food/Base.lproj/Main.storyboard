@@ -476,6 +476,7 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
+                                            <action selector="addressChanged:" destination="s91-ez-c20" eventType="editingChanged" id="fXy-PD-vmT"/>
                                             <action selector="addressOffFocus:" destination="s91-ez-c20" eventType="editingDidEnd" id="OaZ-3s-Hoo"/>
                                             <action selector="addressOnFocus:" destination="s91-ez-c20" eventType="editingDidBegin" id="KKP-Dj-lJz"/>
                                             <action selector="reactToFieldsInteraction:" destination="s91-ez-c20" eventType="editingChanged" id="r7B-Ty-8XM"/>
@@ -594,6 +595,7 @@
                     <connections>
                         <outlet property="addressImageView" destination="AHB-Tg-Dnh" id="xtQ-u0-3NX"/>
                         <outlet property="addressTextField" destination="otN-zx-D9j" id="hXP-62-rmI"/>
+                        <outlet property="autocompleteTableView" destination="gep-2f-noo" id="Voy-eV-9az"/>
                         <outlet property="avatarViewBottomConstraint" destination="LXP-aP-aL5" id="wru-Si-I9r"/>
                         <outlet property="avatarViewTopConstraint" destination="gi5-yw-dQw" id="z04-JH-ZdJ"/>
                         <outlet property="changeAvatarButton" destination="ugE-Zr-dUX" id="LKV-Bp-Z40"/>
@@ -605,7 +607,7 @@
                         <outlet property="textFieldsBottomConstraint" destination="lSs-ei-8sO" id="Pdm-Nx-bgF"/>
                         <outlet property="textFieldsCenterYConstraint" destination="Ous-J7-sn1" id="rPD-wF-mq0"/>
                         <outlet property="textFieldsTopConstraint" destination="LXP-aP-aL5" id="6Rk-W1-CLW"/>
-                        <outlet property="textFieldsView" destination="eAd-Un-TqE" id="l88-DI-BQv"/>
+                        <outlet property="textFieldsView" destination="eAd-Un-TqE" id="3MX-Tj-mRu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="diU-oP-MWM" userLabel="First Responder" sceneMemberID="firstResponder"/>

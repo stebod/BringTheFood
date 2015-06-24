@@ -41,10 +41,13 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     
     // Observers
     private weak var registrationObserver:NSObjectProtocol!
+    private weak var locationAutocompleteObserver:NSObjectProtocol!
     private weak var keyboardWillShowObserver:NSObjectProtocol!
     private weak var keyboardWillHideObserver:NSObjectProtocol!
     private var tapRecognizer:UITapGestureRecognizer!
     
+    // Location autocompleter
+    private var locationAutocompleter: LocationAutocompleter?
     
 
     override func viewDidLoad() {
@@ -59,6 +62,10 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
             object: RestInterface.getInstance(),
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.registrationHandler(notification)})
+        locationAutocompleteObserver = NSNotificationCenter.defaultCenter().addObserverForName(locationAutocompletedNotificationKey,
+            object: locationAutocompleter,
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in self.locationAutocompleterHandler(notification)})
         keyboardWillShowObserver = NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillShowNotification,
             object: nil, queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.keyboardWillShow(notification)})
@@ -68,6 +75,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         // Set tap recognizer on the view
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleTapOnView:")
         tapRecognizer.numberOfTapsRequired = 1
+        locationAutocompleter = LocationAutocompleter()
         self.view.addGestureRecognizer(tapRecognizer)
     }
     
@@ -116,7 +124,9 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         if(sender.text == "Address"){
             sender.text! = ""
         }
-        autocompleteTableView.hidden = false
+        if(addressTextField.text != ""){
+            locationAutocompleter?.retreiveCompleteAddress(addressTextField.text)
+        }
     }
     
     // Off focus textField behaviours
@@ -151,6 +161,13 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         }
         else{
             registerButton.enabled = false
+        }
+    }
+    
+    @IBAction func addressChanged(sender: UITextField) {
+        if(sender.text != ""){
+            locationAutocompleter?.retreiveCompleteAddress(addressTextField.text)
+            autocompleteTableView.hidden = false
         }
     }
     
@@ -318,6 +335,13 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
                 self.view.layoutIfNeeded()
             })
         }
+    }
+    
+    // Handle location autocomplete
+    func locationAutocompleterHandler(notification: NSNotification){
+        autocompleteTableView.delegate = locationAutocompleter
+        autocompleteTableView.hidden = false
+        autocompleteTableView.reloadData()
     }
 }
 
