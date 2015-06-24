@@ -35,5 +35,8 @@ public let passwordChangedNotificationKey = "passwordChangedResponse"
 // rest notifications - "NOTIFICATIONS" section
 public let getNotificationsResponseNotificationKey = "getNotificationsResponse"
 
-
+// ImageDownloader
 public let imageDownloadNotificationKey = "imageDownload"
+
+// LocationAutocompleter
+public let locationAutocompletedNotificationKey = "locationAutocompleted"

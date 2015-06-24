@@ -39,7 +39,7 @@ class MapsTest: XCTestCase {
         
         let doneExpectation = expectationWithDescription("done")
         
-        let searchText = "via A.Vivaldi 6, Turate"
+        let searchText = "via A.Vivaldi"
         let placesClient = GMSPlacesClient()
         
         var data = [String]()
