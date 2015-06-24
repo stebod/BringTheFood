@@ -25,6 +25,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var textFieldsCenterYConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsView: UIView!
+    @IBOutlet weak var autocompleteTableView: UITableView!
     
     // Interface colors
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
@@ -115,6 +116,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         if(sender.text == "Address"){
             sender.text! = ""
         }
+        autocompleteTableView.hidden = false
     }
     
     // Off focus textField behaviours
@@ -137,6 +139,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
             addressImageView.hidden = false
             sender.text = "Address"
         }
+        autocompleteTableView.hidden = true
     }
     
     // Enables register button
@@ -183,6 +186,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         registerButton.layer.borderColor = buttonBorderColor.CGColor
         registerButton.layer.cornerRadius = 3
         registerButton.enabled = false
+        autocompleteTableView.hidden = true
     }
     
     // Delegate method for tapping
