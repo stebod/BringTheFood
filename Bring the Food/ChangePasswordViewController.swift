@@ -8,9 +8,11 @@
 
 import UIKit
 
-class ChangePasswordViewController: UIViewController,UIActionSheetDelegate {
+class ChangePasswordViewController: UIViewController,UIActionSheetDelegate, UIAlertViewDelegate {
     
     // Outlet
+    
+    @IBOutlet weak var oldPasswordTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
@@ -51,4 +53,37 @@ class ChangePasswordViewController: UIViewController,UIActionSheetDelegate {
         return UIStatusBarStyle.LightContent
     }
     
+    func handleChangePassword(notification: NSNotification){
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response?.status == RequestStatus.DATA_ERROR){
+            let alert = UIAlertView()
+            alert.title = "Error"
+            alert.message = "The current password is wrong"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
+            let alert = UIAlertView()
+            alert.title = "No connection"
+            alert.message = "Check you network connectivity and try again"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else{
+            let alert = UIAlertView()
+            alert.title = "Password changed successfully"
+            alert.message = "Top!"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        //NSNotificationCenter.defaultCenter().removeObserver(bookingObserver)
+    }
+    
+    // AlertView delegate
+    func alertView(View: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }

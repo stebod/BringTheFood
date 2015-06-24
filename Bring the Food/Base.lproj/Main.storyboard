@@ -2729,7 +2729,7 @@ www.ict.fbk.eu
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zdk-ao-m5O">
-                                <rect key="frame" x="24" y="175" width="545" height="30"/>
+                                <rect key="frame" x="24" y="210" width="545" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3QT-CH-Lzs"/>
                                 </constraints>
@@ -2737,7 +2737,7 @@ www.ict.fbk.eu
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW PASSWORD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmA-1t-7g6">
-                                <rect key="frame" x="24" y="146" width="220" height="21"/>
+                                <rect key="frame" x="24" y="181" width="220" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="p2O-Pd-Ou8"/>
                                     <constraint firstAttribute="height" constant="21" id="vHn-Ud-YR7"/>
@@ -2747,14 +2747,39 @@ www.ict.fbk.eu
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3K-jg-MFx">
-                                <rect key="frame" x="24" y="211" width="545" height="1"/>
+                                <rect key="frame" x="24" y="246" width="545" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="brN-bs-hKH"/>
                                 </constraints>
                             </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Roa-p6-ROt">
+                                <rect key="frame" x="24" y="120" width="545" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="WvQ-Lz-V6C"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OLD PASSWORD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K91-tQ-aUR">
+                                <rect key="frame" x="24" y="91" width="220" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="220" id="0eA-9C-1ho"/>
+                                    <constraint firstAttribute="height" constant="21" id="8lE-J5-XDe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRn-kj-oMa">
+                                <rect key="frame" x="24" y="156" width="545" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="a1g-er-x0s"/>
+                                </constraints>
+                            </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aKl-ka-cL7">
-                                <rect key="frame" x="24" y="265" width="545" height="30"/>
+                                <rect key="frame" x="24" y="300" width="545" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="jDt-3z-uel"/>
                                 </constraints>
@@ -2762,7 +2787,7 @@ www.ict.fbk.eu
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REPEAT PASSWORD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxv-Z9-9y9">
-                                <rect key="frame" x="24" y="236" width="220" height="21"/>
+                                <rect key="frame" x="24" y="271" width="220" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="OEe-6U-8IL"/>
                                     <constraint firstAttribute="height" constant="21" id="U24-6B-BJi"/>
@@ -2772,7 +2797,7 @@ www.ict.fbk.eu
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNn-AK-0fc">
-                                <rect key="frame" x="24" y="301" width="545" height="1"/>
+                                <rect key="frame" x="24" y="336" width="545" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="MiM-FU-iIj"/>
@@ -2798,9 +2823,12 @@ www.ict.fbk.eu
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Roa-p6-ROt" secondAttribute="trailing" constant="15" id="32R-1p-FEN"/>
                             <constraint firstItem="V0z-6X-kVb" firstAttribute="top" secondItem="9gE-eP-qpk" secondAttribute="top" id="4EW-L0-Bzr"/>
                             <constraint firstItem="UNn-AK-0fc" firstAttribute="leading" secondItem="9gE-eP-qpk" secondAttribute="leading" constant="24" id="6bh-y0-JTi"/>
+                            <constraint firstItem="Roa-p6-ROt" firstAttribute="leading" secondItem="9gE-eP-qpk" secondAttribute="leadingMargin" constant="8" id="9nI-Aq-ZAc"/>
                             <constraint firstItem="zdk-ao-m5O" firstAttribute="top" secondItem="nmA-1t-7g6" secondAttribute="bottom" constant="8" id="Ab7-Sh-qYN"/>
+                            <constraint firstItem="Roa-p6-ROt" firstAttribute="top" secondItem="K91-tQ-aUR" secondAttribute="bottom" constant="8" id="B9a-zS-nbj"/>
                             <constraint firstItem="V0z-6X-kVb" firstAttribute="leading" secondItem="9gE-eP-qpk" secondAttribute="leading" id="DpB-AG-NOO"/>
                             <constraint firstAttribute="centerX" secondItem="V0z-6X-kVb" secondAttribute="centerX" id="E1s-NO-LQ6"/>
                             <constraint firstItem="aKl-ka-cL7" firstAttribute="top" secondItem="kxv-Z9-9y9" secondAttribute="bottom" constant="8" id="Jhk-w8-wKs"/>
@@ -2811,20 +2839,28 @@ www.ict.fbk.eu
                             <constraint firstAttribute="trailing" secondItem="S3K-jg-MFx" secondAttribute="trailing" constant="31" id="T5u-zr-2mC"/>
                             <constraint firstItem="UNn-AK-0fc" firstAttribute="top" secondItem="aKl-ka-cL7" secondAttribute="bottom" constant="6" id="TcS-OZ-6Sn"/>
                             <constraint firstAttribute="trailing" secondItem="V0z-6X-kVb" secondAttribute="trailing" id="VtA-NH-UdE"/>
+                            <constraint firstItem="K91-tQ-aUR" firstAttribute="top" secondItem="V0z-6X-kVb" secondAttribute="bottom" constant="26" id="aKA-QC-erg"/>
                             <constraint firstAttribute="trailing" secondItem="aKl-ka-cL7" secondAttribute="trailing" constant="31" id="dfK-cP-QJQ"/>
+                            <constraint firstItem="YRn-kj-oMa" firstAttribute="top" secondItem="Roa-p6-ROt" secondAttribute="bottom" constant="6" id="e28-BA-vQl"/>
+                            <constraint firstItem="YRn-kj-oMa" firstAttribute="leading" secondItem="9gE-eP-qpk" secondAttribute="leadingMargin" constant="8" id="hGl-gO-lkJ"/>
                             <constraint firstItem="zdk-ao-m5O" firstAttribute="leading" secondItem="9gE-eP-qpk" secondAttribute="leading" constant="24" id="jpW-K7-gTE"/>
                             <constraint firstItem="aKl-ka-cL7" firstAttribute="leading" secondItem="9gE-eP-qpk" secondAttribute="leading" constant="24" id="jws-uR-zKz"/>
                             <constraint firstAttribute="centerX" secondItem="Ev9-Ms-i4e" secondAttribute="centerX" id="kp8-hz-al4"/>
+                            <constraint firstItem="Roa-p6-ROt" firstAttribute="top" secondItem="K91-tQ-aUR" secondAttribute="bottom" constant="8" id="n6O-vZ-KYh"/>
                             <constraint firstItem="kxv-Z9-9y9" firstAttribute="top" secondItem="S3K-jg-MFx" secondAttribute="bottom" constant="24" id="sQa-UU-Guy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YRn-kj-oMa" secondAttribute="trailing" constant="15" id="vRX-6c-u61"/>
+                            <constraint firstItem="YRn-kj-oMa" firstAttribute="top" secondItem="Roa-p6-ROt" secondAttribute="bottom" constant="6" id="xOf-mc-bZF"/>
                             <constraint firstItem="nmA-1t-7g6" firstAttribute="leading" secondItem="9gE-eP-qpk" secondAttribute="leading" constant="24" id="yaQ-r5-C78"/>
+                            <constraint firstItem="K91-tQ-aUR" firstAttribute="leading" secondItem="9gE-eP-qpk" secondAttribute="leadingMargin" constant="8" id="yff-YA-vrv"/>
                             <constraint firstItem="S3K-jg-MFx" firstAttribute="top" secondItem="zdk-ao-m5O" secondAttribute="bottom" constant="6" id="ypb-u3-0V3"/>
-                            <constraint firstItem="nmA-1t-7g6" firstAttribute="top" secondItem="V0z-6X-kVb" secondAttribute="bottom" constant="81" id="zNV-Wz-ALc"/>
+                            <constraint firstItem="nmA-1t-7g6" firstAttribute="top" secondItem="V0z-6X-kVb" secondAttribute="bottom" constant="116" id="zNV-Wz-ALc"/>
                             <constraint firstAttribute="trailing" secondItem="UNn-AK-0fc" secondAttribute="trailing" constant="31" id="zr1-jh-22z"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wif-Mr-7cM"/>
                     <connections>
                         <outlet property="confirmPasswordTextField" destination="aKl-ka-cL7" id="ycG-pd-IOe"/>
+                        <outlet property="oldPasswordTextField" destination="Roa-p6-ROt" id="Kkd-6k-Drb"/>
                         <outlet property="passwordTextField" destination="zdk-ao-m5O" id="pdj-Ad-foD"/>
                     </connections>
                 </viewController>
