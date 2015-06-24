@@ -50,6 +50,7 @@
 		3B99B1BE1B35FEF200E0BECA /* NSNotificationCenterKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B99B1BC1B35FEF200E0BECA /* NSNotificationCenterKeys.swift */; };
 		3B99B1C01B35FEFD00E0BECA /* MapsAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B99B1BF1B35FEFD00E0BECA /* MapsAPIKey.swift */; };
 		3B99B1C11B35FEFD00E0BECA /* MapsAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B99B1BF1B35FEFD00E0BECA /* MapsAPIKey.swift */; };
+		3B9FD1221B3AAE290016F56D /* LocationAutocompleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9FD1211B3AAE290016F56D /* LocationAutocompleter.swift */; };
 		3BC327161B2DB8B0002F0DCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1B4F9A1B1EEE6400B9D705 /* AppDelegate.swift */; };
 		3BC327171B2DB8CF002F0DCE /* RestInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFF2DA1B24A4CD002C2AD5 /* RestInterface.swift */; };
 		3BC327181B2DB8D0002F0DCE /* RestInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFF2DA1B24A4CD002C2AD5 /* RestInterface.swift */; };
@@ -136,6 +137,7 @@
 		3B9501D01B35FCA400D2DC97 /* Donation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		3B99B1BC1B35FEF200E0BECA /* NSNotificationCenterKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNotificationCenterKeys.swift; sourceTree = "<group>"; };
 		3B99B1BF1B35FEFD00E0BECA /* MapsAPIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsAPIKey.swift; sourceTree = "<group>"; };
+		3B9FD1211B3AAE290016F56D /* LocationAutocompleter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAutocompleter.swift; sourceTree = "<group>"; };
 		3BD284731B2C01A200D77319 /* ModelUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelUpdater.swift; sourceTree = "<group>"; };
 		3BD4C79B1B36BC9C0007901E /* DisplayOthersDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayOthersDetail.swift; sourceTree = "<group>"; };
 		3BD4C79D1B36BCE90007901E /* DisplayMyDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayMyDetail.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			children = (
 				3B1B4F9A1B1EEE6400B9D705 /* AppDelegate.swift */,
 				3BD284731B2C01A200D77319 /* ModelUpdater.swift */,
+				3B9FD1211B3AAE290016F56D /* LocationAutocompleter.swift */,
 				3B8DD85F1B2E114E009BC24C /* ImageDownloader.swift */,
 				3BFFF2DA1B24A4CD002C2AD5 /* RestInterface.swift */,
 				3B1B4FA01B1EEE6400B9D705 /* Main.storyboard */,
@@ -527,6 +530,7 @@
 				3B99B1BD1B35FEF200E0BECA /* NSNotificationCenterKeys.swift in Sources */,
 				3BC327181B2DB8D0002F0DCE /* RestInterface.swift in Sources */,
 				3B9501C81B35FC5000D2DC97 /* OthersDonation.swift in Sources */,
+				3B9FD1221B3AAE290016F56D /* LocationAutocompleter.swift in Sources */,
 				3B2727F21B2CA9BA0064F53A /* BookingsList.swift in Sources */,
 				3B4AE1621B2B5AF800436903 /* User.swift in Sources */,
 				3B2727F41B2CA9BA0064F53A /* OthersDonationsList.swift in Sources */,
