@@ -39,6 +39,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     // Observers
     private weak var userImageObserver: NSObjectProtocol!
     private weak var dropCollectObserver: NSObjectProtocol!
+    private weak var collectorObserver: NSObjectProtocol!
     
     // Image downloader
     private var imageDownloader: ImageDownloader?
@@ -48,6 +49,11 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()
+        collectorObserver = NSNotificationCenter.defaultCenter().addObserverForName(getCollectorOfDonationNotificationKey,
+            object: imageDownloader,
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in return})
+        donation?.downloadDonationCollector()
     }
     
     override func viewWillAppear(animated:Bool) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationSettingsViewController: UIViewController {
+class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate {
     
     // Outlets
     @IBOutlet weak var newDonationSwitch: UISwitch!
@@ -25,6 +25,7 @@ class NotificationSettingsViewController: UIViewController {
 
     // Observers
     private weak var notificationsObserver:NSObjectProtocol?
+    private weak var changeNotificationsObserver:NSObjectProtocol?
     
     // Private variables
     private var currentDistance: Int?
@@ -47,7 +48,7 @@ class NotificationSettingsViewController: UIViewController {
         notificationsObserver = NSNotificationCenter.defaultCenter().addObserverForName(getSettingsResponseNotificationKey,
             object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.handleResponse(notification)})
+            usingBlock: {(notification:NSNotification!) in self.handleReceivedSettings(notification)})
         Model.getInstance().downloadMySettings()
     }
     
@@ -87,14 +88,18 @@ class NotificationSettingsViewController: UIViewController {
     }
     
     @IBAction func applyButtonPressed(sender: UIButton) {
-        
+        changeNotificationsObserver = NSNotificationCenter.defaultCenter().addObserverForName(settingsUpdatedNotificationKey,
+            object: ModelUpdater.getInstance(),
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in self.handleChangedSettings(notification)})
+        RestInterface.getInstance().updateSettings(newDonationSwitch.on, bookedEmail: newBookingSwitch.on, retractedEmail: dropBookingSwitch.on, collectedEmail: collectedDonationSwitch.on, maxDistance: currentDistance)
     }
     
-    func handleResponse(notification: NSNotification){
+    func handleReceivedSettings(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.SUCCESS){
             let mySettings = Model.getInstance().getMySettings()
-            currentDistance = mySettings?.getMaxDistance()
+            currentDistance = correctDistance(mySettings!.getMaxDistance())
             updateDistanceButtonSet()
             if(mySettings!.getPublishedEmail() == true){
                 newDonationSwitch.setOn(true, animated: true)
@@ -121,6 +126,35 @@ class NotificationSettingsViewController: UIViewController {
                 dropBookingSwitch.setOn(false, animated: true)
             }
         }
+    }
+    
+    func handleChangedSettings(notification: NSNotification){
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response?.status == RequestStatus.DATA_ERROR){
+            let alert = UIAlertView()
+            alert.title = "Something went wrong"
+            alert.message = "Try again later"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else if (response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
+            let alert = UIAlertView()
+            alert.title = "No connection"
+            alert.message = "Check you network connectivity and try again"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else{
+            let alert = UIAlertView()
+            alert.title = "Notification settings updated"
+            alert.message = "Top!"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        NSNotificationCenter.defaultCenter().removeObserver(changeNotificationsObserver!)
     }
     
     private func updateDistanceButtonSet(){
@@ -150,4 +184,21 @@ class NotificationSettingsViewController: UIViewController {
         }
     }
     
+    private func correctDistance(inputDistance: Int) -> Int{
+        if(inputDistance <= Distances.five.rawValue){
+            return Distances.five.rawValue
+        }
+        if(inputDistance <= Distances.ten.rawValue){
+            return Distances.ten.rawValue
+        }
+        if(inputDistance <= Distances.twentyfive.rawValue){
+            return Distances.twentyfive.rawValue
+        }
+        return Distances.fifty.rawValue
+    }
+    
+    // AlertView delegate
+    func alertView(View: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }

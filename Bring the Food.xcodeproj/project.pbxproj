@@ -76,6 +76,7 @@
 		B346110D1B39A2CA000D13E2 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B346110C1B39A2CA000D13E2 /* AboutViewController.swift */; };
 		B346110F1B39A2FC000D13E2 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B346110E1B39A2FC000D13E2 /* NotificationSettingsViewController.swift */; };
 		B34611111B39D07F000D13E2 /* BookedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34611101B39D07F000D13E2 /* BookedDetailViewController.swift */; };
+		B34611131B3A2205000D13E2 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34611121B3A2205000D13E2 /* ChangePasswordViewController.swift */; };
 		B369EF621B34A7FF00E28079 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF611B34A7FF00E28079 /* FilterProtocol.swift */; };
 		B369EF641B34A81E00E28079 /* DisplayBookedDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */; };
 		B369EF651B34A85000E28079 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369EF611B34A7FF00E28079 /* FilterProtocol.swift */; };
@@ -150,6 +151,7 @@
 		B346110C1B39A2CA000D13E2 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		B346110E1B39A2FC000D13E2 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
 		B34611101B39D07F000D13E2 /* BookedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookedDetailViewController.swift; sourceTree = "<group>"; };
+		B34611121B3A2205000D13E2 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		B3541BBF1B2F496800AA7F65 /* MyDonationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
 		B369EF611B34A7FF00E28079 /* FilterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterProtocol.swift; sourceTree = "<group>"; };
 		B369EF631B34A81E00E28079 /* DisplayBookedDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayBookedDetail.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				B346110C1B39A2CA000D13E2 /* AboutViewController.swift */,
 				B346110E1B39A2FC000D13E2 /* NotificationSettingsViewController.swift */,
 				B34611101B39D07F000D13E2 /* BookedDetailViewController.swift */,
+				B34611121B3A2205000D13E2 /* ChangePasswordViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				B32759C11B34FD790082DCB5 /* MyDetailViewController.swift in Sources */,
 				B369EF641B34A81E00E28079 /* DisplayBookedDetail.swift in Sources */,
 				3B4AE15A1B2B5ACF00436903 /* Address.swift in Sources */,
+				B34611131B3A2205000D13E2 /* ChangePasswordViewController.swift in Sources */,
 				B346110F1B39A2FC000D13E2 /* NotificationSettingsViewController.swift in Sources */,
 				3B9501CB1B35FC5F00D2DC97 /* BookedDonation.swift in Sources */,
 				3B4AE1601B2B5AE700436903 /* BtfNotification.swift in Sources */,
