@@ -58,7 +58,14 @@ class SettingsViewController: UIViewController {
         return UIStatusBarStyle.LightContent
     }
     
-    
+    @IBAction func logOutButtonPressed(sender: UIButton) {
+        let appDelegate = UIApplication.sharedApplication().delegate
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+        if appDelegate!.window != nil {
+            appDelegate!.window!!.rootViewController = rootViewController
+        }
+    }
     
     func fillUserData(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
