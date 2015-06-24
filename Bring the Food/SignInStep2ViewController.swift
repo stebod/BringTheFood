@@ -82,6 +82,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     override func viewWillDisappear(animated: Bool) {
         // Unregister as notification center observer
         NSNotificationCenter.defaultCenter().removeObserver(registrationObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(locationAutocompleteObserver)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillShowObserver)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillHideObserver)
         self.view.removeGestureRecognizer(tapRecognizer)
@@ -339,6 +340,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     
     // Handle location autocomplete
     func locationAutocompleterHandler(notification: NSNotification){
+        autocompleteTableView.dataSource = locationAutocompleter
         autocompleteTableView.delegate = locationAutocompleter
         autocompleteTableView.hidden = false
         autocompleteTableView.reloadData()

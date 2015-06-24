@@ -560,7 +560,7 @@
                                     <constraint firstAttribute="width" constant="279" id="e1Q-o3-bfL"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="dmZ-tL-sUR" style="IBUITableViewCellStyleDefault" id="qZs-vh-hQJ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TextCell" textLabel="dmZ-tL-sUR" style="IBUITableViewCellStyleDefault" id="qZs-vh-hQJ">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qZs-vh-hQJ" id="Gwe-aR-6sx">
                                             <autoresizingMask key="autoresizingMask"/>
