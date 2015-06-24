@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UIAlertViewDelegate {
 
     // Outlets
     @IBOutlet weak var nameLabel: UILabel!
@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController {
     
     // Observers
     private weak var userImageObserver: NSObjectProtocol!
+    private weak var logoutObserver: NSObjectProtocol!
     
     // Image downloader
     private var imageDownloader: ImageDownloader?
@@ -59,12 +60,12 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func logOutButtonPressed(sender: UIButton) {
-        let appDelegate = UIApplication.sharedApplication().delegate
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
-        if appDelegate!.window != nil {
-            appDelegate!.window!!.rootViewController = rootViewController
-        }
+        // Register as notification center observer
+        logoutObserver = NSNotificationCenter.defaultCenter().addObserverForName(logoutResponseNotificationKey,
+            object: ModelUpdater.getInstance(),
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in self.handleLogout(notification)})
+        RestInterface.getInstance().logout()
     }
     
     func fillUserData(notification: NSNotification){
@@ -108,6 +109,35 @@ class SettingsViewController: UIViewController {
 
     }
     
+    func handleLogout(notification: NSNotification){
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response?.status == RequestStatus.DATA_ERROR){
+            let alert = UIAlertView()
+            alert.title = "Impossible to logout"
+            alert.message = "The impossible happened"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
+            let alert = UIAlertView()
+            alert.title = "No connection"
+            alert.message = "Check you network connectivity and try again"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else{
+            let appDelegate = UIApplication.sharedApplication().delegate
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let rootViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+            if appDelegate!.window != nil {
+                appDelegate!.window!!.rootViewController = rootViewController
+            }
+        }
+        NSNotificationCenter.defaultCenter().removeObserver(logoutObserver)
+    }
+    
     private func setUpInterface(){
         addressLabel.numberOfLines = 2
         var leftConstraint = NSLayoutConstraint(item: contentView!, attribute: NSLayoutAttribute.Leading, relatedBy: .Equal,
@@ -117,5 +147,10 @@ class SettingsViewController: UIViewController {
         self.view.addConstraint(leftConstraint)
         self.view.addConstraint(rightConstraint)
         emptyView.hidden = true
+    }
+    
+    // AlertView delegate
+    func alertView(View: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
