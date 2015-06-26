@@ -11,22 +11,19 @@ import UIKit
 class SignInStep2ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate,AddressCommunicator {
     
     // Outlets
-    @IBOutlet weak var nameImageView: UIImageView!
-    @IBOutlet weak var phoneImageView: UIImageView!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var addressImageView: UIImageView!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
-    @IBOutlet weak var registerButton: UIButton!
-    @IBOutlet weak var changeAvatarButton: UIButton!
-    @IBOutlet weak var avatarViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var avatarViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mapLogoImageView: UIImageView!
+    @IBOutlet weak var mapLogoTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mapLogoBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsCenterYConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsView: UIView!
     @IBOutlet weak var autocompleteTableView: UITableView!
-    @IBOutlet weak var autocompleteView: UIView!
+    @IBOutlet weak var autocompleteTableViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var nextButton: UIButton!
     
     // Interface colors
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
@@ -41,7 +38,6 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     var password = String()
     
     // Observers
-    private weak var registrationObserver:NSObjectProtocol!
     private weak var locationAutocompleteObserver:NSObjectProtocol!
     private weak var keyboardWillShowObserver:NSObjectProtocol!
     private weak var keyboardWillHideObserver:NSObjectProtocol!
@@ -60,10 +56,6 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         super.viewWillAppear(animated)
         locationAutocompleter = LocationAutocompleter(delegate: self)
         // Register as notification center observer
-        registrationObserver = NSNotificationCenter.defaultCenter().addObserverForName(createUserNotificationKey,
-            object: ModelUpdater.getInstance(),
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.registrationHandler(notification)})
         locationAutocompleteObserver = NSNotificationCenter.defaultCenter().addObserverForName(locationAutocompletedNotificationKey,
             object: locationAutocompleter,
             queue: NSOperationQueue.mainQueue(),
@@ -83,7 +75,6 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewWillDisappear(animated: Bool) {
         // Unregister as notification center observer
-        NSNotificationCenter.defaultCenter().removeObserver(registrationObserver)
         NSNotificationCenter.defaultCenter().removeObserver(locationAutocompleteObserver)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillShowObserver)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillHideObserver)
@@ -95,88 +86,58 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         return UIStatusBarStyle.Default
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "goToSignUpStep3") {
+            var destViewController : SignInStep3ViewController = segue.destinationViewController as! SignInStep3ViewController
+            destViewController.email = email
+            destViewController.password = password
+            destViewController.address = addressTextField.text
+        }
+    }
+    
     @IBAction func backButtonPressed(sender: UIButton) {
         self.navigationController!.popViewControllerAnimated(true)
     }
     
-    @IBAction func changeAvatarPressed(sender: AnyObject) {
-        if( controllerAvailable()){
-            displayIOS8ActionSheet()
-        } else {
-            displayIOS7ActionSheet()
-        }
-    }
-    
     // On focus textField behaviours
-    @IBAction func nameOnFocus(sender: UITextField) {
-        nameImageView.hidden = true
-        if(sender.text == "Name"){
-            sender.text = ""
-        }
-    }
-    
-    @IBAction func phoneOnFocus(sender: UITextField) {
-        phoneImageView.hidden = true
-        if(sender.text == "Phone"){
-            sender.text! = ""
-        }
-    }
-    
     @IBAction func addressOnFocus(sender: UITextField) {
         addressImageView.hidden = true
+        nextButton.hidden = true
+        backButton.hidden = true
         if(sender.text == "Address"){
             sender.text! = ""
         }
         if(addressTextField.text != ""){
             locationAutocompleter?.retreiveCompleteAddress(addressTextField.text)
         }
+        autocompleteTableView.hidden = false
     }
     
     // Off focus textField behaviours
-    @IBAction func nameOffFocus(sender: UITextField) {
-        if (sender.text.isEmpty){
-            nameImageView.hidden = false
-            sender.text = "Name"
-        }
-    }
-    
-    @IBAction func phoneOffFocus(sender: UITextField) {
-        if (sender.text.isEmpty){
-            phoneImageView.hidden = false
-            sender.text = "Phone"
-        }
-    }
-    
     @IBAction func addressOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
             addressImageView.hidden = false
             sender.text = "Address"
         }
-        autocompleteView.hidden = true
+        backButton.hidden = false
+        nextButton.hidden = false
+        autocompleteTableView.hidden = true
     }
     
-    // Enables register button
+    // Enables next button
     @IBAction func reactToFieldsInteraction(sender: UITextField) {
-        if (nameTextField.text != "" && nameTextField != "Name"
-            && phoneTextField.text != "" && phoneTextField.text != "Phone"
-            && addressTextField.text != "" && addressTextField.text != "Address"){
-                registerButton.enabled = true
+        if (addressTextField.text != "" && addressTextField.text != "Address"){
+                nextButton.enabled = true
         }
         else{
-            registerButton.enabled = false
+            nextButton.enabled = false
         }
     }
     
     @IBAction func addressChanged(sender: UITextField) {
         if(sender.text != ""){
             locationAutocompleter?.retreiveCompleteAddress(addressTextField.text)
-            autocompleteView.hidden = false
         }
-    }
-    
-    // Register button pressed
-    @IBAction func registerButtonPressed(sender: UIButton) {
-        RestInterface.getInstance().createUser(nameTextField.text, password: password, email: email, phoneNumber: phoneTextField.text, avatar: changeAvatarButton.imageView!.image, addressLabel: addressTextField.text)
     }
     
     // Abort button pressed
@@ -186,128 +147,21 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     
     // User interface settings
     private func setUpInterface() -> Void {
-        nameTextField.layer.borderWidth = 1
-        nameTextField.layer.borderColor = textFieldBorderColor.CGColor
-        nameTextField.layer.cornerRadius = 3
-        nameTextField.textColor = UIMainColor
-        nameTextField.text = "Name"
-        phoneTextField.layer.borderWidth = 1
-        phoneTextField.layer.borderColor = textFieldBorderColor.CGColor
-        phoneTextField.layer.cornerRadius = 3
-        phoneTextField.textColor = UIMainColor
-        phoneTextField.text = "Phone"
         addressTextField.layer.borderWidth = 1
         addressTextField.layer.borderColor = textFieldBorderColor.CGColor
         addressTextField.layer.cornerRadius = 3
         addressTextField.textColor = UIMainColor
         addressTextField.text = "Address"
-        registerButton.layer.borderWidth = 1
-        registerButton.layer.borderColor = buttonBorderColor.CGColor
-        registerButton.layer.cornerRadius = 3
-        registerButton.enabled = false
-        autocompleteView.hidden = true
+        nextButton.layer.borderWidth = 1
+        nextButton.layer.borderColor = buttonBorderColor.CGColor
+        nextButton.layer.cornerRadius = 3
+        nextButton.enabled = false
+        autocompleteTableView.hidden = true
     }
     
     // Delegate method for tapping
     func handleTapOnView(recognizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
-    }
-    
-    // Handle registration
-    private func registrationHandler(notification: NSNotification){
-        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
-        if(response!.status == RequestStatus.SUCCESS){
-            let alert = UIAlertView()
-            alert.title = "Registration completed"
-            alert.message = "Top!"
-            alert.addButtonWithTitle("Dismiss")
-            alert.show()
-        }
-        let alert = UIAlertView()
-        alert.title = "Registration failed"
-        alert.message = "Nuuuu!"
-        alert.addButtonWithTitle("Dismiss")
-        alert.show()
-    }
-    
-    // Check if alert controller is available in the current iOS version
-    private func controllerAvailable() -> Bool {
-        if let gotModernAlert: AnyClass = NSClassFromString("UIAlertController") {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    
-    // Action sheet display in iOS8
-    private func displayIOS8ActionSheet() -> Void {
-        let imageController = UIImagePickerController()
-        imageController.editing = false
-        imageController.delegate = self;
-        
-        let alert = UIAlertController(title: "Lets get a picture", message: "Simple Message", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let libButton = UIAlertAction(title: "Select photo from library", style: UIAlertActionStyle.Default) { (alert) -> Void in
-            imageController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            self.presentViewController(imageController, animated: true, completion: nil)
-        }
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
-            let cameraButton = UIAlertAction(title: "Take a picture", style: UIAlertActionStyle.Default) { (alert) -> Void in
-                println("Take Photo")
-                imageController.sourceType = UIImagePickerControllerSourceType.Camera
-                self.presentViewController(imageController, animated: true, completion: nil)
-                
-            }
-            alert.addAction(cameraButton)
-        } else {
-            println("Camera not available")
-        }
-        let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (alert) -> Void in
-            println("Cancel Pressed")
-        }
-        alert.addAction(libButton)
-        alert.addAction(cancelButton)
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    // Image picker
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-        changeAvatarButton.layer.cornerRadius = changeAvatarButton.frame.size.width / 2;
-        changeAvatarButton.clipsToBounds = true
-        changeAvatarButton.layer.borderWidth = 3.0;
-        changeAvatarButton.layer.borderColor = UIMainColor.CGColor
-        // Use smallest side length as crop square length
-        var squareLength = min(image.size.width, image.size.height)
-        var clippedRect = CGRectMake((image.size.width - squareLength) / 2, (image.size.height - squareLength) / 2, squareLength, squareLength)
-        changeAvatarButton.setImage(UIImage(CGImage: CGImageCreateWithImageInRect(image.CGImage, clippedRect)), forState: .Normal)
-    }
-    
-    // Action sheet display in iOS7
-    private func displayIOS7ActionSheet() -> Void {
-        var actionSheet:UIActionSheet
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
-            actionSheet = UIActionSheet(title: "Hello this is IOS7", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil,otherButtonTitles:"Select photo from library", "Take a picture")
-        } else {
-            actionSheet = UIActionSheet(title: "Hello this is IOS7", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil,otherButtonTitles:"Select photo from library")
-        }
-        actionSheet.delegate = self
-        actionSheet.showInView(self.view)
-    }
-    
-    // Action sheet delegate for iOS7
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if(buttonIndex != 0){
-            let imageController = UIImagePickerController()
-            imageController.editing = false
-            imageController.delegate = self;
-            if( buttonIndex == 1){
-                imageController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            } else if(buttonIndex == 2){
-                imageController.sourceType = UIImagePickerControllerSourceType.Camera
-            }
-            self.presentViewController(imageController, animated: true, completion: nil)
-        }
     }
     
     // Called when keyboard appears on screen
@@ -328,24 +182,22 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     // Perform animations when keyboard appears
     private func animateTextField(up: Bool) {
         if(up){
-            if(self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 < kbHeight + 10){
-                UIView.animateWithDuration(0.3, animations: {
-                    self.textFieldsTopConstraint.constant -= self.kbHeight + 10 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2)
-                    self.textFieldsBottomConstraint.constant += self.kbHeight + 10 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
-                    self.textFieldsCenterYConstraint.constant += self.kbHeight + 10 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
-                    self.avatarViewTopConstraint.constant -= 300
-                    self.avatarViewBottomConstraint.constant += 300
-                    self.view.layoutIfNeeded()
-                })
-            }
+            UIView.animateWithDuration(0.3, animations: {
+                self.textFieldsCenterYConstraint.constant += self.textFieldsView.center.y - 100
+                self.mapLogoTopConstraint.constant -= 300
+                self.mapLogoBottomConstraint.constant += 300
+                self.autocompleteTableViewBottomConstraint.constant += self.kbHeight + 20
+                self.view.layoutIfNeeded()
+            })
         }
         else {
             UIView.animateWithDuration(0.3, animations: {
                 self.textFieldsTopConstraint.constant = 0
                 self.textFieldsBottomConstraint.constant = 0
-                self.textFieldsCenterYConstraint.constant = -14
-                self.avatarViewTopConstraint.constant = 0
-                self.avatarViewBottomConstraint.constant = 0
+                self.textFieldsCenterYConstraint.constant = -20
+                self.mapLogoTopConstraint.constant = 0
+                self.mapLogoBottomConstraint.constant = 0
+                self.autocompleteTableViewBottomConstraint.constant = 0
                 self.view.layoutIfNeeded()
             })
         }
@@ -361,12 +213,12 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     
     func communicateAddress(address: String!){
         addressTextField.text = address
-        autocompleteView.hidden = true
+        autocompleteTableView.hidden = true
         self.view.endEditing(true)
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-        if(touch.view.isDescendantOfView(autocompleteView)){
+        if(touch.view.isDescendantOfView(autocompleteTableView)){
             return false
         }
         return true
