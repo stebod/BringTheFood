@@ -24,6 +24,7 @@ public let bookingCollectedNotificationKey = "boookingCollectedResponse"
 
 // rest notifications - "USER" section
 public let loginResponseNotificationKey = "loginResponse"
+public let createUserNotificationKey = "userCreatedResponse"
 public let logoutResponseNotificationKey = "logoutResponse"
 public let mailAvailabilityResponseNotificationKey = "mailAvailabilityResponse"
 public let registrationResponseNotificationKey = "registrationResponse"
