@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignInStep2ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate {
+class SignInStep2ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate,AddressCommunicator {
     
     // Outlets
     @IBOutlet weak var nameImageView: UIImageView!
@@ -26,6 +26,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var textFieldsBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsView: UIView!
     @IBOutlet weak var autocompleteTableView: UITableView!
+    @IBOutlet weak var autocompleteView: UIView!
     
     // Interface colors
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
@@ -57,6 +58,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
+        locationAutocompleter = LocationAutocompleter(delegate: self)
         // Register as notification center observer
         registrationObserver = NSNotificationCenter.defaultCenter().addObserverForName(registrationResponseNotificationKey,
             object: RestInterface.getInstance(),
@@ -74,8 +76,8 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
             usingBlock: {(notification:NSNotification!) in self.keyboardWillHide(notification)})
         // Set tap recognizer on the view
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleTapOnView:")
+        tapRecognizer.delegate = self
         tapRecognizer.numberOfTapsRequired = 1
-        locationAutocompleter = LocationAutocompleter()
         self.view.addGestureRecognizer(tapRecognizer)
     }
     
@@ -150,7 +152,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
             addressImageView.hidden = false
             sender.text = "Address"
         }
-        autocompleteTableView.hidden = true
+        autocompleteView.hidden = true
     }
     
     // Enables register button
@@ -168,7 +170,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     @IBAction func addressChanged(sender: UITextField) {
         if(sender.text != ""){
             locationAutocompleter?.retreiveCompleteAddress(addressTextField.text)
-            autocompleteTableView.hidden = false
+            autocompleteView.hidden = false
         }
     }
     
@@ -204,7 +206,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         registerButton.layer.borderColor = buttonBorderColor.CGColor
         registerButton.layer.cornerRadius = 3
         registerButton.enabled = false
-        autocompleteTableView.hidden = true
+        autocompleteView.hidden = true
     }
     
     // Delegate method for tapping
@@ -214,7 +216,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     
     // Handle registration
     private func registrationHandler(notification: NSNotification){
-        
+        // TODO: CHECK REGISTRATION
     }
     
     // Check if alert controller is available in the current iOS version    
@@ -344,6 +346,19 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         autocompleteTableView.delegate = locationAutocompleter
         autocompleteTableView.hidden = false
         autocompleteTableView.reloadData()
+    }
+    
+    func communicateAddress(address: String!){
+        addressTextField.text = address
+        autocompleteView.hidden = true
+        self.view.endEditing(true)
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        if(touch.view.isDescendantOfView(autocompleteView)){
+            return false
+        }
+        return true
     }
 }
 

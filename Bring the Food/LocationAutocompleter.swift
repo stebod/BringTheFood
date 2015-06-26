@@ -13,10 +13,11 @@ public class LocationAutocompleter: NSObject, UITableViewDataSource, UITableView
 
     private var resultList : [String]!
     private let textCellIdentifier = "TextCell"
+    private let delegate: AddressCommunicator!
     
-    public override init() {
+    public init(delegate: AddressCommunicator!) {
         self.resultList = [String]()
-        super.init()
+        self.delegate = delegate
     }
     
     
@@ -80,7 +81,7 @@ public class LocationAutocompleter: NSObject, UITableViewDataSource, UITableView
     // Handle click on tableView item
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
+        delegate.communicateAddress(resultList[indexPath.row])
     }
 
 
