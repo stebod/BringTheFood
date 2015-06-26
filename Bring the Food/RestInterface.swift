@@ -309,7 +309,7 @@ public class RestInterface : NSObject{
         postString += " \"locale\": \"\(localeString)\", "
         
         if avatar != nil {
-            let imageData = UIImagePNGRepresentation(avatar)
+            let imageData = UIImageJPEGRepresentation(avatar, 0)
             let base64Avatar = imageData.base64EncodedStringWithOptions(.allZeros)
             postString += " \"avatar\": \"\(base64Avatar)\", "
         }
