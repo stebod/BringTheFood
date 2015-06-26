@@ -239,6 +239,33 @@ class RestTest: XCTestCase {
         })
     }
     
+    func testCreateUser(){
+        
+        let doneExpectation = expectationWithDescription("done")
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(createUserNotificationKey,
+            object: ModelUpdater.getInstance(),
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in
+                let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+                if(response!.status == RequestStatus.SUCCESS){
+                    
+                    XCTAssert(true, "Pass")
+                    doneExpectation.fulfill()
+                }
+                else{
+                    XCTFail("Fail")
+                }
+        })
+
+        
+        RestInterface.getInstance().createUser("utenteDiProva", password: "prova", email: "m8r-8ka45@mailinator.com", phoneNumber: "0", avatar: nil, addressLabel: "Casino Monte-Carlo, Casino Square, 98000 Monaco-Ville, Francia")
+        
+        self.waitForExpectationsWithTimeout(10, handler:{ error in
+            XCTAssertNil(error, "Error")
+        })
+    }
+    
     func testUpdateUserSettings(){
         
         let doneExpectation = expectationWithDescription("done")

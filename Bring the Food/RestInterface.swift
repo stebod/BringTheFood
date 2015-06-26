@@ -270,7 +270,7 @@ public class RestInterface : NSObject{
     // USERS
     //*********************************************************************************
     
-    public func sendLoginData(email:String, password:String){
+    public func sendLoginData(email:String!, password:String!){
         
         var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/login")!)
         request.HTTPMethod = "POST"
@@ -282,6 +282,44 @@ public class RestInterface : NSObject{
             + "}"
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         sendRequest(request, notification_key: loginResponseNotificationKey)
+    }
+    
+    public func createUser(username:String!, password:String!, email:String!, phoneNumber:String!, avatar: UIImage?, addressLabel:String!){
+        
+        let localeString:String!
+        let locale :String = NSLocale.preferredLanguages()[0] as! String
+        if locale == "it" {
+            localeString = "it"
+        } else {
+            localeString = "en"
+        }
+        
+        var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/users")!)
+        request.HTTPMethod = "POST"
+        
+        //preparo il body
+        var postString = "{ "
+        postString += " \"user\": { "
+        postString += " \"name\": \"\(username)\", "
+        postString += " \"password\": \"\(password)\", "
+        postString += " \"password_confirmation\": \"\(password)\", "
+        postString += " \"email\": \"\(email)\", "
+        postString += " \"phone\": \"\(phoneNumber)\", "
+        postString += " \"type\": \"Peer\", "
+        postString += " \"locale\": \"\(localeString)\", "
+        
+        if avatar != nil {
+            let imageData = UIImagePNGRepresentation(avatar)
+            let base64Avatar = imageData.base64EncodedStringWithOptions(.allZeros)
+            postString += " \"avatar\": \"\(base64Avatar)\", "
+        }
+        
+        postString += " \"address\" : {  "
+        postString += " \"label\": \"\(addressLabel)\" "
+        postString += "} } } "
+        println(postString)
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        sendRequest(request, notification_key: createUserNotificationKey)
     }
     
     public func changePassword(old_password: String!, new_password:String!){
