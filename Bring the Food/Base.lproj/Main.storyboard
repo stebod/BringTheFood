@@ -127,7 +127,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isd-O7-WqI">
-                                        <rect key="frame" x="41" y="103" width="196" height="33"/>
+                                        <rect key="frame" x="41" y="88" width="196" height="33"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Sign Up for BringTheFood ">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -142,7 +142,7 @@
                                     <constraint firstAttribute="width" constant="279" id="6ku-V4-yZp"/>
                                     <constraint firstAttribute="bottom" secondItem="74N-7U-cPR" secondAttribute="bottom" constant="16" id="cA5-QE-GSI"/>
                                     <constraint firstAttribute="centerX" secondItem="74N-7U-cPR" secondAttribute="centerX" id="iPA-N2-kGT"/>
-                                    <constraint firstAttribute="centerY" secondItem="isd-O7-WqI" secondAttribute="centerY" constant="-15" id="tdg-lI-6CH"/>
+                                    <constraint firstAttribute="centerY" secondItem="isd-O7-WqI" secondAttribute="centerY" id="tdg-lI-6CH"/>
                                     <constraint firstAttribute="centerX" secondItem="isd-O7-WqI" secondAttribute="centerX" id="zJ0-u8-46Q"/>
                                 </constraints>
                             </view>

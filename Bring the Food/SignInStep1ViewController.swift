@@ -255,20 +255,14 @@ class SignInStep1ViewController: UIViewController {
         if(up){
             if(self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 < kbHeight + 20){
                 UIView.animateWithDuration(0.3, animations: {
-                    println(self.textFieldsTopConstraint.constant)
-                    println(self.textFieldsView.center.y)
-                    self.textFieldsCenterYConstraint.constant += self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
-                    if(self.btfImageView.center.y - self.btfImageView.frame.height/2 < 50){
+                    let movement = self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
+                    self.textFieldsCenterYConstraint.constant += movement
+                    self.textFieldsTopConstraint.constant -= movement
+                    if(self.btfImageView.center.y - self.btfImageView.frame.height/2 < 80){
                         self.btfViewTopConstraint.constant -= 300
                         self.btfViewBottomConstraint.constant += 300
                     }
-                    else{
-                        self.btfViewTopConstraint.constant -= 15
-                        self.btfViewBottomConstraint.constant += 15
-                    }
                     self.view.layoutIfNeeded()
-                    println(self.textFieldsTopConstraint.constant)
-                    println(self.textFieldsView.center.y)
                 })
             }
         }
