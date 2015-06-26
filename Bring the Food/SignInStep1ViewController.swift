@@ -18,6 +18,7 @@ class SignInStep1ViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var btfImageView: UIImageView!
     @IBOutlet weak var btfViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var btfViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsTopConstraint: NSLayoutConstraint!
@@ -252,14 +253,22 @@ class SignInStep1ViewController: UIViewController {
     // Perform animations when keyboard appears
     private func animateTextField(up: Bool) {
         if(up){
-            if(self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 < kbHeight + 10){
+            if(self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 < kbHeight + 20){
                 UIView.animateWithDuration(0.3, animations: {
-                    self.textFieldsTopConstraint.constant -= self.kbHeight + 10 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2)
-                    self.textFieldsBottomConstraint.constant += self.kbHeight + 10 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
-                    self.textFieldsCenterYConstraint.constant += self.kbHeight + 10 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
-                    self.btfViewTopConstraint.constant -= 300
-                    self.btfViewBottomConstraint.constant += 300
+                    println(self.textFieldsTopConstraint.constant)
+                    println(self.textFieldsView.center.y)
+                    self.textFieldsCenterYConstraint.constant += self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
+                    if(self.btfImageView.center.y - self.btfImageView.frame.height/2 < 50){
+                        self.btfViewTopConstraint.constant -= 300
+                        self.btfViewBottomConstraint.constant += 300
+                    }
+                    else{
+                        self.btfViewTopConstraint.constant -= 15
+                        self.btfViewBottomConstraint.constant += 15
+                    }
                     self.view.layoutIfNeeded()
+                    println(self.textFieldsTopConstraint.constant)
+                    println(self.textFieldsView.center.y)
                 })
             }
         }
@@ -267,13 +276,14 @@ class SignInStep1ViewController: UIViewController {
             UIView.animateWithDuration(0.3, animations: {
                 self.textFieldsTopConstraint.constant = 0
                 self.textFieldsBottomConstraint.constant = 0
-                self.textFieldsCenterYConstraint.constant = -14
+                self.textFieldsCenterYConstraint.constant = -18
                 self.btfViewTopConstraint.constant = 0
                 self.btfViewBottomConstraint.constant = 0
                 self.view.layoutIfNeeded()
             })
         }
     }
+
     
 }
 

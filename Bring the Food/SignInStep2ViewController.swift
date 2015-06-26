@@ -60,8 +60,8 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
         super.viewWillAppear(animated)
         locationAutocompleter = LocationAutocompleter(delegate: self)
         // Register as notification center observer
-        registrationObserver = NSNotificationCenter.defaultCenter().addObserverForName(registrationResponseNotificationKey,
-            object: RestInterface.getInstance(),
+        registrationObserver = NSNotificationCenter.defaultCenter().addObserverForName(createUserNotificationKey,
+            object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.registrationHandler(notification)})
         locationAutocompleteObserver = NSNotificationCenter.defaultCenter().addObserverForName(locationAutocompletedNotificationKey,
@@ -176,8 +176,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     
     // Register button pressed
     @IBAction func registerButtonPressed(sender: UIButton) {
-        //TODO: IMPLEMENT REGISTRATION
-        self.navigationController!.dismissViewControllerAnimated(true, completion: nil)
+        RestInterface.getInstance().createUser(nameTextField.text, password: password, email: email, phoneNumber: phoneTextField.text, avatar: changeAvatarButton.imageView!.image, addressLabel: addressTextField.text)
     }
     
     // Abort button pressed
@@ -216,10 +215,22 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     
     // Handle registration
     private func registrationHandler(notification: NSNotification){
-        // TODO: CHECK REGISTRATION
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response!.status == RequestStatus.SUCCESS){
+            let alert = UIAlertView()
+            alert.title = "Registration completed"
+            alert.message = "Top!"
+            alert.addButtonWithTitle("Dismiss")
+            alert.show()
+        }
+        let alert = UIAlertView()
+        alert.title = "Registration failed"
+        alert.message = "Nuuuu!"
+        alert.addButtonWithTitle("Dismiss")
+        alert.show()
     }
     
-    // Check if alert controller is available in the current iOS version    
+    // Check if alert controller is available in the current iOS version
     private func controllerAvailable() -> Bool {
         if let gotModernAlert: AnyClass = NSClassFromString("UIAlertController") {
             return true;
