@@ -13,10 +13,8 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     // Outlets
     @IBOutlet weak var nameImageView: UIImageView!
     @IBOutlet weak var phoneImageView: UIImageView!
-    @IBOutlet weak var addressImageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
-    @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var changeAvatarButton: UIButton!
     @IBOutlet weak var avatarViewTopConstraint: NSLayoutConstraint!
@@ -112,13 +110,6 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         }
     }
     
-    @IBAction func addressOnFocus(sender: UITextField) {
-        addressImageView.hidden = true
-        if(sender.text == "Address"){
-            sender.text! = ""
-        }
-    }
-    
     // Off focus textField behaviours
     @IBAction func nameOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
@@ -134,18 +125,10 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         }
     }
     
-    @IBAction func addressOffFocus(sender: UITextField) {
-        if (sender.text.isEmpty){
-            addressImageView.hidden = false
-            sender.text = "Address"
-        }
-    }
-    
     // Enables register button
     @IBAction func reactToFieldsInteraction(sender: UITextField) {
         if (nameTextField.text != "" && nameTextField != "Name"
-            && phoneTextField.text != "" && phoneTextField.text != "Phone"
-            && addressTextField.text != "" && addressTextField.text != "Address"){
+            && phoneTextField.text != "" && phoneTextField.text != "Phone"){
                 registerButton.enabled = true
         }
         else{
@@ -159,7 +142,7 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     
     // Register button pressed
     @IBAction func registerButtonPressed(sender: UIButton) {
-        RestInterface.getInstance().createUser(nameTextField.text, password: password, email: email, phoneNumber: phoneTextField.text, avatar: changeAvatarButton.imageView!.image, addressLabel: addressTextField.text)
+        RestInterface.getInstance().createUser(nameTextField.text, password: password, email: email, phoneNumber: phoneTextField.text, avatar: changeAvatarButton.imageView!.image, addressLabel: address)
     }
     
     // Abort button pressed
@@ -179,11 +162,6 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         phoneTextField.layer.cornerRadius = 3
         phoneTextField.textColor = UIMainColor
         phoneTextField.text = "Phone"
-        addressTextField.layer.borderWidth = 1
-        addressTextField.layer.borderColor = textFieldBorderColor.CGColor
-        addressTextField.layer.cornerRadius = 3
-        addressTextField.textColor = UIMainColor
-        addressTextField.text = "Address"
         registerButton.layer.borderWidth = 1
         registerButton.layer.borderColor = buttonBorderColor.CGColor
         registerButton.layer.cornerRadius = 3
@@ -201,13 +179,13 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         if(response!.status == RequestStatus.SUCCESS){
             let alert = UIAlertView()
             alert.title = "Registration completed"
-            alert.message = "Top!"
+            alert.message = "You will receive a confirmation email!"
             alert.addButtonWithTitle("Dismiss")
             alert.show()
         }
         let alert = UIAlertView()
         alert.title = "Registration failed"
-        alert.message = "Nuuuu!"
+        alert.message = "Something went wrong, try again!"
         alert.addButtonWithTitle("Dismiss")
         alert.show()
     }
@@ -310,11 +288,11 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     // Perform animations when keyboard appears
     private func animateTextField(up: Bool) {
         if(up){
-            if(self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 < kbHeight + 10){
+            if(self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 < kbHeight + 20){
                 UIView.animateWithDuration(0.3, animations: {
-                    self.textFieldsTopConstraint.constant -= self.kbHeight + 10 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2)
-                    self.textFieldsBottomConstraint.constant += self.kbHeight + 10 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
-                    self.textFieldsCenterYConstraint.constant += self.kbHeight + 10 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
+                    self.textFieldsTopConstraint.constant -= self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2)
+                    self.textFieldsBottomConstraint.constant += self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
+                    self.textFieldsCenterYConstraint.constant += self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
                     self.avatarViewTopConstraint.constant -= 300
                     self.avatarViewBottomConstraint.constant += 300
                     self.view.layoutIfNeeded()
@@ -325,7 +303,7 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
             UIView.animateWithDuration(0.3, animations: {
                 self.textFieldsTopConstraint.constant = 0
                 self.textFieldsBottomConstraint.constant = 0
-                self.textFieldsCenterYConstraint.constant = -14
+                self.textFieldsCenterYConstraint.constant = -20
                 self.avatarViewTopConstraint.constant = 0
                 self.avatarViewBottomConstraint.constant = 0
                 self.view.layoutIfNeeded()
