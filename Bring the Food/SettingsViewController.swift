@@ -79,7 +79,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
     
     func fillUserData(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
-        if(response?.status == RequestStatus.SUCCESS || response?.status == RequestStatus.CACHE){
+        if(response?.status == RequestStatus.SUCCESS){
             scrollView.hidden = false
             emptyView.hidden = true
             let user = Model.getInstance().getCurrentUser()

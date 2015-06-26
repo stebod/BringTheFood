@@ -17,6 +17,7 @@ class LoginViewController: UIViewController,UIActionSheetDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var btfImageView: UIView!
     @IBOutlet weak var btfViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var btfViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsTopConstraint: NSLayoutConstraint!
@@ -256,8 +257,14 @@ class LoginViewController: UIViewController,UIActionSheetDelegate {
                     self.textFieldsTopConstraint.constant -= self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2)
                     self.textFieldsBottomConstraint.constant += self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
                     self.textFieldsCenterYConstraint.constant += self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
-                    self.btfViewTopConstraint.constant -= 300
-                    self.btfViewBottomConstraint.constant += 300
+                    if(self.btfImageView.center.y - self.btfImageView.frame.height/2 < 50){
+                        self.btfViewTopConstraint.constant -= 300
+                        self.btfViewBottomConstraint.constant += 300
+                    }
+                    else{
+                        self.btfViewTopConstraint.constant -= 15
+                        self.btfViewBottomConstraint.constant += 15
+                    }
                     self.view.layoutIfNeeded()
                 })
             }
