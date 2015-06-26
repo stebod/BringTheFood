@@ -17,6 +17,7 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var changeAvatarButton: UIButton!
+    @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var avatarViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsTopConstraint: NSLayoutConstraint!
@@ -288,13 +289,15 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     // Perform animations when keyboard appears
     private func animateTextField(up: Bool) {
         if(up){
-            if(self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 < kbHeight + 20){
+            if(self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 < kbHeight - 10){
                 UIView.animateWithDuration(0.3, animations: {
-                    self.textFieldsTopConstraint.constant -= self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2)
-                    self.textFieldsBottomConstraint.constant += self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
-                    self.textFieldsCenterYConstraint.constant += self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
-                    self.avatarViewTopConstraint.constant -= 300
-                    self.avatarViewBottomConstraint.constant += 300
+                    let movement = self.kbHeight - 10 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
+                    self.textFieldsCenterYConstraint.constant += movement
+                    self.textFieldsTopConstraint.constant -= movement
+                    if(self.avatarView.center.y - self.changeAvatarButton.frame.height/2 < 80){
+                        self.avatarViewTopConstraint.constant -= 300
+                        self.avatarViewBottomConstraint.constant += 300
+                    }
                     self.view.layoutIfNeeded()
                 })
             }
@@ -303,7 +306,7 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
             UIView.animateWithDuration(0.3, animations: {
                 self.textFieldsTopConstraint.constant = 0
                 self.textFieldsBottomConstraint.constant = 0
-                self.textFieldsCenterYConstraint.constant = -20
+                self.textFieldsCenterYConstraint.constant = -22
                 self.avatarViewTopConstraint.constant = 0
                 self.avatarViewBottomConstraint.constant = 0
                 self.view.layoutIfNeeded()
