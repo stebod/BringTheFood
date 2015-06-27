@@ -703,6 +703,10 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXb-BH-Okj">
                                         <rect key="frame" x="100" y="80" width="79" height="79"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="79" id="gam-S8-uei"/>
+                                            <constraint firstAttribute="width" constant="79" id="vsA-ce-0VE"/>
+                                        </constraints>
                                         <state key="normal" image="avatar">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -710,8 +714,16 @@
                                             <action selector="changeAvatarPressed:" destination="320-bE-Ss1" eventType="touchUpInside" id="dCc-XB-ZlO"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take a selfie!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0n-Yn-9yb">
+                                        <rect key="frame" x="93" y="172" width="93" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" red="0.95686274510000002" green="0.62745098040000002" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="y0n-Yn-9yb" secondAttribute="centerX" id="NAs-3s-maF"/>
+                                    <constraint firstItem="y0n-Yn-9yb" firstAttribute="top" secondItem="nXb-BH-Okj" secondAttribute="bottom" constant="13" id="YXm-t5-Ffk"/>
                                     <constraint firstAttribute="width" constant="279" id="bMY-vb-8jG"/>
                                     <constraint firstItem="nXb-BH-Okj" firstAttribute="centerY" secondItem="lmh-Lf-dCP" secondAttribute="centerY" id="bgx-0I-ioj"/>
                                     <constraint firstAttribute="centerX" secondItem="nXb-BH-Okj" secondAttribute="centerX" id="i1n-RA-qh7"/>
@@ -761,6 +773,7 @@
                         <outlet property="phoneImageView" destination="xD3-ST-QPQ" id="HCV-2u-mot"/>
                         <outlet property="phoneTextField" destination="hkg-PO-VUl" id="xls-kb-t9s"/>
                         <outlet property="registerButton" destination="rYs-oQ-5n2" id="rKG-kr-004"/>
+                        <outlet property="takeASelfieLabel" destination="y0n-Yn-9yb" id="sFU-na-f0X"/>
                         <outlet property="textFieldsBottomConstraint" destination="8LL-9y-07a" id="Ibc-CV-5xr"/>
                         <outlet property="textFieldsCenterYConstraint" destination="h1E-QV-31I" id="8Jy-z3-Dyz"/>
                         <outlet property="textFieldsTopConstraint" destination="iIl-hD-2gg" id="bqm-yK-uOa"/>

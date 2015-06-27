@@ -19,6 +19,7 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var changeAvatarButton: UIButton!
+    @IBOutlet weak var takeASelfieLabel: UILabel!
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var avatarViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarViewBottomConstraint: NSLayoutConstraint!
@@ -144,7 +145,7 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     
     // Register button pressed
     @IBAction func registerButtonPressed(sender: UIButton) {
-        RestInterface.getInstance().createUser(nameTextField.text, password: password, email: email, phoneNumber: phoneTextField.text, avatar: changeAvatarButton.imageView!.image, addressLabel: address)
+        RestInterface.getInstance().createUser(nameTextField.text, password: password, email: email, phoneNumber: phoneTextField.text, avatar: customAvatar == nil ? nil : customAvatar, addressLabel: address)
         self.view.endEditing(true)
         activityIndicatorView.startAnimating()
         registerButton.enabled = false
@@ -254,16 +255,17 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         // Use smallest side length as crop square length
         var squareLength = min(image.size.width, image.size.height)
         var clippedRect = CGRectMake((image.size.width - squareLength) / 2, (image.size.height - squareLength) / 2, squareLength, squareLength)
-        changeAvatarButton.setImage(UIImage(CGImage: CGImageCreateWithImageInRect(image.CGImage, clippedRect)), forState: .Normal)
+        customAvatar = UIImage(CGImage: CGImageCreateWithImageInRect(image.CGImage, clippedRect))
+        changeAvatarButton.setImage(customAvatar, forState: .Normal)
     }
     
     // Action sheet display in iOS7
     private func displayIOS7ActionSheet() -> Void {
         var actionSheet:UIActionSheet
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
-            actionSheet = UIActionSheet(title: "Hello this is IOS7", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil,otherButtonTitles:"Select photo from library", "Take a picture")
+            actionSheet = UIActionSheet(title: "Lets get a picture", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil,otherButtonTitles:"Select photo from library", "Take a picture")
         } else {
-            actionSheet = UIActionSheet(title: "Hello this is IOS7", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil,otherButtonTitles:"Select photo from library")
+            actionSheet = UIActionSheet(title: "Lets get a picture", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil,otherButtonTitles:"Select photo from library")
         }
         actionSheet.delegate = self
         actionSheet.showInView(self.view)
@@ -312,6 +314,9 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
                         self.avatarViewBottomConstraint.constant += 300
                         self.backButtonTopConstraint.constant -= 300
                     }
+                    if(self.avatarView.center.y - self.changeAvatarButton.frame.height/2 < 80){
+                        self.takeASelfieLabel.alpha = 0.0
+                    }
                     self.view.layoutIfNeeded()
                 })
             }
@@ -335,6 +340,7 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
                     self.avatarViewBottomConstraint.constant = 0
                 }
                 self.backButtonTopConstraint.constant = 20
+                self.takeASelfieLabel.alpha = 1.0
                 self.view.layoutIfNeeded()
             })
         }
