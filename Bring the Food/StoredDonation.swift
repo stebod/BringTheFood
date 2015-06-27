@@ -118,11 +118,30 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
         return false
     }
     
-    //TODO
-    public func modify(){
+
+    public func modify(newDescription: String? , newParcelSize: Float?){
+        
+        let desc : String!
+        let parcSize : Float!
+        
         if !canBeModified() {
             return
         }
+        if newDescription == nil && newParcelSize == nil {
+            return
+        }
+        if newDescription == nil {
+            desc = self.getDescription()
+        } else {
+            desc = newDescription!
+        }
+        if newParcelSize == nil {
+            parcSize = self.getParcelSize()
+        } else {
+            parcSize = newParcelSize!
+        }
+        RestInterface.getInstance().updateDonation(self.id, newDescription: desc, newParcelSize: parcSize)
+        
     }
     
     public func delete(){

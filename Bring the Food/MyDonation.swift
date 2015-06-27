@@ -18,7 +18,7 @@ public protocol MyDonation : Donation {
     
     func getCollector() -> User?
     
-    func modify()
+    func modify(newDescription: String? , newParcelSize: Float?)
     
     func delete()
     

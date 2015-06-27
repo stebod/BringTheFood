@@ -311,20 +311,19 @@ class RestTest: XCTestCase {
     // DONATION CALLS TESTS
     //*********************************************************************************
    
-    /*
+    
     
     func testCreateDonation(){
         
         let doneExpectation = expectationWithDescription("done")
         
         NSNotificationCenter.defaultCenter().addObserverForName(donationCreatedNotificationKey,
-            object: RestInterface.getInstance(),
+            object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in
                 let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
                 if(response!.status == RequestStatus.SUCCESS){
-                    var data = response!.data
-                    println(toString(data))
+
                     XCTAssert(true, "Pass")
                     doneExpectation.fulfill()
                 }
@@ -334,14 +333,14 @@ class RestTest: XCTestCase {
         })
         
         NSNotificationCenter.defaultCenter().addObserverForName(loginResponseNotificationKey,
-            object: RestInterface.getInstance(),
+            object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in
                 let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
                 if(response!.status == RequestStatus.SUCCESS){
                     
                     let donation = NewDonation("test donation", parcelSize: 7, parcelUnit: ParcelUnit.KILOGRAMS,
-                        productDate: Date(dateString: "2017-08-23"), productType: ProductType.FROZEN, photo: nil)
+                        productDate: Date(dateString: "2017-08-23"), productType: ProductType.FROZEN)
                     RestInterface.getInstance().createDonation(donation)
                 }
                 else{
@@ -357,78 +356,19 @@ class RestTest: XCTestCase {
         
     }
     
-    func testDeleteDonation(){
-        
-        let doneExpectation = expectationWithDescription("done")
 
-        NSNotificationCenter.defaultCenter().addObserverForName(donationDeletedNotificationKey,
-            object: RestInterface.getInstance(),
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in
-                let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
-                if(response!.status == RequestStatus.SUCCESS){
-                    var data = response!.data
-                    println(toString(data))
-                    XCTAssert(true, "Pass")
-                    doneExpectation.fulfill()
-                }
-                else{
-                    XCTFail("Fail")
-                }
-        })
-        
-        NSNotificationCenter.defaultCenter().addObserverForName(donationCreatedNotificationKey,
-            object: RestInterface.getInstance(),
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in
-                let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
-                if(response!.status == RequestStatus.SUCCESS){
-                    var data = response!.data
-                    var idToDelete = (data![0]["donation"] as! NSDictionary)["id"] as! Int
-                    println(idToDelete)
-                    RestInterface.getInstance().deleteDonation(idToDelete)
-                }
-                else{
-                    XCTFail("Fail")
-                }
-        })
-        
-        NSNotificationCenter.defaultCenter().addObserverForName(loginResponseNotificationKey,
-            object: RestInterface.getInstance(),
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in
-                let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
-                if(response!.status == RequestStatus.SUCCESS){
-                    
-                    let donation = NewDonation("test donation", parcelSize: 7, parcelUnit: ParcelUnit.KILOGRAMS,
-                        productDate: Date(dateString: "2017-08-23"), productType: ProductType.FROZEN, photo: nil)
-                    RestInterface.getInstance().createDonation(donation)
-                }
-                else{
-                    XCTFail("Fail")
-                }
-        })
-        
-        RestInterface.getInstance().sendLoginData("bodini.stefano@gmail.com",
-            password: "fedeealesonoalmiofianco")
-        self.waitForExpectationsWithTimeout(10, handler:{ error in
-            XCTAssertNil(error, "Error")
-        })
-        
-    }
     
     func testgetOthersDonation(){
         
         let doneExpectation = expectationWithDescription("done")
         
         NSNotificationCenter.defaultCenter().addObserverForName(getOthersDonationNotificationKey,
-            object: RestInterface.getInstance(),
+            object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in
                 let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
                 if(response!.status == RequestStatus.SUCCESS){
-                    var data = response!.data
-                    println(toString(data))
+
                     XCTAssert(true, "Pass")
                     doneExpectation.fulfill()
                 }
@@ -438,7 +378,7 @@ class RestTest: XCTestCase {
         })
         
         NSNotificationCenter.defaultCenter().addObserverForName(loginResponseNotificationKey,
-            object: RestInterface.getInstance(),
+            object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in
                 let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
@@ -459,7 +399,7 @@ class RestTest: XCTestCase {
         
     }
     
-    */
+
     
     func testgetMyDonation(){
         
