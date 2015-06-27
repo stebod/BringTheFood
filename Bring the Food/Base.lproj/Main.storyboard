@@ -587,37 +587,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmh-Lf-dCP">
-                                <rect key="frame" x="161" y="0.0" width="279" height="239"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSD-R9-i0v">
-                                        <rect key="frame" x="102" y="83" width="74" height="74"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="74" id="FEH-0M-o9N"/>
-                                            <constraint firstAttribute="width" constant="74" id="LbJ-mb-EcT"/>
-                                        </constraints>
-                                        <state key="normal" image="avatar">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="changeAvatarPressed:" destination="320-bE-Ss1" eventType="touchUpInside" id="qV4-z5-Dmb"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take a selfie!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFM-pp-4g4">
-                                        <rect key="frame" x="93" y="172" width="93" height="20.5"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" red="0.95686274510000002" green="0.62745098040000002" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="LFM-pp-4g4" secondAttribute="centerX" id="B0s-TX-fpb"/>
-                                    <constraint firstAttribute="width" constant="279" id="bMY-vb-8jG"/>
-                                    <constraint firstItem="LFM-pp-4g4" firstAttribute="top" secondItem="VSD-R9-i0v" secondAttribute="bottom" constant="15" id="cql-DI-NwW"/>
-                                    <constraint firstAttribute="centerY" secondItem="VSD-R9-i0v" secondAttribute="centerY" constant="-0.5" id="dbd-TS-HNL"/>
-                                    <constraint firstAttribute="centerX" secondItem="VSD-R9-i0v" secondAttribute="centerX" id="yZI-qN-c97"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjT-vD-NJD">
                                 <rect key="frame" x="30" y="239" width="540" height="185"/>
                                 <subviews>
@@ -699,7 +668,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dn6-Nm-azP">
-                                <rect key="frame" x="161" y="424" width="279" height="176"/>
+                                <rect key="frame" x="160" y="424" width="279" height="176"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Pi-5B-RCG">
                                         <rect key="frame" x="89" y="132" width="101" height="28"/>
@@ -740,6 +709,37 @@
                                     <action selector="backButtonPressed:" destination="320-bE-Ss1" eventType="touchUpInside" id="LYt-ue-KKl"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmh-Lf-dCP">
+                                <rect key="frame" x="161" y="0.0" width="279" height="239"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take a selfie!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFM-pp-4g4">
+                                        <rect key="frame" x="93" y="172" width="93" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" red="0.95686274510000002" green="0.62745098040000002" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSD-R9-i0v">
+                                        <rect key="frame" x="102" y="83" width="74" height="74"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="74" id="FEH-0M-o9N"/>
+                                            <constraint firstAttribute="width" constant="74" id="LbJ-mb-EcT"/>
+                                        </constraints>
+                                        <state key="normal" image="avatar">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changeAvatarPressed:" destination="320-bE-Ss1" eventType="touchUpInside" id="qV4-z5-Dmb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="LFM-pp-4g4" secondAttribute="centerX" id="B0s-TX-fpb"/>
+                                    <constraint firstAttribute="width" constant="279" id="bMY-vb-8jG"/>
+                                    <constraint firstItem="LFM-pp-4g4" firstAttribute="top" secondItem="VSD-R9-i0v" secondAttribute="bottom" constant="15" id="cql-DI-NwW"/>
+                                    <constraint firstAttribute="centerY" secondItem="VSD-R9-i0v" secondAttribute="centerY" constant="-0.5" id="dbd-TS-HNL"/>
+                                    <constraint firstAttribute="centerX" secondItem="VSD-R9-i0v" secondAttribute="centerX" id="yZI-qN-c97"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -750,7 +750,7 @@
                             <constraint firstItem="aqP-V0-wcA" firstAttribute="top" secondItem="xOu-p7-jku" secondAttribute="bottom" constant="20" id="S0R-a5-Zub"/>
                             <constraint firstItem="SjT-vD-NJD" firstAttribute="leading" secondItem="XW9-YU-oMX" secondAttribute="leading" constant="30" id="SGS-gN-gZb"/>
                             <constraint firstItem="lmh-Lf-dCP" firstAttribute="top" secondItem="XW9-YU-oMX" secondAttribute="topMargin" id="YOm-fc-6tW"/>
-                            <constraint firstAttribute="centerY" secondItem="SjT-vD-NJD" secondAttribute="centerY" constant="-31.5" id="h1E-QV-31I"/>
+                            <constraint firstAttribute="centerY" secondItem="SjT-vD-NJD" secondAttribute="centerY" constant="-32" id="h1E-QV-31I"/>
                             <constraint firstAttribute="centerX" secondItem="dn6-Nm-azP" secondAttribute="centerX" id="jsS-Qp-jfj"/>
                             <constraint firstItem="aqP-V0-wcA" firstAttribute="leading" secondItem="XW9-YU-oMX" secondAttribute="leading" constant="30" id="qTw-BB-gKq"/>
                             <constraint firstAttribute="centerX" secondItem="lmh-Lf-dCP" secondAttribute="centerX" id="rIM-Of-71W"/>

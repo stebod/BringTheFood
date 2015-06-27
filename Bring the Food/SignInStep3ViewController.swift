@@ -47,6 +47,9 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     private weak var keyboardWillHideObserver:NSObjectProtocol!
     private var tapRecognizer:UITapGestureRecognizer!
     
+    // Custom user avatar
+    private var customAvatar: UIImage?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -315,9 +318,9 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         }
         else {
             UIView.animateWithDuration(0.3, animations: {
+                self.textFieldsCenterYConstraint.constant = -32
                 self.textFieldsTopConstraint.constant = 0
                 self.textFieldsBottomConstraint.constant = 0
-                self.textFieldsCenterYConstraint.constant = -22
                 self.avatarViewTopConstraint.constant = 0
                 self.avatarViewBottomConstraint.constant = 0
                 self.backButtonTopConstraint.constant = 20
