@@ -157,6 +157,13 @@ class SignInStep1ViewController: UIViewController {
             alert.addButtonWithTitle("Dismiss")
             alert.show()
         }
+        else if(count(passwordTextField.text) < 4){
+            let alert = UIAlertView()
+            alert.title = "Error"
+            alert.message = "Password must be at least 4 characters long"
+            alert.addButtonWithTitle("Dismiss")
+            alert.show()
+        }
         else if(passwordTextField.text != confirmPasswordTextField.text){
             let alert = UIAlertView()
             alert.title = "Error"

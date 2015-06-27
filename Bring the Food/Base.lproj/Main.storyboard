@@ -972,6 +972,9 @@
                                         <state key="normal" image="add">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="OXO-A4-9nC" kind="presentation" id="1fe-mK-LaZ"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfE-LA-465">
                                         <rect key="frame" x="268" y="29" width="64.5" height="22.5"/>
@@ -1045,6 +1048,75 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7oQ-EJ-9Vz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1645" y="348"/>
+        </scene>
+        <!--New Donation-->
+        <scene sceneID="1aY-wD-3Cb">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="OXO-A4-9nC" userLabel="New Donation" customClass="NewDonationViewController" customModule="Bring_the_Food" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j45-iK-4KW"/>
+                        <viewControllerLayoutGuide type="bottom" id="E5J-xx-aZk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zeR-hj-gEc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSN-Hg-ZBu">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Donation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9R-wK-Fgg">
+                                        <rect key="frame" x="240" y="29" width="121" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSl-O5-iaQ">
+                                        <rect key="frame" x="20" y="25" width="46" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="ETm-Z8-gSi"/>
+                                            <constraint firstAttribute="width" constant="46" id="Uxr-lv-yuV"/>
+                                            <constraint firstAttribute="width" constant="46" id="tCl-r0-Zrv"/>
+                                            <constraint firstAttribute="height" constant="30" id="tbT-j1-UE0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Uxr-lv-yuV"/>
+                                                <exclude reference="tbT-j1-UE0"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="OXO-A4-9nC" eventType="touchUpInside" id="C26-bo-cH2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.62352941179999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Q9R-wK-Fgg" firstAttribute="top" secondItem="RSN-Hg-ZBu" secondAttribute="top" constant="29" id="Sh5-m7-9dl"/>
+                                    <constraint firstAttribute="height" constant="65" id="YoT-lt-F4w"/>
+                                    <constraint firstAttribute="centerX" secondItem="Q9R-wK-Fgg" secondAttribute="centerX" id="kVb-tf-iJC"/>
+                                    <constraint firstAttribute="bottom" secondItem="dSl-O5-iaQ" secondAttribute="bottom" constant="7" id="s5W-Oe-TJJ"/>
+                                    <constraint firstItem="dSl-O5-iaQ" firstAttribute="leading" secondItem="RSN-Hg-ZBu" secondAttribute="leading" constant="20" id="zaX-oa-64c"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RSN-Hg-ZBu" firstAttribute="leading" secondItem="zeR-hj-gEc" secondAttribute="leading" id="Dku-0a-TaE"/>
+                            <constraint firstItem="RSN-Hg-ZBu" firstAttribute="top" secondItem="zeR-hj-gEc" secondAttribute="top" id="aby-Cg-EnQ"/>
+                            <constraint firstAttribute="centerX" secondItem="RSN-Hg-ZBu" secondAttribute="centerX" id="wdZ-mX-Bm7"/>
+                            <constraint firstAttribute="trailing" secondItem="RSN-Hg-ZBu" secondAttribute="trailing" id="z37-uc-ezd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="dM8-Xt-YWK"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Afn-0K-iXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1650" y="-472"/>
         </scene>
         <!--Filter View Controller-->
         <scene sceneID="3iL-BD-tj1">
