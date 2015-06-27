@@ -44,17 +44,21 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
     private var tapRecognizer:UITapGestureRecognizer!
     
     // Location autocompleter
-    private var locationAutocompleter: LocationAutocompleter?
+    private var locationAutocompleter: LocationAutocompleter!
     
 
+    deinit{
+        println("ciao")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()
+        locationAutocompleter = LocationAutocompleter(delegate: self)
     }
     
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
-        locationAutocompleter = LocationAutocompleter(delegate: self)
         // Register as notification center observer
         locationAutocompleteObserver = NSNotificationCenter.defaultCenter().addObserverForName(locationAutocompletedNotificationKey,
             object: locationAutocompleter,
@@ -182,12 +186,11 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
         if(up){
             UIView.animateWithDuration(0.3, animations: {
                 self.textFieldsCenterYConstraint.constant += self.textFieldsView.center.y - 130
+                self.textFieldsBottomConstraint.constant += self.textFieldsView.center.y - 130
                 self.mapLogoTopConstraint.constant -= 300
                 self.mapLogoBottomConstraint.constant += 300
                 self.backButtonTopConstraint.constant -= 300
-                self.autocompleteTableViewBottomConstraint.constant += self.kbHeight + 20
-                self.view.setNeedsUpdateConstraints()
-                self.view.setNeedsLayout()
+                self.view.layoutIfNeeded()
             })
         }
         else {

@@ -196,17 +196,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fFZ-vp-qkW">
                                 <rect key="frame" x="160" y="424" width="279" height="176"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nj-dQ-lnP">
-                                        <rect key="frame" x="20" y="66.5" width="239" height="33"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                        <state key="normal" title="Learn More about BringTheFood">
-                                            <color key="titleColor" red="0.95686274510000002" green="0.62745098040000002" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="learnMoreButtonPressed:" destination="iCk-pE-GjM" eventType="touchUpInside" id="57G-Mx-KRa"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wko-63-W0W">
                                         <rect key="frame" x="89" y="132" width="101" height="28"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
@@ -218,6 +207,17 @@
                                             <action selector="abortRegistration:" destination="iCk-pE-GjM" eventType="touchUpInside" id="KhV-Xc-Vq1"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nj-dQ-lnP">
+                                        <rect key="frame" x="20" y="71" width="239" height="33"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <state key="normal" title="Learn More about BringTheFood">
+                                            <color key="titleColor" red="0.95686274510000002" green="0.62745098040000002" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="learnMoreButtonPressed:" destination="iCk-pE-GjM" eventType="touchUpInside" id="57G-Mx-KRa"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="wko-63-W0W" secondAttribute="centerX" id="Eg8-eN-zMj"/>
@@ -225,7 +225,7 @@
                                     <constraint firstAttribute="centerX" secondItem="9nj-dQ-lnP" secondAttribute="centerX" id="Mb1-U8-gpR"/>
                                     <constraint firstAttribute="bottom" secondItem="wko-63-W0W" secondAttribute="bottom" constant="16" id="Z9h-9S-hjK"/>
                                     <constraint firstAttribute="centerX" secondItem="9nj-dQ-lnP" secondAttribute="centerX" id="bKy-En-zzb"/>
-                                    <constraint firstAttribute="centerY" secondItem="9nj-dQ-lnP" secondAttribute="centerY" constant="5.25" id="qbx-dw-E2Y"/>
+                                    <constraint firstAttribute="centerY" secondItem="9nj-dQ-lnP" secondAttribute="centerY" constant="0.5" id="qbx-dw-E2Y"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ijk-9S-N7k">
