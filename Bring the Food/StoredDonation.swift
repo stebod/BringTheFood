@@ -118,8 +118,8 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
         return false
     }
     
-    //TODO
-    public func modify(newDescription: String? , newParcelSize: Int?){
+
+    public func modify(newDescription: String? , newParcelSize: Float?){
         
         let desc : String!
         let parcSize : Float!
