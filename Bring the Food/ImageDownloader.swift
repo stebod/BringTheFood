@@ -12,9 +12,8 @@ import UIKit
 
 /*
     Esegue il download dalla url con cui è stato inizializzato.
-    La politica di caching assicura che ogni immagine sia scaricata solo una volta dal server.
-    Nel caso dovesse fallire, recupera le immagini previste di default.
-    Fatto questo, invia una notifica in cui segnala che l'immagine è disponibile.
+    La politica di caching assicura che ogni immagine sia scaricata al più una volta dal server.
+    Fatto questo, invia una notifica, il cui stato segnala se il download è andato a buon fine.
 */
 
 public class ImageDownloader{
