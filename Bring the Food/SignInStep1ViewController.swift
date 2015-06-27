@@ -18,9 +18,9 @@ class SignInStep1ViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var btfImageView: UIImageView!
-    @IBOutlet weak var btfViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var btfViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var credentialsImageView: UIImageView!
+    @IBOutlet weak var credentialsViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var credentialsViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsCenterYConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsBottomConstraint: NSLayoutConstraint!
@@ -258,9 +258,9 @@ class SignInStep1ViewController: UIViewController {
                     let movement = self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
                     self.textFieldsCenterYConstraint.constant += movement
                     self.textFieldsTopConstraint.constant -= movement
-                    if(self.btfImageView.center.y - self.btfImageView.frame.height/2 < 80){
-                        self.btfViewTopConstraint.constant -= 300
-                        self.btfViewBottomConstraint.constant += 300
+                    if(self.credentialsImageView.center.y - self.credentialsImageView.frame.height/2 < 80){
+                        self.credentialsViewTopConstraint.constant -= 300
+                        self.credentialsViewBottomConstraint.constant += 300
                     }
                     self.view.layoutIfNeeded()
                 })
@@ -271,8 +271,8 @@ class SignInStep1ViewController: UIViewController {
                 self.textFieldsTopConstraint.constant = 0
                 self.textFieldsBottomConstraint.constant = 0
                 self.textFieldsCenterYConstraint.constant = -18
-                self.btfViewTopConstraint.constant = 0
-                self.btfViewBottomConstraint.constant = 0
+                self.credentialsViewTopConstraint.constant = 0
+                self.credentialsViewBottomConstraint.constant = 0
                 self.view.layoutIfNeeded()
             })
         }

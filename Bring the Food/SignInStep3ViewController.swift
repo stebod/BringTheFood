@@ -11,6 +11,7 @@ import UIKit
 class SignInStep3ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate {
     
     // Outlets
+    @IBOutlet weak var backButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var nameImageView: UIImageView!
     @IBOutlet weak var phoneImageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
@@ -294,9 +295,10 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
                     let movement = self.kbHeight - 10 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
                     self.textFieldsCenterYConstraint.constant += movement
                     self.textFieldsTopConstraint.constant -= movement
-                    if(self.avatarView.center.y - self.changeAvatarButton.frame.height/2 < 80){
+                    if(self.avatarView.center.y - self.changeAvatarButton.frame.height/2 < 60){
                         self.avatarViewTopConstraint.constant -= 300
                         self.avatarViewBottomConstraint.constant += 300
+                        self.backButtonTopConstraint.constant -= 300
                     }
                     self.view.layoutIfNeeded()
                 })
@@ -309,6 +311,7 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
                 self.textFieldsCenterYConstraint.constant = -22
                 self.avatarViewTopConstraint.constant = 0
                 self.avatarViewBottomConstraint.constant = 0
+                self.backButtonTopConstraint.constant = 20
                 self.view.layoutIfNeeded()
             })
         }

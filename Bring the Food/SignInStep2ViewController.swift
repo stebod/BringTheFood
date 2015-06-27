@@ -8,10 +8,10 @@
 
 import UIKit
 
-class SignInStep2ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate,AddressCommunicator {
+class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, AddressCommunicator {
     
     // Outlets
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var backButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var addressImageView: UIImageView!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var mapLogoImageView: UIImageView!
@@ -103,7 +103,6 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     @IBAction func addressOnFocus(sender: UITextField) {
         addressImageView.hidden = true
         nextButton.hidden = true
-        backButton.hidden = true
         if(sender.text == "Address"){
             sender.text! = ""
         }
@@ -119,7 +118,6 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
             addressImageView.hidden = false
             sender.text = "Address"
         }
-        backButton.hidden = false
         nextButton.hidden = false
         autocompleteTableView.hidden = true
     }
@@ -183,11 +181,13 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
     private func animateTextField(up: Bool) {
         if(up){
             UIView.animateWithDuration(0.3, animations: {
-                self.textFieldsCenterYConstraint.constant += self.textFieldsView.center.y - 100
+                self.textFieldsCenterYConstraint.constant += self.textFieldsView.center.y - 130
                 self.mapLogoTopConstraint.constant -= 300
                 self.mapLogoBottomConstraint.constant += 300
+                self.backButtonTopConstraint.constant -= 300
                 self.autocompleteTableViewBottomConstraint.constant += self.kbHeight + 20
-                self.view.layoutIfNeeded()
+                self.view.setNeedsUpdateConstraints()
+                self.view.setNeedsLayout()
             })
         }
         else {
@@ -198,6 +198,7 @@ class SignInStep2ViewController: UIViewController, UINavigationControllerDelegat
                 self.mapLogoTopConstraint.constant = 0
                 self.mapLogoBottomConstraint.constant = 0
                 self.autocompleteTableViewBottomConstraint.constant = 0
+                self.backButtonTopConstraint.constant = 20
                 self.view.layoutIfNeeded()
             })
         }
