@@ -317,7 +317,6 @@ public class RestInterface : NSObject{
         postString += " \"address\" : {  "
         postString += " \"label\": \"\(addressLabel)\" "
         postString += "} } } "
-        println(postString)
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         sendRequest(request, notification_key: createUserNotificationKey)
     }
