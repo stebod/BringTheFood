@@ -196,7 +196,7 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         else{
             let alert = UIAlertView()
             alert.title = "Network error"
-            alert.message = "Check your internet connectivity"
+            alert.message = "Check you network connectivity and try again"
             alert.addButtonWithTitle("Dismiss")
             alert.delegate = self
             alert.show()

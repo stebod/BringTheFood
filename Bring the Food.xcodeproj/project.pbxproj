@@ -297,6 +297,7 @@
 				B3E762121B2488FC004C631F /* SignInStep1ViewController.swift */,
 				B3FCE0001B2505BB00A86F7E /* SignInStep2ViewController.swift */,
 				B36264841B3DE4180054C491 /* SignInStep3ViewController.swift */,
+				B3C46D731B3EB7FD003B602F /* NewDonationViewController.swift */,
 				B3DED4801B2CA00F00F9808D /* MainViewController.swift */,
 				B384C52F1B2F73CF007DDAA2 /* BookingsViewController.swift */,
 				B3541BBF1B2F496800AA7F65 /* MyDonationsViewController.swift */,
@@ -309,7 +310,6 @@
 				B34611101B39D07F000D13E2 /* BookedDetailViewController.swift */,
 				B34611121B3A2205000D13E2 /* ChangePasswordViewController.swift */,
 				B3BD162A1B3B4984003E755E /* ChangeSettingsViewController.swift */,
-				B3C46D731B3EB7FD003B602F /* NewDonationViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
