@@ -46,6 +46,7 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     // Private variables
     private var productType: ProductType?
     private var parcelUnit: ParcelUnit?
+    private var lastDateSelected: NSDate?
     
     
     
@@ -84,7 +85,7 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         return UIStatusBarStyle.LightContent
     }
     
-    @IBAction func backButtonPressed(sender: UIButton) {
+    @IBAction func cancelButtonPressed(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -178,7 +179,10 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     }
     
     @IBAction func submitDonationButtonPressed(sender: UIButton) {
-        let donation = NewDonation(descriptionTextField.text, parcelSize: (amountTextField.text as NSString).floatValue, parcelUnit: parcelUnit!, productDate: Date(dateString: expirationTextField.text), productType: productType!)
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.stringFromDate(lastDateSelected!)
+        let donation = NewDonation(descriptionTextField.text, parcelSize: (amountTextField.text as NSString).floatValue, parcelUnit: parcelUnit!, productDate: Date(dateString: dateString), productType: productType!)
         RestInterface.getInstance().createDonation(donation)
         submitDonationButton.enabled = false
         activityIndicator.startAnimating()
@@ -260,7 +264,7 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     func handleNewDonation(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.SUCCESS){
-            self.navigationController?.popViewControllerAnimated(true)
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
         else if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
@@ -328,6 +332,8 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd MMM yyyy"
         expirationTextField.text = dateFormatter.stringFromDate(sender.date)
+        lastDateSelected = sender.date
+        reactToFieldsInteraction(expirationTextField)
     }
     
     // AlertView delegate

@@ -1144,7 +1144,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="backButtonPressed:" destination="OXO-A4-9nC" eventType="touchUpInside" id="C26-bo-cH2"/>
+                                            <action selector="cancelButtonPressed:" destination="OXO-A4-9nC" eventType="touchUpInside" id="Ugs-dt-2Yt"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1180,6 +1180,7 @@
                                         </state>
                                         <connections>
                                             <action selector="applyFilterButtonPressed:" destination="L4a-ke-I24" eventType="touchUpInside" id="pvX-sm-ywP"/>
+                                            <action selector="submitDonationButtonPressed:" destination="OXO-A4-9nC" eventType="touchUpInside" id="L4t-1n-J6x"/>
                                         </connections>
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="FeU-Vd-Ooz">
@@ -1215,6 +1216,7 @@
                                         <connections>
                                             <action selector="expirationOffFocus:" destination="OXO-A4-9nC" eventType="editingDidEnd" id="HrU-jT-zXy"/>
                                             <action selector="expirationOnFocus:" destination="OXO-A4-9nC" eventType="editingDidBegin" id="RXs-4p-p8v"/>
+                                            <action selector="reactToFieldsInteraction:" destination="OXO-A4-9nC" eventType="editingChanged" id="y6V-f2-cDH"/>
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3OM-Vb-GkD">
@@ -1237,6 +1239,7 @@
                                         <connections>
                                             <action selector="amountOffFocus:" destination="OXO-A4-9nC" eventType="editingDidEnd" id="JtP-cJ-YtG"/>
                                             <action selector="amountOnFocus:" destination="OXO-A4-9nC" eventType="editingDidBegin" id="YZl-Lb-MSt"/>
+                                            <action selector="reactToFieldsInteraction:" destination="OXO-A4-9nC" eventType="editingChanged" id="KoJ-5o-Gzg"/>
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qIF-Af-gsU">
@@ -1308,6 +1311,7 @@
                                         <connections>
                                             <action selector="descriptionOffFocus:" destination="OXO-A4-9nC" eventType="editingDidEnd" id="dHh-rH-E3E"/>
                                             <action selector="descriptionOnFocus:" destination="OXO-A4-9nC" eventType="editingDidBegin" id="2aU-UK-v79"/>
+                                            <action selector="reactToFieldsInteraction:" destination="OXO-A4-9nC" eventType="editingChanged" id="Qu3-3o-ddm"/>
                                         </connections>
                                     </textField>
                                 </subviews>
