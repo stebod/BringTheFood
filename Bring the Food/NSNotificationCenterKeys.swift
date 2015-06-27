@@ -10,6 +10,7 @@ import Foundation
 
 // rest notifications - "DONATIONS" section
 public let donationCreatedNotificationKey = "donationCreatedResponse"
+public let donationUpdatedNotificationKey = "donationUpdatedResponse"
 public let donationDeletedNotificationKey = "donationDeletedResponse"
 public let getSingleDonationNotificationKey = "getSingleDonationResponse"
 public let getOthersDonationNotificationKey = "getOthersDonationResponse"

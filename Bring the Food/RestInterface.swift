@@ -139,6 +139,27 @@ public class RestInterface : NSObject{
         }
     }
     
+    public func updateDonation(donationId: Int!, newDescription:String!, newParcelSize:Float!){
+        
+        if(isLoggedIn()){
+            var parameters:String = "?user_credentials=\(singleAccessToken)"
+            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/donations/\(donationId)" + parameters)!)
+            request.HTTPMethod = "PUT"
+            
+            //preparo il body
+            var postString = "{ \"donation\" : {  "
+            postString += "\"description\": \"\(newDescription)\","
+            postString += "\"parcel_size\": \(newParcelSize)"
+            postString += " } } "
+            println(postString)
+            request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+            sendRequest(request, notification_key: donationUpdatedNotificationKey)
+        }
+        else{
+            ModelUpdater.getInstance().notifyNotLoggedInError(donationUpdatedNotificationKey)
+        }
+    }
+    
     public func getOthersDonations(){
         if(isLoggedIn()){
             var parameters:String = "?user_credentials=\(singleAccessToken)"
