@@ -318,11 +318,22 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         }
         else {
             UIView.animateWithDuration(0.3, animations: {
+                let iOS7 = floor(NSFoundationVersionNumber) <= floor(NSFoundationVersionNumber_iOS_7_1)
+                if(iOS7){
+                    self.textFieldsTopConstraint.constant = -8
+                }
+                else{
+                    self.textFieldsTopConstraint.constant = 0
+                }
                 self.textFieldsCenterYConstraint.constant = -32
-                self.textFieldsTopConstraint.constant = 0
                 self.textFieldsBottomConstraint.constant = 0
                 self.avatarViewTopConstraint.constant = 0
-                self.avatarViewBottomConstraint.constant = 0
+                if(iOS7){
+                    self.avatarViewBottomConstraint.constant = -8
+                }
+                else{
+                    self.avatarViewBottomConstraint.constant = 0
+                }
                 self.backButtonTopConstraint.constant = 20
                 self.view.layoutIfNeeded()
             })

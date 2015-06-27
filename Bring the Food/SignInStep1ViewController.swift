@@ -275,7 +275,7 @@ class SignInStep1ViewController: UIViewController {
             UIView.animateWithDuration(0.3, animations: {
                 self.textFieldsTopConstraint.constant = 0
                 self.textFieldsBottomConstraint.constant = 0
-                self.textFieldsCenterYConstraint.constant = -18
+                self.textFieldsCenterYConstraint.constant = -22
                 self.credentialsViewTopConstraint.constant = 0
                 self.credentialsViewBottomConstraint.constant = 0
                 self.view.layoutIfNeeded()
