@@ -9,6 +9,16 @@
 import Foundation
 import UIKit
 
+/// Singleton providing the communication between client and server.
+/// This class also provides a minimal "offline mode" access to data,
+/// persisting the responses to the most frequent get requests.
+/// When responses are received a ModelUpdater object is called, which
+/// parses the response from the server and updates the model accordingly.
+//
+//
+//  All methods implementing rest calls set the URL, the body and the 
+//  http method of the request, and end with a call to the private method
+//  sendRequest().
 public class RestInterface : NSObject{
     
     private let serverAddress: String = "http://dev.ict4g.org/btf/api/v2"
@@ -21,8 +31,7 @@ public class RestInterface : NSObject{
     private var imageSession : NSURLSession!
     private static var instance: RestInterface?
     
-    // per fare in modo che il costruttore non sia accessibile all'esterno della classe
-    // imposta anche il caching
+    // The initializer also instatiates memory for caching of images
     private override init() {
         
         let memoryCapacity : Int = 20*1024*1024
@@ -35,6 +44,7 @@ public class RestInterface : NSObject{
         super.init()
     }
     
+    /// :returns: the instance of the singleton object
     public static func getInstance() -> RestInterface{
         if(self.instance == nil){
             self.instance = RestInterface()
@@ -47,20 +57,33 @@ public class RestInterface : NSObject{
     // CREDENTIALS STORAGE
     //*********************************************************************************
     
+    /// Method that check if the current user is logged in the system.
+    /// If the user was logged in the last time that the application was
+    /// closed, this method loads the previous session data, and returns true.
+    ///
+    ///
+    /// :returns: true if the user is currently logged in, false otherwise
     public func isLoggedIn() -> Bool {
         if self.singleAccessToken != "" {
             return true
         }
-        //deleteCredentials()
         return loadCredentials()
     }
     
-    public func setUserCredentials(userId : Int, singleAccessToken:String){
+    /// Call this method after a successful login. This method persists the data needed
+    /// for sending any type of request to the server. After this method is called,
+    /// any call to method isLoggedIn() will return true, until handleLogoutSucceded()
+    /// is called.
+    public func setUserCredentials(userId : Int!, singleAccessToken:String!){
         self.userId = userId
         self.singleAccessToken = singleAccessToken
         storeCredentials(userId, singleAccessToken: singleAccessToken)
     }
     
+    /// Call this method after a successful logout. This method cleans the persisted
+    /// data needed for sending any type of request to the server.
+    /// After this method is called, any call to method isLoggedIn() will return false,
+    /// until the next time setUserCredentials(...) is called.
     public func handleLogoutSucceded(){
         singleAccessToken = ""
         userId = 0
@@ -68,17 +91,21 @@ public class RestInterface : NSObject{
         clearImageCache()
     }
     
-    private func storeCredentials(userId : Int, singleAccessToken:String){
+    /// Persists login data, allowing the user to be still logged in the 
+    /// next time the application is opened.
+    private func storeCredentials(userId : Int!, singleAccessToken:String!){
 
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(singleAccessToken, forKey: singleAccessTokenKey)
         defaults.setInteger(userId, forKey: userIdKey)
     }
     
-    // Ritorna vero se il caricamento delle credenziali ha avuto successo, falso altrimenti
+    /// Loads persisted login data.
+    ///
+    ///
+    /// :returns: true if login data was found in persisted data, false otherwise
     private func loadCredentials() -> Bool {
 
-        //deleteurlcache()
         let defaults = NSUserDefaults.standardUserDefaults()
         let singleAccessToken = defaults.stringForKey(singleAccessTokenKey)
         let userId = defaults.integerForKey(userIdKey)
@@ -89,27 +116,26 @@ public class RestInterface : NSObject{
         }
         return (self.singleAccessToken != "") && (self.userId != 0)
     }
-    
-    // Da chiamare in seguito al logout, cancella tutte le credenziali salvate
+
+    /// Deleted all persisted data. You should call this method right before
+    /// performing logout, to prevent any kind of privacy issues.
     private func deletePersistedData() {
         
         let defaults = NSUserDefaults.standardUserDefaults()
+        
+        // Deleted persisted login data
         defaults.setObject("", forKey: singleAccessTokenKey)
         defaults.setInteger(0, forKey: userIdKey)
         
-        deleteurlcache()
-
-        defaults.synchronize()
-    }
-    
-    private func deleteurlcache() {
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
+        // Delete "offline mode" persisted data
         defaults.setObject(nil, forKey: getMyDonationNotificationKey)
         defaults.setObject(nil, forKey: getOthersDonationNotificationKey)
         defaults.setObject(nil, forKey: getBookingsNotificationKey)
         
+        // Ensures data deletion to be performed immediately
+        defaults.synchronize()
     }
+    
     
     //*********************************************************************************
     // DONATIONS
@@ -130,7 +156,7 @@ public class RestInterface : NSObject{
             postString += "\"product_date\": \"\(donation.getProductDate().getDateString())\","
             postString += "\"product_type\": \"\(donation.getProductType().description)\""
             postString += " } } "
-            println(postString)
+           
             request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
             sendRequest(request, notification_key: donationCreatedNotificationKey)
         }
@@ -151,7 +177,7 @@ public class RestInterface : NSObject{
             postString += "\"description\": \"\(newDescription)\","
             postString += "\"parcel_size\": \(newParcelSize)"
             postString += " } } "
-            println(postString)
+       
             request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
             sendRequest(request, notification_key: donationUpdatedNotificationKey)
         }
@@ -184,7 +210,7 @@ public class RestInterface : NSObject{
         }
     }
     
-    public func getDonationWithId(donation_id: Int){
+    public func getDonationWithId(donation_id: Int!){
         if(isLoggedIn()){
             var parameters:String = "\(donation_id)" +
             "?user_credentials=\(singleAccessToken)"
@@ -197,7 +223,7 @@ public class RestInterface : NSObject{
         }
     }
     
-    public func deleteDonation(donation_id: Int){
+    public func deleteDonation(donation_id: Int!){
         if(isLoggedIn()){
             var parameters:String = "?user_credentials=\(singleAccessToken)"
             var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/donations/\(donation_id)" + parameters)!)
@@ -248,7 +274,7 @@ public class RestInterface : NSObject{
             var postString = "{ \"booking\" : {  "
             postString += "\"parcels\": 1 "
             postString += " } } "
-            println(postString)
+  
             request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
             sendRequest(request, notification_key: bookingCreatedNotificationKey)
         }
@@ -278,7 +304,7 @@ public class RestInterface : NSObject{
             //preparo il body
             var postString = "{ \"booking\" : {  "
             postString += " } } "
-            println(postString)
+       
             request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
             sendRequest(request, notification_key: bookingCollectedNotificationKey)
         }
@@ -440,7 +466,7 @@ public class RestInterface : NSObject{
             postString += " \"charity\" : {  "
             postString += " \"range\": \(maxDistance) "
             postString += "} }  "
-            println(postString)
+          
             request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
             sendRequest(request, notification_key: settingsUpdatedNotificationKey)
         }
@@ -468,7 +494,16 @@ public class RestInterface : NSObject{
     //*********************************************************************************
     // IMAGES
     //*********************************************************************************
-    public func downloadImage(url:String, imDownloader: ImageDownloader!){
+    
+    
+    /// This method handles the download of an image, and saves the downloaded
+    /// image in the ImageDownloader object received as parameter.
+    /// In case the image at the given url has already been downloaded after the last login,
+    /// the picture is not downloaded again, instead the result is retreived from the image cache.
+    ///
+    /// :param: url the url of the image that has to be downloaded
+    /// :param: imDowloader the ImageDownloader object which requested the download of the image
+    public func downloadImage(url:String!, imDownloader: ImageDownloader!){
         
         var request = NSMutableURLRequest(URL: NSURL(string: url)!)
         request.HTTPMethod = "GET"
@@ -489,7 +524,21 @@ public class RestInterface : NSObject{
     // SEND REQUEST
     //*********************************************************************************
     
-    private func sendRequest(request : NSMutableURLRequest, notification_key : String){
+    /// Completes the header of the request and then sends it to the server.
+    /// When the response is received, different methods of a ModelUpdater object are called, depending
+    /// on wether the request succeded or not.
+    ///
+    /// The request that has to be sent is identified by the given notification key. If the
+    /// request has to be cached (see method cachedRequest(...) ), and response is successfully received,
+    /// the content of the cache is updated. If the request has to be cached
+    /// and the server returns an error, this method looks for the response in the cache.
+    /// If the response is found in the cache, the ModelUpdater is notified that the navigation is
+    /// in "offline mode". Otherwise, ModelUpdater is notified of the server error.
+    ///
+    ///
+    /// :param: request the request that has to be sent. Must have the url, the http method and, if necessary, the body already set
+    /// :param: notification_key a string identifying the type of request that has to be sent (see NSNotificationCenterKeys.swift in group Utils)
+    private func sendRequest(request : NSMutableURLRequest!, notification_key : String!){
         
         //completo l'header
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -564,6 +613,8 @@ public class RestInterface : NSObject{
         }
     }
     
+    /// :param: notificationKey a string that identifies the type of rest request (see NSNotificationCenterKeys.swift in group Utils)
+    /// :returns: true if rest request of that type are stored in cache
     private func cachedRequest(notificationKey: String!) -> Bool! {
         if notificationKey == getMyDonationNotificationKey {
             return true
