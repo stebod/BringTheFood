@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController,UIActionSheetDelegate {
+class LoginViewController: UIViewController, UIActionSheetDelegate {
     
     // Outlets
     @IBOutlet weak var emailImageView: UIImageView!
@@ -126,6 +126,7 @@ class LoginViewController: UIViewController,UIActionSheetDelegate {
         RestInterface.getInstance().sendLoginData(emailTextField.text, password: passwordTextField.text)
         self.view.endEditing(true)
         activityIndicatorView.startAnimating()
+        logInButton.enabled = false
     }
     
     // Need help pressed
@@ -179,6 +180,7 @@ class LoginViewController: UIViewController,UIActionSheetDelegate {
             alert.show()
         }
         activityIndicatorView.stopAnimating()
+        logInButton.enabled = true
     }
     
     // Delegate method for tapping
@@ -254,16 +256,10 @@ class LoginViewController: UIViewController,UIActionSheetDelegate {
         if(up){
             if(self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 < kbHeight + 20){
                 UIView.animateWithDuration(0.3, animations: {
-                    self.textFieldsTopConstraint.constant -= self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2)
-                    self.textFieldsBottomConstraint.constant += self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
                     self.textFieldsCenterYConstraint.constant += self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
                     if(self.btfImageView.center.y - self.btfImageView.frame.height/2 < 50){
                         self.btfViewTopConstraint.constant -= 300
                         self.btfViewBottomConstraint.constant += 300
-                    }
-                    else{
-                        self.btfViewTopConstraint.constant -= 15
-                        self.btfViewBottomConstraint.constant += 15
                     }
                     self.view.layoutIfNeeded()
                 })

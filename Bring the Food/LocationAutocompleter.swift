@@ -72,7 +72,7 @@ public class LocationAutocompleter: NSObject, UITableViewDataSource, UITableView
     // Build the cell
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
-        
+        cell.textLabel?.numberOfLines = 2
         cell.textLabel?.text = self.resultList[indexPath.row]
         
         return cell

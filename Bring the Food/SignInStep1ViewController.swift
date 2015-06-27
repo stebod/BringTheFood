@@ -18,9 +18,10 @@ class SignInStep1ViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var btfImageView: UIImageView!
-    @IBOutlet weak var btfViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var btfViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var credentialsImageView: UIImageView!
+    @IBOutlet weak var credentialsViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var credentialsViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsCenterYConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsBottomConstraint: NSLayoutConstraint!
@@ -165,6 +166,8 @@ class SignInStep1ViewController: UIViewController {
         }
         else{
             RestInterface.getInstance().getEmailAvailability(emailTextField.text)
+            activityIndicatorView.startAnimating()
+            nextButton.enabled = false
         }
     }
     
@@ -226,6 +229,8 @@ class SignInStep1ViewController: UIViewController {
             alert.addButtonWithTitle("Dismiss")
             alert.show()
         }
+        activityIndicatorView.stopAnimating()
+        nextButton.enabled = true
     }
     
     // Regex check for email
@@ -255,20 +260,14 @@ class SignInStep1ViewController: UIViewController {
         if(up){
             if(self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 < kbHeight + 20){
                 UIView.animateWithDuration(0.3, animations: {
-                    println(self.textFieldsTopConstraint.constant)
-                    println(self.textFieldsView.center.y)
-                    self.textFieldsCenterYConstraint.constant += self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
-                    if(self.btfImageView.center.y - self.btfImageView.frame.height/2 < 50){
-                        self.btfViewTopConstraint.constant -= 300
-                        self.btfViewBottomConstraint.constant += 300
-                    }
-                    else{
-                        self.btfViewTopConstraint.constant -= 15
-                        self.btfViewBottomConstraint.constant += 15
+                    let movement = self.kbHeight + 20 - (self.view.frame.height - self.textFieldsView.center.y - self.textFieldsView.frame.height/2 )
+                    self.textFieldsCenterYConstraint.constant += movement
+                    self.textFieldsTopConstraint.constant -= movement
+                    if(self.credentialsImageView.center.y - self.credentialsImageView.frame.height/2 < 80){
+                        self.credentialsViewTopConstraint.constant -= 300
+                        self.credentialsViewBottomConstraint.constant += 300
                     }
                     self.view.layoutIfNeeded()
-                    println(self.textFieldsTopConstraint.constant)
-                    println(self.textFieldsView.center.y)
                 })
             }
         }
@@ -276,9 +275,9 @@ class SignInStep1ViewController: UIViewController {
             UIView.animateWithDuration(0.3, animations: {
                 self.textFieldsTopConstraint.constant = 0
                 self.textFieldsBottomConstraint.constant = 0
-                self.textFieldsCenterYConstraint.constant = -18
-                self.btfViewTopConstraint.constant = 0
-                self.btfViewBottomConstraint.constant = 0
+                self.textFieldsCenterYConstraint.constant = -22
+                self.credentialsViewTopConstraint.constant = 0
+                self.credentialsViewBottomConstraint.constant = 0
                 self.view.layoutIfNeeded()
             })
         }
