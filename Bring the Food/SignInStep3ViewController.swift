@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignInStep3ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate {
+class SignInStep3ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate {
     
     // Outlets
     @IBOutlet weak var backButtonTopConstraint: NSLayoutConstraint!
@@ -17,6 +17,7 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var changeAvatarButton: UIButton!
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var avatarViewTopConstraint: NSLayoutConstraint!
@@ -138,13 +139,12 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         }
     }
     
-    @IBAction func addressChanged(sender: UITextField) {
-        
-    }
-    
     // Register button pressed
     @IBAction func registerButtonPressed(sender: UIButton) {
         RestInterface.getInstance().createUser(nameTextField.text, password: password, email: email, phoneNumber: phoneTextField.text, avatar: changeAvatarButton.imageView!.image, addressLabel: address)
+        self.view.endEditing(true)
+        activityIndicatorView.startAnimating()
+        registerButton.enabled = false
     }
     
     // Abort button pressed
@@ -179,17 +179,26 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     private func registrationHandler(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response!.status == RequestStatus.SUCCESS){
+            self.navigationController!.dismissViewControllerAnimated(true, completion: nil)
+        }
+        else if(response!.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Registration completed"
-            alert.message = "You will receive a confirmation email!"
+            alert.title = "Registration failed"
+            alert.message = "A problem occourred during the processing of you request. Please try again"
             alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
             alert.show()
         }
-        let alert = UIAlertView()
-        alert.title = "Registration failed"
-        alert.message = "Something went wrong, try again!"
-        alert.addButtonWithTitle("Dismiss")
-        alert.show()
+        else{
+            let alert = UIAlertView()
+            alert.title = "Network error"
+            alert.message = "Check your internet connectivity"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        activityIndicatorView.stopAnimating()
+        registerButton.enabled = true
     }
     
     // Check if alert controller is available in the current iOS version
@@ -315,6 +324,11 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
                 self.view.layoutIfNeeded()
             })
         }
+    }
+    
+    // AlertView delegate
+    func alertView(View: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        self.navigationController!.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

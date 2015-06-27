@@ -47,9 +47,6 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
     private var locationAutocompleter: LocationAutocompleter!
     
 
-    deinit{
-        println("ciao")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -190,6 +187,7 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
                 self.mapLogoTopConstraint.constant -= 300
                 self.mapLogoBottomConstraint.constant += 300
                 self.backButtonTopConstraint.constant -= 300
+                self.autocompleteTableViewBottomConstraint.constant += self.kbHeight + 20
                 self.view.layoutIfNeeded()
             })
         }

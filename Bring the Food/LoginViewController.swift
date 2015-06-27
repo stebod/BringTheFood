@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController,UIActionSheetDelegate {
+class LoginViewController: UIViewController, UIActionSheetDelegate {
     
     // Outlets
     @IBOutlet weak var emailImageView: UIImageView!
@@ -126,6 +126,7 @@ class LoginViewController: UIViewController,UIActionSheetDelegate {
         RestInterface.getInstance().sendLoginData(emailTextField.text, password: passwordTextField.text)
         self.view.endEditing(true)
         activityIndicatorView.startAnimating()
+        logInButton.enabled = false
     }
     
     // Need help pressed
@@ -179,6 +180,7 @@ class LoginViewController: UIViewController,UIActionSheetDelegate {
             alert.show()
         }
         activityIndicatorView.stopAnimating()
+        logInButton.enabled = true
     }
     
     // Delegate method for tapping

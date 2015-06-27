@@ -18,6 +18,7 @@ class SignInStep1ViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var credentialsImageView: UIImageView!
     @IBOutlet weak var credentialsViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var credentialsViewBottomConstraint: NSLayoutConstraint!
@@ -165,6 +166,8 @@ class SignInStep1ViewController: UIViewController {
         }
         else{
             RestInterface.getInstance().getEmailAvailability(emailTextField.text)
+            activityIndicatorView.startAnimating()
+            nextButton.enabled = false
         }
     }
     
@@ -226,6 +229,8 @@ class SignInStep1ViewController: UIViewController {
             alert.addButtonWithTitle("Dismiss")
             alert.show()
         }
+        activityIndicatorView.stopAnimating()
+        nextButton.enabled = true
     }
     
     // Regex check for email
