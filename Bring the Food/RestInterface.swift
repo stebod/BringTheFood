@@ -491,6 +491,18 @@ public class RestInterface : NSObject{
         }
     }
     
+    public func markNotificationsAsRead(notificationId:Int!){
+        if(isLoggedIn()){
+            var parameters:String = "?user_credentials=\(singleAccessToken)"
+            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/notifications/\(notificationId)" + parameters)!)
+            request.HTTPMethod = "GET"
+            sendRequest(request, notification_key: notificationReadNotificationKey)
+        }
+        else{
+            ModelUpdater.getInstance().notifyNotLoggedInError(notificationReadNotificationKey)
+        }
+    }
+    
     //*********************************************************************************
     // IMAGES
     //*********************************************************************************

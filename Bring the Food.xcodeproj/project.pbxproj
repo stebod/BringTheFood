@@ -14,6 +14,10 @@
 		3B132AA11B28CE8700D8A09F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B132A9E1B28C3A000D8A09F /* Date.swift */; };
 		3B1B4FA21B1EEE6400B9D705 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B1B4FA01B1EEE6400B9D705 /* Main.storyboard */; };
 		3B1B4FA41B1EEE6400B9D705 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B1B4FA31B1EEE6400B9D705 /* Images.xcassets */; };
+		3B1FDDE21B406659004B5A28 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1FDDE11B406659004B5A28 /* NotificationType.swift */; };
+		3B1FDDE41B406E4F004B5A28 /* BtfNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1FDDE31B406E4F004B5A28 /* BtfNotificationCenter.swift */; };
+		3B1FDDE51B4093BB004B5A28 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1FDDE11B406659004B5A28 /* NotificationType.swift */; };
+		3B1FDDE61B4093C8004B5A28 /* BtfNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1FDDE31B406E4F004B5A28 /* BtfNotificationCenter.swift */; };
 		3B2727F21B2CA9BA0064F53A /* BookingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2727EF1B2CA9BA0064F53A /* BookingsList.swift */; };
 		3B2727F31B2CA9BA0064F53A /* MyDonationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2727F01B2CA9BA0064F53A /* MyDonationsList.swift */; };
 		3B2727F41B2CA9BA0064F53A /* OthersDonationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2727F11B2CA9BA0064F53A /* OthersDonationsList.swift */; };
@@ -122,6 +126,8 @@
 		3B1B4FA31B1EEE6400B9D705 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3B1B4FAC1B1EEE6400B9D705 /* Bring the FoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bring the FoodTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B1B4FB11B1EEE6400B9D705 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B1FDDE11B406659004B5A28 /* NotificationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
+		3B1FDDE31B406E4F004B5A28 /* BtfNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtfNotificationCenter.swift; sourceTree = "<group>"; };
 		3B2727EF1B2CA9BA0064F53A /* BookingsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingsList.swift; sourceTree = "<group>"; };
 		3B2727F01B2CA9BA0064F53A /* MyDonationsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsList.swift; sourceTree = "<group>"; };
 		3B2727F11B2CA9BA0064F53A /* OthersDonationsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OthersDonationsList.swift; sourceTree = "<group>"; };
@@ -273,6 +279,7 @@
 				3B9501CD1B35FC8700D2DC97 /* StoredDonation.swift */,
 				3B4AE15B1B2B5ADB00436903 /* ApplicationSettings.swift */,
 				3B4AE1651B2B65D200436903 /* Model.swift */,
+				3B1FDDE31B406E4F004B5A28 /* BtfNotificationCenter.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -289,6 +296,7 @@
 				3B99B1BF1B35FEFD00E0BECA /* MapsAPIKey.swift */,
 				3B3441441B300B420080360D /* NSUserDefaultsKeys.swift */,
 				B3A30B0E1B32BBE200F733E0 /* FilterState.swift */,
+				3B1FDDE11B406659004B5A28 /* NotificationType.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -547,6 +555,7 @@
 				B39374EF1B30162E0034473B /* MyDonationsViewController.swift in Sources */,
 				3B99B1C01B35FEFD00E0BECA /* MapsAPIKey.swift in Sources */,
 				B3A30B0F1B32BBE200F733E0 /* FilterState.swift in Sources */,
+				3B1FDDE21B406659004B5A28 /* NotificationType.swift in Sources */,
 				3B99B1BD1B35FEF200E0BECA /* NSNotificationCenterKeys.swift in Sources */,
 				3BC327181B2DB8D0002F0DCE /* RestInterface.swift in Sources */,
 				3B9501C81B35FC5000D2DC97 /* OthersDonation.swift in Sources */,
@@ -572,6 +581,7 @@
 				B34611131B3A2205000D13E2 /* ChangePasswordViewController.swift in Sources */,
 				B346110F1B39A2FC000D13E2 /* NotificationSettingsViewController.swift in Sources */,
 				3B9501CB1B35FC5F00D2DC97 /* BookedDonation.swift in Sources */,
+				3B1FDDE41B406E4F004B5A28 /* BtfNotificationCenter.swift in Sources */,
 				3B4AE1601B2B5AE700436903 /* BtfNotification.swift in Sources */,
 				B346110D1B39A2CA000D13E2 /* AboutViewController.swift in Sources */,
 				B3BF98B21B2F97C000E79515 /* FilterViewController.swift in Sources */,
@@ -590,6 +600,7 @@
 			files = (
 				3B9501CC1B35FC5F00D2DC97 /* BookedDonation.swift in Sources */,
 				3B6F96C71B2DFCD8004C9503 /* AppDelegate.swift in Sources */,
+				3B1FDDE61B4093C8004B5A28 /* BtfNotificationCenter.swift in Sources */,
 				3B6F96C91B2DFE05004C9503 /* RestTest.swift in Sources */,
 				B369EF661B34A85000E28079 /* DisplayBookedDetail.swift in Sources */,
 				3B9501D21B35FCA400D2DC97 /* Donation.swift in Sources */,
@@ -619,6 +630,7 @@
 				3BD4C7A21B36C1DF0007901E /* MyDetailViewController.swift in Sources */,
 				B3BEE6091B33431D001F7E7F /* FilterViewController.swift in Sources */,
 				B39682B91B40050D00043898 /* ModifyDonationViewController.swift in Sources */,
+				3B1FDDE51B4093BB004B5A28 /* NotificationType.swift in Sources */,
 				3B12DA5A1B27498700105A48 /* HTTPResponseData.swift in Sources */,
 				3BD284781B2C0C9300D77319 /* User.swift in Sources */,
 				3BD284761B2C0BE700D77319 /* Model.swift in Sources */,

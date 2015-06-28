@@ -22,9 +22,10 @@ public protocol Donation {
     
     func getRemainingDays() -> Int!
     
-    
     func getPhotoURL() -> String!
     
     func getSupplier() -> User!
+    
+    func hasNotification(type: NotificationType) -> Bool!
     
 }
