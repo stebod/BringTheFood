@@ -189,4 +189,23 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
     public func getSupplier() -> User! {
         return supplier
     }
+    
+    
+    public func hasNotification(type: NotificationType) -> Bool! {
+    
+        switch type {
+        case .CREATED :
+            return Model.getInstance().getMyNotifications().isJustCreatedDonation(self.id)
+        case .BOOKED :
+            return Model.getInstance().getMyNotifications().isJustBookedDonation(self.id)
+        case .COLLECTED :
+            return Model.getInstance().getMyNotifications().isJustCollectedDonation(self.id)
+        case .OTHER:
+            return false
+        default:
+            break
+            
+        }
+        return false
+    }
 }

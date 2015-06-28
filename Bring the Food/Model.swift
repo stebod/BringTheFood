@@ -17,7 +17,7 @@ public class Model : NSObject{
     private var myDonations: MyDonationsList!
     private var myBookings: BookingsList!
     private var settings: ApplicationSettings?
-    private var myNotifications: [BtfNotification]?
+    private var myNotifications: BtfNotificationCenter
     
     
     // per fare in modo che il costruttore non sia accessibile all'esterno della classe
@@ -31,6 +31,7 @@ public class Model : NSObject{
         let currBooks = [BookedDonation]()
         let histBooks = [BookedDonation]()
         self.myBookings = BookingsList(currentBookingsList: currBooks, historicBookingsList: histBooks)
+        self.myNotifications = BtfNotificationCenter()
         
         super.init()
     }
@@ -108,14 +109,16 @@ public class Model : NSObject{
         self.settings = mySettings
     }
     
-    //TODO
-    public func downloadMyNotifications(){}
+   
+    public func downloadMyNotifications(){
+        RestInterface.getInstance().getNotifications()
+    }
     
-    public func getMyNotifications() -> [BtfNotification]? {
+    public func getMyNotifications() -> BtfNotificationCenter {
         return self.myNotifications
     }
     
-    public func setMyNotifications(notifications : [BtfNotification]!){
+    public func setMyNotifications(notifications : BtfNotificationCenter){
         self.myNotifications = notifications
     }
 }

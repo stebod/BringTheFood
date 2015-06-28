@@ -11,19 +11,19 @@ import Foundation
 public class BtfNotification{
     
     private let id: Int!
-    private let message: String!
+    private let type: NotificationType!
     
-    public init(id: Int!, message:String!){
+    public init(id: Int!, type: NotificationType!){
         self.id = id
-        self.message = message
+        self.type = type
     }
     
-    public func getMessage() -> String{
-        return self.message
+    public func getTypeString() -> String!{
+        return self.type.description
     }
     
-    // TODO
+    
     public func markAsRead(){
-        
+        RestInterface.getInstance().markNotificationsAsRead(id)
     }
 }
