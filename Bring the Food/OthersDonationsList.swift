@@ -76,13 +76,16 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
         let mainLabel = cell.viewWithTag(1000) as! UILabel
         let addressLabel = cell.viewWithTag(1001) as! UILabel
         let expirationLabel = cell.viewWithTag(1002) as! UILabel
-        let alarmIcon = cell.viewWithTag(1003) as! UIImageView
         let amountLabel = cell.viewWithTag(1004) as! UILabel
         let kgIcon = cell.viewWithTag(1005) as! UIImageView
         let ltIcon = cell.viewWithTag(1006) as! UIImageView
         let portionIcon = cell.viewWithTag(1007) as! UIImageView
         
-        mainLabel.text = othersDonationsFilteredList[row].getDescription()
+        let description = othersDonationsFilteredList[row].getDescription()
+        var first = description.startIndex
+        var rest = advance(first,1)..<description.endIndex
+        mainLabel.text = description[first...first].uppercaseString + description[rest]
+        
         addressLabel.numberOfLines = 2
         let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
         if (iOS8) {
@@ -91,11 +94,13 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
             let screenWidth = UIScreen.mainScreen().bounds.width
             addressLabel.preferredMaxLayoutWidth = screenWidth - 89;
         }
-        addressLabel.text = othersDonationsFilteredList[row].getSupplier().getAddress().getLabel()
+        
+        let address = othersDonationsFilteredList[row].getSupplier().getAddress().getLabel()
+        first = address.startIndex
+        rest = advance(first,1)..<address.endIndex
+        addressLabel.text = address[first...first].uppercaseString + address[rest]
+        
         expirationLabel.text = String(othersDonationsFilteredList[row].getRemainingDays()) + "d"
-        if(othersDonationsFilteredList[row].getRemainingDays() > 20){
-            alarmIcon.hidden = true
-        }
         amountLabel.text = "\(othersDonationsFilteredList[row].getParcelSize())"
         let parcelUnit = othersDonationsFilteredList[row].getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
@@ -131,7 +136,7 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
         if(requestStatus == RequestStatus.CACHE){
             return "Available donations (offline mode)"
         }
-        return ""
+        return nil
     }
     
     // Set the filtering criteria
