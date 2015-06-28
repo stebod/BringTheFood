@@ -24,9 +24,18 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
     
     // Initializer
     public init(myAvailableDonationsList: [MyDonation]!, myBookedDonationsList: [MyDonation]!, myHistoricDonationsList: [MyDonation]!){
-        donations.append(DonationsList(donationName: "Available donations", donationList: myAvailableDonationsList))
-        donations.append(DonationsList(donationName: "Booked donations", donationList: myBookedDonationsList))
-        donations.append(DonationsList(donationName: "Historic donations", donationList: myHistoricDonationsList))
+        var sortedMyAvailableDonationsList = myAvailableDonationsList.sorted({(lhs: MyDonation, rhs: MyDonation) -> Bool in
+            return lhs.getRemainingDays() < rhs.getRemainingDays()
+        })
+        var sortedMyBookedDonationsList = myBookedDonationsList.sorted({(lhs: MyDonation, rhs: MyDonation) -> Bool in
+            return lhs.getRemainingDays() < rhs.getRemainingDays()
+        })
+        var sortedMyHistoricDonationsList = myHistoricDonationsList.sorted({(lhs: MyDonation, rhs: MyDonation) -> Bool in
+            return lhs.getRemainingDays() < rhs.getRemainingDays()
+        })
+        donations.append(DonationsList(donationName: "Available donations", donationList: sortedMyAvailableDonationsList))
+        donations.append(DonationsList(donationName: "Booked donations", donationList: sortedMyBookedDonationsList))
+        donations.append(DonationsList(donationName: "Historic donations", donationList: sortedMyHistoricDonationsList))
     }
     
 

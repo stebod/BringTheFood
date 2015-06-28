@@ -23,8 +23,14 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     
     // Initializer
     public init(currentBookingsList: [BookedDonation]!, historicBookingsList: [BookedDonation]!){
-        donations.append(DonationsList(donationName: "Pending donations", donationList: currentBookingsList))
-        donations.append(DonationsList(donationName: "Collected donations", donationList: historicBookingsList))
+        var sortedCurrentBookingsList = currentBookingsList.sorted({(lhs: BookedDonation, rhs: BookedDonation) -> Bool in
+            return lhs.getRemainingDays() < rhs.getRemainingDays()
+        })
+        var sortedHistoricBookingsList = historicBookingsList.sorted({(lhs: BookedDonation, rhs: BookedDonation) -> Bool in
+            return lhs.getRemainingDays() < rhs.getRemainingDays()
+        })
+        donations.append(DonationsList(donationName: "Pending donations", donationList: sortedCurrentBookingsList))
+        donations.append(DonationsList(donationName: "Collected donations", donationList: sortedHistoricBookingsList))
     }
     
     // Set number of section in table
