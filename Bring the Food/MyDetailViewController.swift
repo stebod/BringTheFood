@@ -27,6 +27,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var dropCollectButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
     
     // Variables populated from prepareForSegue
     var donation: MyDonation?
@@ -76,6 +77,13 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         return UIStatusBarStyle.LightContent
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "goToDonationUpdate"){
+            var vc = segue.destinationViewController as! ModifyDonationViewController
+            vc.donation = donation
+        }
+    }
+    
     @IBAction func backButtonPressed(sender: UIButton) {
         self.navigationController?.popViewControllerAnimated(true)
     }
@@ -102,10 +110,12 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         mainLabel.numberOfLines = 2
         mainLabel.text = donation?.getDescription()
         if(donation!.canBeModified() == true){
+            editButton.hidden = false
             dropCollectButton.setImage(UIImage(named: "delete_button"), forState: .Normal)
         }
         else {
             dropCollectButton.setImage(UIImage(named: "collected_button"), forState: .Normal)
+            editButton.hidden = true
             if(donation!.canBeCollected() == false){
                 dropCollectButton.enabled = false
             }
