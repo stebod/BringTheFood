@@ -25,8 +25,12 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
     
     // Initializer
     public init(othersDonationsList: [OthersDonation]!){
-        self.othersDonationsList = othersDonationsList
-        othersDonationsFilteredList = othersDonationsList
+        var sortedOthersDonationsList = othersDonationsList.sorted({(lhs: OthersDonation, rhs: OthersDonation) -> Bool in
+            // you can have additional code here
+            return lhs.getRemainingDays() < rhs.getRemainingDays()
+        })
+        self.othersDonationsList = sortedOthersDonationsList
+        othersDonationsFilteredList = sortedOthersDonationsList
     }
     
     // Set number of section in table

@@ -8,19 +8,19 @@
 
 import UIKit
 
-class NewDonationViewController: UIViewController, UIAlertViewDelegate {
+class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     
     // Outlets
-    @IBOutlet weak var freshFoodButton: UIButton!
-    @IBOutlet weak var cookedFoodButton: UIButton!
-    @IBOutlet weak var driedFoodButton: UIButton!
-    @IBOutlet weak var frozenFoodButton: UIButton!
+    @IBOutlet weak var freshFoodImageView: UIImageView!
+    @IBOutlet weak var cookedFoodImageView: UIImageView!
+    @IBOutlet weak var driedFoodImageView: UIImageView!
+    @IBOutlet weak var frozenFoodImageView: UIImageView!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var kgButton: UIButton!
-    @IBOutlet weak var ltButton: UIButton!
-    @IBOutlet weak var portionsButton: UIButton!
-    @IBOutlet weak var expirationTextField: UITextField!
+    @IBOutlet weak var kgLabel: UILabel!
+    @IBOutlet weak var ltLabel: UILabel!
+    @IBOutlet weak var portionsLabel: UILabel!
+    @IBOutlet weak var expirationLabel: UILabel!
     @IBOutlet weak var textFieldsView: UIView!
     @IBOutlet weak var textFieldsTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldsBottomConstraint: NSLayoutConstraint!
@@ -28,7 +28,7 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     @IBOutlet weak var foodTypeTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var foodTypeBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var foodTypeView: UIView!
-    @IBOutlet weak var submitDonationButton: UIButton!
+    @IBOutlet weak var updateDonationButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // Interface colors
@@ -37,8 +37,11 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     // Keyboard height
     private var kbHeight: CGFloat!
     
+    // Variables populated from prepareForSegue
+    var donation: MyDonation?
+    
     // Observers
-    private weak var newDonationObserver: NSObjectProtocol?
+    private weak var updateDonationObserver: NSObjectProtocol?
     private weak var keyboardWillShowObserver:NSObjectProtocol?
     private weak var keyboardWillHideObserver:NSObjectProtocol?
     private var tapRecognizer:UITapGestureRecognizer!
@@ -46,7 +49,6 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     // Private variables
     private var productType: ProductType?
     private var parcelUnit: ParcelUnit?
-    private var lastDateSelected: NSDate?
     
     
     
@@ -58,10 +60,10 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
         // Register notification center observer
-        newDonationObserver = NSNotificationCenter.defaultCenter().addObserverForName(donationCreatedNotificationKey,
+        updateDonationObserver = NSNotificationCenter.defaultCenter().addObserverForName(donationUpdatedNotificationKey,
             object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.handleNewDonation(notification)})
+            usingBlock: {(notification:NSNotification!) in self.handleUpdateDonation(notification)})
         keyboardWillShowObserver = NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillShowNotification,
             object: nil, queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.keyboardWillShow(notification)})
@@ -74,7 +76,7 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     }
     
     override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(newDonationObserver!)
+        NSNotificationCenter.defaultCenter().removeObserver(updateDonationObserver!)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillShowObserver!)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillHideObserver!)
         self.view.removeGestureRecognizer(tapRecognizer)
@@ -89,41 +91,6 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func freshFoodButtonPressed(sender: UIButton) {
-        productType = ProductType.FRESH
-        updateFoodType()
-    }
-    
-    @IBAction func cookedFoodButtonPressed(sender: UIButton) {
-        productType = ProductType.COOKED
-        updateFoodType()
-    }
-    
-    @IBAction func driedFoodButtonPressed(sender: UIButton) {
-        productType = ProductType.DRIED
-        updateFoodType()
-    }
-    
-    @IBAction func frozenFoodButtonPressed(sender: UIButton) {
-        productType = ProductType.FROZEN
-        updateFoodType()
-    }
-    
-    @IBAction func kgButtonPressed(sender: UIButton) {
-        parcelUnit = ParcelUnit.KILOGRAMS
-        updateParcelUnit()
-    }
-    
-    @IBAction func ltButtonPressed(sender: UIButton) {
-        parcelUnit = ParcelUnit.LITERS
-        updateParcelUnit()
-    }
-    
-    @IBAction func portionsButtonPressed(sender: UIButton) {
-        parcelUnit = ParcelUnit.PORTIONS
-        updateParcelUnit()
-    }
-    
     // On focus textField behaviours
     @IBAction func descriptionOnFocus(sender: UITextField) {
         if(sender.text == "Description"){
@@ -135,16 +102,6 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         if(sender.text == "Amount"){
             sender.text! = ""
         }
-    }
-
-    @IBAction func expirationOnFocus(sender: UITextField) {
-        if(sender.text == "Expiration"){
-            sender.text = ""
-        }
-        var datePickerView  : UIDatePicker = UIDatePicker()
-        datePickerView.datePickerMode = UIDatePickerMode.Date
-        sender.inputView = datePickerView
-        datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
     }
     
     // Off focus textField behaviours
@@ -160,49 +117,32 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         }
     }
     
-    @IBAction func expirationOffFocus(sender: UITextField) {
-        if (sender.text.isEmpty){
-            sender.text = "Expiration"
-        }
-    }
-    
     // Enables submit donation button
     @IBAction func reactToFieldsInteraction(sender: UITextField) {
         if (descriptionTextField.text != "" && descriptionTextField.text != "Description"
-            && amountTextField.text != "" && amountTextField.text != "Amount"
-            && expirationTextField.text != "Expiration" && expirationTextField.text != "Production date"){
-                submitDonationButton.enabled = true
+            && amountTextField.text != "" && amountTextField.text != "Amount"){
+                updateDonationButton.enabled = true
         }
         else{
-            submitDonationButton.enabled = false
+            updateDonationButton.enabled = false
         }
     }
     
     @IBAction func submitDonationButtonPressed(sender: UIButton) {
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dateFormatter.stringFromDate(lastDateSelected!)
-        let donation = NewDonation(descriptionTextField.text, parcelSize: (amountTextField.text as NSString).floatValue, parcelUnit: parcelUnit!, productDate: Date(dateString: dateString), productType: productType!)
-        RestInterface.getInstance().createDonation(donation)
-        submitDonationButton.enabled = false
+        donation?.modify(descriptionTextField.text, newParcelSize: (amountTextField.text as NSString).floatValue)
+        updateDonationButton.enabled = false
         activityIndicator.startAnimating()
     }
     
     func setUpInterface(){
-        descriptionTextField.text = "Description"
-        amountTextField.text = "Amount"
-        expirationTextField.text = "Expiration"
-        productType = ProductType.FRESH
-        freshFoodButton.setImage(UIImage(named: "fresh"), forState: UIControlState.Selected)
-        freshFoodButton.highlighted = false
-        cookedFoodButton.setImage(UIImage(named: "cooked"), forState: UIControlState.Selected)
-        cookedFoodButton.highlighted = false
-        driedFoodButton.setImage(UIImage(named: "dried"), forState: UIControlState.Selected)
-        driedFoodButton.highlighted = false
-        frozenFoodButton.setImage(UIImage(named: "frozen"), forState: UIControlState.Selected)
-        frozenFoodButton.highlighted = false
+        descriptionTextField.text = donation!.getDescription()
+        amountTextField.text = String(stringInterpolationSegment: Int(donation!.getParcelSize()))
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        expirationLabel.text = dateFormatter.stringFromDate(donation!.getProductDate().getDate())
+        productType = donation!.getProductType()
         updateFoodType()
-        parcelUnit = ParcelUnit.KILOGRAMS
+        parcelUnit = donation!.getParcelUnit()
         updateParcelUnit()
     }
     
@@ -212,66 +152,51 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     }
     
     func updateFoodType(){
-        if(productType == ProductType.FRESH){
-            freshFoodButton.selected = true
+        freshFoodImageView.hidden = true
+        cookedFoodImageView.hidden = true
+        driedFoodImageView.hidden = true
+        frozenFoodImageView.hidden = true
+        let donationType = donation!.getProductType()
+        if(donationType == ProductType.FRESH){
+            freshFoodImageView.hidden = false
+        }
+        else if(donationType == ProductType.COOKED){
+            cookedFoodImageView.hidden = false
+        }
+        else if(donationType == ProductType.DRIED){
+            driedFoodImageView.hidden = false
         }
         else{
-            freshFoodButton.selected = false
-        }
-        if(productType == ProductType.COOKED){
-            cookedFoodButton.selected = true
-            expirationTextField.text = "Production date"
-        }
-        else{
-            cookedFoodButton.selected = false
-            expirationTextField.text = "Expiration"
-        }
-        if(productType == ProductType.DRIED){
-            driedFoodButton.selected = true
-        }
-        else{
-            driedFoodButton.selected = false
-        }
-        if(productType == ProductType.FROZEN){
-            frozenFoodButton.selected = true
-        }
-        else{
-            frozenFoodButton.selected = false
+            frozenFoodImageView.hidden = false
         }
     }
     
     func updateParcelUnit(){
-        if(parcelUnit == ParcelUnit.KILOGRAMS){
-            kgButton.setTitleColor(UIMainColor, forState: .Normal)
+        kgLabel.hidden = true
+        ltLabel.hidden = true
+        portionsLabel.hidden = true
+        let donationParcelUnit = donation!.getParcelUnit()
+        if(donationParcelUnit == ParcelUnit.KILOGRAMS){
+            kgLabel.hidden = false
+        }
+        else if(donationParcelUnit == ParcelUnit.LITERS){
+            ltLabel.hidden = false
         }
         else{
-            kgButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        }
-        if(parcelUnit == ParcelUnit.LITERS){
-            ltButton.setTitleColor(UIMainColor, forState: .Normal)
-        }
-        else{
-            ltButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        }
-        if(parcelUnit == ParcelUnit.PORTIONS){
-            portionsButton.setTitleColor(UIMainColor, forState: .Normal)
-        }
-        else{
-            portionsButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+            portionsLabel.hidden = false
         }
     }
     
-    func handleNewDonation(notification: NSNotification){
+    func handleUpdateDonation(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.SUCCESS){
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.navigationController?.popToRootViewControllerAnimated(true)
         }
         else if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Submission failed"
+            alert.title = "Update failed"
             alert.message = "A problem occourred during the processing of you request. Please try again"
             alert.addButtonWithTitle("Dismiss")
-            alert.delegate = self
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
@@ -279,11 +204,10 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
             alert.title = "Network error"
             alert.message = "Check you network connectivity and try again"
             alert.addButtonWithTitle("Dismiss")
-            alert.delegate = self
             alert.show()
         }
         activityIndicator.stopAnimating()
-        submitDonationButton.enabled = true
+        updateDonationButton.enabled = true
     }
     
     // Called when keyboard appears on screen
@@ -328,16 +252,8 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         }
     }
     
-    func handleDatePicker(sender: UIDatePicker) {
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd MMM yyyy"
-        expirationTextField.text = dateFormatter.stringFromDate(sender.date)
-        lastDateSelected = sender.date
-        reactToFieldsInteraction(expirationTextField)
-    }
-    
     // AlertView delegate
     func alertView(View: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController!.popToRootViewControllerAnimated(true)
     }
 }

@@ -27,6 +27,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var dropCollectButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
     
     // Variables populated from prepareForSegue
     var donation: MyDonation?
@@ -50,7 +51,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         super.viewDidLoad()
         setUpInterface()
         collectorObserver = NSNotificationCenter.defaultCenter().addObserverForName(getCollectorOfDonationNotificationKey,
-            object: imageDownloader,
+            object: RestInterface.getInstance(),
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in return})
         donation?.downloadDonationCollector()
@@ -74,6 +75,13 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "goToDonationUpdate"){
+            var vc = segue.destinationViewController as! ModifyDonationViewController
+            vc.donation = donation
+        }
     }
     
     @IBAction func backButtonPressed(sender: UIButton) {
@@ -102,10 +110,12 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         mainLabel.numberOfLines = 2
         mainLabel.text = donation?.getDescription()
         if(donation!.canBeModified() == true){
+            editButton.hidden = false
             dropCollectButton.setImage(UIImage(named: "delete_button"), forState: .Normal)
         }
         else {
             dropCollectButton.setImage(UIImage(named: "collected_button"), forState: .Normal)
+            editButton.hidden = true
             if(donation!.canBeCollected() == false){
                 dropCollectButton.enabled = false
             }
@@ -190,15 +200,17 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.SUCCESS){
             let image = imageDownloader!.getImage()
-            avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2;
-            avatarImageView.clipsToBounds = true
-            avatarImageView.layer.borderWidth = 3.0;
-            avatarImageView.layer.borderColor = UIMainColor.CGColor
-            // Use smallest side length as crop square length
-            var squareLength = min(image!.size.width, image!.size.height)
-            var clippedRect = CGRectMake((image!.size.width - squareLength) / 2, (image!.size.height -      squareLength) / 2, squareLength, squareLength)
-            avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
-            avatarImageView.image = UIImage(CGImage: CGImageCreateWithImageInRect(image!.CGImage, clippedRect))
+            if(image != nil){
+                avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2;
+                avatarImageView.clipsToBounds = true
+                avatarImageView.layer.borderWidth = 3.0;
+                avatarImageView.layer.borderColor = UIMainColor.CGColor
+                // Use smallest side length as crop square length
+                var squareLength = min(image!.size.width, image!.size.height)
+                var clippedRect = CGRectMake((image!.size.width - squareLength) / 2, (image!.size.height -      squareLength) / 2, squareLength, squareLength)
+                avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
+                avatarImageView.image = UIImage(CGImage: CGImageCreateWithImageInRect(image!.CGImage, clippedRect))
+            }
         }
     }
     
