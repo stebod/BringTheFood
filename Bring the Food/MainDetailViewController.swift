@@ -26,6 +26,8 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var donorView: UIView!
+    @IBOutlet weak var donorViewActivityIndicator: UIActivityIndicatorView!
     
     // Variables populated from prepareForSegue
     var donation: OthersDonation?
@@ -34,6 +36,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
     private let regionRadius: CLLocationDistance = 250
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
     private var donationPosition: BtfAnnotation?
+    private var userImageCollected: Bool = false
     
     // Observers
     private weak var userImageObserver: NSObjectProtocol!
@@ -47,17 +50,20 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()
+        imageDownloader = ImageDownloader(url: donation?.getSupplier().getImageURL())
     }
     
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
-        imageDownloader = ImageDownloader(url: donation?.getSupplier().getImageURL())
         // Register notification center observer
         userImageObserver = NSNotificationCenter.defaultCenter().addObserverForName(imageDownloadNotificationKey,
             object: imageDownloader,
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.userImageHandler(notification)})
-        imageDownloader?.downloadImage()
+        if(!userImageCollected){
+            imageDownloader?.downloadImage()
+            donorViewActivityIndicator.startAnimating()
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -94,10 +100,6 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
             offerer: donation!.getSupplier().getName(), address: donation!.getSupplier().getAddress().getLabel()!, coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
         mapView.addAnnotation(donationPosition)
         mapView.delegate = self
-        addressLabel.numberOfLines = 2
-        addressLabel.text = donation!.getSupplier().getAddress().getLabel()
-        emailLabel.text = donation!.getSupplier().getEmail()
-        phoneLabel.text = donation!.getSupplier().getPhone()
         foodTypeLabel.text = donation!.getProductType().description
         foodQuantityLabel.text = String(stringInterpolationSegment: donation!.getParcelSize())
         let parcelUnit = donation!.getParcelUnit()
@@ -120,6 +122,8 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
             foodQuantityLabel.text = foodQuantityLabel.text! + " portions"
         }
         expirationLabel.text = String(donation!.getRemainingDays()) + " days left"
+        addressLabel.numberOfLines = 2
+        donorView.hidden = true
     }
     
     // Center the mapView on the specified location
@@ -174,6 +178,11 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
             var clippedRect = CGRectMake((image!.size.width - squareLength) / 2, (image!.size.height -      squareLength) / 2, squareLength, squareLength)
             avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
             avatarImageView.image = UIImage(CGImage: CGImageCreateWithImageInRect(image!.CGImage, clippedRect))
+            addressLabel.text = donation?.getSupplier().getAddress().getLabel()
+            phoneLabel.text = donation?.getSupplier().getPhone()
+            emailLabel.text = donation?.getSupplier().getEmail()
+            donorViewActivityIndicator.stopAnimating()
+            donorView.hidden = false
         }
     }
     

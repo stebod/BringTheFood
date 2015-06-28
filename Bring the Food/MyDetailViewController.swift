@@ -28,6 +28,8 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var dropCollectButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var collectorView: UIView!
+    @IBOutlet weak var collectorViewHeightConstraint: NSLayoutConstraint!
     
     // Variables populated from prepareForSegue
     var donation: MyDonation?
@@ -50,26 +52,29 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()
-        collectorObserver = NSNotificationCenter.defaultCenter().addObserverForName(getCollectorOfDonationNotificationKey,
-            object: RestInterface.getInstance(),
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in return})
-        donation?.downloadDonationCollector()
     }
     
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
-        imageDownloader = ImageDownloader(url: donation!.getSupplier().getImageURL())
-        // Register notification center observer
-        userImageObserver = NSNotificationCenter.defaultCenter().addObserverForName(imageDownloadNotificationKey,
-            object: imageDownloader,
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.userImageHandler(notification)})
-        imageDownloader?.downloadImage()
+        if(donation?.canBeModified() != true){
+            // Register notification center observer
+            collectorObserver = NSNotificationCenter.defaultCenter().addObserverForName(getCollectorOfDonationNotificationKey,
+                object: ModelUpdater.getInstance(),
+                queue: NSOperationQueue.mainQueue(),
+                usingBlock: {(notification:NSNotification!) in self.handleCollector(notification)})
+            donation?.downloadDonationCollector()
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(userImageObserver)
+        if(donation?.canBeModified() != true){
+            if(collectorObserver != nil){
+                NSNotificationCenter.defaultCenter().removeObserver(collectorObserver)
+            }
+            if(userImageObserver != nil){
+                NSNotificationCenter.defaultCenter().removeObserver(userImageObserver)
+            }
+        }
         super.viewWillDisappear(animated)
     }
     
@@ -108,7 +113,10 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     // User interface settings
     func setUpInterface() {
         mainLabel.numberOfLines = 2
-        mainLabel.text = donation?.getDescription()
+        let description = donation!.getDescription()
+        var first = description.startIndex
+        var rest = advance(first,1)..<description.endIndex
+        mainLabel.text = description[first...first].uppercaseString + description[rest]
         if(donation!.canBeModified() == true){
             editButton.hidden = false
             dropCollectButton.setImage(UIImage(named: "delete_button"), forState: .Normal)
@@ -117,22 +125,11 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
             dropCollectButton.setImage(UIImage(named: "collected_button"), forState: .Normal)
             editButton.hidden = true
             if(donation!.canBeCollected() == false){
-                dropCollectButton.enabled = false
+                dropCollectButton.hidden = true
             }
         }
         infoPanelView.layer.borderColor = UIMainColor.CGColor
         infoPanelView.layer.borderWidth = 1.0
-        mapView.layer.borderColor = UIMainColor.CGColor
-        mapView.layer.borderWidth = 1.0
-        centerMapOnLocation(CLLocation(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
-        donationPosition = BtfAnnotation(title: donation!.getDescription(),
-            offerer: donation!.getSupplier().getName(), address: donation!.getSupplier().getAddress().getLabel()!, coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
-        mapView.addAnnotation(donationPosition)
-        mapView.delegate = self
-        addressLabel.numberOfLines = 2
-        addressLabel.text = donation!.getSupplier().getAddress().getLabel()
-        emailLabel.text = donation!.getSupplier().getEmail()
-        phoneLabel.text = donation!.getSupplier().getPhone()
         foodTypeLabel.text = donation!.getProductType().description
         foodQuantityLabel.text = String(stringInterpolationSegment: donation!.getParcelSize())
         let parcelUnit = donation!.getParcelUnit()
@@ -154,7 +151,30 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
             quantityPortionsImageView.hidden = false
             foodQuantityLabel.text = foodQuantityLabel.text! + " portions"
         }
-        expirationLabel.text = String(donation!.getRemainingDays()) + " days left"
+        let remainingDays = donation!.getRemainingDays()
+        if(remainingDays > 0){
+            expirationLabel.text = String(donation!.getRemainingDays()) + " days left"
+        }
+        else{
+            expirationLabel.text = "expired"
+        }
+        mapView.layer.borderColor = UIMainColor.CGColor
+        mapView.layer.borderWidth = 1.0
+        centerMapOnLocation(CLLocation(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
+        donationPosition = BtfAnnotation(title: donation!.getDescription(),
+            offerer: donation!.getSupplier().getName(), address: donation!.getSupplier().getAddress().getLabel()!, coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
+        mapView.addAnnotation(donationPosition)
+        mapView.delegate = self
+        addressLabel.numberOfLines = 2
+        if(donation?.canBeModified() == true){
+            collectorView.hidden = true
+            collectorViewHeightConstraint.constant = 0
+            avatarImageView.removeFromSuperview()
+            addressLabel.removeFromSuperview()
+            phoneLabel.removeFromSuperview()
+            emailLabel.removeFromSuperview()
+            self.view.layoutIfNeeded()
+        }
     }
     
     // Center the mapView on the specified location
@@ -272,6 +292,24 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
             alert.show()
         }
         NSNotificationCenter.defaultCenter().removeObserver(dropCollectObserver)
+    }
+    
+    func handleCollector(notification: NSNotification){
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response?.status == RequestStatus.SUCCESS){
+            let collector = donation?.getCollector()
+            if(collector != nil){
+                imageDownloader = ImageDownloader(url: donation!.getSupplier().getImageURL())
+                userImageObserver = NSNotificationCenter.defaultCenter().addObserverForName(imageDownloadNotificationKey,
+                    object: imageDownloader,
+                    queue: NSOperationQueue.mainQueue(),
+                    usingBlock: {(notification:NSNotification!) in self.userImageHandler(notification)})
+                imageDownloader?.downloadImage()
+                addressLabel.text = collector!.getAddress().getLabel()
+                emailLabel.text = collector!.getEmail()
+                phoneLabel.text = collector!.getPhone()
+            }
+        }
     }
     
     // AlertView delegate

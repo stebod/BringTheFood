@@ -105,7 +105,7 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
         addressLabel.numberOfLines = 2
         let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
         if (iOS8) {
-            // do nothing, it will use automatic via the storyboard
+            // Do nothing, it will use automatic via the storyboard
         } else {
             let screenWidth = UIScreen.mainScreen().bounds.width
             addressLabel.preferredMaxLayoutWidth = screenWidth - 89;
