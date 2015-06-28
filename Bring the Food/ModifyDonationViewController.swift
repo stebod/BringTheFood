@@ -190,14 +190,13 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     func handleUpdateDonation(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.SUCCESS){
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.navigationController?.popToRootViewControllerAnimated(true)
         }
         else if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Submission failed"
+            alert.title = "Update failed"
             alert.message = "A problem occourred during the processing of you request. Please try again"
             alert.addButtonWithTitle("Dismiss")
-            alert.delegate = self
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
@@ -205,7 +204,6 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
             alert.title = "Network error"
             alert.message = "Check you network connectivity and try again"
             alert.addButtonWithTitle("Dismiss")
-            alert.delegate = self
             alert.show()
         }
         activityIndicator.stopAnimating()
@@ -256,6 +254,6 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     
     // AlertView delegate
     func alertView(View: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController!.popToRootViewControllerAnimated(true)
     }
 }
