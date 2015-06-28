@@ -73,13 +73,16 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
         let mainLabel = cell.viewWithTag(1000) as! UILabel
         let addressLabel = cell.viewWithTag(1001) as! UILabel
         let expirationLabel = cell.viewWithTag(1002) as! UILabel
-        let alarmIcon = cell.viewWithTag(1003) as! UIImageView
         let amountLabel = cell.viewWithTag(1004) as! UILabel
         let kgIcon = cell.viewWithTag(1005) as! UIImageView
         let ltIcon = cell.viewWithTag(1006) as! UIImageView
         let portionIcon = cell.viewWithTag(1007) as! UIImageView
         
-        mainLabel.text = donation.getDescription()
+        let description = donation.getDescription()
+        var first = description.startIndex
+        var rest = advance(first,1)..<description.endIndex
+        mainLabel.text = description[first...first].uppercaseString + description[rest]
+
         addressLabel.numberOfLines = 2
         let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
         if (iOS8) {
@@ -88,11 +91,13 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
             let screenWidth = UIScreen.mainScreen().bounds.width
             addressLabel.preferredMaxLayoutWidth = screenWidth - 89;
         }
-        addressLabel.text = donation.getSupplier().getAddress().getLabel()
+        
+        let address = donation.getSupplier().getAddress().getLabel()
+        first = address.startIndex
+        rest = advance(first,1)..<address.endIndex
+        addressLabel.text = address[first...first].uppercaseString + address[rest]
+        
         expirationLabel.text = String(donation.getRemainingDays()) + "d"
-        if(donation.getRemainingDays() > 20){
-            alarmIcon.hidden = true
-        }
         amountLabel.text = "\(donation.getParcelSize())"
         let parcelUnit = donation.getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
@@ -122,13 +127,13 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     
     // Set section titles
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if(requestStatus != RequestStatus.SUCCESS){
-            return donations[section].donationName + " (offline mode)"
-        }
-        if(requestStatus != RequestStatus.CACHE){
+        if(requestStatus == RequestStatus.SUCCESS && donations[section].donationsList.count > 0){
             return donations[section].donationName
         }
-        return ""
+        if(requestStatus == RequestStatus.CACHE && donations[section].donationsList.count > 0){
+            return donations[section].donationName + " (offline mode)"
+        }
+        return nil
     }
     
     // Set the status retrieved by rest interface for the current request
