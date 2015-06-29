@@ -595,4 +595,54 @@ class RestTest: XCTestCase {
         })
         
     }
+    
+    
+    //*********************************************************************************
+    // NOTIFICATIONS CALLS TESTS
+    //*********************************************************************************
+    
+    func testgetNotifications(){
+        
+        let doneExpectation = expectationWithDescription("done")
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(getNotificationsResponseNotificationKey,
+            object: ModelUpdater.getInstance(),
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in
+                let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+                if(response!.status == RequestStatus.SUCCESS){
+                    
+                    // controllare che i dati ci siano
+                    
+                    
+                    XCTAssert(true, "Pass")
+                    doneExpectation.fulfill()
+                }
+                else{
+                    XCTFail("Fail")
+                }
+        })
+   
+        NSNotificationCenter.defaultCenter().addObserverForName(loginResponseNotificationKey,
+            object: ModelUpdater.getInstance(),
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in
+                let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+                if(response!.status == RequestStatus.SUCCESS){
+                    
+                    Model.getInstance().downloadMyNotifications()
+                }
+                else{
+                    XCTFail("Fail")
+                }
+        })
+        
+        RestInterface.getInstance().sendLoginData("bodini.stefano@gmail.com",
+            password: "fedeealesonoalmiofianco")
+        self.waitForExpectationsWithTimeout(10, handler:{ error in
+            XCTAssertNil(error, "Error")
+        })
+        
+    }
+
 }
