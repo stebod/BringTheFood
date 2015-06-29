@@ -16,6 +16,7 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
     // Outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mainLabel: UILabel!
+    @IBOutlet weak var mainLabelRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var infoPanelView: UIView!
     @IBOutlet weak var foodTypeLabel: UILabel!
     @IBOutlet weak var foodQuantityLabel: UILabel!
@@ -27,7 +28,11 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var dropButton: UIButton!
+    @IBOutlet weak var unbookButton: UIButton!
+    @IBOutlet weak var unbookButtonActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var unbookButtonLabel: UILabel!
+    @IBOutlet weak var donorView: UIView!
+    @IBOutlet weak var donorViewActivityIndicator: UIActivityIndicatorView!
     
     // Variables populated from prepareForSegue
     var donation: BookedDonation?
@@ -36,6 +41,7 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
     private let regionRadius: CLLocationDistance = 250
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
     private var donationPosition: BtfAnnotation?
+    private var userImageCollected: Bool = false
     
     // Observers
     private weak var userImageObserver: NSObjectProtocol!
@@ -49,17 +55,20 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()
+        imageDownloader = ImageDownloader(url: donation?.getSupplier().getImageURL())
     }
     
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
-        imageDownloader = ImageDownloader(url: donation!.getSupplier().getImageURL())
         // Register notification center observer
         userImageObserver = NSNotificationCenter.defaultCenter().addObserverForName(imageDownloadNotificationKey,
             object: imageDownloader,
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.userImageHandler(notification)})
-        imageDownloader?.downloadImage()
+        if(!userImageCollected){
+            imageDownloader?.downloadImage()
+            donorViewActivityIndicator.startAnimating()
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -75,34 +84,34 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    @IBAction func dropButtonPressed(sender: UIButton) {
+    @IBAction func unbookButtonPressed(sender: UIButton) {
         bookingObserver = NSNotificationCenter.defaultCenter().addObserverForName(unbookedNotificationKey,
             object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.bookingHandler(notification)})
         donation!.unbook()
+        unbookButton.enabled = false
+        unbookButtonLabel.hidden = true
+        unbookButtonActivityIndicator.startAnimating()
     }
     
     // User interface settings
     func setUpInterface() {
         mainLabel.numberOfLines = 2
-        mainLabel.text = donation?.getDescription()
+        let description = donation!.getDescription()
+        var first = description.startIndex
+        var rest = advance(first,1)..<description.endIndex
+        mainLabel.text = description[first...first].uppercaseString + description[rest]
         if(donation?.getIsValid() != true){
-            dropButton.enabled = false
+            unbookButton.hidden = true
+            unbookButtonLabel.hidden = true
+            unbookButtonActivityIndicator.hidden = true
+            mainLabelRightConstraint.constant -= 93
+            self.view.layoutIfNeeded()
         }
         infoPanelView.layer.borderColor = UIMainColor.CGColor
         infoPanelView.layer.borderWidth = 1.0
-        mapView.layer.borderColor = UIMainColor.CGColor
-        mapView.layer.borderWidth = 1.0
-        centerMapOnLocation(CLLocation(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
-        donationPosition = BtfAnnotation(title: donation!.getDescription(),
-            offerer: donation!.getSupplier().getName(), address: donation!.getSupplier().getAddress().getLabel()!, coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
-        mapView.addAnnotation(donationPosition)
-        mapView.delegate = self
         addressLabel.numberOfLines = 2
-        addressLabel.text = donation!.getSupplier().getAddress().getLabel()
-        emailLabel.text = donation!.getSupplier().getEmail()
-        phoneLabel.text = donation!.getSupplier().getPhone()
         foodTypeLabel.text = donation!.getProductType().description
         foodQuantityLabel.text = String(stringInterpolationSegment: donation!.getParcelSize())
         let parcelUnit = donation!.getParcelUnit()
@@ -124,7 +133,22 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
             quantityPortionsImageView.hidden = false
             foodQuantityLabel.text = foodQuantityLabel.text! + " portions"
         }
-        expirationLabel.text = String(donation!.getRemainingDays()) + " days left"
+        let remainingDays = donation!.getRemainingDays()
+        if(remainingDays > 0){
+            expirationLabel.text = String(donation!.getRemainingDays()) + " days left"
+        }
+        else{
+            expirationLabel.text = "expired"
+        }
+
+        mapView.layer.borderColor = UIMainColor.CGColor
+        mapView.layer.borderWidth = 1.0
+        centerMapOnLocation(CLLocation(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
+        donationPosition = BtfAnnotation(title: donation!.getDescription(),
+            offerer: donation!.getSupplier().getName(), address: donation!.getSupplier().getAddress().getLabel()!, coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
+        mapView.addAnnotation(donationPosition)
+        mapView.delegate = self
+        donorView.hidden = true
     }
     
     // Center the mapView on the specified location
@@ -179,6 +203,12 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
             var clippedRect = CGRectMake((image!.size.width - squareLength) / 2, (image!.size.height -      squareLength) / 2, squareLength, squareLength)
             avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
             avatarImageView.image = UIImage(CGImage: CGImageCreateWithImageInRect(image!.CGImage, clippedRect))
+            addressLabel.text = donation?.getSupplier().getAddress().getLabel()
+            phoneLabel.text = donation?.getSupplier().getPhone()
+            emailLabel.text = donation?.getSupplier().getEmail()
+            donorViewActivityIndicator.stopAnimating()
+            donorView.hidden = false
+            userImageCollected = true
         }
     }
     
@@ -203,13 +233,16 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Donation unbooked"
-            alert.message = "Top!"
+            alert.title = "Succedd"
+            alert.message = "Donation successfully unbooked!"
             alert.addButtonWithTitle("Dismiss")
             alert.delegate = self
             alert.show()
         }
         NSNotificationCenter.defaultCenter().removeObserver(bookingObserver)
+        unbookButtonActivityIndicator.stopAnimating()
+        unbookButtonLabel.hidden = false
+        unbookButton.enabled = true
     }
     
     // AlertView delegate

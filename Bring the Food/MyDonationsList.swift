@@ -105,7 +105,7 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
         addressLabel.numberOfLines = 2
         let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
         if (iOS8) {
-            // do nothing, it will use automatic via the storyboard
+            // Do nothing, it will use automatic via the storyboard
         } else {
             let screenWidth = UIScreen.mainScreen().bounds.width
             addressLabel.preferredMaxLayoutWidth = screenWidth - 89;
@@ -116,7 +116,12 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
         rest = advance(first,1)..<address.endIndex
         addressLabel.text = address[first...first].uppercaseString + address[rest]
 
-        expirationLabel.text = String(donation.getRemainingDays()) + "d"
+        if(donation.getRemainingDays() > 0){
+            expirationLabel.text = String(donation.getRemainingDays()) + "d"
+        }
+        else{
+            expirationLabel.text = "expired"
+        }
         amountLabel.text = "\(donation.getParcelSize())"
         let parcelUnit = donation.getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
