@@ -203,13 +203,13 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
             var clippedRect = CGRectMake((image!.size.width - squareLength) / 2, (image!.size.height -      squareLength) / 2, squareLength, squareLength)
             avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
             avatarImageView.image = UIImage(CGImage: CGImageCreateWithImageInRect(image!.CGImage, clippedRect))
-            addressLabel.text = donation?.getSupplier().getAddress().getLabel()
-            phoneLabel.text = donation?.getSupplier().getPhone()
-            emailLabel.text = donation?.getSupplier().getEmail()
-            donorViewActivityIndicator.stopAnimating()
-            donorView.hidden = false
             userImageCollected = true
         }
+        addressLabel.text = donation?.getSupplier().getAddress().getLabel()
+        phoneLabel.text = donation?.getSupplier().getPhone()
+        emailLabel.text = donation?.getSupplier().getEmail()
+        donorViewActivityIndicator.stopAnimating()
+        donorView.hidden = false
     }
     
     // Handle unbook response

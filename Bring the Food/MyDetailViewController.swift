@@ -102,23 +102,33 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     }
     
     @IBAction func dropCollectButtonPressed(sender: AnyObject) {
-        if(donation!.canBeModified() == true){
-            dropCollectObserver = NSNotificationCenter.defaultCenter().addObserverForName(donationDeletedNotificationKey,
-                object: ModelUpdater.getInstance(),
-                queue: NSOperationQueue.mainQueue(),
-                usingBlock: {(notification:NSNotification!) in self.deleteHandler(notification)})
-            donation?.delete()
+        if(donation?.getSupplier() == nil){
+            let alert = UIAlertView()
+            alert.title = "No connection"
+            alert.message = "Check you network connectivity and try again"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
         }
-        else if(donation!.canBeCollected() == true){
-            dropCollectObserver = NSNotificationCenter.defaultCenter().addObserverForName(bookingCollectedNotificationKey,
-                object: ModelUpdater.getInstance(),
-                queue: NSOperationQueue.mainQueue(),
-                usingBlock: {(notification:NSNotification!) in self.collectHandler(notification)})
-            donation?.markAsCollected()
+        else {
+            if(donation!.canBeModified() == true){
+                dropCollectObserver = NSNotificationCenter.defaultCenter().addObserverForName(donationDeletedNotificationKey,
+                    object: ModelUpdater.getInstance(),
+                    queue: NSOperationQueue.mainQueue(),
+                    usingBlock: {(notification:NSNotification!) in self.deleteHandler(notification)})
+                donation?.delete()
+            }
+            else if(donation!.canBeCollected() == true){
+                dropCollectObserver = NSNotificationCenter.defaultCenter().addObserverForName(bookingCollectedNotificationKey,
+                    object: ModelUpdater.getInstance(),
+                    queue: NSOperationQueue.mainQueue(),
+                    usingBlock: {(notification:NSNotification!) in self.collectHandler(notification)})
+                donation?.markAsCollected()
+            }
+            dropCollectButton.enabled = false
+            dropCollectButtonLabel.hidden = true
+            dropCollectButtonActivityIndicator.startAnimating()
         }
-        dropCollectButton.enabled = false
-        dropCollectButtonLabel.hidden = true
-        dropCollectButtonActivityIndicator.startAnimating()
     }
     
     // User interface settings
@@ -327,14 +337,17 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
                 addressLabel.text = collector!.getAddress().getLabel()
                 emailLabel.text = collector!.getEmail()
                 phoneLabel.text = collector!.getPhone()
+                collectorView.hidden = false
             }
             else{
                 missingCollectorLabel.text = "Uncollected donation"
-                collectorViewActivityIndicator.stopAnimating()
-                collectorView.hidden = false
             }
             collectorDataRetrieved = true
         }
+        else{
+            missingCollectorLabel.text = "Unable to retrieve collector"
+        }
+        collectorViewActivityIndicator.stopAnimating()
     }
     
     // AlertView delegate

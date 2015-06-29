@@ -88,7 +88,7 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     }
     
     @IBAction func cancelButtonPressed(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     // On focus textField behaviours

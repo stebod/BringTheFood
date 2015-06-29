@@ -19,6 +19,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
     @IBOutlet weak var scrollView: UIView!
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var editButton: UIButton!
     
     // Interface colors
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
@@ -82,6 +83,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
         if(response?.status == RequestStatus.SUCCESS){
             scrollView.hidden = false
             emptyView.hidden = true
+            editButton.hidden = false
             let user = Model.getInstance().getCurrentUser()
             nameLabel.text = user?.getName()
             emailLabel.text = user?.getEmail()
@@ -148,6 +150,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
     }
     
     private func setUpInterface(){
+        editButton.hidden = true
         addressLabel.numberOfLines = 2
         var leftConstraint = NSLayoutConstraint(item: contentView!, attribute: NSLayoutAttribute.Leading, relatedBy: .Equal,
             toItem: self.view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0)
