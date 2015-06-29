@@ -335,11 +335,6 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
             }
             collectorDataRetrieved = true
         }
-        else{
-            missingCollectorLabel.text = "Uncollected donation"
-            collectorViewActivityIndicator.stopAnimating()
-            collectorView.hidden = false
-        }
     }
     
     // AlertView delegate
