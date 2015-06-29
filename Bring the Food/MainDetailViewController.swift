@@ -82,6 +82,10 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    @IBAction func backWithSwipe(sender: UISwipeGestureRecognizer) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     @IBAction func bookButtonPressed(sender: UIButton) {
         bookingObserver = NSNotificationCenter.defaultCenter().addObserverForName(bookingCreatedNotificationKey,
             object: ModelUpdater.getInstance(),

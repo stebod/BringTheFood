@@ -101,6 +101,10 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    @IBAction func backWithSwipe(sender: UISwipeGestureRecognizer) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     @IBAction func dropCollectButtonPressed(sender: AnyObject) {
         if(donation?.getSupplier() == nil){
             let alert = UIAlertView()

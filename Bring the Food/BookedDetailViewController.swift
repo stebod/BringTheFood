@@ -84,6 +84,10 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    @IBAction func backWithSwipe(sender: UISwipeGestureRecognizer) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     @IBAction func unbookButtonPressed(sender: UIButton) {
         bookingObserver = NSNotificationCenter.defaultCenter().addObserverForName(unbookedNotificationKey,
             object: ModelUpdater.getInstance(),
