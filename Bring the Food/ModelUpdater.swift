@@ -356,42 +356,17 @@ public class ModelUpdater : NSObject{
             }
         case getNotificationsResponseNotificationKey :
             
-            var newDonationNotifications = [Int:BtfNotification]()
-            var newBookingNotifications = [Int:BtfNotification]()
-            var bookingCollectedNotifications = [Int:BtfNotification]()
-            
-            
             var resultList : [NSDictionary]! = json["result"] as! [NSDictionary]!
             for e in resultList {
 
                 let notificationId = e["id"] as! Int!
                 let notificationType = e["notification_type"] as! String!
 
-                // Get the id of the notified object formthe specified uri
-                let str = e["notifiable_uri"] as! String!
-                let range = str.rangeOfString("/[0-9]+", options: .RegularExpressionSearch)
-                let sub = str.substringWithRange(range!)
-                let clean = sub.stringByReplacingOccurrencesOfString("/", withString: "", options: .RegularExpressionSearch)
-                let objectId = clean.toInt() as Int!
-                
-                
-                switch notificationType {
-                case NotificationType.CREATED.description :
-                    break //TODO
-                case NotificationType.BOOKED.description :
-                    let newNotification = BtfNotification(id: notificationId, type: NotificationType.BOOKED)
-                    newBookingNotifications[objectId] = newNotification
-                case NotificationType.COLLECTED.description :
-                    let newNotification = BtfNotification(id: notificationId, type: NotificationType.COLLECTED)
-                    bookingCollectedNotifications[objectId] = newNotification
-                default: break
-                }
-
                 
             }
 
-            let myNot = BtfNotificationCenter(newDonationNotifications: newDonationNotifications, newBookingNotifications: newBookingNotifications, bookingCollectedNotifications: bookingCollectedNotifications)
-            Model.getInstance().setMyNotifications(myNot)
+   //         let myNot = BtfNotificationCenter(newDonationNotifications: newDonationNotifications, newBookingNotifications: newBookingNotifications, bookingCollectedNotifications: bookingCollectedNotifications)
+      //      Model.getInstance().setMyNotifications(myNot)
             
         case logoutResponseNotificationKey :
             RestInterface.getInstance().handleLogoutSucceded()

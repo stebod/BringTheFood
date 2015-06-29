@@ -445,6 +445,7 @@ class RestTest: XCTestCase {
         
     }
     
+
     func testMarkAsCollected(){
         
         let doneExpectation = expectationWithDescription("done")

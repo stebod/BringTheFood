@@ -26,6 +26,4 @@ public protocol Donation {
     
     func getSupplier() -> User!
     
-    func hasNotification(type: NotificationType) -> Bool!
-    
 }

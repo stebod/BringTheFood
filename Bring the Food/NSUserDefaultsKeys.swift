@@ -10,3 +10,4 @@ import Foundation
 
 public let singleAccessTokenKey = "singleAccessTokenKey"
 public let userIdKey = "userIdKey"
+public let notificationListKey = "notificationListKey"
