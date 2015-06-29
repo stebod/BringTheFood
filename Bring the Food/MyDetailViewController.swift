@@ -15,6 +15,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     // Outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mainLabel: UILabel!
+    @IBOutlet weak var mainLabelRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var infoPanelView: UIView!
     @IBOutlet weak var foodTypeLabel: UILabel!
     @IBOutlet weak var foodQuantityLabel: UILabel!
@@ -27,9 +28,12 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var dropCollectButton: UIButton!
+    @IBOutlet weak var dropCollectButtonActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var dropCollectButtonLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var collectorView: UIView!
-    @IBOutlet weak var collectorViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectorViewActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var missingCollectorLabel: UILabel!
     
     // Variables populated from prepareForSegue
     var donation: MyDonation?
@@ -38,6 +42,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     private let regionRadius: CLLocationDistance = 250
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
     private var donationPosition: BtfAnnotation?
+    private var collectorDataRetrieved: Bool = false
     
     // Observers
     private weak var userImageObserver: NSObjectProtocol!
@@ -62,7 +67,10 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
                 object: ModelUpdater.getInstance(),
                 queue: NSOperationQueue.mainQueue(),
                 usingBlock: {(notification:NSNotification!) in self.handleCollector(notification)})
-            donation?.downloadDonationCollector()
+            if(collectorDataRetrieved == false){
+                donation?.downloadDonationCollector()
+                collectorViewActivityIndicator.startAnimating()
+            }
         }
     }
     
@@ -108,6 +116,8 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
                 usingBlock: {(notification:NSNotification!) in self.collectHandler(notification)})
             donation?.markAsCollected()
         }
+        dropCollectButtonLabel.hidden = true
+        dropCollectButtonActivityIndicator.startAnimating()
     }
     
     // User interface settings
@@ -119,13 +129,17 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         mainLabel.text = description[first...first].uppercaseString + description[rest]
         if(donation!.canBeModified() == true){
             editButton.hidden = false
-            dropCollectButton.setImage(UIImage(named: "delete_button"), forState: .Normal)
+            dropCollectButtonLabel.text = "DROP"
         }
         else {
-            dropCollectButton.setImage(UIImage(named: "collected_button"), forState: .Normal)
+            dropCollectButtonLabel.text = "COLLECT"
             editButton.hidden = true
             if(donation!.canBeCollected() == false){
                 dropCollectButton.hidden = true
+                dropCollectButtonLabel.hidden = true
+                dropCollectButtonLabel.hidden = true
+                mainLabelRightConstraint.constant -= 93
+                self.view.layoutIfNeeded()
             }
         }
         infoPanelView.layer.borderColor = UIMainColor.CGColor
@@ -166,14 +180,9 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         mapView.addAnnotation(donationPosition)
         mapView.delegate = self
         addressLabel.numberOfLines = 2
+        collectorView.hidden = true
         if(donation?.canBeModified() == true){
-            collectorView.hidden = true
-            collectorViewHeightConstraint.constant = 0
-            avatarImageView.removeFromSuperview()
-            addressLabel.removeFromSuperview()
-            phoneLabel.removeFromSuperview()
-            emailLabel.removeFromSuperview()
-            self.view.layoutIfNeeded()
+            missingCollectorLabel.text = "No collector"
         }
     }
     
@@ -232,6 +241,8 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
                 avatarImageView.image = UIImage(CGImage: CGImageCreateWithImageInRect(image!.CGImage, clippedRect))
             }
         }
+        collectorViewActivityIndicator.stopAnimating()
+        collectorView.hidden = false
     }
     
     // Handle donation collection
@@ -255,13 +266,15 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Donation marked as collected"
-            alert.message = "Top!"
+            alert.title = "Success"
+            alert.message = "The donation has been marked as collected!"
             alert.addButtonWithTitle("Dismiss")
             alert.delegate = self
             alert.show()
         }
         NSNotificationCenter.defaultCenter().removeObserver(dropCollectObserver)
+        dropCollectButtonLabel.hidden = false
+        dropCollectButtonActivityIndicator.stopAnimating()
     }
     
     // Handle donation deletion
@@ -285,13 +298,15 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Donation correctly deleted"
-            alert.message = "Top!"
+            alert.title = "Success"
+            alert.message = "The donation has been deleted!"
             alert.addButtonWithTitle("Dismiss")
             alert.delegate = self
             alert.show()
         }
         NSNotificationCenter.defaultCenter().removeObserver(dropCollectObserver)
+        dropCollectButtonLabel.hidden = false
+        dropCollectButtonActivityIndicator.stopAnimating()
     }
     
     func handleCollector(notification: NSNotification){
@@ -309,6 +324,17 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
                 emailLabel.text = collector!.getEmail()
                 phoneLabel.text = collector!.getPhone()
             }
+            else{
+                missingCollectorLabel.text = "Uncollected donation"
+                collectorViewActivityIndicator.stopAnimating()
+                collectorView.hidden = false
+            }
+            collectorDataRetrieved = true
+        }
+        else{
+            missingCollectorLabel.text = "Uncollected donation"
+            collectorViewActivityIndicator.stopAnimating()
+            collectorView.hidden = false
         }
     }
     

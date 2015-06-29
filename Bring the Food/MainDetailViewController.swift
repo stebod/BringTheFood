@@ -15,6 +15,8 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
     // Outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mainLabel: UILabel!
+    @IBOutlet weak var bookButtonLabel: UILabel!
+    @IBOutlet weak var bookButtonActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var infoPanelView: UIView!
     @IBOutlet weak var foodTypeLabel: UILabel!
     @IBOutlet weak var foodQuantityLabel: UILabel!
@@ -85,12 +87,17 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.bookingHandler(notification)})
         donation!.book()
+        bookButtonLabel.hidden = true
+        bookButtonActivityIndicator.startAnimating()
     }
     
     // User interface settings
     func setUpInterface() {
         mainLabel.numberOfLines = 2
-        mainLabel.text = donation?.getDescription()
+        let description = donation!.getDescription()
+        var first = description.startIndex
+        var rest = advance(first,1)..<description.endIndex
+        mainLabel.text = description[first...first].uppercaseString + description[rest]
         infoPanelView.layer.borderColor = UIMainColor.CGColor
         infoPanelView.layer.borderWidth = 1.0
         mapView.layer.borderColor = UIMainColor.CGColor
@@ -183,6 +190,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
             emailLabel.text = donation?.getSupplier().getEmail()
             donorViewActivityIndicator.stopAnimating()
             donorView.hidden = false
+            userImageCollected = true
         }
     }
     
@@ -207,12 +215,14 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Booking performed"
-            alert.message = "Top!"
+            alert.title = "Success"
+            alert.message = "Booking accomplished!"
             alert.addButtonWithTitle("Dismiss")
             alert.delegate = self
             alert.show()
         }
+        bookButtonActivityIndicator.stopAnimating()
+        bookButtonLabel.hidden = false
         NSNotificationCenter.defaultCenter().removeObserver(bookingObserver)
     }
     
