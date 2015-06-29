@@ -62,14 +62,14 @@ public class BtfNotificationCenter {
         return newDonationNotifications[donationId] != nil
     }
 
-    /// :returns: true if there is a notification of type NotificationType.BOOKED on the donation identified by the id
-    public func isJustBookedDonation(donationId: Int!) -> Bool!{
-        return newBookingNotifications[donationId] != nil
+    /// :returns: true if there is a notification of type NotificationType.BOOKED on the booking identified by the id
+    public func isJustBookedDonation(bookingId: Int!) -> Bool!{
+        return newBookingNotifications[bookingId] != nil
     }
     
-    /// :returns: true if there is a notification of type NotificationType.COLLECTED on the donation identified by the id
-    public func isJustCollectedDonation(donationId: Int!) -> Bool!{
-        return bookingCollectedNotifications[donationId] != nil
+    /// :returns: true if there is a notification of type NotificationType.COLLECTED on the booking identified by the id
+    public func isJustCollectedDonation(bookingId: Int!) -> Bool!{
+        return bookingCollectedNotifications[bookingId] != nil
     }
     
     /// :returns: the number of notifications about new donations
