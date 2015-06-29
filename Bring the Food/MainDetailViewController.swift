@@ -15,6 +15,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
     // Outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mainLabel: UILabel!
+    @IBOutlet weak var bookButton: UIButton!
     @IBOutlet weak var bookButtonLabel: UILabel!
     @IBOutlet weak var bookButtonActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var infoPanelView: UIView!
@@ -87,6 +88,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.bookingHandler(notification)})
         donation!.book()
+        bookButton.enabled = false
         bookButtonLabel.hidden = true
         bookButtonActivityIndicator.startAnimating()
     }
@@ -100,13 +102,6 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         mainLabel.text = description[first...first].uppercaseString + description[rest]
         infoPanelView.layer.borderColor = UIMainColor.CGColor
         infoPanelView.layer.borderWidth = 1.0
-        mapView.layer.borderColor = UIMainColor.CGColor
-        mapView.layer.borderWidth = 1.0
-        centerMapOnLocation(CLLocation(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
-        donationPosition = BtfAnnotation(title: donation!.getDescription(),
-            offerer: donation!.getSupplier().getName(), address: donation!.getSupplier().getAddress().getLabel()!, coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
-        mapView.addAnnotation(donationPosition)
-        mapView.delegate = self
         foodTypeLabel.text = donation!.getProductType().description
         foodQuantityLabel.text = String(stringInterpolationSegment: donation!.getParcelSize())
         let parcelUnit = donation!.getParcelUnit()
@@ -130,6 +125,13 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         }
         expirationLabel.text = String(donation!.getRemainingDays()) + " days left"
         addressLabel.numberOfLines = 2
+        mapView.layer.borderColor = UIMainColor.CGColor
+        mapView.layer.borderWidth = 1.0
+        centerMapOnLocation(CLLocation(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
+        donationPosition = BtfAnnotation(title: donation!.getDescription(),
+            offerer: donation!.getSupplier().getName(), address: donation!.getSupplier().getAddress().getLabel()!, coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLatitude()!), longitude: CLLocationDegrees(donation!.getSupplier().getAddress().getLongitude()!)))
+        mapView.addAnnotation(donationPosition)
+        mapView.delegate = self
         donorView.hidden = true
     }
     
@@ -223,6 +225,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         }
         bookButtonActivityIndicator.stopAnimating()
         bookButtonLabel.hidden = false
+        bookButton.enabled = true
         NSNotificationCenter.defaultCenter().removeObserver(bookingObserver)
     }
     

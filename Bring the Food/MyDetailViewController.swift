@@ -116,6 +116,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
                 usingBlock: {(notification:NSNotification!) in self.collectHandler(notification)})
             donation?.markAsCollected()
         }
+        dropCollectButton.enabled = false
         dropCollectButtonLabel.hidden = true
         dropCollectButtonActivityIndicator.startAnimating()
     }
@@ -243,6 +244,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         }
         collectorViewActivityIndicator.stopAnimating()
         collectorView.hidden = false
+        dropCollectButton.enabled = true
     }
     
     // Handle donation collection
@@ -273,8 +275,9 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
             alert.show()
         }
         NSNotificationCenter.defaultCenter().removeObserver(dropCollectObserver)
-        dropCollectButtonLabel.hidden = false
         dropCollectButtonActivityIndicator.stopAnimating()
+        dropCollectButtonLabel.hidden = false
+        dropCollectButton.enabled = true
     }
     
     // Handle donation deletion
@@ -305,8 +308,9 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
             alert.show()
         }
         NSNotificationCenter.defaultCenter().removeObserver(dropCollectObserver)
-        dropCollectButtonLabel.hidden = false
         dropCollectButtonActivityIndicator.stopAnimating()
+        dropCollectButtonLabel.hidden = false
+        dropCollectButton.enabled = true
     }
     
     func handleCollector(notification: NSNotification){
