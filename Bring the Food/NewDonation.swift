@@ -8,8 +8,9 @@
 
 import Foundation
 
+/// Immutable object describing the data of a donation
+/// that is about to be created by the current user.
 public class NewDonation{
-    
     
     private let description: String!
     private let parcelSize: Float!

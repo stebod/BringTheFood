@@ -8,6 +8,9 @@
 
 import Foundation
 
+// Keys used for identifying rest calls and
+// the notifications sent to NSNotificationCenter
+
 // rest notifications - "DONATIONS" section
 public let donationCreatedNotificationKey = "donationCreatedResponse"
 public let donationUpdatedNotificationKey = "donationUpdatedResponse"
@@ -26,6 +29,7 @@ public let bookingCollectedNotificationKey = "boookingCollectedResponse"
 // rest notifications - "USER" section
 public let loginResponseNotificationKey = "loginResponse"
 public let createUserNotificationKey = "userCreatedResponse"
+public let updateUserNotificationKey = "userUpdatedResponse"
 public let logoutResponseNotificationKey = "logoutResponse"
 public let mailAvailabilityResponseNotificationKey = "mailAvailabilityResponse"
 public let userInfoResponseNotificationKey = "userInfoResponse"

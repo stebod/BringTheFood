@@ -8,4 +8,5 @@
 
 import Foundation
 
+/// string providing the Google Maps API Key
 public let gMapsAPIKey = "AIzaSyAAWAAlcZlwvn0KwVatqNMozuqiCg6mJqE"

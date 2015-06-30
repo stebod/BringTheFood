@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Immutable object describing the notifications settings
+/// of the current user.
 public class ApplicationSettings{
     
     private var publishedSms : Bool!

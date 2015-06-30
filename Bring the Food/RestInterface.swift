@@ -368,6 +368,40 @@ public class RestInterface : NSObject{
         sendRequest(request, notification_key: createUserNotificationKey)
     }
     
+    public func updateUser(username:String!, email:String!, phoneNumber:String!, addressLabel:String!){
+        
+        if(isLoggedIn()){
+            
+            var parameters:String = "?user_credentials=\(singleAccessToken)"
+            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/users/\(self.userId)" + parameters)!)
+            request.HTTPMethod = "POST"
+            
+            //preparo il body
+            
+            let localeString:String!
+            let locale :String = NSLocale.preferredLanguages()[0] as! String
+            if locale == "it" {
+                localeString = "it"
+            } else {
+                localeString = "en"
+            }
+            
+            var postString = "{ "
+            postString += " \"user\": { "
+            postString += " \"name\": \"\(username)\", "
+            postString += " \"email\": \"\(email)\", "
+            postString += " \"phone\": \"\(phoneNumber)\", "
+            postString += " \"address\" : {  "
+            postString += " \"label\": \"\(addressLabel)\" "
+            postString += "} } } "
+            request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+            sendRequest(request, notification_key: updateUserNotificationKey)
+        }
+        else{
+            ModelUpdater.getInstance().notifyNotLoggedInError(updateUserNotificationKey)
+        }
+    }
+    
     public func changePassword(old_password: String!, new_password:String!){
         
         if(isLoggedIn()){
@@ -445,8 +479,18 @@ public class RestInterface : NSObject{
             var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/settings" + parameters)!)
             request.HTTPMethod = "POST"
 
-            //preparo il body
-            var postString = "{ \"notify_me_when\" : {  "
+            let localeString:String!
+            let locale :String = NSLocale.preferredLanguages()[0] as! String
+            if locale == "it" {
+                localeString = "it"
+            } else {
+                localeString = "en"
+            }
+                        
+            var postString = "{ \"lang\" : { \"locale\" : "
+            postString += "\"\(localeString)\""
+            postString += " }, "
+            postString += " \"notify_me_when\" : {  "
             postString += " \"published\": { "
             postString += " \"sms\": \"false\", "
             postString += " \"email\": \"\(publishedEmail)\" "
@@ -467,6 +511,8 @@ public class RestInterface : NSObject{
             postString += " \"range\": \(maxDistance) "
             postString += "} }  "
           
+            println(postString)
+            
             request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
             sendRequest(request, notification_key: settingsUpdatedNotificationKey)
         }

@@ -8,11 +8,16 @@
 
 import Foundation
 
+/// Enum describing the values that may be
+/// assumed by the "parcel_unit" field of
+/// a donation.
 public enum ParcelUnit : Printable {
     case LITERS
     case KILOGRAMS
     case PORTIONS
     
+    
+    /// :returns: the string used in POST requests to communicate the "parcel_unit" data to the server
     public var description : String {
         switch self {
         case .LITERS: return "liters"
@@ -22,8 +27,13 @@ public enum ParcelUnit : Printable {
     }
 }
 
+
 public class ParcelUnitFactory {
     
+    /// Simple static method converting a String into a
+    /// ParcelUnit value. This method should be called 
+    /// when parsing the "parcel_unit" data of a
+    /// response received from the server.
     public static func getParcUnitFromString(string :String)-> ParcelUnit{
         var output :ParcelUnit
         

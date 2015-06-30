@@ -8,6 +8,17 @@
 
 import Foundation
 
+/// Singleton whose methods should only be called by
+/// an instance of RestInterface.
+/// Objects requesting rest calls to RestInterface
+/// should add an observer to notifications posted in
+/// NSNotificationCenter by ModelUpdater.
+/// ModelUpdater is in charge of parsing the rest responses
+/// received from the server, updating the model accordingly
+/// and posting a notification to NSNotificationCenter
+/// to communicate the outcome of the operation.
+/// (For this last topic, see also the documentation 
+/// about HTTPResponseData)
 public class ModelUpdater : NSObject{
     
     private static var instance: ModelUpdater?
@@ -25,6 +36,8 @@ public class ModelUpdater : NSObject{
     }
     
     
+    /// Method posting a notification having status
+    /// RequestStatus.NOT_LOGGED_IN to NSNotificationCenter
     public func notifyNotLoggedInError(notification_key : String ){
         
         println("not logged in")
@@ -35,6 +48,8 @@ public class ModelUpdater : NSObject{
         )
     }
     
+    /// Method posting a notification having status
+    /// RequestStatus.DEVICE_ERROR to NSNotificationCenter
     public func notifyDeviceError(notification_key : String ){
         
         println("device error")
@@ -46,6 +61,8 @@ public class ModelUpdater : NSObject{
         
     }
     
+    /// Method posting a notification having status
+    /// RequestStatus.NETWORK_ERROR to NSNotificationCenter
     public func notifyNetworkError(notification_key : String){
         
         println("network error")
@@ -56,6 +73,8 @@ public class ModelUpdater : NSObject{
         )
     }
     
+    /// Method posting a notification having status 
+    /// RequestStatus.DATA_ERROR to NSNotificationCenter
     public func notifyDataError(notification_key : String){
         
         println("data error")
@@ -66,6 +85,9 @@ public class ModelUpdater : NSObject{
         )
     }
     
+    /// Parses the json data contained in parameter "data", and updates the 
+    /// Model accordingly. In case no error occurs, a notification having 
+    /// status RequestStatus.SUCCESS is sent to NSNotificationCenter
     public func notifySuccess(notification_key : String, data : NSData, cachedResponse : Bool!){
         
         //parsing json
@@ -105,10 +127,12 @@ public class ModelUpdater : NSObject{
         }
     }
     
-    
+    /// Method which is responsible of parsing the response received 
+    /// from the server.
     private func handleData(notification_key : String, json : NSDictionary!){
         
         //var listaerrori : NSArray = json.valueForKeyPath("result.errors") as! NSArray
+        
         
         switch notification_key {
             
