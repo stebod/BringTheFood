@@ -27,7 +27,6 @@
 		3B49131E1B2EAE7700173BAE /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8DD85F1B2E114E009BC24C /* ImageDownloader.swift */; };
 		3B4AE15A1B2B5ACF00436903 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4AE1591B2B5ACF00436903 /* Address.swift */; };
 		3B4AE15C1B2B5ADB00436903 /* ApplicationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4AE15B1B2B5ADB00436903 /* ApplicationSettings.swift */; };
-		3B4AE1601B2B5AE700436903 /* BtfNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4AE15F1B2B5AE700436903 /* BtfNotification.swift */; };
 		3B4AE1621B2B5AF800436903 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4AE1611B2B5AF800436903 /* User.swift */; };
 		3B4AE1661B2B65D200436903 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4AE1651B2B65D200436903 /* Model.swift */; };
 		3B6F96BE1B2DF379004C9503 /* ParcelUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6F96BD1B2DF379004C9503 /* ParcelUnit.swift */; };
@@ -62,7 +61,6 @@
 		3BD284781B2C0C9300D77319 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4AE1611B2B5AF800436903 /* User.swift */; };
 		3BD2847A1B2C0C9C00D77319 /* ApplicationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4AE15B1B2B5ADB00436903 /* ApplicationSettings.swift */; };
 		3BD2847B1B2C0C9F00D77319 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4AE1591B2B5ACF00436903 /* Address.swift */; };
-		3BD2847C1B2C0CA200D77319 /* BtfNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4AE15F1B2B5AE700436903 /* BtfNotification.swift */; };
 		3BD4C79C1B36BC9C0007901E /* DisplayOthersDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD4C79B1B36BC9C0007901E /* DisplayOthersDetail.swift */; };
 		3BD4C79E1B36BCE90007901E /* DisplayMyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD4C79D1B36BCE90007901E /* DisplayMyDetail.swift */; };
 		3BD4C79F1B36C1960007901E /* MyDonationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3541BBF1B2F496800AA7F65 /* MyDonationsViewController.swift */; };
@@ -132,7 +130,6 @@
 		3B3441441B300B420080360D /* NSUserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsKeys.swift; sourceTree = "<group>"; };
 		3B4AE1591B2B5ACF00436903 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		3B4AE15B1B2B5ADB00436903 /* ApplicationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationSettings.swift; sourceTree = "<group>"; };
-		3B4AE15F1B2B5AE700436903 /* BtfNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BtfNotification.swift; sourceTree = "<group>"; };
 		3B4AE1611B2B5AF800436903 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3B4AE1651B2B65D200436903 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		3B6F96BD1B2DF379004C9503 /* ParcelUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParcelUnit.swift; sourceTree = "<group>"; };
@@ -272,7 +269,6 @@
 			children = (
 				3B2E97F01B28B59400506B54 /* NewDonation.swift */,
 				3B4AE1611B2B5AF800436903 /* User.swift */,
-				3B4AE15F1B2B5AE700436903 /* BtfNotification.swift */,
 				3B9501CD1B35FC8700D2DC97 /* StoredDonation.swift */,
 				3B4AE15B1B2B5ADB00436903 /* ApplicationSettings.swift */,
 				3B4AE1651B2B65D200436903 /* Model.swift */,
@@ -577,7 +573,6 @@
 				B346110F1B39A2FC000D13E2 /* NotificationSettingsViewController.swift in Sources */,
 				3B9501CB1B35FC5F00D2DC97 /* BookedDonation.swift in Sources */,
 				3B1FDDE41B406E4F004B5A28 /* BtfNotificationCenter.swift in Sources */,
-				3B4AE1601B2B5AE700436903 /* BtfNotification.swift in Sources */,
 				B346110D1B39A2CA000D13E2 /* AboutViewController.swift in Sources */,
 				B3BF98B21B2F97C000E79515 /* FilterViewController.swift in Sources */,
 				B3E762131B2488FC004C631F /* SignInStep1ViewController.swift in Sources */,
@@ -631,7 +626,6 @@
 				3B9501C31B35FBDE00D2DC97 /* MapsTest.swift in Sources */,
 				3B2727F81B2CAAB40064F53A /* BookingsList.swift in Sources */,
 				3B99B1BE1B35FEF200E0BECA /* NSNotificationCenterKeys.swift in Sources */,
-				3BD2847C1B2C0CA200D77319 /* BtfNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
