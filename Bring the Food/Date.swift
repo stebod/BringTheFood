@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Immutable object describing a date in the same format used
+/// by the server side of the application
 public class Date {
     
     private let date: NSDate!
@@ -20,11 +22,13 @@ public class Date {
         self.date =  self.dateFormatter.dateFromString(dateString)
     }
     
+    /// :returns: a string describing the date in the same format used by the server side of the application
     public func getDateString() -> String!{
         
         return self.dateFormatter.stringFromDate(self.date)
     }
     
+    /// :returns: the date represented with this object
     public func getDate() -> NSDate! {
         return self.date
     }

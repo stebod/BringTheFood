@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Immutable object describing the profile informations
+/// of the current user.
 public class User{
     
     private let id : Int!

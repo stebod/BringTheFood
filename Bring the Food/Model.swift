@@ -8,6 +8,10 @@
 
 import Foundation
 
+
+/// Singleton providing access to all data of interest for
+/// the application.
+/// Data in the model is updated only by Model Updater
 public class Model : NSObject{
     
     
@@ -43,7 +47,10 @@ public class Model : NSObject{
         return self.instance!
     }
     
-   
+    //*********************************************************************************
+    // USERS
+    //*********************************************************************************
+    
     public func downloadCurrentUser(){
         RestInterface.getInstance().getUserInfo()
     }
@@ -56,9 +63,14 @@ public class Model : NSObject{
         self.currentUser = currentUser
     }
     
-    //TODO
-    public func updateCurrentUser(){}
     
+    public func updateCurrentUser(username:String!, email:String!, phoneNumber:String!, addressLabel:String!){
+        RestInterface.getInstance().updateUser(username, email: email, phoneNumber: phoneNumber, addressLabel: addressLabel)
+    }
+    
+    //*********************************************************************************
+    // DONATIONS
+    //*********************************************************************************
     
     public func downloadOthersDonationsList(){
         RestInterface.getInstance().getOthersDonations()
@@ -84,6 +96,9 @@ public class Model : NSObject{
         return self.myDonations
     }
     
+    //*********************************************************************************
+    // BOOKINGS
+    //*********************************************************************************
     
     public func downloadMyBookings(){
         RestInterface.getInstance().getBookings()
@@ -97,6 +112,10 @@ public class Model : NSObject{
         self.myBookings = myBookings
     }
     
+    //*********************************************************************************
+    // SETTINGS
+    //*********************************************************************************
+    
     public func downloadMySettings(){
         RestInterface.getInstance().getSettings()
     }
@@ -109,6 +128,9 @@ public class Model : NSObject{
         self.settings = mySettings
     }
     
+    //*********************************************************************************
+    // NOTIFICATIONS
+    //*********************************************************************************
    
     public func downloadMyNotifications(){
         RestInterface.getInstance().getNotifications()

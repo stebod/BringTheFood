@@ -8,12 +8,16 @@
 
 import Foundation
 
+/// Enum describing the values that may be
+/// assumed by the "product_type" field of
+/// a donation.
 public enum ProductType : Printable {
     case DRIED
     case FRESH
     case COOKED
     case FROZEN
     
+    /// :returns: the string used in POST requests to communicate the "product_type" data to the server
     public var description : String {
         switch self {
         case .DRIED: return "dried"
@@ -28,6 +32,10 @@ public enum ProductType : Printable {
 
 public class ProductTypeFactory{
     
+    /// Simple static method converting a String into a
+    /// ProductType value. This method should be called
+    /// when parsing the "product_type" data of a
+    /// response received from the server.
     public static func getProdTypeFromString(string :String)-> ProductType{
         var output :ProductType
         

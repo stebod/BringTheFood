@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Keys used for data storage in NSUserDefaults
+
 public let singleAccessTokenKey = "singleAccessTokenKey"
 public let userIdKey = "userIdKey"
 public let notificationListKey = "notificationListKey"

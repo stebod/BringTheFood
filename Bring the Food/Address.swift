@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Immutable object describing an address, of which
+/// a label and (optionally) coordinates are provided.
 public class Address {
     
     private var label: String!
