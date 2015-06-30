@@ -25,6 +25,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     @IBOutlet weak var tableViewBottomLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var changeSettingsButton: UIButton!
     @IBOutlet weak var changeSettingsActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var addressTopLayoutConstraint: NSLayoutConstraint!
     
     // Interface colors
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
@@ -51,7 +52,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     
     // Private variables
     private var deltaHeight: CGFloat?
-    private var locationAutocompleterTableViewHeight: CGFloat?
+    private var locationAutocompleterHeightDelta: CGFloat?
     private var isExpandedForKeyboard: Bool?
     private var isExpandedForTableView: Bool?
     private var openKeyboardMovement: CGFloat?
@@ -164,7 +165,8 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         }
         addressTableView.hidden = true
         if(isExpandedForTableView == true){
-            tableViewBottomLayoutConstraint.constant -= openTableViewMovement!
+            addressTopLayoutConstraint.constant -= 5
+            tableViewBottomLayoutConstraint.constant -= locationAutocompleterHeightDelta!
             addressToButtonLayoutConstraint.constant -= openTableViewMovement!
             self.view.layoutIfNeeded()
             isExpandedForTableView = false
@@ -233,8 +235,10 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             if(openKeyboardMovement! > 0){
                 openTableViewMovement! = openTableViewMovement! - openKeyboardMovement!
             }
+            addressTopLayoutConstraint.constant += 5
             addressToButtonLayoutConstraint.constant += openTableViewMovement!
-            tableViewBottomLayoutConstraint.constant += openTableViewMovement!
+            locationAutocompleterHeightDelta = openTableViewMovement! - (scrollView.bounds.height - kbHeight - addressTableView.bounds.height) + 10
+            tableViewBottomLayoutConstraint.constant += locationAutocompleterHeightDelta!
             self.view.layoutIfNeeded()
             scrollView.scrollRectToVisible(CGRectMake(0, 235, scrollView.contentSize.width, scrollView.bounds.height), animated: true)
             isExpandedForTableView = true
@@ -355,9 +359,6 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     private func animateTextField(up: Bool) {
         if(up){
             self.openKeyboardMovement = self.kbHeight + 20 - (self.view.frame.height - self.addressUnderlineView.center.y - self.headerView.bounds.height)
-            if(self.locationAutocompleterTableViewHeight == nil){
-                self.locationAutocompleterTableViewHeight = self.contentViewVisibleHeight! - self.kbHeight - 30
-            }
             if(self.view.frame.height - self.addressUnderlineView.center.y - headerView.bounds.height < kbHeight + 20){
                 UIView.animateWithDuration(0.3, animations: {
                     self.addressToButtonLayoutConstraint.constant += self.openKeyboardMovement!
