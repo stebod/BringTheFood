@@ -182,16 +182,18 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.SUCCESS){
             let image = imageDownloader!.getImage()
-            avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2;
-            avatarImageView.clipsToBounds = true
-            avatarImageView.layer.borderWidth = 3.0;
-            avatarImageView.layer.borderColor = UIMainColor.CGColor
-            // Use smallest side length as crop square length
-            var squareLength = min(image!.size.width, image!.size.height)
-            var clippedRect = CGRectMake((image!.size.width - squareLength) / 2, (image!.size.height -      squareLength) / 2, squareLength, squareLength)
-            avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
-            avatarImageView.image = UIImage(CGImage: CGImageCreateWithImageInRect(image!.CGImage, clippedRect))
-            userImageCollected = true
+            if(image != nil){
+                avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2;
+                avatarImageView.clipsToBounds = true
+                avatarImageView.layer.borderWidth = 3.0;
+                avatarImageView.layer.borderColor = UIMainColor.CGColor
+                // Use smallest side length as crop square length
+                var squareLength = min(image!.size.width, image!.size.height)
+                var clippedRect = CGRectMake((image!.size.width - squareLength) / 2, (image!.size.height -      squareLength) / 2, squareLength, squareLength)
+                avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
+                avatarImageView.image = UIImage(CGImage: CGImageCreateWithImageInRect(image!.CGImage, clippedRect))
+                userImageCollected = true
+            }
         }
         addressLabel.text = donation?.getSupplier().getAddress().getLabel()
         phoneLabel.text = donation?.getSupplier().getPhone()
