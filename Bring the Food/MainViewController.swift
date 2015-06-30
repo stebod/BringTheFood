@@ -79,7 +79,11 @@ class MainViewController: UIViewController, FilterProtocol, DisplayOthersDetail 
         for item in (self.tabBarController?.tabBar.items as NSArray!){
             (item as! UITabBarItem).image = (item as! UITabBarItem).image?.imageWithRenderingMode(.AlwaysOriginal)
         }
-        self.tableView.addSubview(self.refreshControl)
+        
+        var tableViewController = UITableViewController()
+        tableViewController.tableView = self.tableView;
+        tableViewController.refreshControl = self.refreshControl;
+        
         let backgroundView = UIView(frame: CGRectZero)
         tableView.tableFooterView = backgroundView
         tableView.backgroundColor = UIColor.clearColor()

@@ -67,7 +67,9 @@ class MyDonationsViewController: UIViewController, DisplayMyDetail {
     
     // User interface settings
     private func setUpInterface() {
-        self.tableView.addSubview(self.refreshControl)
+        var tableViewController = UITableViewController()
+        tableViewController.tableView = self.tableView;
+        tableViewController.refreshControl = self.refreshControl;
         let backgroundView = UIView(frame: CGRectZero)
         tableView.tableFooterView = backgroundView
         tableView.backgroundColor = UIColor.clearColor()

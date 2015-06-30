@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChangeSettingsViewController: UIViewController,UINavigationControllerDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AddressCommunicator {
+class ChangeSettingsViewController: UIViewController,UINavigationControllerDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AddressCommunicator {
 
     // Outlets
     @IBOutlet weak var nameTextField: UITextField!
@@ -392,7 +392,6 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             alert.title = "Update failed"
             alert.message = "The chosen email is already taken"
             alert.addButtonWithTitle("Dismiss")
-            alert.delegate = self
             alert.show()
         }
         else{
@@ -400,15 +399,9 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             alert.title = "Network error"
             alert.message = "Check you network connectivity and try again"
             alert.addButtonWithTitle("Dismiss")
-            alert.delegate = self
             alert.show()
         }
         changeSettingsActivityIndicator.stopAnimating()
         changeSettingsButton.enabled = true
-    }
-    
-    // AlertView delegate
-    func alertView(View: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
-        self.navigationController!.popViewControllerAnimated(true)
     }
 }
