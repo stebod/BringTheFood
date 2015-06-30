@@ -46,6 +46,7 @@ class MyDonationsViewController: UIViewController, DisplayMyDetail {
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.fillTableView(notification)})
         Model.getInstance().downloadMyDonationsList()
+        refreshControl.beginRefreshing()
     }
     
     override func viewWillDisappear(animated: Bool) {

@@ -44,6 +44,7 @@ class BookingsViewController: UIViewController, DisplayBookedDetail {
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.fillTableView(notification)})
         Model.getInstance().downloadMyBookings()
+        refreshControl.beginRefreshing()
     }
     
     override func viewWillDisappear(animated: Bool) {

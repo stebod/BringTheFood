@@ -63,6 +63,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.fillUserData(notification)})
         Model.getInstance().downloadCurrentUser()
+        refreshControl.beginRefreshing()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -232,6 +233,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
         self.view.addConstraint(leftConstraint)
         self.view.addConstraint(rightConstraint)
         self.scrollView.addSubview(self.refreshControl)
+        contentView.hidden = true
     }
     
     // Refresh table content
