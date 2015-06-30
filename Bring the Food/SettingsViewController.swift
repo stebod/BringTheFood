@@ -21,8 +21,6 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomViewLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomScrollViewLayoutConstraint: NSLayoutConstraint!
     
     // Interface colors
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)

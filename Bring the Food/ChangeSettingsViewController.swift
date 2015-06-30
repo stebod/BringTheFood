@@ -17,7 +17,15 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var addressTableView: UITableView!
     @IBOutlet weak var changeAvatarButton: UIButton!
-
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var addressToButtonLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var addressUnderlineView: UIView!
+    @IBOutlet weak var tableViewBottomLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var changeSettingsButton: UIButton!
+    @IBOutlet weak var changeSettingsActivityIndicator: UIActivityIndicatorView!
+    
     // Interface colors
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
     
@@ -30,26 +38,31 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     
     // Observers
     private weak var changeSettingsObserver: NSObjectProtocol!
+    private weak var keyboardWillShowObserver:NSObjectProtocol!
+    private weak var keyboardWillHideObserver:NSObjectProtocol!
     private var tapRecognizer:UITapGestureRecognizer!
     private weak var locationAutocompleteObserver:NSObjectProtocol!
     
+    // Keyboard height
+    private var kbHeight: CGFloat!
+    
     // Location autocompleter
     private var locationAutocompleter: LocationAutocompleter?
+    
+    // Private variables
+    private var deltaHeight: CGFloat?
+    private var locationAutocompleterTableViewHeight: CGFloat?
+    private var isExpandedForKeyboard: Bool?
+    private var isExpandedForTableView: Bool?
+    private var openKeyboardMovement: CGFloat?
+    private var openTableViewMovement: CGFloat?
+    private var contentViewVisibleHeight: CGFloat?
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        changeAvatarButton.layer.cornerRadius = changeAvatarButton.frame.size.width / 2;
-        changeAvatarButton.clipsToBounds = true
-        changeAvatarButton.layer.borderWidth = 3.0;
-        changeAvatarButton.layer.borderColor = UIMainColor.CGColor
-        changeAvatarButton.setImage(userImage, forState: .Normal)
-        nameTextField.text = name
-        emailTextField.text = email
-        phoneTextField.text = phone
-        addressTextField.text = address
-        addressTableView.hidden = true
+        setUpInterface()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -59,6 +72,12 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             object: locationAutocompleter,
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.locationAutocompleterHandler(notification)})
+        keyboardWillShowObserver = NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillShowNotification,
+            object: nil, queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in self.keyboardWillShow(notification)})
+        keyboardWillHideObserver = NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillHideNotification,
+            object: nil, queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in self.keyboardWillHide(notification)})
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleTapOnView:")
         tapRecognizer.delegate = self
         tapRecognizer.numberOfTapsRequired = 1
@@ -88,6 +107,25 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         }
     }
     
+    // On focus textField behaviours
+    @IBAction func emailOnFocus(sender: UITextField) {
+        if(sender.text == "Email"){
+            sender.text = ""
+        }
+    }
+    
+    @IBAction func nameOnFocus(sender: UITextField) {
+        if(sender.text == "Name"){
+            sender.text = ""
+        }
+    }
+    
+    @IBAction func phoneOnFocus(sender: UITextField) {
+        if(sender.text == "Phone"){
+            sender.text! = ""
+        }
+    }
+    
     @IBAction func addressOnFocus(sender: UITextField) {
         if(sender.text == "Address"){
             sender.text! = ""
@@ -97,23 +135,80 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         }
     }
     
+    // Off focus textField behaviours
+    @IBAction func emailOffFocus(sender: UITextField) {
+        if (sender.text.isEmpty){
+            sender.text = "Email"
+        }
+    }
+    
+    @IBAction func nameOffFocus(sender: UITextField) {
+        if (sender.text.isEmpty){
+            sender.text = "Name"
+        }
+    }
+    
+    @IBAction func phoneOffFocus(sender: UITextField) {
+        if (sender.text.isEmpty){
+            sender.text = "Phone"
+        }
+    }
+    
     @IBAction func addressOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
             sender.text = "Address"
         }
         addressTableView.hidden = true
+        if(isExpandedForTableView == true){
+            tableViewBottomLayoutConstraint.constant -= openTableViewMovement!
+            addressToButtonLayoutConstraint.constant -= openTableViewMovement!
+            self.view.layoutIfNeeded()
+            isExpandedForTableView = false
+        }
+    }
+
+    // Enables register button
+    @IBAction func reactToFieldsInteraction(sender: UITextField) {
+        if (nameTextField.text != "" && nameTextField != "Name"
+            && phoneTextField.text != "" && phoneTextField.text != "Phone"
+            && emailTextField.text != "" && emailTextField.text != "Email"
+            && addressTextField.text != "" && addressTextField.text != "Address"){
+                changeSettingsButton.enabled = true
+        }
+        else{
+            changeSettingsButton.enabled = false
+        }
     }
     
     @IBAction func addressChanged(sender: UITextField) {
         if(sender.text != ""){
             locationAutocompleter?.retreiveCompleteAddress(addressTextField.text)
-            addressTableView.hidden = false
         }
     }
 
     
     @IBAction func applyChangesButtonPressed(sender: UIButton) {
         
+    }
+    
+    private func setUpInterface(){
+        changeAvatarButton.layer.cornerRadius = changeAvatarButton.frame.size.width / 2;
+        changeAvatarButton.clipsToBounds = true
+        changeAvatarButton.layer.borderWidth = 3.0;
+        changeAvatarButton.layer.borderColor = UIMainColor.CGColor
+        changeAvatarButton.setImage(userImage, forState: .Normal)
+        nameTextField.text = name
+        emailTextField.text = email
+        phoneTextField.text = phone
+        addressTextField.text = address
+        addressTableView.hidden = true
+        contentViewVisibleHeight = UIScreen.mainScreen().bounds.height - headerView.bounds.height - 49
+        deltaHeight = contentView.bounds.height - contentViewVisibleHeight!
+        addressToButtonLayoutConstraint.constant -= deltaHeight!
+        tableViewBottomLayoutConstraint.constant -= deltaHeight!
+        self.view.layoutIfNeeded()
+        isExpandedForKeyboard = false
+        isExpandedForTableView = false
     }
 
     // Delegate method for tapping
@@ -125,6 +220,17 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     func locationAutocompleterHandler(notification: NSNotification){
         addressTableView.dataSource = locationAutocompleter
         addressTableView.delegate = locationAutocompleter
+        if(isExpandedForTableView == false){
+            openTableViewMovement = addressTextField.center.y
+            if(openKeyboardMovement! > 0){
+                openTableViewMovement! = openTableViewMovement! - openKeyboardMovement!
+            }
+            addressToButtonLayoutConstraint.constant += openTableViewMovement!
+            tableViewBottomLayoutConstraint.constant += openTableViewMovement!
+            self.view.layoutIfNeeded()
+            scrollView.scrollRectToVisible(CGRectMake(0, 235, scrollView.contentSize.width, scrollView.bounds.height), animated: true)
+            isExpandedForTableView = true
+        }
         addressTableView.hidden = false
         addressTableView.reloadData()
     }
@@ -219,6 +325,51 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
                 imageController.sourceType = UIImagePickerControllerSourceType.Camera
             }
             self.presentViewController(imageController, animated: true, completion: nil)
+        }
+    }
+    
+    // Called when keyboard appears on screen
+    private func keyboardWillShow(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+                kbHeight = keyboardSize.height
+                self.animateTextField(true)
+            }
+        }
+    }
+    
+    // Called when keyboard disappears from screen
+    private func keyboardWillHide(notification: NSNotification) {
+        self.animateTextField(false)
+    }
+    
+    // Perform animations when keyboard appears
+    private func animateTextField(up: Bool) {
+        if(up){
+            self.openKeyboardMovement = self.kbHeight + 20 - (self.view.frame.height - self.addressUnderlineView.center.y - self.headerView.bounds.height)
+            if(self.locationAutocompleterTableViewHeight == nil){
+                self.locationAutocompleterTableViewHeight = self.contentViewVisibleHeight! - self.kbHeight - 30
+            }
+            if(self.view.frame.height - self.addressUnderlineView.center.y - headerView.bounds.height < kbHeight + 20){
+                UIView.animateWithDuration(0.3, animations: {
+                    self.addressToButtonLayoutConstraint.constant += self.openKeyboardMovement!
+                    self.tableViewBottomLayoutConstraint.constant += self.openKeyboardMovement!
+                    self.view.layoutIfNeeded()
+                    let bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+                    self.scrollView.setContentOffset(bottomOffset, animated: true)
+                    self.isExpandedForKeyboard = true
+                })
+            }
+        }
+        else {
+            UIView.animateWithDuration(0.3, animations: {
+                if(self.isExpandedForKeyboard == true){
+                    self.addressToButtonLayoutConstraint.constant -= self.openKeyboardMovement!
+                    self.tableViewBottomLayoutConstraint.constant -= self.openKeyboardMovement!
+                    self.view.layoutIfNeeded()
+                    self.isExpandedForKeyboard = false
+                }
+            })
         }
     }
 }
