@@ -48,6 +48,7 @@ class MainViewController: UIViewController, FilterProtocol, DisplayOthersDetail 
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.fillTableView(notification)})
         Model.getInstance().downloadOthersDonationsList()
+        refreshControl.beginRefreshing()
     }
     
     override func viewWillDisappear(animated: Bool) {
