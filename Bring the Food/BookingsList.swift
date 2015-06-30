@@ -36,6 +36,7 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
     // Set number of section in table
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if(!donations[0].donationsList.isEmpty || !donations[1].donationsList.isEmpty){
+            emptyTableView = tableView.viewWithTag(999)
             if(emptyTableView != nil){
                 emptyTableView?.hidden = true
             }
@@ -183,7 +184,8 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
         emptyTableView!.addSubview(secondaryMessageLabel!)
         emptyTableView!.addConstraint(xConstraint)
         emptyTableView!.addConstraint(yConstraint)
-        tableView.backgroundView = emptyTableView;
+        emptyTableView?.tag = 999
+        tableView.addSubview(emptyTableView!)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
 }
