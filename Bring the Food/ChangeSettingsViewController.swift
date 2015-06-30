@@ -72,6 +72,10 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             object: locationAutocompleter,
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.locationAutocompleterHandler(notification)})
+        changeSettingsObserver = NSNotificationCenter.defaultCenter().addObserverForName(updateUserNotificationKey,
+            object: ModelUpdater.getInstance(),
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in self.handleChangeSettings(notification)})
         keyboardWillShowObserver = NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillShowNotification,
             object: nil, queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.keyboardWillShow(notification)})
@@ -188,7 +192,9 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
 
     
     @IBAction func applyChangesButtonPressed(sender: UIButton) {
-        
+        RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, addressLabel: addressTextField.text)
+        changeSettingsButton.enabled = false
+        changeSettingsActivityIndicator.startAnimating()
     }
     
     private func setUpInterface(){
@@ -209,6 +215,8 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         self.view.layoutIfNeeded()
         isExpandedForKeyboard = false
         isExpandedForTableView = false
+        // REMOVE IN CASE PHOTO UPDATE IS PERMITTED
+        changeAvatarButton.enabled = false
     }
 
     // Delegate method for tapping
@@ -371,5 +379,35 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
                 }
             })
         }
+    }
+    
+    func handleChangeSettings(notification: NSNotification){
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response!.status == RequestStatus.SUCCESS){
+            self.navigationController!.popViewControllerAnimated(true)
+        }
+        else if(response!.status == RequestStatus.DATA_ERROR){
+            let alert = UIAlertView()
+            alert.title = "Update failed"
+            alert.message = "The chosen email is already taken"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        else{
+            let alert = UIAlertView()
+            alert.title = "Network error"
+            alert.message = "Check you network connectivity and try again"
+            alert.addButtonWithTitle("Dismiss")
+            alert.delegate = self
+            alert.show()
+        }
+        changeSettingsActivityIndicator.stopAnimating()
+        changeSettingsButton.enabled = true
+    }
+    
+    // AlertView delegate
+    func alertView(View: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        self.navigationController!.popViewControllerAnimated(true)
     }
 }

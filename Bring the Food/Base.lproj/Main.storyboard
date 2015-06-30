@@ -3643,7 +3643,7 @@
                                                     <action selector="reactToFieldsInteraction:" destination="CXU-mX-LXG" eventType="editingChanged" id="Gx0-Hw-vtS"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIW-BF-jZz">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIW-BF-jZz">
                                                 <rect key="frame" x="261" y="36" width="79" height="79"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="79" id="LBs-hc-A9L"/>
@@ -3683,7 +3683,7 @@
                                                     <constraint firstAttribute="height" constant="1" id="ESo-pT-Z9P"/>
                                                 </constraints>
                                             </view>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="rs8-Bm-RvR">
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="rs8-Bm-RvR">
                                                 <rect key="frame" x="403" y="439" width="20" height="20"/>
                                             </activityIndicatorView>
                                         </subviews>
