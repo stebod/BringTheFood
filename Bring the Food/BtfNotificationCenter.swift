@@ -13,77 +13,52 @@ import Foundation
 /// currently not marked as "read"
 public class BtfNotificationCenter {
 
-    private var newDonationNotifications: [Int:BtfNotification]
-    private var newBookingNotifications: [Int:BtfNotification]
-    private var bookingCollectedNotifications: [Int:BtfNotification]
+    private var notifications: [Int:BtfNotification]!
+    private var numberOfNewNotifications : Int
     
-    /// Initializes an object containing no notifications
+    /// Loads the array of notifications that were previously
+    /// persisted. In case no array is found, initializes a
+    /// new array containing no notifications
     public init(){
-        self.newDonationNotifications = [Int:BtfNotification]()
-        self.newBookingNotifications = [Int:BtfNotification]()
-        self.bookingCollectedNotifications = [Int:BtfNotification]()
-    }
-
-    /// Initializes an object containing the given dictionaries of notifications
-    /// The Dictionaries passed as parameters have to be indexed by the id of the
-    /// donation to which the notification refers.
-    public init(newDonationNotifications : [Int:BtfNotification]!,
-        newBookingNotifications : [Int:BtfNotification]!,
-        bookingCollectedNotifications : [Int:BtfNotification]!){
-            
-        self.newDonationNotifications = newDonationNotifications
-        self.newBookingNotifications = newBookingNotifications
-        self.bookingCollectedNotifications = bookingCollectedNotifications
-    }
-    
-    /// Call this method when the "Explore" tab is displayed
-    public func markAllNewDonationsAsRead(){
-        for tempNotification in newDonationNotifications {
-            tempNotification.1.markAsRead()
-        }
-    }
-
-    /// Call this method when the "My Donations" tab is displayed
-    public func markAllNewBookingsAsRead(){
-        for tempNotification in newBookingNotifications {
-            tempNotification.1.markAsRead()
+        
+        self.numberOfNewNotifications = 0
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let persistedNotifications : [Int:BtfNotification]? = defaults.dictionaryForKey(notificationListKey) as! [Int:BtfNotification]?
+        
+        if persistedNotifications != nil {
+            self.notifications = persistedNotifications!
+        } else {
+            self.notifications = [Int:BtfNotification]()
         }
     }
     
-    /// Call this method when the "My Bookings" tab is displayed
-    public func markAllCollectedAsRead(){
-        for tempNotification in bookingCollectedNotifications {
+    public func addNotification(newNotification: BtfNotification!){
+        self.notifications[newNotification.getId()] = newNotification
+        self.numberOfNewNotifications++
+    }
+    
+    public func markAllAsRead(){
+        for tempNotification in self.notifications {
             tempNotification.1.markAsRead()
         }
+        self.numberOfNewNotifications = 0
+        // Ensures data persistence to be performed immediately
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(self.notifications, forKey: notificationListKey)
+        defaults.synchronize()
     }
     
-    /// :returns: true if there is a notification of type NotificationType.CREATED on the donation identified by the id
-    public func isJustCreatedDonation(donationId: Int!) -> Bool!{
-        return newDonationNotifications[donationId] != nil
-    }
-
-    /// :returns: true if there is a notification of type NotificationType.BOOKED on the booking identified by the id
-    public func isJustBookedDonation(bookingId: Int!) -> Bool!{
-        return newBookingNotifications[bookingId] != nil
+    public func deleteAllNotifications(){
+        self.notifications = [Int:BtfNotification]()
     }
     
-    /// :returns: true if there is a notification of type NotificationType.COLLECTED on the booking identified by the id
-    public func isJustCollectedDonation(bookingId: Int!) -> Bool!{
-        return bookingCollectedNotifications[bookingId] != nil
+    public func getNotifications() -> [BtfNotification]! {
+        let notificationsArray = [BtfNotification](self.notifications.values)
+        return notificationsArray
     }
     
-    /// :returns: the number of notifications about new donations
-    public func getNumberOfCreatedNotifications() -> Int!{
-        return newDonationNotifications.count
-    }
-    
-    /// :returns: the number of notifications about new bookings
-    public func getNumberOfBookedNotifications() -> Int!{
-        return newBookingNotifications.count
-    }
-    
-    /// :returns: the number of notifications about bookings collected
-    public func getNumberOfCollectedNotifications() -> Int!{
-        return bookingCollectedNotifications.count
+    public func getNumberOfNewNotifications() -> Int {
+        return self.numberOfNewNotifications
     }
 }

@@ -8,22 +8,32 @@
 
 import Foundation
 
-public class BtfNotification{
+public class BtfNotification: AnyObject {
     
     private let id: Int!
-    private let type: NotificationType!
+    private var seen: Bool!
+    private let label: String!
     
-    public init(id: Int!, type: NotificationType!){
+    public init(id: Int!, label:String!){
         self.id = id
-        self.type = type
+        self.label = label
+        self.seen = false
     }
     
-    public func getTypeString() -> String!{
-        return self.type.description
+    public func getLabel() -> String!{
+        return self.label
     }
     
+    public func getId() -> Int!{
+        return self.id
+    }
     
     public func markAsRead(){
-        RestInterface.getInstance().markNotificationsAsRead(id)
+        if self.seen! {
+            return
+        } else {
+            RestInterface.getInstance().markNotificationsAsRead(id)
+            self.seen = true
+        }
     }
 }

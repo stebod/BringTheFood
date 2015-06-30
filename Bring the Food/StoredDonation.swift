@@ -78,9 +78,7 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
     // MY DONATION PROTOCOL
     //*********************************************************************************
     public func downloadDonationCollector(){
-        if !(self.isValid! && self.hasOpenBookings!){
-            return
-        }
+
         RestInterface.getInstance().getCollectorOfDonation(self.id)
     }
     
@@ -190,22 +188,4 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
         return supplier
     }
     
-    
-    public func hasNotification(type: NotificationType) -> Bool! {
-    
-        switch type {
-        case .CREATED :
-            return Model.getInstance().getMyNotifications().isJustCreatedDonation(self.id)
-        case .BOOKED :
-            return Model.getInstance().getMyNotifications().isJustBookedDonation(self.id)
-        case .COLLECTED :
-            return Model.getInstance().getMyNotifications().isJustCollectedDonation(self.id)
-        case .OTHER:
-            return false
-        default:
-            break
-            
-        }
-        return false
-    }
 }
