@@ -36,6 +36,7 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
     // Set number of section in table
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if(othersDonationsFilteredList.count > 0){
+            emptyTableView = tableView.viewWithTag(999)
             if(emptyTableView != nil){
                 emptyTableView?.hidden = true
             }
@@ -211,7 +212,8 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
         emptyTableView!.addSubview(secondaryMessageLabel!)
         emptyTableView!.addConstraint(xConstraint)
         emptyTableView!.addConstraint(yConstraint)
-        tableView.backgroundView = emptyTableView;
+        emptyTableView?.tag = 999
+        tableView.addSubview(emptyTableView!)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
 }
