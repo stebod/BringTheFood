@@ -3765,6 +3765,7 @@
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="rqu-4B-JtL" firstAttribute="leading" secondItem="3cf-T8-yH5" secondAttribute="leading" id="0uU-xu-QGp"/>
                             <constraint firstItem="kVG-fp-RNm" firstAttribute="top" secondItem="3cf-T8-yH5" secondAttribute="top" id="6YU-FH-tU3"/>
@@ -3776,6 +3777,9 @@
                             <constraint firstItem="rqu-4B-JtL" firstAttribute="top" secondItem="kVG-fp-RNm" secondAttribute="bottom" id="bdD-PR-bHt"/>
                             <constraint firstAttribute="centerX" secondItem="kVG-fp-RNm" secondAttribute="centerX" id="s0F-hD-TrE"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="bCv-re-4sl" appends="YES" id="xQ4-En-WJj"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="otb-hE-3ud"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -3799,6 +3803,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHK-RD-ioa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="bCv-re-4sl">
+                    <connections>
+                        <action selector="backWithSwipe:" destination="CXU-mX-LXG" id="4aO-Ph-pqZ"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-538" y="3509"/>
         </scene>
@@ -4125,6 +4134,7 @@
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="FEo-Nj-5qb" secondAttribute="trailing" id="Nda-v2-282"/>
                             <constraint firstItem="FEo-Nj-5qb" firstAttribute="leading" secondItem="6Ll-77-XM4" secondAttribute="leading" id="Ruj-Y8-2Ti"/>
@@ -4135,6 +4145,9 @@
                             <constraint firstItem="ECO-BE-19D" firstAttribute="leading" secondItem="6Ll-77-XM4" secondAttribute="leading" id="ucF-6y-De4"/>
                             <constraint firstAttribute="trailing" secondItem="ECO-BE-19D" secondAttribute="trailing" id="vMp-ZI-69d"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Ga7-If-Tw2" appends="YES" id="VBl-Ab-o1K"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="ggJ-DY-2yS"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -4156,6 +4169,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="STl-Km-wXj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="Ga7-If-Tw2">
+                    <connections>
+                        <action selector="cancelWithSwipe:" destination="npm-eQ-GHx" id="5IN-hh-n0R"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1672" y="3509"/>
         </scene>
@@ -4280,6 +4298,7 @@ www.ict.fbk.eu
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="28D-kc-OJK" secondAttribute="centerX" id="5DX-wf-XWo"/>
                             <constraint firstItem="YFa-WA-83u" firstAttribute="top" secondItem="C8a-G4-frj" secondAttribute="bottom" constant="13" id="6nN-xN-NNH"/>
@@ -4300,10 +4319,18 @@ www.ict.fbk.eu
                             <constraint firstItem="C8a-G4-frj" firstAttribute="top" secondItem="8e7-MW-0de" secondAttribute="bottom" constant="14" id="tot-Dd-4FO"/>
                             <constraint firstAttribute="centerX" secondItem="37L-Lg-4pX" secondAttribute="centerX" id="uCt-jK-OEI"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="4NN-bX-7OT" appends="YES" id="nfu-Ml-yeT"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="bzY-To-zG8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8TN-ZR-1u9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="4NN-bX-7OT">
+                    <connections>
+                        <action selector="backWithSwipe:" destination="4sN-Jm-G6C" id="DaA-eL-aBf"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="876" y="3509"/>
         </scene>
@@ -4442,6 +4469,7 @@ www.ict.fbk.eu
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Ev9-Ms-i4e" firstAttribute="centerY" secondItem="7CP-ny-8zt" secondAttribute="centerY" id="0LD-Go-AZi"/>
                             <constraint firstItem="V0z-6X-kVb" firstAttribute="top" secondItem="9gE-eP-qpk" secondAttribute="top" id="4EW-L0-Bzr"/>
@@ -4476,6 +4504,9 @@ www.ict.fbk.eu
                             <constraint firstAttribute="trailing" secondItem="bol-Hg-hRe" secondAttribute="trailing" constant="20" id="xpb-5R-3HI"/>
                             <constraint firstItem="WBg-lY-noL" firstAttribute="top" secondItem="CPT-pW-Vi0" secondAttribute="bottom" constant="2" id="yUQ-sP-rRy"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="nws-k5-KwD" appends="YES" id="zhe-Md-KxG"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="wif-Mr-7cM"/>
                     <connections>
@@ -4491,6 +4522,11 @@ www.ict.fbk.eu
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fa1-mC-Ylr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="nws-k5-KwD">
+                    <connections>
+                        <action selector="backWithSwipe:" destination="6Oc-n9-o8C" id="1hE-PU-oIw"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="141" y="3509.5"/>
         </scene>

@@ -131,6 +131,10 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    @IBAction func backWithSwipe(sender: UISwipeGestureRecognizer) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     @IBAction func changePasswordButtonPressed(sender: UIButton) {
         if(passwordTextField.text == ""){
             let alert = UIAlertView()

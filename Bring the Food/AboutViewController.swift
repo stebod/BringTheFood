@@ -21,4 +21,8 @@ class AboutViewController: UIViewController {
     @IBAction func backButtonPressed(sender: UIButton) {
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    @IBAction func backWithSwipe(sender: UISwipeGestureRecognizer) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }

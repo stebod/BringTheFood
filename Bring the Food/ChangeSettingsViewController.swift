@@ -113,6 +113,10 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    @IBAction func backWithSwipe(sender: UISwipeGestureRecognizer) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     @IBAction func changeAvatarPressed(sender: AnyObject) {
         if( controllerAvailable()){
             displayIOS8ActionSheet()

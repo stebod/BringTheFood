@@ -74,6 +74,10 @@ class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate 
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    @IBAction func cancelWithSwipe(sender: UISwipeGestureRecognizer) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     @IBAction func fivekmButtonPressed(sender: UIButton) {
         currentDistance = Distances.five.rawValue
         updateDistanceButtonSet()
