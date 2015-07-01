@@ -42,7 +42,6 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     private weak var keyboardWillShowObserver:NSObjectProtocol!
     private weak var keyboardWillHideObserver:NSObjectProtocol!
     private var tapRecognizer:UITapGestureRecognizer!
-    private weak var locationAutocompleteObserver:NSObjectProtocol!
     private weak var mailObserver:NSObjectProtocol?
     
     // Keyboard height
@@ -70,10 +69,6 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     override func viewWillAppear(animated: Bool) {
         locationAutocompleter = LocationAutocompleter(delegate: self)
         // Set tap recognizer on the view
-        locationAutocompleteObserver = NSNotificationCenter.defaultCenter().addObserverForName(locationAutocompletedNotificationKey,
-            object: locationAutocompleter,
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.locationAutocompleterHandler(notification)})
         mailObserver = NSNotificationCenter.defaultCenter().addObserverForName(mailAvailabilityResponseNotificationKey,
             object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
@@ -96,7 +91,6 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     
     override func viewWillDisappear(animated: Bool) {
         // Unregister as notification center observer
-        NSNotificationCenter.defaultCenter().removeObserver(locationAutocompleteObserver)
         NSNotificationCenter.defaultCenter().removeObserver(mailObserver!)
         NSNotificationCenter.defaultCenter().removeObserver(changeSettingsObserver)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillShowObserver)
@@ -299,10 +293,16 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         self.view.endEditing(true)
     }
     
-    // Handle location autocomplete
-    func locationAutocompleterHandler(notification: NSNotification){
+    func communicateAddress(address: String!) {
+        addressTextField.text = address
+        addressTableView.hidden = true
+        self.view.endEditing(true)
+    }
+    
+    func triggerTableUpdate() {
         addressTableView.dataSource = locationAutocompleter
         addressTableView.delegate = locationAutocompleter
+        addressTableView.reloadData()
         if(isExpandedForTableView == false){
             openTableViewMovement = addressTextField.center.y
             if(openKeyboardMovement! > 0){
@@ -317,13 +317,6 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             isExpandedForTableView = true
         }
         addressTableView.hidden = false
-        addressTableView.reloadData()
-    }
-    
-    func communicateAddress(address: String!) {
-        addressTextField.text = address
-        addressTableView.hidden = true
-        self.view.endEditing(true)
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {

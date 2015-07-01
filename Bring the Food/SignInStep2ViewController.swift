@@ -38,7 +38,6 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
     var password = String()
     
     // Observers
-    private weak var locationAutocompleteObserver:NSObjectProtocol!
     private weak var keyboardWillShowObserver:NSObjectProtocol!
     private weak var keyboardWillHideObserver:NSObjectProtocol!
     private var tapRecognizer:UITapGestureRecognizer!
@@ -57,10 +56,6 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
         // Register as notification center observer
-        locationAutocompleteObserver = NSNotificationCenter.defaultCenter().addObserverForName(locationAutocompletedNotificationKey,
-            object: locationAutocompleter,
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.locationAutocompleterHandler(notification)})
         keyboardWillShowObserver = NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillShowNotification,
             object: nil, queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.keyboardWillShow(notification)})
@@ -76,7 +71,6 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
     
     override func viewWillDisappear(animated: Bool) {
         // Unregister as notification center observer
-        NSNotificationCenter.defaultCenter().removeObserver(locationAutocompleteObserver)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillShowObserver)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillHideObserver)
         self.view.removeGestureRecognizer(tapRecognizer)
@@ -205,18 +199,17 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
         }
     }
     
-    // Handle location autocomplete
-    func locationAutocompleterHandler(notification: NSNotification){
-        autocompleteTableView.dataSource = locationAutocompleter
-        autocompleteTableView.delegate = locationAutocompleter
-        autocompleteTableView.hidden = false
-        autocompleteTableView.reloadData()
-    }
-    
     func communicateAddress(address: String!){
         addressTextField.text = address
         autocompleteTableView.hidden = true
         self.view.endEditing(true)
+    }
+    
+    func triggerTableUpdate() {
+        autocompleteTableView.dataSource = locationAutocompleter
+        autocompleteTableView.delegate = locationAutocompleter
+        autocompleteTableView.hidden = false
+        autocompleteTableView.reloadData()
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {

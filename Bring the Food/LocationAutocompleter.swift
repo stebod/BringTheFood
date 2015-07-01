@@ -47,13 +47,7 @@ public class LocationAutocompleter: NSObject, UITableViewDataSource, UITableView
                 return
             }
             
-            //Invio notifica
-            if data.count > 0 {
-                NSNotificationCenter.defaultCenter().postNotificationName(
-                    locationAutocompletedNotificationKey,
-                    object: self
-                )
-            }
+            self.delegate.triggerTableUpdate()
         })
     }
     

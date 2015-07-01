@@ -10,4 +10,5 @@ import Foundation
 
 public protocol AddressCommunicator {
     func communicateAddress(address: String!)
+    func triggerTableUpdate()
 }
