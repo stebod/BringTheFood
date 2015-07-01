@@ -43,6 +43,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     private weak var keyboardWillHideObserver:NSObjectProtocol!
     private var tapRecognizer:UITapGestureRecognizer!
     private weak var locationAutocompleteObserver:NSObjectProtocol!
+    private weak var mailObserver:NSObjectProtocol?
     
     // Keyboard height
     private var kbHeight: CGFloat!
@@ -58,7 +59,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     private var openKeyboardMovement: CGFloat?
     private var openTableViewMovement: CGFloat?
     private var contentViewVisibleHeight: CGFloat?
-    
+
     
     
     override func viewDidLoad() {
@@ -73,6 +74,10 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             object: locationAutocompleter,
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.locationAutocompleterHandler(notification)})
+        mailObserver = NSNotificationCenter.defaultCenter().addObserverForName(mailAvailabilityResponseNotificationKey,
+            object: ModelUpdater.getInstance(),
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in self.emailAvailabilityHandler(notification)})
         changeSettingsObserver = NSNotificationCenter.defaultCenter().addObserverForName(updateUserNotificationKey,
             object: ModelUpdater.getInstance(),
             queue: NSOperationQueue.mainQueue(),
@@ -92,6 +97,10 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     override func viewWillDisappear(animated: Bool) {
         // Unregister as notification center observer
         NSNotificationCenter.defaultCenter().removeObserver(locationAutocompleteObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(mailObserver!)
+        NSNotificationCenter.defaultCenter().removeObserver(changeSettingsObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(keyboardWillShowObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(keyboardWillHideObserver)
         self.view.removeGestureRecognizer(tapRecognizer)
         super.viewWillDisappear(animated)
     }
@@ -179,7 +188,10 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             && phoneTextField.text != "" && phoneTextField.text != "Phone"
             && emailTextField.text != "" && emailTextField.text != "Email"
             && addressTextField.text != "" && addressTextField.text != "Address"){
-                changeSettingsButton.enabled = true
+                if(emailTextField.text != email || phoneTextField.text != phone
+                    || nameTextField.text != name || addressTextField.text != address){
+                    changeSettingsButton.enabled = true
+                }
         }
         else{
             changeSettingsButton.enabled = false
@@ -194,9 +206,65 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
 
     
     @IBAction func applyChangesButtonPressed(sender: UIButton) {
-        RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, addressLabel: addressTextField.text)
-        changeSettingsButton.enabled = false
-        changeSettingsActivityIndicator.startAnimating()
+        if(!isValidEmail(emailTextField.text)){
+            let alert = UIAlertView()
+            alert.title = "Error"
+            alert.message = "Invalid email"
+            alert.addButtonWithTitle("Dismiss")
+            alert.show()
+        }
+        else{
+            if(emailTextField.text != email){
+                RestInterface.getInstance().getEmailAvailability(emailTextField.text)
+            }
+            else{
+                if(addressTextField.text != address){
+                    RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, addressLabel: addressTextField.text)
+                }
+                else{
+                    RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, addressLabel: nil)
+                }
+            }
+            changeSettingsButton.enabled = false
+            changeSettingsActivityIndicator.startAnimating()
+        }
+    }
+    
+    // Handle email availability
+    private func emailAvailabilityHandler(notification: NSNotification){
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response!.status == RequestStatus.SUCCESS){
+            if(addressTextField.text != address){
+                RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, addressLabel: addressTextField.text)
+            }
+            else{
+                RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, addressLabel: nil)
+            }
+        }
+        else {
+            if (response!.status == RequestStatus.DATA_ERROR){
+                let alert = UIAlertView()
+                alert.title = "Email not available"
+                alert.message = "The inserted email is already taken!"
+                alert.addButtonWithTitle("Dismiss")
+                alert.show()
+            } else{
+                let alert = UIAlertView()
+                alert.title = "Network error"
+                alert.message = "Check your internet connectivity"
+                alert.addButtonWithTitle("Dismiss")
+                alert.show()
+            }
+            changeSettingsActivityIndicator.stopAnimating()
+            changeSettingsButton.enabled = true
+        }
+    }
+    
+    // Regex check for email
+    private func isValidEmail(testStr:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluateWithObject(testStr)
     }
     
     private func setUpInterface(){
@@ -210,6 +278,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         phoneTextField.text = phone
         addressTextField.text = address
         addressTableView.hidden = true
+        changeSettingsButton.enabled = false
         contentViewVisibleHeight = UIScreen.mainScreen().bounds.height - headerView.bounds.height - 49
         deltaHeight = contentView.bounds.height - contentViewVisibleHeight!
         addressToButtonLayoutConstraint.constant -= deltaHeight!
@@ -390,7 +459,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         else if(response!.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
             alert.title = "Update failed"
-            alert.message = "The chosen email is already taken"
+            alert.message = "If you have active donations you cannot change your address"
             alert.addButtonWithTitle("Dismiss")
             alert.show()
         }

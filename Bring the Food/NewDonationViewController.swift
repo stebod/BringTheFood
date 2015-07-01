@@ -143,6 +143,7 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         }
         var datePickerView  : UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = UIDatePickerMode.Date
+        datePickerView.minimumDate = NSDate()
         sender.inputView = datePickerView
         datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
     }
@@ -220,10 +221,15 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         }
         if(productType == ProductType.COOKED){
             cookedFoodButton.selected = true
-            expirationTextField.text = "Production date"
+            expirationTextField.enabled = false
+            let currentDate = NSDate()
+            var dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd MMM yyyy"
+            expirationTextField.text = dateFormatter.stringFromDate(currentDate)
         }
         else{
             cookedFoodButton.selected = false
+            expirationTextField.enabled = true
             expirationTextField.text = "Expiration"
         }
         if(productType == ProductType.DRIED){

@@ -22,6 +22,8 @@ class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate 
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var applyChangesActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var applyChangesButton: UIButton!
     
     // Interface colors
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
@@ -98,6 +100,8 @@ class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate 
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.handleChangedSettings(notification)})
         RestInterface.getInstance().updateSettings(newDonationSwitch.on, bookedEmail: newBookingSwitch.on, retractedEmail: dropBookingSwitch.on, collectedEmail: collectedDonationSwitch.on, maxDistance: currentDistance)
+        applyChangesButton.enabled = false
+        applyChangesActivityIndicator.startAnimating()
     }
     
     func handleReceivedSettings(notification: NSNotification){
@@ -153,13 +157,15 @@ class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate 
         }
         else if (response?.status == RequestStatus.SUCCESS){
             let alert = UIAlertView()
-            alert.title = "Notification settings updated"
-            alert.message = "Top!"
+            alert.title = "Success"
+            alert.message = "Notification settings correctly updated!"
             alert.addButtonWithTitle("Dismiss")
             alert.delegate = self
             alert.show()
         }
         NSNotificationCenter.defaultCenter().removeObserver(changeNotificationsObserver!)
+        applyChangesActivityIndicator.stopAnimating()
+        applyChangesButton.enabled = true
     }
     
     private func updateDistanceButtonSet(){

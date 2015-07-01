@@ -368,13 +368,13 @@ public class RestInterface : NSObject{
         sendRequest(request, notification_key: createUserNotificationKey)
     }
     
-    public func updateUser(username:String!, email:String!, phoneNumber:String!, addressLabel:String!){
+    public func updateUser(username:String!, email:String!, phoneNumber:String!, addressLabel:String?){
         
         if(isLoggedIn()){
             
             var parameters:String = "?user_credentials=\(singleAccessToken)"
             var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/users/\(self.userId)" + parameters)!)
-            request.HTTPMethod = "POST"
+            request.HTTPMethod = "PUT"
             
             //preparo il body
             
@@ -390,10 +390,14 @@ public class RestInterface : NSObject{
             postString += " \"user\": { "
             postString += " \"name\": \"\(username)\", "
             postString += " \"email\": \"\(email)\", "
-            postString += " \"phone\": \"\(phoneNumber)\", "
-            postString += " \"address\" : {  "
-            postString += " \"label\": \"\(addressLabel)\" "
-            postString += "} } } "
+            postString += " \"phone\": \"\(phoneNumber)\" "
+            
+            if addressLabel != nil {
+                postString += " \", address\" : {  "
+                postString += " \"label\": \"\(addressLabel!)\" "
+                postString += "} "
+            }
+            postString += "} }"
             request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
             sendRequest(request, notification_key: updateUserNotificationKey)
         }

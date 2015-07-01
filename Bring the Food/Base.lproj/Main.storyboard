@@ -4052,6 +4052,9 @@
                                                     <constraint firstAttribute="height" constant="1" id="5Ep-hz-sv4"/>
                                                 </constraints>
                                             </view>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="X1B-yH-jEw">
+                                                <rect key="frame" x="403" y="496" width="20" height="20"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -4072,6 +4075,8 @@
                                             <constraint firstAttribute="trailing" secondItem="fE8-IL-pWi" secondAttribute="trailing" constant="20" id="DqJ-0a-QkD"/>
                                             <constraint firstItem="HRx-6J-6Y9" firstAttribute="leading" secondItem="CX1-E3-Ks5" secondAttribute="leading" constant="20" id="E0P-nw-7wB"/>
                                             <constraint firstItem="3wR-VQ-1RD" firstAttribute="top" secondItem="ltT-pq-hKb" secondAttribute="bottom" constant="14" id="EhU-BC-EwW"/>
+                                            <constraint firstItem="975-p7-UXZ" firstAttribute="trailing" secondItem="X1B-yH-jEw" secondAttribute="trailing" constant="16" id="JuQ-Xg-WGm"/>
+                                            <constraint firstItem="975-p7-UXZ" firstAttribute="centerY" secondItem="X1B-yH-jEw" secondAttribute="centerY" id="LGq-2K-QL6"/>
                                             <constraint firstItem="SlU-Qi-R5T" firstAttribute="top" secondItem="mv0-6A-hcM" secondAttribute="bottom" constant="30" id="LGs-fi-yWU"/>
                                             <constraint firstItem="oYv-Jt-GwP" firstAttribute="leading" secondItem="CX1-E3-Ks5" secondAttribute="leading" constant="20" id="MlE-xG-Uf5"/>
                                             <constraint firstItem="3wR-VQ-1RD" firstAttribute="leading" secondItem="CX1-E3-Ks5" secondAttribute="leading" constant="20" id="Q8o-Gx-4kF"/>
@@ -4135,6 +4140,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="660"/>
                     <connections>
+                        <outlet property="applyChangesActivityIndicator" destination="X1B-yH-jEw" id="3gz-pA-VTj"/>
+                        <outlet property="applyChangesButton" destination="975-p7-UXZ" id="Xs2-jW-1kQ"/>
                         <outlet property="buttonTopConstraint" destination="uy8-6D-M7d" id="oND-gY-Tuo"/>
                         <outlet property="collectedDonationSwitch" destination="Kba-hq-YDR" id="QGh-3I-ieb"/>
                         <outlet property="contentView" destination="CX1-E3-Ks5" id="43Z-k9-esO"/>
