@@ -91,14 +91,14 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     
     // Set number of rows in each section
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notifications.count
+        return self.notifications.count
     }
     
     // Build the cell
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         
-        cell.textLabel?.text = notifications[indexPath.row]?.getLabel()
+        cell.textLabel?.text = getNotifications()[indexPath.row].getLabel()
         return cell
     }
     

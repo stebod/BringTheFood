@@ -35,6 +35,7 @@ class NotificationsViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         // Unregister notification center observer
         NSNotificationCenter.defaultCenter().removeObserver(notificationObserver!)
+        // TODO MARK AS READ
         super.viewWillDisappear(animated)
     }
     
@@ -43,8 +44,12 @@ class NotificationsViewController: UIViewController {
     }
     
     func handleNotifications(notification: NSNotification){
-        tableView.dataSource = Model.getInstance().getMyNotifications()
-        tableView.delegate = Model.getInstance().getMyNotifications()
-        tableView.reloadData()
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response!.status == RequestStatus.SUCCESS){
+            let notifications = Model.getInstance().getMyNotifications()
+            tableView.dataSource = notifications
+            tableView.delegate = notifications
+            tableView.reloadData()
+        }
     }
 }
