@@ -222,7 +222,7 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
                 UIView.animateWithDuration(0.3, animations: {
                     let movement = self.kbHeight + 20 - (self.view.frame.height - self.bottomLinearView.center.y)
                     self.credentialsBottomLayoutConstraint.constant -= movement
-                    if(self.credentialsImageView.center.y - self.credentialsImageView.frame.height/2 < 60){
+                    if(self.view.bounds.height < 481){
                         self.credentialsTopLayoutConstraint.constant -= 300
                         self.credentialsBottomLayoutConstraint.constant += 300
                     }

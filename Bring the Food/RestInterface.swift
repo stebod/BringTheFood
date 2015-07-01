@@ -412,7 +412,7 @@ public class RestInterface : NSObject{
             //preparo il body                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
             let postString = "{"
                 + "\"old_password\": \"\(old_password)\","
-                + "\"password\": \"\(new_password)\""
+                + "\"password\": \"\(new_password)\", "
                 + "\"password_confirmation\": \"\(new_password)\""
                 + "}"
             request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
