@@ -7,19 +7,20 @@
 //
 
 import Foundation
-
+import UIKit
 
 /// Object storing all the notifications received from the server.
 /// Every notification can be inserted only once in this structure.
-public class BtfNotificationCenter {
+public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     private var notifications: [Int:BtfNotification]!
     private var numberOfNewNotifications : Int
+    private let textCellIdentifier = "TextCell"
     
     /// Loads the notifications that were previously
     /// persisted. In case no notification is found, initializes a
     /// new array containing no notifications
-    public init(){
+    public override init(){
         
         self.numberOfNewNotifications = 0
         
@@ -82,6 +83,30 @@ public class BtfNotificationCenter {
     public func getNumberOfNewNotifications() -> Int {
         return self.numberOfNewNotifications
     }
+    
+    // Set number of section in table
+    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    // Set number of rows in each section
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return notifications.count
+    }
+    
+    // Build the cell
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        
+        cell.textLabel?.text = notifications[indexPath.row]?.getLabel()
+        return cell
+    }
+    
+    // Handle click on tableView item
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        return
+    }
+
 }
 
 

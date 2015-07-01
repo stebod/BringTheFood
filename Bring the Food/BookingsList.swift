@@ -29,8 +29,8 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
         var sortedHistoricBookingsList = historicBookingsList.sorted({(lhs: BookedDonation, rhs: BookedDonation) -> Bool in
             return lhs.getRemainingDays() < rhs.getRemainingDays()
         })
-        donations.append(DonationsList(donationName: "Pending donations", donationList: sortedCurrentBookingsList))
-        donations.append(DonationsList(donationName: "Collected donations", donationList: sortedHistoricBookingsList))
+        donations.append(DonationsList(donationName: "Pending bookings", donationList: sortedCurrentBookingsList))
+        donations.append(DonationsList(donationName: "Collected bookings", donationList: sortedHistoricBookingsList))
     }
     
     // Set number of section in table
@@ -98,7 +98,7 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
         rest = advance(first,1)..<address.endIndex
         addressLabel.text = address[first...first].uppercaseString + address[rest]
         
-        if(donation.getRemainingDays() > 0){
+        if(donation.getRemainingDays() >= 0){
             expirationLabel.text = String(donation.getRemainingDays()) + "d"
         }
         else{

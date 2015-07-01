@@ -21,7 +21,7 @@ public class Model : NSObject{
     private var myDonations: MyDonationsList!
     private var myBookings: BookingsList!
     private var settings: ApplicationSettings?
-    private var myNotifications: BtfNotificationCenter
+    private var myNotifications: BtfNotificationCenter!
     
     
     // per fare in modo che il costruttore non sia accessibile all'esterno della classe
@@ -136,7 +136,7 @@ public class Model : NSObject{
         RestInterface.getInstance().getNotifications()
     }
     
-    public func getMyNotifications() -> BtfNotificationCenter {
+    public func getMyNotifications() -> BtfNotificationCenter! {
         return self.myNotifications
     }
     

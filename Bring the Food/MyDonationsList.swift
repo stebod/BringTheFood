@@ -117,7 +117,7 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
         rest = advance(first,1)..<address.endIndex
         addressLabel.text = address[first...first].uppercaseString + address[rest]
 
-        if(donation.getRemainingDays() > 0){
+        if(donation.getRemainingDays() >= 0){
             expirationLabel.text = String(donation.getRemainingDays()) + "d"
         }
         else{
