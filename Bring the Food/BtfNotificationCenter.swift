@@ -39,6 +39,16 @@ public class BtfNotificationCenter {
         
         self.notifications[id] = newNotification
         self.numberOfNewNotifications++
+        
+        var lowestKey = self.notifications.keys.array[0]
+        while self.notifications.count > 100 {
+            for tempKey in self.notifications.keys {
+                if tempKey < lowestKey {
+                    lowestKey = tempKey
+                }
+            }
+            self.notifications.removeValueForKey(lowestKey)
+        }
     }
     
     /// marks all the notifications in the list as "seen", and persist
