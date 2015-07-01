@@ -477,7 +477,7 @@ public class RestInterface : NSObject{
         if(isLoggedIn()){
             var parameters:String = "?user_credentials=\(singleAccessToken)"
             var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/settings" + parameters)!)
-            request.HTTPMethod = "POST"
+            request.HTTPMethod = "PUT"
 
             let localeString:String!
             let locale :String = NSLocale.preferredLanguages()[0] as! String

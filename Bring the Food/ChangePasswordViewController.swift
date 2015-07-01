@@ -31,6 +31,7 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
     private var tapRecognizer:UITapGestureRecognizer!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()

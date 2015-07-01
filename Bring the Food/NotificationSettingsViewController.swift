@@ -19,6 +19,9 @@ class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate 
     @IBOutlet weak var tenkmButton: UIButton!
     @IBOutlet weak var twentyfivekmButton: UIButton!
     @IBOutlet weak var fiftykmButton: UIButton!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
     
     // Interface colors
     private var UIMainColor = UIColor(red: 0xf6/255, green: 0xae/255, blue: 0x39/255, alpha: 1)
@@ -28,6 +31,7 @@ class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate 
     private weak var changeNotificationsObserver:NSObjectProtocol?
     
     // Private variables
+    private var deltaHeight: CGFloat?
     private var currentDistance: Int?
     private enum Distances: Int {
         case five = 5
@@ -40,6 +44,7 @@ class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpInterface()
     }
     
     override func viewWillAppear(animated:Bool) {
@@ -146,7 +151,7 @@ class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate 
             alert.delegate = self
             alert.show()
         }
-        else{
+        else if (response?.status == RequestStatus.SUCCESS){
             let alert = UIAlertView()
             alert.title = "Notification settings updated"
             alert.message = "Top!"
@@ -195,6 +200,15 @@ class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate 
             return Distances.twentyfive.rawValue
         }
         return Distances.fifty.rawValue
+    }
+    
+    private func setUpInterface(){
+        let contentViewVisibleHeight = UIScreen.mainScreen().bounds.height - headerView.bounds.height - 49
+        deltaHeight = contentView.bounds.height - contentViewVisibleHeight
+        if(deltaHeight < 0){
+            buttonTopConstraint.constant -= deltaHeight!
+            self.view.layoutIfNeeded()
+        }
     }
     
     // AlertView delegate

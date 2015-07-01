@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     
     // Outlets
