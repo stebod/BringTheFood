@@ -384,13 +384,10 @@ public class ModelUpdater : NSObject{
             for e in resultList {
 
                 let notificationId = e["id"] as! Int!
-                let notificationType = e["notification_type"] as! String!
-
+                let notificationLabel = e["message"] as! String!
+                Model.getInstance().getMyNotifications().addNotification(notificationId, label: notificationLabel)
                 
             }
-
-   //         let myNot = BtfNotificationCenter(newDonationNotifications: newDonationNotifications, newBookingNotifications: newBookingNotifications, bookingCollectedNotifications: bookingCollectedNotifications)
-      //      Model.getInstance().setMyNotifications(myNot)
             
         case logoutResponseNotificationKey :
             RestInterface.getInstance().handleLogoutSucceded()
