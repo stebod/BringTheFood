@@ -35,8 +35,8 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     }
     
     /// creates a notification and adds it to the list
-    public func addNotification(id: Int!, label:String!){
-        let newNotification = BtfNotification(id: id, label: label) as BtfNotification!
+    public func addNotification(id: Int!, label:String!, type:String!){
+        let newNotification = BtfNotification(id: id, label: label, type:type) as BtfNotification!
         
         self.notifications[id] = newNotification
         self.numberOfNewNotifications++
@@ -116,16 +116,23 @@ public class BtfNotification: AnyObject {
     private let id: Int!
     private var seen: Bool!
     private let label: String!
+    private let type: String!
     
-    private init(id: Int!, label:String!){
+    private init(id: Int!, label:String!, type: String!){
         self.id = id
         self.label = label
+        self.type = type
         self.seen = false
     }
     
     /// :returns: the label describing the content of the notification
     public func getLabel() -> String!{
         return self.label
+    }
+    
+    /// :returns: the label identifying the type of the notification
+    public func getType() -> String!{
+        return self.type
     }
     
     /// Function indicating wether the notification
