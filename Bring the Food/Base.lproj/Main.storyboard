@@ -3218,7 +3218,7 @@
         <!--Notifications-->
         <scene sceneID="a7F-mZ-0kB">
             <objects>
-                <viewController id="DQU-pI-VQS" sceneMemberID="viewController">
+                <viewController id="DQU-pI-VQS" customClass="NotificationsViewController" customModule="Bring_the_Food" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0ga-Hf-Rx5"/>
                         <viewControllerLayoutGuide type="bottom" id="dIw-JS-099"/>
@@ -4560,6 +4560,9 @@ www.ict.fbk.eu
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="settings_filled"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedImageTintColor">
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xw8-qZ-Ysi">

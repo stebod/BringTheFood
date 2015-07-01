@@ -96,6 +96,7 @@
 		B3BEE6091B33431D001F7E7F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF98B11B2F97C000E79515 /* FilterViewController.swift */; };
 		B3BF98B21B2F97C000E79515 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF98B11B2F97C000E79515 /* FilterViewController.swift */; };
 		B3C46D741B3EB7FD003B602F /* NewDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C46D731B3EB7FD003B602F /* NewDonationViewController.swift */; };
+		B3DD68D11B4426BD0049BF36 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD68D01B4426BD0049BF36 /* NotificationsViewController.swift */; };
 		B3DED4811B2CA00F00F9808D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DED4801B2CA00F00F9808D /* MainViewController.swift */; };
 		B3E762131B2488FC004C631F /* SignInStep1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E762121B2488FC004C631F /* SignInStep1ViewController.swift */; };
 		B3FCE0011B2505BB00A86F7E /* SignInStep2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCE0001B2505BB00A86F7E /* SignInStep2ViewController.swift */; };
@@ -170,6 +171,7 @@
 		B3BD162A1B3B4984003E755E /* ChangeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeSettingsViewController.swift; sourceTree = "<group>"; };
 		B3BF98B11B2F97C000E79515 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		B3C46D731B3EB7FD003B602F /* NewDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDonationViewController.swift; sourceTree = "<group>"; };
+		B3DD68D01B4426BD0049BF36 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		B3DED4801B2CA00F00F9808D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B3E762121B2488FC004C631F /* SignInStep1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInStep1ViewController.swift; sourceTree = "<group>"; };
 		B3FCE0001B2505BB00A86F7E /* SignInStep2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInStep2ViewController.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				B34611121B3A2205000D13E2 /* ChangePasswordViewController.swift */,
 				B3BD162A1B3B4984003E755E /* ChangeSettingsViewController.swift */,
 				B39682B71B3FF86100043898 /* ModifyDonationViewController.swift */,
+				B3DD68D01B4426BD0049BF36 /* NotificationsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				3B9501CE1B35FC8700D2DC97 /* StoredDonation.swift in Sources */,
 				B38216231B3AF5CD00E831C0 /* AddressCommunicator.swift in Sources */,
 				B3C46D741B3EB7FD003B602F /* NewDonationViewController.swift in Sources */,
+				B3DD68D11B4426BD0049BF36 /* NotificationsViewController.swift in Sources */,
 				3B9501D11B35FCA400D2DC97 /* Donation.swift in Sources */,
 				B34611111B39D07F000D13E2 /* BookedDetailViewController.swift in Sources */,
 				B3FCE0011B2505BB00A86F7E /* SignInStep2ViewController.swift in Sources */,
