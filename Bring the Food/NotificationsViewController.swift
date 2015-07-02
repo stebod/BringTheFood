@@ -15,6 +15,9 @@ class NotificationsViewController: UIViewController {
     
     // Observers
     private weak var notificationObserver:NSObjectProtocol!
+    
+    // Private variables
+    private var notifications: BtfNotificationCenter?
 
     // Refresh control
     private lazy var refreshControl: UIRefreshControl = {
@@ -45,8 +48,10 @@ class NotificationsViewController: UIViewController {
     
     override func viewWillDisappear(animated: Bool) {
         // Unregister notification center observer
+        if(notifications != nil){
+            notifications!.markAllAsRead()
+        }
         NSNotificationCenter.defaultCenter().removeObserver(notificationObserver!)
-        // TODO MARK AS READ
         super.viewWillDisappear(animated)
     }
     
@@ -62,8 +67,8 @@ class NotificationsViewController: UIViewController {
     
     func handleNotifications(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
-        let notifications = Model.getInstance().getMyNotifications()
-        notifications.setRequestStatus(response!.status)
+        notifications = Model.getInstance().getMyNotifications()
+        notifications!.setRequestStatus(response!.status)
         tableView.dataSource = notifications
         tableView.delegate = notifications
         tableView.reloadData()
