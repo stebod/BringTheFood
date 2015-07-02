@@ -226,6 +226,7 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
             var dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "dd MMM yyyy"
             expirationTextField.text = dateFormatter.stringFromDate(currentDate)
+            lastDateSelected = currentDate
         }
         else{
             cookedFoodButton.selected = false
