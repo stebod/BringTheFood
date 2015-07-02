@@ -70,6 +70,11 @@ public class RestInterface : NSObject{
         return loadCredentials()
     }
     
+    /// :returns: a string containing the single access token
+    public func getSingleAccessToken() -> String! {
+        return self.singleAccessToken
+    }
+    
     /// Call this method after a successful login. This method persists the data needed
     /// for sending any type of request to the server. After this method is called,
     /// any call to method isLoggedIn() will return true, until handleLogoutSucceded()

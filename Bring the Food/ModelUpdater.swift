@@ -372,7 +372,7 @@ public class ModelUpdater : NSObject{
             
             let user = User(id: userId, email: userEmail, name: userName, phone: userPhone, address: userAddress, imageURL: userImageURL)
             
-            let donationToUpdate:MyDonation? = Model.getInstance().getMyDonationsList().getBookedDonationsWithId(donationId)
+            let donationToUpdate:MyDonation? = Model.getInstance().getMyDonationsList().getBookedOrHistoricDonationWithId(donationId)
             
             if donationToUpdate != nil{
                 donationToUpdate!.setCollector(user)
@@ -386,8 +386,12 @@ public class ModelUpdater : NSObject{
                 let notificationId = e["id"] as! Int!
                 let notificationLabel = e["message"] as! String!
                 let notificationTypeString = e["notification_type"] as! String!
+                
+                let notExtendedDate = e.valueForKeyPath("created_at") as! String!
+                let notDate = Date(dateString: prefix(notExtendedDate, 10))
+                
                 let notificationType = NotificationTypeFactory.getNotificationTypeFromString(notificationTypeString)
-                Model.getInstance().getMyNotifications().addNotification(notificationId, label: notificationLabel, type: notificationType)
+                Model.getInstance().getMyNotifications().addNotification(notificationId, label: notificationLabel, type: notificationType, notificationDate: notDate)
                 
             }
             
