@@ -784,10 +784,10 @@
             </objects>
             <point key="canvasLocation" x="2542" y="-1202"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController storyboardIdentifier="mainViewController" id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mainViewController" id="49e-Tb-3d3" customClass="MainTabBarController" customModule="Bring_the_Food" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -1151,19 +1151,21 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="btf_logo_small" translatesAutoresizingMaskIntoConstraints="NO" id="cZX-0i-564">
-                                        <rect key="frame" x="25" y="31" width="23" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="LBC-VE-hNi"/>
-                                            <constraint firstAttribute="width" constant="23" id="TZ4-HM-9qX"/>
-                                        </constraints>
-                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYO-wV-KAb">
+                                        <rect key="frame" x="25" y="30" width="22" height="22"/>
+                                        <state key="normal" image="add">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="OXO-A4-9nC" kind="presentation" id="unc-w3-ApX"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.62352941179999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="cZX-0i-564" firstAttribute="top" secondItem="luT-gX-wf6" secondAttribute="top" constant="31" id="2cX-cy-EQs"/>
-                                    <constraint firstItem="cZX-0i-564" firstAttribute="leading" secondItem="luT-gX-wf6" secondAttribute="leading" constant="25" id="AIb-lu-SD6"/>
+                                    <constraint firstItem="hYO-wV-KAb" firstAttribute="top" secondItem="luT-gX-wf6" secondAttribute="top" constant="30" id="B2j-Zh-GWl"/>
                                     <constraint firstAttribute="centerX" secondItem="ax8-6Z-6qL" secondAttribute="centerX" id="RRU-Jy-el3"/>
+                                    <constraint firstItem="hYO-wV-KAb" firstAttribute="leading" secondItem="luT-gX-wf6" secondAttribute="leading" constant="25" id="gL8-ET-MJL"/>
                                     <constraint firstItem="ax8-6Z-6qL" firstAttribute="top" secondItem="luT-gX-wf6" secondAttribute="top" constant="29" id="hft-yk-eRl"/>
                                     <constraint firstAttribute="height" constant="65" id="jlf-cF-eRZ"/>
                                 </constraints>
@@ -1678,7 +1680,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Afn-0K-iXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="922" y="-409"/>
+            <point key="canvasLocation" x="1106" y="731"/>
         </scene>
         <!--New Donation-->
         <scene sceneID="Hgd-iI-1LB">
@@ -2153,7 +2155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2T3-GI-ErC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1734" y="-400"/>
+            <point key="canvasLocation" x="1162" y="-176"/>
         </scene>
         <!--Main Detail View Controller-->
         <scene sceneID="1WO-DT-Ed3">
@@ -4723,4 +4725,7 @@ www.ict.fbk.eu
         <image name="userShape" width="25" height="25"/>
         <image name="weight" width="25" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="1fe-mK-LaZ"/>
+    </inferredMetricsTieBreakers>
 </document>

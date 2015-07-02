@@ -71,6 +71,7 @@
 		3BD4C7A21B36C1DF0007901E /* MyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32759C01B34FD790082DCB5 /* MyDetailViewController.swift */; };
 		3BFFF2DB1B24A4CD002C2AD5 /* HTTPResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFF2D81B24A4CD002C2AD5 /* HTTPResponseData.swift */; };
 		82A86094A07D79164A6E0EC9 /* libPods-Bring the FoodTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1778C71CDA4D5BEB8E7BE0 /* libPods-Bring the FoodTests.a */; };
+		B3249A951B4567B400FB1AD0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3249A941B4567B400FB1AD0 /* MainTabBarController.swift */; };
 		B32759BF1B34FC950082DCB5 /* MainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32759BE1B34FC950082DCB5 /* MainDetailViewController.swift */; };
 		B32759C11B34FD790082DCB5 /* MyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32759C01B34FD790082DCB5 /* MyDetailViewController.swift */; };
 		B32759C21B3500690082DCB5 /* MainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32759BE1B34FC950082DCB5 /* MainDetailViewController.swift */; };
@@ -155,6 +156,7 @@
 		3BFFF2DA1B24A4CD002C2AD5 /* RestInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestInterface.swift; sourceTree = "<group>"; };
 		59571654A80C6B9248913FA1 /* Pods-Bring the FoodTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bring the FoodTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bring the FoodTests/Pods-Bring the FoodTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B1778C71CDA4D5BEB8E7BE0 /* libPods-Bring the FoodTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Bring the FoodTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3249A941B4567B400FB1AD0 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B32759BE1B34FC950082DCB5 /* MainDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainDetailViewController.swift; sourceTree = "<group>"; };
 		B32759C01B34FD790082DCB5 /* MyDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDetailViewController.swift; sourceTree = "<group>"; };
 		B333D38A1B2042A000DBF44D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				3B1B4FA01B1EEE6400B9D705 /* Main.storyboard */,
 				3B1B4FA31B1EEE6400B9D705 /* Images.xcassets */,
 				B3541BC11B2F67F900AA7F65 /* Delegate */,
+				B3249A931B45677500FB1AD0 /* TabBarControllers */,
 				3B6F96C61B2DFBEE004C9503 /* ViewControllers */,
 				B369EF601B34A7E400E28079 /* Protocols */,
 				3B6F96C41B2DFB2A004C9503 /* Utils */,
@@ -332,6 +335,14 @@
 				8B1778C71CDA4D5BEB8E7BE0 /* libPods-Bring the FoodTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B3249A931B45677500FB1AD0 /* TabBarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B3249A941B4567B400FB1AD0 /* MainTabBarController.swift */,
+			);
+			name = TabBarControllers;
 			sourceTree = "<group>";
 		};
 		B3541BC11B2F67F900AA7F65 /* Delegate */ = {
@@ -590,6 +601,7 @@
 				B3BD162B1B3B4984003E755E /* ChangeSettingsViewController.swift in Sources */,
 				3BD284741B2C01A200D77319 /* ModelUpdater.swift in Sources */,
 				3B132A9F1B28C3A000D8A09F /* Date.swift in Sources */,
+				B3249A951B4567B400FB1AD0 /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

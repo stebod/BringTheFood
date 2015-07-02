@@ -16,10 +16,20 @@ class NotificationsViewController: UIViewController {
     // Observers
     private weak var notificationObserver:NSObjectProtocol!
 
+    // Refresh control
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        let refreshControlColor = UIColor(red: 0xfe/255, green: 0xfa/255, blue: 0xf3/255, alpha: 1)
+        refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.backgroundColor = refreshControlColor
+        return refreshControl
+        }()
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpInterface()
     }
     
     override func viewWillAppear(animated:Bool) {
@@ -30,6 +40,7 @@ class NotificationsViewController: UIViewController {
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.handleNotifications(notification)})
         Model.getInstance().downloadMyNotifications()
+        refreshControl.beginRefreshing()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -43,13 +54,24 @@ class NotificationsViewController: UIViewController {
         return UIStatusBarStyle.LightContent
     }
     
+    func setUpInterface(){
+        var tableViewController = UITableViewController()
+        tableViewController.tableView = self.tableView;
+        tableViewController.refreshControl = self.refreshControl;
+    }
+    
     func handleNotifications(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
-        if(response!.status == RequestStatus.SUCCESS){
-            let notifications = Model.getInstance().getMyNotifications()
-            tableView.dataSource = notifications
-            tableView.delegate = notifications
-            tableView.reloadData()
-        }
+        let notifications = Model.getInstance().getMyNotifications()
+        notifications.setRequestStatus(response!.status)
+        tableView.dataSource = notifications
+        tableView.delegate = notifications
+        tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    
+    // Refresh table content
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        Model.getInstance().downloadMyNotifications()
     }
 }

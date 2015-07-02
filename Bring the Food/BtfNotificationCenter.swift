@@ -17,6 +17,10 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     private var numberOfNewNotifications : Int
     private let textCellIdentifier = "TextCell"
     private let UILightColor = UIColor(red: 0xfc/255, green: 0xf8/255, blue: 0xf1/255, alpha: 1)
+    private var emptyTableView: UIView?
+    private var mainMessageLabel: UILabel?
+    private var secondaryMessageLabel: UILabel?
+    private var requestStatus: RequestStatus?
     
     /// Loads the notifications that were previously
     /// persisted. In case no notification is found, initializes a
@@ -39,8 +43,10 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     public func addNotification(id: Int!, label:String!, type:NotificationType!){
         let newNotification = BtfNotification(id: id, label: label, type:type) as BtfNotification!
         
+        if(self.notifications[id] == nil){
+            self.numberOfNewNotifications++
+        }
         self.notifications[id] = newNotification
-        self.numberOfNewNotifications++
         
         var lowestKey = self.notifications.keys.array[0]
         while self.notifications.count > 100 {
@@ -87,7 +93,28 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     
     // Set number of section in table
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        if(notifications.count > 0){
+            emptyTableView = tableView.viewWithTag(999)
+            if(emptyTableView != nil){
+                emptyTableView?.hidden = true
+            }
+            return 1
+        }
+        if(emptyTableView == nil){
+            createEmptyView(tableView)
+        }
+        if(requestStatus == RequestStatus.SUCCESS || requestStatus == RequestStatus.CACHE){
+            mainMessageLabel?.text = "No notifications"
+            secondaryMessageLabel?.text = "Pull down to refresh"
+        }
+        else{
+            mainMessageLabel?.text = "Network error"
+            secondaryMessageLabel?.text = "Check your connectivity"
+        }
+        
+        emptyTableView?.hidden = false
+        
+        return 0
     }
     
     // Set number of rows in each section
@@ -141,9 +168,61 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     
     // Set section titles
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Notifications"
+        if(requestStatus == RequestStatus.SUCCESS){
+            return "Notifications"
+        }
+        if(requestStatus == RequestStatus.DEVICE_ERROR){
+            return "Notifications (offline mode)"
+        }
+        return nil
     }
 
+    // Display a message in case of empty table view
+    private func createEmptyView(tableView: UITableView){
+        emptyTableView = UIView(frame: CGRectMake(0, 0, tableView.bounds.width, tableView.bounds.height))
+        mainMessageLabel = UILabel()
+        mainMessageLabel!.textColor = UIColor.lightGrayColor()
+        mainMessageLabel!.numberOfLines = 1
+        mainMessageLabel!.textAlignment = .Center
+        mainMessageLabel!.font = UIFont(name: "HelveticaNeue-Light", size: 22)
+        mainMessageLabel!.setTranslatesAutoresizingMaskIntoConstraints(false)
+        var widthConstraint = NSLayoutConstraint(item: mainMessageLabel!, attribute: .Width, relatedBy: .Equal,
+            toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 250)
+        mainMessageLabel!.addConstraint(widthConstraint)
+        var heightConstraint = NSLayoutConstraint(item: mainMessageLabel!, attribute: .Height, relatedBy: .Equal,
+            toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 100)
+        mainMessageLabel!.addConstraint(heightConstraint)
+        var xConstraint = NSLayoutConstraint(item: mainMessageLabel!, attribute: .CenterX, relatedBy: .Equal, toItem: emptyTableView, attribute: .CenterX, multiplier: 1, constant: 0)
+        var yConstraint = NSLayoutConstraint(item: mainMessageLabel!, attribute: .CenterY, relatedBy: .Equal, toItem: emptyTableView, attribute: .CenterY, multiplier: 1, constant: 0)
+        emptyTableView!.addSubview(mainMessageLabel!)
+        emptyTableView!.addConstraint(xConstraint)
+        emptyTableView!.addConstraint(yConstraint)
+        secondaryMessageLabel = UILabel()
+        secondaryMessageLabel!.textColor = UIColor.lightGrayColor()
+        secondaryMessageLabel!.numberOfLines = 1
+        secondaryMessageLabel!.textAlignment = .Center
+        secondaryMessageLabel!.font = UIFont(name: "HelveticaNeue-Light", size: 13)
+        secondaryMessageLabel!.setTranslatesAutoresizingMaskIntoConstraints(false)
+        widthConstraint = NSLayoutConstraint(item: secondaryMessageLabel!, attribute: .Width, relatedBy: .Equal,
+            toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 250)
+        secondaryMessageLabel!.addConstraint(widthConstraint)
+        heightConstraint = NSLayoutConstraint(item: secondaryMessageLabel!, attribute: .Height, relatedBy: .Equal,
+            toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 100)
+        secondaryMessageLabel!.addConstraint(heightConstraint)
+        xConstraint = NSLayoutConstraint(item: secondaryMessageLabel!, attribute: .CenterX, relatedBy: .Equal, toItem: emptyTableView, attribute: .CenterX, multiplier: 1, constant: 0)
+        yConstraint = NSLayoutConstraint(item: secondaryMessageLabel!, attribute: .CenterY, relatedBy: .Equal, toItem: mainMessageLabel, attribute: .CenterY, multiplier: 1, constant: 30)
+        emptyTableView!.addSubview(secondaryMessageLabel!)
+        emptyTableView!.addConstraint(xConstraint)
+        emptyTableView!.addConstraint(yConstraint)
+        emptyTableView?.tag = 999
+        tableView.addSubview(emptyTableView!)
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    }
+    
+    // Set the status retrieved by rest interface for the current request
+    func setRequestStatus(requestStatus: RequestStatus){
+        self.requestStatus = requestStatus
+    }
 }
 
 
