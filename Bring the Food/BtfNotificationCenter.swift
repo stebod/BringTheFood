@@ -33,7 +33,12 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
         if RestInterface.getInstance().isLoggedIn() {
             let defaults = NSUserDefaults.standardUserDefaults()
             let key = notificationListKey+RestInterface.getInstance().getSingleAccessToken()
-            persistedNotifications = defaults.dictionaryForKey(key) as! [Int:BtfNotification]?
+            let persistedNotificationsData = defaults.dataForKey(key)
+            if persistedNotificationsData != nil {
+                persistedNotifications = NSKeyedUnarchiver.unarchiveObjectWithData(persistedNotificationsData!) as! [Int:BtfNotification]?
+            } else {
+                persistedNotifications = nil
+            }
         }
         
         if persistedNotifications != nil {
@@ -74,7 +79,10 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
         // Ensures data persistence to be performed immediately
         let defaults = NSUserDefaults.standardUserDefaults()
         let key = notificationListKey+RestInterface.getInstance().getSingleAccessToken()
-        defaults.setObject(self.notifications, forKey: key)
+        
+        let notificationsData = NSKeyedArchiver.archivedDataWithRootObject(self.notifications)
+        
+        defaults.setObject(notificationsData, forKey: key)
         defaults.synchronize()
     }
     
@@ -239,7 +247,7 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
 
 
 /// Represents a Notification as received from the server
-public class BtfNotification: AnyObject {
+public class BtfNotification: NSObject, NSCoding {
     
     private let id: Int!
     private var seen: Bool!
@@ -294,5 +302,31 @@ public class BtfNotification: AnyObject {
             RestInterface.getInstance().markNotificationsAsRead(self.id)
             self.seen = true
         }
+    }
+    
+    
+    // NSCoding protocol
+    public func encodeWithCoder(coder: NSCoder) {
+        
+        coder.encodeObject(self.id, forKey: "id")
+        coder.encodeObject(self.seen, forKey: "seen")
+        coder.encodeObject(self.label, forKey: "label")
+        coder.encodeObject(self.notificationDate.getDateString(), forKey: "notificationDate")
+        coder.encodeObject(self.type.description, forKey: "typeString")
+    }
+    
+    // NSCoding protocol
+    required public init(coder: NSCoder) {
+        self.id = coder.decodeObjectForKey("id") as! Int!
+        self.seen = coder.decodeObjectForKey("seen") as! Bool!
+        self.label = coder.decodeObjectForKey("label") as! String!
+        
+        let notificationDateString = coder.decodeObjectForKey("notificationDate") as! String!
+        self.notificationDate = Date(dateString: notificationDateString)
+        
+        let typeString = coder.decodeObjectForKey("typeString") as! String!
+        self.type = NotificationTypeFactory.getNotificationTypeFromString(typeString)
+        
+        super.init()
     }
 }
