@@ -385,7 +385,8 @@ public class ModelUpdater : NSObject{
 
                 let notificationId = e["id"] as! Int!
                 let notificationLabel = e["message"] as! String!
-                let notificationType = e["notification_type"] as! String!
+                let notificationTypeString = e["notification_type"] as! String!
+                let notificationType = NotificationTypeFactory.getNotificationTypeFromString(notificationTypeString)
                 Model.getInstance().getMyNotifications().addNotification(notificationId, label: notificationLabel, type: notificationType)
                 
             }

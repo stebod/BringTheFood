@@ -21,6 +21,8 @@
 		3B2727F41B2CA9BA0064F53A /* OthersDonationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2727F11B2CA9BA0064F53A /* OthersDonationsList.swift */; };
 		3B2727F71B2CAAA90064F53A /* MyDonationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2727F01B2CA9BA0064F53A /* MyDonationsList.swift */; };
 		3B2727F81B2CAAB40064F53A /* BookingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2727EF1B2CA9BA0064F53A /* BookingsList.swift */; };
+		3B2C402C1B4532030064F56B /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C402B1B4532030064F56B /* NotificationType.swift */; };
+		3B2C402D1B4534F10064F56B /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C402B1B4532030064F56B /* NotificationType.swift */; };
 		3B2E97F11B28B59400506B54 /* NewDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2E97F01B28B59400506B54 /* NewDonation.swift */; };
 		3B3441451B300B420080360D /* NSUserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3441441B300B420080360D /* NSUserDefaultsKeys.swift */; };
 		3B3441461B300F060080360D /* NSUserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3441441B300B420080360D /* NSUserDefaultsKeys.swift */; };
@@ -127,6 +129,7 @@
 		3B2727EF1B2CA9BA0064F53A /* BookingsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingsList.swift; sourceTree = "<group>"; };
 		3B2727F01B2CA9BA0064F53A /* MyDonationsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDonationsList.swift; sourceTree = "<group>"; };
 		3B2727F11B2CA9BA0064F53A /* OthersDonationsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OthersDonationsList.swift; sourceTree = "<group>"; };
+		3B2C402B1B4532030064F56B /* NotificationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		3B2E97F01B28B59400506B54 /* NewDonation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDonation.swift; sourceTree = "<group>"; };
 		3B3441441B300B420080360D /* NSUserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsKeys.swift; sourceTree = "<group>"; };
 		3B4AE1591B2B5ACF00436903 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
@@ -291,6 +294,7 @@
 				3B99B1BF1B35FEFD00E0BECA /* MapsAPIKey.swift */,
 				3B3441441B300B420080360D /* NSUserDefaultsKeys.swift */,
 				B3A30B0E1B32BBE200F733E0 /* FilterState.swift */,
+				3B2C402B1B4532030064F56B /* NotificationType.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -552,6 +556,7 @@
 				3B99B1C01B35FEFD00E0BECA /* MapsAPIKey.swift in Sources */,
 				B3A30B0F1B32BBE200F733E0 /* FilterState.swift in Sources */,
 				3B99B1BD1B35FEF200E0BECA /* NSNotificationCenterKeys.swift in Sources */,
+				3B2C402C1B4532030064F56B /* NotificationType.swift in Sources */,
 				3BC327181B2DB8D0002F0DCE /* RestInterface.swift in Sources */,
 				3B9501C81B35FC5000D2DC97 /* OthersDonation.swift in Sources */,
 				3B9FD1221B3AAE290016F56D /* LocationAutocompleter.swift in Sources */,
@@ -623,6 +628,7 @@
 				3BD4C7A11B36C1BF0007901E /* DisplayMyDetail.swift in Sources */,
 				3BD4C7A21B36C1DF0007901E /* MyDetailViewController.swift in Sources */,
 				B3BEE6091B33431D001F7E7F /* FilterViewController.swift in Sources */,
+				3B2C402D1B4534F10064F56B /* NotificationType.swift in Sources */,
 				B39682B91B40050D00043898 /* ModifyDonationViewController.swift in Sources */,
 				3B12DA5A1B27498700105A48 /* HTTPResponseData.swift in Sources */,
 				3BD284781B2C0C9300D77319 /* User.swift in Sources */,
