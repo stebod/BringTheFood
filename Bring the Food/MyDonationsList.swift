@@ -39,15 +39,14 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
     }
     
 
-    public func getBookedDonationsWithId(donationId : Int!) -> MyDonation? {
+    public func getBookedOrHistoricDonationWithId(donationId : Int!) -> MyDonation? {
         for donList in donations {
-            if donList.donationName == "Booked donations" {
+            if donList.donationName == "Booked donations" || donList.donationName == "Historic donations" {
                 for temp in donList.donationsList {
                     if temp.getId() == donationId {
                         return temp
                     }
                 }
-                return nil
             }
         }
         return nil

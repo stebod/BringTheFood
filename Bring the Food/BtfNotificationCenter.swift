@@ -28,9 +28,13 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     public override init(){
         
         self.numberOfNewNotifications = 0
+        var persistedNotifications : [Int:BtfNotification]?
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let persistedNotifications : [Int:BtfNotification]? = defaults.dictionaryForKey(notificationListKey) as! [Int:BtfNotification]?
+        if RestInterface.getInstance().isLoggedIn() {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let key = notificationListKey+RestInterface.getInstance().getSingleAccessToken()
+            persistedNotifications = defaults.dictionaryForKey(key) as! [Int:BtfNotification]?
+        }
         
         if persistedNotifications != nil {
             self.notifications = persistedNotifications!
@@ -40,8 +44,8 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     }
     
     /// creates a notification and adds it to the list
-    public func addNotification(id: Int!, label:String!, type:NotificationType!){
-        let newNotification = BtfNotification(id: id, label: label, type:type) as BtfNotification!
+    public func addNotification(id: Int!, label:String!, type:NotificationType!, notificationDate: Date!){
+        let newNotification = BtfNotification(id: id, label: label, type:type, notificationDate: notificationDate) as BtfNotification!
         
         if(self.notifications[id] == nil){
             self.numberOfNewNotifications++
@@ -69,7 +73,8 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
         self.numberOfNewNotifications = 0
         // Ensures data persistence to be performed immediately
         let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(self.notifications, forKey: notificationListKey)
+        let key = notificationListKey+RestInterface.getInstance().getSingleAccessToken()
+        defaults.setObject(self.notifications, forKey: key)
         defaults.synchronize()
     }
     
@@ -232,12 +237,14 @@ public class BtfNotification: AnyObject {
     private let id: Int!
     private var seen: Bool!
     private let label: String!
+    private let notificationDate : Date!
     private let type: NotificationType!
     
-    private init(id: Int!, label:String!, type: NotificationType!){
+    private init(id: Int!, label:String!, type: NotificationType!, notificationDate :Date!){
         self.id = id
         self.label = label
         self.type = type
+        self.notificationDate = notificationDate
         self.seen = false
     }
     
@@ -255,6 +262,21 @@ public class BtfNotification: AnyObject {
     /// has never been seen by the user
     public func isNew() -> Bool! {
         return !self.seen
+    }
+    
+    /// :returns: a day indicating the number of days passed by after the notification was issued
+    public func getDaysAgo() -> Int!{
+        
+        let notDate = self.notificationDate.getDate()
+        let currentDate = NSDate()
+        let gregorian = NSCalendar.currentCalendar()
+        
+        let components = gregorian.components(NSCalendarUnit.CalendarUnitDay,
+            fromDate: notDate,
+            toDate: currentDate,
+            options: nil)
+        
+        return components.day
     }
     
     /// Call this method when the user has seen the notification
