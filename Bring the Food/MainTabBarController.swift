@@ -25,10 +25,6 @@ class MainTabBarController: UITabBarController {
         Model.getInstance().downloadMyNotifications()
     }
     
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(notificationObserver!)
-    }
-    
     func handleNotifications(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.SUCCESS){

@@ -135,6 +135,7 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
         let typeLabel = cell.viewWithTag(1000) as! UILabel
         let descriptionLabel = cell.viewWithTag(1001) as! UILabel
         let newNotificationMark = cell.viewWithTag(1002) as UIView!
+        let dateLabel = cell.viewWithTag(1003) as! UILabel
         let notificationSymbol = cell.viewWithTag(1004) as! UIImageView
         
         typeLabel.text = notification.getType().description
@@ -148,6 +149,7 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
             newNotificationMark.hidden = true
             cell.backgroundColor = UIColor.clearColor()
         }
+        dateLabel.text = "\(notification.getDaysAgo())d"
         switch notification.getType()! {
         case .DONATION_EXPIRED:
             notificationSymbol.image = UIImage(named: "expired")
@@ -168,7 +170,12 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     
     // Handle click on tableView item
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        return
+        let notification = getNotifications()[indexPath.row]
+        let alert = UIAlertView()
+        alert.title = notification.getType().description
+        alert.message = notification.getLabel()
+        alert.addButtonWithTitle("Dismiss")
+        alert.show()
     }
     
     // Set section titles
