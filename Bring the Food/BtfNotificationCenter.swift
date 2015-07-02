@@ -16,6 +16,7 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     private var notifications: [Int:BtfNotification]!
     private var numberOfNewNotifications : Int
     private let textCellIdentifier = "TextCell"
+    private let UILightColor = UIColor(red: 0xfc/255, green: 0xf8/255, blue: 0xf1/255, alpha: 1)
     
     /// Loads the notifications that were previously
     /// persisted. In case no notification is found, initializes a
@@ -98,25 +99,49 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         
+        let notification = getNotifications()[indexPath.row]
         let typeLabel = cell.viewWithTag(1000) as! UILabel
         let descriptionLabel = cell.viewWithTag(1001) as! UILabel
         let newNotificationMark = cell.viewWithTag(1002) as UIView!
-        let notification = getNotifications()[indexPath.row]
+        let notificationSymbol = cell.viewWithTag(1004) as! UIImageView
+        
         typeLabel.text = notification.getType().description
         descriptionLabel.numberOfLines = 2
         descriptionLabel.text = notification.getLabel()
         if(notification.isNew() == true){
-            newNotificationMark.hidden = false
+                newNotificationMark.hidden = false
+                cell.backgroundColor = UILightColor
         }
         else{
             newNotificationMark.hidden = true
+            cell.backgroundColor = UIColor.clearColor()
         }
+        switch notification.getType()! {
+        case .DONATION_EXPIRED:
+            notificationSymbol.image = UIImage(named: "expired")
+        case .DONATION_EXPIRING:
+            notificationSymbol.image = UIImage(named: "expiring")
+        case .BOOKING_CREATED:
+            notificationSymbol.image = UIImage(named: "new")
+        case .BOOKING_CANCELED:
+            notificationSymbol.image = UIImage(named: "cancelled")
+        case .BOOKING_COLLECTED:
+            notificationSymbol.image = UIImage(named: "collected")
+        case .CHARITY_NO_SHOW:
+            notificationSymbol.image = UIImage(named: "uncollected")
+        }
+        
         return cell
     }
     
     // Handle click on tableView item
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         return
+    }
+    
+    // Set section titles
+    public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Notifications"
     }
 
 }
@@ -150,7 +175,7 @@ public class BtfNotification: AnyObject {
     /// Function indicating wether the notification
     /// has never been seen by the user
     public func isNew() -> Bool! {
-        return self.seen
+        return !self.seen
     }
     
     /// Call this method when the user has seen the notification

@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "weight.png"
+      "filename" : "expiring.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "weight@2x.png"
+      "filename" : "expiring@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "weight@3x.png"
+      "filename" : "expiring@3x.png"
     }
   ],
   "info" : {

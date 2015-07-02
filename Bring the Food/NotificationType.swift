@@ -22,12 +22,12 @@ public enum NotificationType : Printable {
     /// :returns: the string used in POST requests to communicate the "notification_type" data to the server
     public var description : String {
         switch self {
-        case .DONATION_EXPIRED: return "donation_expired"
-        case .DONATION_EXPIRING: return "donation_expiring"
-        case .BOOKING_CREATED: return "booking_created"
-        case .BOOKING_CANCELED: return "booking_canceled"
-        case .BOOKING_COLLECTED: return "booking_collected"
-        case .CHARITY_NO_SHOW: return "charity_no_show"
+        case .DONATION_EXPIRED: return "Donation expired"
+        case .DONATION_EXPIRING: return "Donation expiring"
+        case .BOOKING_CREATED: return "Booking created"
+        case .BOOKING_CANCELED: return "Booking canceled"
+        case .BOOKING_COLLECTED: return "Booking collected"
+        case .CHARITY_NO_SHOW: return "Uncollected donation"
         }
     }
 }

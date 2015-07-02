@@ -80,6 +80,7 @@ class MainViewController: UIViewController, FilterProtocol, DisplayOthersDetail 
             (item as! UITabBarItem).image = (item as! UITabBarItem).image?.imageWithRenderingMode(.AlwaysOriginal)
         }
         
+        
         var tableViewController = UITableViewController()
         tableViewController.tableView = self.tableView;
         tableViewController.refreshControl = self.refreshControl;
