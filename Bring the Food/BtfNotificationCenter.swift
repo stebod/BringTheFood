@@ -98,7 +98,19 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         
-        cell.textLabel?.text = getNotifications()[indexPath.row].getLabel()
+        let typeLabel = cell.viewWithTag(1000) as! UILabel
+        let descriptionLabel = cell.viewWithTag(1001) as! UILabel
+        let newNotificationMark = cell.viewWithTag(1002) as UIView!
+        let notification = getNotifications()[indexPath.row]
+        typeLabel.text = notification.getType()
+        descriptionLabel.numberOfLines = 2
+        descriptionLabel.text = notification.getLabel()
+        if(notification.isNew() == true){
+            newNotificationMark.hidden = false
+        }
+        else{
+            newNotificationMark.hidden = true
+        }
         return cell
     }
     
