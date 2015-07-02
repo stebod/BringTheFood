@@ -19,7 +19,7 @@ public enum NotificationType : Printable {
     case BOOKING_COLLECTED
     case CHARITY_NO_SHOW
     
-    /// :returns: the string used in POST requests to communicate the "notification_type" data to the server
+    /// :returns: the string used to coomunicate the notification type to the GUI
     public var description : String {
         switch self {
         case .DONATION_EXPIRED: return "Donation expired"
@@ -28,6 +28,18 @@ public enum NotificationType : Printable {
         case .BOOKING_CANCELED: return "Booking canceled"
         case .BOOKING_COLLECTED: return "Booking collected"
         case .CHARITY_NO_SHOW: return "Uncollected donation"
+        }
+    }
+    
+    /// :returns: the string used by the server to communicate the "notification_type" data 
+    public var serverDescription : String {
+        switch self {
+        case .DONATION_EXPIRED: return "donation_expired"
+        case .DONATION_EXPIRING: return "donation_expiring"
+        case .BOOKING_CREATED: return "booking_created"
+        case .BOOKING_CANCELED: return "booking_canceled"
+        case .BOOKING_COLLECTED: return "booking_collected"
+        case .CHARITY_NO_SHOW: return "charity_no_show"
         }
     }
 }

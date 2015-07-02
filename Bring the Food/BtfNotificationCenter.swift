@@ -312,7 +312,7 @@ public class BtfNotification: NSObject, NSCoding {
         coder.encodeObject(self.seen, forKey: "seen")
         coder.encodeObject(self.label, forKey: "label")
         coder.encodeObject(self.notificationDate.getDateString(), forKey: "notificationDate")
-        coder.encodeObject(self.type.description, forKey: "typeString")
+        coder.encodeObject(self.type.serverDescription, forKey: "typeString")
     }
     
     // NSCoding protocol
