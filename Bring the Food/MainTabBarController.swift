@@ -18,13 +18,15 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        notificationObserver = NSNotificationCenter.defaultCenter().addObserverForName(getNotificationsResponseNotificationKey,
-            object: ModelUpdater.getInstance(),
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.handleNotifications(notification)})
-        Model.getInstance().downloadMyNotifications()
+        if(notificationObserver == nil){
+            notificationObserver = NSNotificationCenter.defaultCenter().addObserverForName(getNotificationsResponseNotificationKey,
+                object: ModelUpdater.getInstance(),
+                queue: NSOperationQueue.mainQueue(),
+                usingBlock: {(notification:NSNotification!) in self.handleNotifications(notification)})
+            Model.getInstance().downloadMyNotifications()
+        }
     }
-    
+
     func handleNotifications(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.SUCCESS){
@@ -38,5 +40,6 @@ class MainTabBarController: UITabBarController {
                 (self.tabBar.items as! [UITabBarItem]!)[3].badgeValue = nil
             }
         }
+        println("ciao")
     }
 }
