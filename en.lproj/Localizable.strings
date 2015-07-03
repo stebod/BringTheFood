@@ -64,6 +64,11 @@ UNBOOK_ACCOMPLISHED="Donation successfully unbooked!";
 NOTIFICATION_UPDATE_ERROR="Something went wrong";
 NOTIFICATION_UPDATE_ERROR_MESSAGE="Try again later";
 NOTIFICATION_UPDATE_ACCOMPLISHED="Notification settings correctly updated!";
+OLD_PASSWORD="Old Password";
+NEW_PASSWORD="New Password";
+OLD_PASSWORD_WRONG="Error";
+OLD_PASSWORD_WRONG_MESSAGE="The current password is wrong";
+PASSWORD_CHANGED_SUCCESSFULLY="Password changed successfully!";
 
 
 

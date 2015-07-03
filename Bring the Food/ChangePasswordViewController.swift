@@ -68,21 +68,21 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
     
     // On focus textField behaviours
     @IBAction func oldPasswordOnFocus(sender: UITextField) {
-        if(sender.text == "Old Password"){
+        if(sender.text == NSLocalizedString("OLD_PASSWORD",comment:"Old password")){
             sender.text = ""
             sender.secureTextEntry = true
         }
     }
     
     @IBAction func passwordOnFocus(sender: UITextField) {
-        if(sender.text == "New Password"){
+        if(sender.text == NSLocalizedString("NEW_PASSWORD",comment:"New password")){
             sender.text! = ""
             sender.secureTextEntry = true
         }
     }
     
     @IBAction func confirmPasswordOnFocus(sender: UITextField) {
-        if(sender.text == "Confirm Password"){
+        if(sender.text == NSLocalizedString("CONFIRM_PASSWORD",comment:"Confirm password")){
             sender.text! = ""
             sender.secureTextEntry = true
         }
@@ -91,21 +91,21 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
     // Off focus textField behaviours
     @IBAction func oldPasswordOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "Old Password"
+            sender.text = NSLocalizedString("OLD_PASSWORD",comment:"Old password")
             sender.secureTextEntry = false
         }
     }
     
     @IBAction func passwordOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "New Password"
+            sender.text = NSLocalizedString("NEW_PASSWORD",comment:"New password")
             sender.secureTextEntry = false
         }
     }
     
     @IBAction func confirmPasswordOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "Confirm Password"
+            sender.text = NSLocalizedString("CONFIRM_PASSWORD",comment:"Confirm password")
             sender.secureTextEntry = false
         }
     }
@@ -136,25 +136,18 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
     }
     
     @IBAction func changePasswordButtonPressed(sender: UIButton) {
-        if(passwordTextField.text == ""){
+        if(count(passwordTextField.text) < 4){
             let alert = UIAlertView()
-            alert.title = "Error"
-            alert.message = "Password may not be empty"
-            alert.addButtonWithTitle("Dismiss")
-            alert.show()
-        }
-        else if(count(passwordTextField.text) < 4){
-            let alert = UIAlertView()
-            alert.title = "Error"
-            alert.message = "Password must be at least 4 characters long"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("ERROR",comment:"Error")
+            alert.message = NSLocalizedString("INVALID_PASSWORD",comment:"Invalid password")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         else if(passwordTextField.text != confirmPasswordTextField.text){
             let alert = UIAlertView()
-            alert.title = "Error"
-            alert.message = "Password Mismatch"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("ERROR",comment:"Error")
+            alert.message = NSLocalizedString("PASSWORD_MISMATCH",comment:"Password mismatch")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         else{
@@ -165,9 +158,9 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
     }
     
     private func setUpInterface(){
-        oldPasswordTextField.text = "Old Password"
-        passwordTextField.text = "New Password"
-        confirmPasswordTextField.text = "Confirm Password"
+        oldPasswordTextField.text = NSLocalizedString("OLD_PASSWORD",comment:"Old password")
+        passwordTextField.text = NSLocalizedString("NEW_PASSWORD",comment:"New password")
+        confirmPasswordTextField.text = NSLocalizedString("CONFIRM_PASSWORD",comment:"Confirm password")
         changePasswordButton.enabled = false
     }
     
@@ -179,25 +172,25 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Error"
-            alert.message = "The current password is wrong"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("OLD_PASSWORD_WRONG",comment:"Old password wrong")
+            alert.message = NSLocalizedString("OLD_PASSWORD_WRONG_MESSAGE",comment:"Old password wrong message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
             let alert = UIAlertView()
-            alert.title = "No connection"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Password changed successfully"
-            alert.message = "Top!"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("SUCCESS",comment:"Success")
+            alert.message = NSLocalizedString("PASSWORD_CHANGED_SUCCESSFULLY",comment:"Password changed successfully")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
