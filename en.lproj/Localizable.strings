@@ -71,6 +71,8 @@ OLD_PASSWORD_WRONG_MESSAGE="The current password is wrong";
 PASSWORD_CHANGED_SUCCESSFULLY="Password changed successfully!";
 SETTINGS_UPDATE_FAILED="Update failed";
 SETTINGS_UPDATE_FAILED_MESSAGE="Remember that if you have active donations you cannot change your address";
+DONATION_UPDATE_FAILED="Update failed";
+DONATION_UPDATE_FAILED_MESSAGE="A problem occourred during the processing of your request. Please try again";
 
 
 

@@ -71,3 +71,5 @@ OLD_PASSWORD_WRONG_MESSAGE="La password corrente non è corretta";
 PASSWORD_CHANGED_SUCCESSFULLY="Password cambiata con successo!";
 SETTINGS_UPDATE_FAILED="Aggiornamento informazioni utente failed";
 SETTINGS_UPDATE_FAILED_MESSAGE="Ricorda che fintanto che possiedi donazioni attive la modifica dell'indirizzo di residenza non è consentita";
+DONATION_UPDATE_FAILED="Aggiornamento donazione fallito";
+DONATION_UPDATE_FAILED_MESSAGE="Si è verificato un problema durante l'elaborazione della richiesta. Si prega di riprovare";

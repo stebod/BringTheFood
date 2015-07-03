@@ -92,13 +92,13 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     
     // On focus textField behaviours
     @IBAction func descriptionOnFocus(sender: UITextField) {
-        if(sender.text == "Description"){
+        if(sender.text == NSLocalizedString("DESCRIPTION",comment:"Description")){
             sender.text = ""
         }
     }
     
     @IBAction func amountOnFocus(sender: UITextField) {
-        if(sender.text == "Amount"){
+        if(sender.text == NSLocalizedString("AMOUNT",comment:"Amount")){
             sender.text! = ""
         }
     }
@@ -106,20 +106,20 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     // Off focus textField behaviours
     @IBAction func descriptionOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "Description"
+            sender.text = NSLocalizedString("DESCRIPTION",comment:"Description")
         }
     }
     
     @IBAction func amountOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "Amount"
+            sender.text = NSLocalizedString("AMOUNT",comment:"Amount")
         }
     }
     
     // Enables submit donation button
     @IBAction func reactToFieldsInteraction(sender: UITextField) {
-        if (descriptionTextField.text != "" && descriptionTextField.text != "Description"
-            && amountTextField.text != "" && amountTextField.text != "Amount"){
+        if (descriptionTextField.text != "" && descriptionTextField.text != NSLocalizedString("DESCRIPTION",comment:"Description")
+            && amountTextField.text != "" && amountTextField.text != NSLocalizedString("AMOUNT",comment:"Amount")){
                 updateDonationButton.enabled = true
         }
         else{
@@ -193,16 +193,16 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
         }
         else if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Update failed"
-            alert.message = "A problem occourred during the processing of you request. Please try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("DONATION_UPDATE_FAILED",comment:"Donation update failed")
+            alert.message = NSLocalizedString("DONATION_UPDATE_FAILED_MESSAGE",comment:"Donation update failed message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
             let alert = UIAlertView()
-            alert.title = "Network error"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         activityIndicator.stopAnimating()
