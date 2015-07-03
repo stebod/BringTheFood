@@ -50,12 +50,15 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     
     /// creates a notification and adds it to the list
     public func addNotification(id: Int!, label:String!, type:NotificationType!, notificationDate: Date!){
-        let newNotification = BtfNotification(id: id, label: label, type:type, notificationDate: notificationDate) as BtfNotification!
         
-        if(self.notifications[id] == nil){
-            self.numberOfNewNotifications++
+        if(self.notifications[id] != nil){
+            RestInterface.getInstance().markNotificationsAsRead(id)
+            return
         }
+       
+        let newNotification = BtfNotification(id: id, label: label, type:type, notificationDate: notificationDate)
         self.notifications[id] = newNotification
+        self.numberOfNewNotifications++
         
         var lowestKey = self.notifications.keys.array[0]
         while self.notifications.count > 100 {
@@ -298,10 +301,9 @@ public class BtfNotification: NSObject, NSCoding {
     public func markAsRead(){
         if self.seen! {
             return
-        } else {
-            RestInterface.getInstance().markNotificationsAsRead(self.id)
-            self.seen = true
         }
+        
+        self.seen = true
     }
     
     
