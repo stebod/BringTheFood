@@ -113,21 +113,21 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
             quantityKgImageView.hidden = false
             quantityLitersImageView.hidden = true
             quantityPortionsImageView.hidden = true
-            foodQuantityLabel.text = foodQuantityLabel.text! + " Kg"
+            foodQuantityLabel.text = foodQuantityLabel.text! + " " + NSLocalizedString("KG",comment:"Kg")
         }
         else if(parcelUnit == ParcelUnit.LITERS){
             quantityKgImageView.hidden = true
             quantityLitersImageView.hidden = false
             quantityPortionsImageView.hidden = true
-            foodQuantityLabel.text = foodQuantityLabel.text! + " Lt"
+            foodQuantityLabel.text = foodQuantityLabel.text! + " " + NSLocalizedString("LITERS",comment:"Lt")
         }
         else{
             quantityKgImageView.hidden = true
             quantityLitersImageView.hidden = true
             quantityPortionsImageView.hidden = false
-            foodQuantityLabel.text = foodQuantityLabel.text! + " portions"
+            foodQuantityLabel.text = foodQuantityLabel.text! + " " + NSLocalizedString("PORTIONS",comment:"Portions")
         }
-        expirationLabel.text = String(donation!.getRemainingDays()) + " days left"
+        expirationLabel.text = String(donation!.getRemainingDays()) + " " + NSLocalizedString("DAYS_LEFT",comment:"Days left")
         addressLabel.numberOfLines = 2
         mapView.layer.borderColor = UIMainColor.CGColor
         mapView.layer.borderWidth = 1.0
@@ -207,25 +207,25 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Impossible to book"
-            alert.message = "The donation is not bookable anymore"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("BOOK_ERROR",comment:"Book error")
+            alert.message = NSLocalizedString("BOOK_ERROR_MESSAGE",comment:"Book error message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
             let alert = UIAlertView()
-            alert.title = "No connection"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Success"
-            alert.message = "Booking accomplished!"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("SUCCESS",comment:"Success")
+            alert.message = NSLocalizedString("BOOKING_ACCOMPLISHED",comment:"Booking accomplished")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }

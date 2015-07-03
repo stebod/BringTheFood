@@ -105,14 +105,14 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     // On focus textField behaviours
     @IBAction func nameOnFocus(sender: UITextField) {
         nameImageView.hidden = true
-        if(sender.text == "Name"){
+        if(sender.text == NSLocalizedString("NAME",comment:"Name")){
             sender.text = ""
         }
     }
     
     @IBAction func phoneOnFocus(sender: UITextField) {
         phoneImageView.hidden = true
-        if(sender.text == "Phone"){
+        if(sender.text == NSLocalizedString("PHONE",comment:"Phone")){
             sender.text! = ""
         }
     }
@@ -121,21 +121,21 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     @IBAction func nameOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
             nameImageView.hidden = false
-            sender.text = "Name"
+            sender.text = NSLocalizedString("NAME",comment:"Name")
         }
     }
     
     @IBAction func phoneOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
             phoneImageView.hidden = false
-            sender.text = "Phone"
+            sender.text = NSLocalizedString("PHONE",comment:"Phone")
         }
     }
     
     // Enables register button
     @IBAction func reactToFieldsInteraction(sender: UITextField) {
-        if (nameTextField.text != "" && nameTextField != "Name"
-            && phoneTextField.text != "" && phoneTextField.text != "Phone"){
+        if (nameTextField.text != "" && nameTextField != NSLocalizedString("NAME",comment:"Name")
+            && phoneTextField.text != "" && phoneTextField.text != NSLocalizedString("PHONE",comment:"Phone")){
                 registerButton.enabled = true
         }
         else{
@@ -162,12 +162,12 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         nameTextField.layer.borderColor = textFieldBorderColor.CGColor
         nameTextField.layer.cornerRadius = 3
         nameTextField.textColor = UIMainColor
-        nameTextField.text = "Name"
+        nameTextField.text = NSLocalizedString("NAME",comment:"Name")
         phoneTextField.layer.borderWidth = 1
         phoneTextField.layer.borderColor = textFieldBorderColor.CGColor
         phoneTextField.layer.cornerRadius = 3
         phoneTextField.textColor = UIMainColor
-        phoneTextField.text = "Phone"
+        phoneTextField.text = NSLocalizedString("PHONE",comment:"Phone")
         registerButton.layer.borderWidth = 1
         registerButton.layer.borderColor = buttonBorderColor.CGColor
         registerButton.layer.cornerRadius = 3
@@ -187,17 +187,17 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         }
         else if(response!.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Registration failed"
-            alert.message = "A problem occourred during the processing of you request. Please try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("REGISTRATION_FAILED",comment:"Registration failed")
+            alert.message = NSLocalizedString("REGISTRATION_FAILED_MESSAGE",comment:"Registration failed message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Network error"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
@@ -221,24 +221,20 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         imageController.editing = false
         imageController.delegate = self;
         
-        let alert = UIAlertController(title: "Lets get a picture", message: "Simple Message", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let libButton = UIAlertAction(title: "Select photo from library", style: UIAlertActionStyle.Default) { (alert) -> Void in
+        let alert = UIAlertController(title: NSLocalizedString("CHOOSE_AVATAR",comment:"Choose avatar"), message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let libButton = UIAlertAction(title: NSLocalizedString("SELECT_FROM_LIBRARY",comment:"Select from library"), style: UIAlertActionStyle.Default) { (alert) -> Void in
             imageController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
             self.presentViewController(imageController, animated: true, completion: nil)
         }
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
-            let cameraButton = UIAlertAction(title: "Take a picture", style: UIAlertActionStyle.Default) { (alert) -> Void in
-                println("Take Photo")
+            let cameraButton = UIAlertAction(title: NSLocalizedString("TAKE_PICTURE",comment:"Take picture"), style: UIAlertActionStyle.Default) { (alert) -> Void in
                 imageController.sourceType = UIImagePickerControllerSourceType.Camera
                 self.presentViewController(imageController, animated: true, completion: nil)
-                
             }
             alert.addAction(cameraButton)
-        } else {
-            println("Camera not available")
         }
-        let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (alert) -> Void in
-            println("Cancel Pressed")
+        let cancelButton = UIAlertAction(title: NSLocalizedString("CANCEL",comment:"Cancel"), style: UIAlertActionStyle.Cancel) { (alert) -> Void in
+            return
         }
         alert.addAction(libButton)
         alert.addAction(cancelButton)
@@ -263,9 +259,9 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
     private func displayIOS7ActionSheet() -> Void {
         var actionSheet:UIActionSheet
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
-            actionSheet = UIActionSheet(title: "Lets get a picture", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil,otherButtonTitles:"Select photo from library", "Take a picture")
+            actionSheet = UIActionSheet(title: NSLocalizedString("CHOOSE_AVATAR",comment:"Choose avatar"), delegate: self, cancelButtonTitle: NSLocalizedString("CANCEL",comment:"Cancel"), destructiveButtonTitle: nil,otherButtonTitles:NSLocalizedString("SELECT_FROM_LIBRARY",comment:"Select from library"), NSLocalizedString("TAKE_PICTURE",comment:"Take picture"))
         } else {
-            actionSheet = UIActionSheet(title: "Lets get a picture", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil,otherButtonTitles:"Select photo from library")
+            actionSheet = UIActionSheet(title: NSLocalizedString("CHOOSE_AVATAR",comment:"Choose avatar"), delegate: self, cancelButtonTitle: NSLocalizedString("CANCEL",comment:"Cancel"), destructiveButtonTitle: nil,otherButtonTitles:NSLocalizedString("SELECT_FROM_LIBRARY",comment:"Select from library"))
         }
         actionSheet.delegate = self
         actionSheet.showInView(self.view)

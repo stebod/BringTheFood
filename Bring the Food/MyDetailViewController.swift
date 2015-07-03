@@ -108,9 +108,9 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
     @IBAction func dropCollectButtonPressed(sender: AnyObject) {
         if(donation?.getSupplier() == nil){
             let alert = UIAlertView()
-            alert.title = "No connection"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
@@ -144,10 +144,10 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         mainLabel.text = description[first...first].uppercaseString + description[rest]
         if(donation!.canBeModified() == true){
             editButton.hidden = false
-            dropCollectButtonLabel.text = "DROP"
+            dropCollectButtonLabel.text = NSLocalizedString("DROP",comment:"Drop")
         }
         else {
-            dropCollectButtonLabel.text = "COLLECT"
+            dropCollectButtonLabel.text = NSLocalizedString("COLLECT",comment:"Collect")
             editButton.hidden = true
             if(donation!.canBeCollected() == false){
                 dropCollectButton.hidden = true
@@ -166,26 +166,26 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
             quantityKgImageView.hidden = false
             quantityLitersImageView.hidden = true
             quantityPortionsImageView.hidden = true
-            foodQuantityLabel.text = foodQuantityLabel.text! + " Kg"
+            foodQuantityLabel.text = foodQuantityLabel.text! + " " + NSLocalizedString("KG",comment:"Kg")
         }
         else if(parcelUnit == ParcelUnit.LITERS){
             quantityKgImageView.hidden = true
             quantityLitersImageView.hidden = false
             quantityPortionsImageView.hidden = true
-            foodQuantityLabel.text = foodQuantityLabel.text! + " Lt"
+            foodQuantityLabel.text = foodQuantityLabel.text! + " " + NSLocalizedString("LITERS",comment:"Lt")
         }
         else{
             quantityKgImageView.hidden = true
             quantityLitersImageView.hidden = true
             quantityPortionsImageView.hidden = false
-            foodQuantityLabel.text = foodQuantityLabel.text! + " portions"
+            foodQuantityLabel.text = foodQuantityLabel.text! + " " + NSLocalizedString("PORTIONS",comment:"Portions")
         }
         let remainingDays = donation!.getRemainingDays()
         if(remainingDays > 0){
-            expirationLabel.text = String(donation!.getRemainingDays()) + " days left"
+            expirationLabel.text = String(donation!.getRemainingDays()) + " " + NSLocalizedString("DAYS_LEFT",comment:"Days left")
         }
         else{
-            expirationLabel.text = "expired"
+            expirationLabel.text = NSLocalizedString("EXPIRED",comment:"Expired")
         }
         mapView.layer.borderColor = UIMainColor.CGColor
         mapView.layer.borderWidth = 1.0
@@ -197,7 +197,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         addressLabel.numberOfLines = 2
         collectorView.hidden = true
         if(donation?.canBeModified() == true){
-            missingCollectorLabel.text = "No collector"
+            missingCollectorLabel.text = NSLocalizedString("NO_COLLECTOR",comment:"No collector")
         }
     }
     
@@ -266,25 +266,25 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Impossible to mark as collected"
-            alert.message = "The donation is not markable as collected anymore"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("COLLECTED_ERROR",comment:"Collected error")
+            alert.message = NSLocalizedString("COLLECTED_ERROR_MESSAGE",comment:"Collected error message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
             let alert = UIAlertView()
-            alert.title = "No connection"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Success"
-            alert.message = "The donation has been marked as collected!"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("SUCCESS",comment:"Success")
+            alert.message = NSLocalizedString("COLLECTION_ACCOMPLISHED",comment:"Collection accomplished")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
@@ -299,25 +299,25 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Impossible to delete donation"
-            alert.message = "The donation is not deletable anymore"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("DELETION_ERROR",comment:"Deletion error")
+            alert.message = NSLocalizedString("DELETION_ERROR_MESSAGE",comment:"Deletion error message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
             let alert = UIAlertView()
-            alert.title = "No connection"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Success"
-            alert.message = "The donation has been deleted!"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("SUCCESS",comment:"Success")
+            alert.message = NSLocalizedString("DELETION_ACCOMPLISHED",comment:"Deletion accomplished")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
@@ -344,12 +344,12 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
                 collectorView.hidden = false
             }
             else{
-                missingCollectorLabel.text = "Uncollected donation"
+                missingCollectorLabel.text = NSLocalizedString("UNCOLLECTED_DONATION",comment:"Uncollected donation")
             }
             collectorDataRetrieved = true
         }
         else{
-            missingCollectorLabel.text = "Unable to retrieve collector"
+            missingCollectorLabel.text = NSLocalizedString("COLLECTOR_RETRIEVAL_ERROR",comment:"Collector retrieval error")
         }
         collectorViewActivityIndicator.stopAnimating()
     }

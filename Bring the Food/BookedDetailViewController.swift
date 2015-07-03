@@ -123,26 +123,26 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
             quantityKgImageView.hidden = false
             quantityLitersImageView.hidden = true
             quantityPortionsImageView.hidden = true
-            foodQuantityLabel.text = foodQuantityLabel.text! + " Kg"
+            foodQuantityLabel.text = foodQuantityLabel.text! + " " + NSLocalizedString("KG",comment:"Kg")
         }
         else if(parcelUnit == ParcelUnit.LITERS){
             quantityKgImageView.hidden = true
             quantityLitersImageView.hidden = false
             quantityPortionsImageView.hidden = true
-            foodQuantityLabel.text = foodQuantityLabel.text! + " Lt"
+            foodQuantityLabel.text = foodQuantityLabel.text! + " " + NSLocalizedString("LITERS",comment:"Lt")
         }
         else{
             quantityKgImageView.hidden = true
             quantityLitersImageView.hidden = true
             quantityPortionsImageView.hidden = false
-            foodQuantityLabel.text = foodQuantityLabel.text! + " portions"
+            foodQuantityLabel.text = foodQuantityLabel.text! + " " + NSLocalizedString("PORTIONS",comment:"Portions")
         }
         let remainingDays = donation!.getRemainingDays()
         if(remainingDays > 0){
-            expirationLabel.text = String(donation!.getRemainingDays()) + " days left"
+            expirationLabel.text = String(donation!.getRemainingDays()) + " " + NSLocalizedString("DAYS_LEFT",comment:"Days left")
         }
         else{
-            expirationLabel.text = "expired"
+            expirationLabel.text = NSLocalizedString("EXPIRED",comment:"Expired")
         }
 
         mapView.layer.borderColor = UIMainColor.CGColor
@@ -223,25 +223,25 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Impossible to unbook"
-            alert.message = "The donation is not unbookable anymore"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("UNBOOK_ERROR",comment:"Unbook error")
+            alert.message = NSLocalizedString("UNBOOK_ERROR_MESSAGE",comment:"Unbook error message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
             let alert = UIAlertView()
-            alert.title = "No connection"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Succedd"
-            alert.message = "Donation successfully unbooked!"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("SUCCESS",comment:"Success")
+            alert.message = NSLocalizedString("UNBOOK_ACCOMPLISHED",comment:"Unbook accomplished")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
