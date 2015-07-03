@@ -80,15 +80,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let notifications = Model.getInstance().getMyNotifications()
             let prova = notifications.getNumberOfNewNotifications()
             let newNotifications = notifications.getNumberOfNewNotifications()
-            if(mainViewController != nil){
-                if(newNotifications > 0){
-                    mainViewController?.tabBarController?.tabBarItem.badgeValue = String(notifications.getNumberOfNewNotifications())
-                }
-                else{
-                    mainViewController?.tabBarController?.tabBarItem.badgeValue = nil
-                }
-                println("handled")
+            let tabBarController = self.window!.rootViewController as! UITabBarController
+            let badge = (tabBarController.tabBar.items as! [UITabBarItem])[3]
+            if(newNotifications > 0){
+                badge.badgeValue = String(notifications.getNumberOfNewNotifications())
             }
+            else{
+                badge.badgeValue = nil
+            }
+            println("handled")
         }
     }
     
