@@ -91,14 +91,14 @@ class SignInStep1ViewController: UIViewController {
     // On focus textField behaviours
     @IBAction func emailOnFocus(sender: UITextField) {
         emailImageView.hidden = true
-        if(sender.text == "Email"){
+        if(sender.text == NSLocalizedString("EMAIL",comment:"Email")){
             sender.text = ""
         }
     }
     
     @IBAction func passwordOnFocus(sender: UITextField) {
         passwordImageView.hidden = true
-        if(sender.text == "Password"){
+        if(sender.text == NSLocalizedString("PASSWORD",comment:"Password")){
             sender.text! = ""
             sender.secureTextEntry = true
         }
@@ -106,7 +106,7 @@ class SignInStep1ViewController: UIViewController {
     
     @IBAction func confirmPasswordOnFocus(sender: UITextField) {
         confirmPasswordImageView.hidden = true
-        if(sender.text == "Confirm Password"){
+        if(sender.text == NSLocalizedString("CONFIRM_PASSWORD",comment:"Confirm password")){
             sender.text! = ""
             sender.secureTextEntry = true
         }
@@ -116,14 +116,14 @@ class SignInStep1ViewController: UIViewController {
     @IBAction func emailOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
             emailImageView.hidden = false
-            sender.text = "Email"
+            sender.text = NSLocalizedString("EMAIL",comment:"Email")
         }
     }
     
     @IBAction func passwordOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
             passwordImageView.hidden = false
-            sender.text = "Password"
+            sender.text = NSLocalizedString("PASSWORD",comment:"Password")
             sender.secureTextEntry = false
         }
     }
@@ -131,7 +131,7 @@ class SignInStep1ViewController: UIViewController {
     @IBAction func confirmPasswordOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
             confirmPasswordImageView.hidden = false
-            sender.text = "Confirm Password"
+            sender.text = NSLocalizedString("CONFIRM_PASSWORD",comment:"Confirm password")
             sender.secureTextEntry = false
         }
     }
@@ -152,23 +152,23 @@ class SignInStep1ViewController: UIViewController {
     @IBAction func nextButtonPressed(sender: UIButton) {
         if(!isValidEmail(emailTextField.text)){
             let alert = UIAlertView()
-            alert.title = "Error"
-            alert.message = "Invalid email"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("ERROR",comment:"Error")
+            alert.message = NSLocalizedString("INVALID_EMAIL",comment:"Invalid email")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         else if(count(passwordTextField.text) < 4){
             let alert = UIAlertView()
-            alert.title = "Error"
-            alert.message = "Password must be at least 4 characters long"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("ERROR",comment:"Error")
+            alert.message = NSLocalizedString("INVALID_PASSWORD",comment:"Invalid password")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         else if(passwordTextField.text != confirmPasswordTextField.text){
             let alert = UIAlertView()
-            alert.title = "Error"
-            alert.message = "Password Mismatch"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("ERROR",comment:"Error")
+            alert.message = NSLocalizedString("PASSWORD_MISMATCH",comment:"Password mismatch")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         else{
@@ -195,17 +195,17 @@ class SignInStep1ViewController: UIViewController {
         emailTextField.layer.borderColor = textFieldBorderColor.CGColor
         emailTextField.layer.cornerRadius = 3
         emailTextField.textColor = UIMainColor
-        emailTextField.text = "Email"
+        emailTextField.text = NSLocalizedString("EMAIL",comment:"Email")
         passwordTextField.layer.borderWidth = 1
         passwordTextField.layer.borderColor = textFieldBorderColor.CGColor
         passwordTextField.layer.cornerRadius = 3
         passwordTextField.textColor = UIMainColor
-        passwordTextField.text = "Password"
+        passwordTextField.text = NSLocalizedString("PASSWORD",comment:"Password")
         confirmPasswordTextField.layer.borderWidth = 1
         confirmPasswordTextField.layer.borderColor = textFieldBorderColor.CGColor
         confirmPasswordTextField.layer.cornerRadius = 3
         confirmPasswordTextField.textColor = UIMainColor
-        confirmPasswordTextField.text = "Confirm Password"
+        confirmPasswordTextField.text = NSLocalizedString("CONFIRM_PASSWORD",comment:"Confirm password")
         nextButton.layer.borderWidth = 1
         nextButton.layer.borderColor = buttonBorderColor.CGColor
         nextButton.layer.cornerRadius = 3
@@ -225,15 +225,15 @@ class SignInStep1ViewController: UIViewController {
         }
         else if (response!.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Email not available"
-            alert.message = "The inserted email is already taken!"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("EMAIL_NOT_AVAILABLE",comment:"Email not available")
+            alert.message = NSLocalizedString("EMAIL_NOT_AVAILABLE_MESSAGE",comment:"Email not available message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         } else{
             let alert = UIAlertView()
-            alert.title = "Network error"
-            alert.message = "Check your internet connectivity"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         activityIndicatorView.stopAnimating()
