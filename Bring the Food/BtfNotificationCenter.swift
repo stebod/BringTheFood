@@ -22,6 +22,12 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     private var secondaryMessageLabel: UILabel?
     private var requestStatus: RequestStatus?
     
+    
+    
+    deinit{
+        println("notificationCenter deinit")
+    }
+    
     /// Loads the notifications that were previously
     /// persisted. In case no notification is found, initializes a
     /// new array containing no notifications
@@ -242,6 +248,7 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
         emptyTableView!.addConstraint(yConstraint)
         emptyTableView?.tag = 999
         tableView.addSubview(emptyTableView!)
+        tableView.bringSubviewToFront(emptyTableView!)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     

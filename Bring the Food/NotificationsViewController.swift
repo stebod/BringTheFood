@@ -69,6 +69,18 @@ class NotificationsViewController: UIViewController {
         var tableViewController = UITableViewController()
         tableViewController.tableView = self.tableView;
         tableViewController.refreshControl = self.refreshControl;
+        
+        let backgroundView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = backgroundView
+        tableView.backgroundColor = UIColor.clearColor()
+    }
+    
+    @IBAction func clearButtonPressed(sender: UIButton) {
+        if(notifications != nil){
+            notifications?.deleteAllNotifications()
+            Model.getInstance().downloadMyNotifications()
+            refreshControl.beginRefreshing()
+        }
     }
     
     func handleNotifications(notification: NSNotification){

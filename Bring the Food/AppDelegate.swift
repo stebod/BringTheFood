@@ -13,8 +13,6 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    private var mainViewController: UIViewController?
-    private var loginController: UIViewController?
 
     // Observers
     weak var notificationObserver: NSObjectProtocol!
@@ -24,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Get reference to storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if (RestInterface.getInstance().isLoggedIn()){
-            mainViewController = storyboard.instantiateViewControllerWithIdentifier("mainViewController") as? UIViewController
+            let mainViewController = storyboard.instantiateViewControllerWithIdentifier("mainViewController") as? UIViewController
             if self.window != nil {
                 self.window!.rootViewController = mainViewController
                 notificationObserver = NSNotificationCenter.defaultCenter().addObserverForName(getNotificationsResponseNotificationKey,
@@ -95,6 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func removeNotificationObserver(){
         if(notificationObserver != nil){
             NSNotificationCenter.defaultCenter().removeObserver(notificationObserver)
+
             notificationObserver = nil
             println("removed for reuse")
         }

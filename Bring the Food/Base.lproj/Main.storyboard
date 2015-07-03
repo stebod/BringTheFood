@@ -3233,7 +3233,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVo-Hk-nK7">
-                                        <rect key="frame" x="246" y="29" width="107" height="22.5"/>
+                                        <rect key="frame" x="246" y="29" width="106.5" height="22.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -3245,11 +3245,28 @@
                                             <constraint firstAttribute="height" constant="20" id="eeg-iI-R5L"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9RO-ks-84o">
+                                        <rect key="frame" x="538" y="31" width="39" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="2YU-bX-5pR"/>
+                                            <constraint firstAttribute="width" constant="39" id="BdS-q9-tbi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <state key="normal" title="Clear">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clearButtonPressed:" destination="DQU-pI-VQS" eventType="touchUpInside" id="h04-dO-4pH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.62352941179999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="YVo-Hk-nK7" firstAttribute="top" secondItem="W9K-na-7Nj" secondAttribute="top" constant="29" id="0OR-3k-Grm"/>
+                                    <constraint firstItem="9RO-ks-84o" firstAttribute="top" secondItem="W9K-na-7Nj" secondAttribute="top" constant="31" id="A21-7g-5Mw"/>
                                     <constraint firstAttribute="height" constant="65" id="FNB-WL-vUg"/>
+                                    <constraint firstAttribute="trailing" secondItem="9RO-ks-84o" secondAttribute="trailing" constant="23" id="OqH-zq-9v6"/>
                                     <constraint firstItem="qcf-vR-biS" firstAttribute="top" secondItem="W9K-na-7Nj" secondAttribute="top" constant="31" id="Zas-3c-Sgl"/>
                                     <constraint firstItem="qcf-vR-biS" firstAttribute="leading" secondItem="W9K-na-7Nj" secondAttribute="leading" constant="25" id="byT-h3-qkT"/>
                                     <constraint firstAttribute="centerX" secondItem="YVo-Hk-nK7" secondAttribute="centerX" id="uod-MW-f9f"/>

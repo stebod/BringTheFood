@@ -35,6 +35,10 @@ class MainViewController: UIViewController, FilterProtocol, DisplayOthersDetail 
 
     
     
+    deinit{
+        println("mainViewController deinit")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()
