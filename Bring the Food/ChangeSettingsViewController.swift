@@ -59,6 +59,9 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     private var openTableViewMovement: CGFloat?
     private var contentViewVisibleHeight: CGFloat?
 
+    // Custom user avatar
+    private var customAvatar: UIImage?
+    
     
     
     override func viewDidLoad() {
@@ -217,10 +220,10 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             }
             else{
                 if(addressTextField.text != address){
-                    RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, addressLabel: addressTextField.text)
+                    RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, avatar: customAvatar == nil ? nil : customAvatar, addressLabel: addressTextField.text)
                 }
                 else{
-                    RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, addressLabel: nil)
+                    RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, avatar: customAvatar == nil ? nil : customAvatar, addressLabel: nil)
                 }
             }
             changeSettingsButton.enabled = false
@@ -233,10 +236,10 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response!.status == RequestStatus.SUCCESS){
             if(addressTextField.text != address){
-                RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, addressLabel: addressTextField.text)
+                RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, avatar: customAvatar == nil ? nil : customAvatar, addressLabel: addressTextField.text)
             }
             else{
-                RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, addressLabel: nil)
+                RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, avatar: customAvatar == nil ? nil : customAvatar, addressLabel: nil)
             }
         }
         else {
@@ -284,8 +287,6 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         self.view.layoutIfNeeded()
         isExpandedForKeyboard = false
         isExpandedForTableView = false
-        // REMOVE IN CASE PHOTO UPDATE IS PERMITTED
-        changeAvatarButton.enabled = false
     }
 
     // Delegate method for tapping
@@ -376,7 +377,8 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         // Use smallest side length as crop square length
         var squareLength = min(image.size.width, image.size.height)
         var clippedRect = CGRectMake((image.size.width - squareLength) / 2, (image.size.height - squareLength) / 2, squareLength, squareLength)
-        changeAvatarButton.setImage(UIImage(CGImage: CGImageCreateWithImageInRect(image.CGImage, clippedRect)), forState: .Normal)
+        customAvatar = UIImage(CGImage: CGImageCreateWithImageInRect(image.CGImage, clippedRect))
+        changeAvatarButton.setImage(customAvatar, forState: .Normal)
     }
     
     // Action sheet display in iOS7
