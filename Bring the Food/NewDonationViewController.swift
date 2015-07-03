@@ -126,19 +126,19 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     
     // On focus textField behaviours
     @IBAction func descriptionOnFocus(sender: UITextField) {
-        if(sender.text == "Description"){
+        if(sender.text == NSLocalizedString("DESCRIPTION",comment:"Description")){
             sender.text = ""
         }
     }
     
     @IBAction func amountOnFocus(sender: UITextField) {
-        if(sender.text == "Amount"){
+        if(sender.text == NSLocalizedString("AMOUNT",comment:"Amount")){
             sender.text! = ""
         }
     }
 
     @IBAction func expirationOnFocus(sender: UITextField) {
-        if(sender.text == "Expiration"){
+        if(sender.text == NSLocalizedString("EXPIRATION",comment:"Expiration")){
             sender.text = ""
         }
         var datePickerView  : UIDatePicker = UIDatePicker()
@@ -151,27 +151,27 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     // Off focus textField behaviours
     @IBAction func descriptionOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "Description"
+            sender.text = NSLocalizedString("DESCRIPTION",comment:"Description")
         }
     }
     
     @IBAction func amountOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "Amount"
+            sender.text = NSLocalizedString("AMOUNT",comment:"Amount")
         }
     }
     
     @IBAction func expirationOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "Expiration"
+            sender.text = NSLocalizedString("EXPIRATION",comment:"Expiration")
         }
     }
     
     // Enables submit donation button
     @IBAction func reactToFieldsInteraction(sender: UITextField) {
-        if (descriptionTextField.text != "" && descriptionTextField.text != "Description"
-            && amountTextField.text != "" && amountTextField.text != "Amount"
-            && expirationTextField.text != "Expiration" && expirationTextField.text != "Production date"){
+        if (descriptionTextField.text != "" && descriptionTextField.text != NSLocalizedString("DESCRIPTION",comment:"Description")
+            && amountTextField.text != "" && amountTextField.text != NSLocalizedString("AMOUNT",comment:"Amount")
+            && expirationTextField.text != "" && expirationTextField.text != NSLocalizedString("EXPIRATION",comment:"Expiration")){
                 submitDonationButton.enabled = true
         }
         else{
@@ -191,9 +191,9 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     }
     
     func setUpInterface(){
-        descriptionTextField.text = "Description"
-        amountTextField.text = "Amount"
-        expirationTextField.text = "Expiration"
+        descriptionTextField.text = NSLocalizedString("DESCRIPTION",comment:"Description")
+        amountTextField.text = NSLocalizedString("AMOUNT",comment:"Amount")
+        expirationTextField.text = NSLocalizedString("EXPIRATION",comment:"Expiration")
         productType = ProductType.FRESH
         freshFoodButton.setImage(UIImage(named: "fresh"), forState: UIControlState.Selected)
         freshFoodButton.highlighted = false
@@ -232,7 +232,7 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         else{
             cookedFoodButton.selected = false
             expirationTextField.enabled = true
-            expirationTextField.text = "Expiration"
+            expirationTextField.text = NSLocalizedString("EXPIRATION",comment:"Expiration")
         }
         if(productType == ProductType.DRIED){
             driedFoodButton.selected = true
@@ -276,17 +276,17 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         }
         else if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Submission failed"
-            alert.message = "A problem occourred during the processing of you request. Please try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("SUBMISSION_FAILED",comment:"Submission failed")
+            alert.message = NSLocalizedString("SUBMISSION_FAILED_MESSAGE",comment:"Submission failed message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
             let alert = UIAlertView()
-            alert.title = "Network error"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
