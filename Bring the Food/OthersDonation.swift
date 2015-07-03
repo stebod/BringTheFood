@@ -8,7 +8,9 @@
 
 import Foundation
 
+/// Contains methods which may be used only by a user which is visualising a donation submitted by someone else.
 public protocol OthersDonation : Donation{
 
+    /// Creates a booking by the current user on the donation
     func book()
 }

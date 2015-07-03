@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// The donation protocol gives access to the 
+/// essential data composing a donation
 public protocol Donation {
 
     func getDescription() -> String!
@@ -20,10 +22,12 @@ public protocol Donation {
     
     func getProductType() -> ProductType!
     
+    /// :returns: the number of days left to collect the donation before it expires
     func getRemainingDays() -> Int!
     
     func getPhotoURL() -> String!
     
+    /// :returns: the user who submitted the donation
     func getSupplier() -> User!
     
 }

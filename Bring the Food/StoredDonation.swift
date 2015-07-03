@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Object representing a donation stored on the server
 public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation, BookedDonation {
     
     private let id: Int!
@@ -19,6 +20,7 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
     private var collector: User?
     private var bookingId: Int!
     
+    /// use this to initialize objects retrieved with a get to /donatoins or to /my_donations
     public init(id:Int!, description: String!, parcelSize: Float!, parcelUnit: ParcelUnit!,
         productDate: Date!, productType: ProductType!, photo_url:String!, supplier: User!, isValid: Bool!, hasOpenBookings: Bool!){
             
@@ -33,7 +35,7 @@ public class StoredDonation : NewDonation, Donation, MyDonation, OthersDonation,
                 productDate: productDate, productType: productType)
     }
 
-    
+    /// use this to initialize objects retrieved with a get to /my_bookings
     public convenience init(id:Int!, description: String!, parcelSize: Float!, parcelUnit: ParcelUnit!,
         productDate: Date!, productType: ProductType!, photo_url:String!, supplier: User!, isValid: Bool!, hasOpenBookings: Bool!, collector: User!, bookingId: Int!){
             
