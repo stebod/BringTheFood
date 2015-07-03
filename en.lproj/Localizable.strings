@@ -36,3 +36,5 @@ AMOUNT="Amount";
 EXPIRATION="Expiration";
 SUBMISSION_FAILED="Submission failed";
 SUBMISSION_FAILED_MESSAGE="A problem occourred during the processing of your request. Please try again";
+LOGOUT_ERROR="Impossible to logout";
+LOGOUT_ERROR_MESSAGE="The impossible happened";

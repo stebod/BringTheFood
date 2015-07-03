@@ -36,3 +36,5 @@ AMOUNT="Quantità";
 EXPIRATION="Scadenza";
 SUBMISSION_FAILED="Invio donazione fallito";
 SUBMISSION_FAILED_MESSAGE="Si è verificato un problema durante l'elaborazione della richiesta. Si prega di riprovare";
+LOGOUT_ERROR="Impossibile effettuare il logout";
+LOGOUT_ERROR_MESSAGE="Si è verificato un errore sconosciuto";

@@ -133,7 +133,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
         mainMessageLabel.textAlignment = .Center
         mainMessageLabel.font = UIFont(name: "HelveticaNeue-Light", size: 22)
         mainMessageLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        mainMessageLabel.text = "Network error"
+        mainMessageLabel.text = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
         var widthConstraint = NSLayoutConstraint(item: mainMessageLabel, attribute: .Width, relatedBy: .Equal,
             toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 250)
         mainMessageLabel.addConstraint(widthConstraint)
@@ -151,7 +151,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
         secondaryMessageLabel.textAlignment = .Center
         secondaryMessageLabel.font = UIFont(name: "HelveticaNeue-Light", size: 13)
         secondaryMessageLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        secondaryMessageLabel.text = "Check your connectivity"
+        secondaryMessageLabel.text =  NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
         widthConstraint = NSLayoutConstraint(item: secondaryMessageLabel, attribute: .Width, relatedBy: .Equal,
             toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 250)
         secondaryMessageLabel.addConstraint(widthConstraint)
@@ -196,17 +196,17 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Impossible to logout"
-            alert.message = "The impossible happened"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("LOGOUT_ERROR",comment:"Logout error")
+            alert.message = NSLocalizedString("LOGOUT_ERROR_MESSAGE",comment:"Logout error message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
             let alert = UIAlertView()
-            alert.title = "No connection"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
