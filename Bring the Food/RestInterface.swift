@@ -94,6 +94,7 @@ public class RestInterface : NSObject{
         userId = 0
         deletePersistedData()
         clearImageCache()
+        Model.clear()
     }
     
     /// Persists login data, allowing the user to be still logged in the 
