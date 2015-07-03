@@ -145,25 +145,25 @@ class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate 
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response?.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Something went wrong"
-            alert.message = "Try again later"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NOTIFICATION_UPDATE_ERROR",comment:"Notification update error")
+            alert.message = NSLocalizedString("NOTIFICATION_UPDATE_ERROR_MESSAGE",comment:"Notification update error message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else if (response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
             let alert = UIAlertView()
-            alert.title = "No connection"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }
         else if (response?.status == RequestStatus.SUCCESS){
             let alert = UIAlertView()
-            alert.title = "Success"
-            alert.message = "Notification settings correctly updated!"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("SUCCESS",comment:"Success")
+            alert.message = NSLocalizedString("NOTIFICATION_UPDATE_ACCOMPLISHED",comment:"Notification update accomplished")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
         }

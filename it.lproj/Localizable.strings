@@ -61,3 +61,6 @@ COLLECT="RITIRA";
 UNBOOK_ERROR="Impossibile disdire";
 UNBOOK_ERROR_MESSAGE="La prenotazione non può più essere disdetta";
 UNBOOK_ACCOMPLISHED="Prenotazione disdetta con successo!";
+NOTIFICATION_UPDATE_ERROR="Impossibile modificare i parametri";
+NOTIFICATION_UPDATE_ERROR_MESSAGE="Riprovare in seguito";
+NOTIFICATION_UPDATE_ACCOMPLISHED="Impostazioni notifiche aggiornate correttamente!";

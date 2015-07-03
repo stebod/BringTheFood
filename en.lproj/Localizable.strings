@@ -61,6 +61,9 @@ COLLECT="COLLECT";
 UNBOOK_ERROR="Impossible to unbook";
 UNBOOK_ERROR_MESSAGE="The donation is not unbookable anymore";
 UNBOOK_ACCOMPLISHED="Donation successfully unbooked!";
+NOTIFICATION_UPDATE_ERROR="Something went wrong";
+NOTIFICATION_UPDATE_ERROR_MESSAGE="Try again later";
+NOTIFICATION_UPDATE_ACCOMPLISHED="Notification settings correctly updated!";
 
 
 
