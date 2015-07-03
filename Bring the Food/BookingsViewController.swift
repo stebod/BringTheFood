@@ -31,6 +31,10 @@ class BookingsViewController: UIViewController, DisplayBookedDetail {
     
     
     
+    deinit{
+        println("bookings deinit")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()

@@ -33,6 +33,10 @@ class MyDonationsViewController: UIViewController, DisplayMyDetail {
 
     
     
+    deinit{
+        println("mydonations deinit")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()

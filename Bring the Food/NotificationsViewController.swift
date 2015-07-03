@@ -30,6 +30,10 @@ class NotificationsViewController: UIViewController {
 
     
     
+    deinit{
+        println("notifications deinit")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()
