@@ -183,7 +183,8 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.stringFromDate(lastDateSelected!)
-        let donation = NewDonation(descriptionTextField.text, parcelSize: (amountTextField.text as NSString).floatValue, parcelUnit: parcelUnit!, productDate: Date(dateString: dateString), productType: productType!)
+        let filteredDescription = descriptionTextField.text.stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let donation = NewDonation(filteredDescription, parcelSize: (amountTextField.text as NSString).floatValue, parcelUnit: parcelUnit!, productDate: Date(dateString: dateString), productType: productType!)
         RestInterface.getInstance().createDonation(donation)
         submitDonationButton.enabled = false
         activityIndicator.startAnimating()

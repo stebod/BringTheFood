@@ -97,7 +97,10 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     /// :returns: an array containing all the notifications currently in the list
     public func getNotifications() -> [BtfNotification]! {
         let notificationsArray = [BtfNotification](self.notifications.values)
-        return notificationsArray
+        var sortedNotifications = notificationsArray.sorted({(lhs: BtfNotification, rhs: BtfNotification) -> Bool in
+            return lhs.id > rhs.id
+        })
+        return sortedNotifications
     }
     
     
