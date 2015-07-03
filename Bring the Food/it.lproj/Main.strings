@@ -1,0 +1,366 @@
+
+/* Class = "UITabBarItem"; title = "Notifications"; ObjectID = "0Ml-Td-xOL"; */
+"0Ml-Td-xOL.title" = "Notifiche";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "0QF-tr-Wlc"; */
+"0QF-tr-Wlc.text" = "Dettaglio";
+
+/* Class = "UILabel"; text = "Expiration"; ObjectID = "0Td-PU-26z"; */
+"0Td-PU-26z.text" = "Scadenza";
+
+/* Class = "UILabel"; text = "140d"; ObjectID = "1Rp-9Y-oWd"; */
+"1Rp-9Y-oWd.text" = "140d";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "1kN-0I-uO0"; */
+"1kN-0I-uO0.text" = "Dettaglio";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "2Iw-2V-YHs"; */
+"2Iw-2V-YHs.normalTitle" = "Indietro";
+
+/* Class = "UILabel"; text = "Developed by"; ObjectID = "37L-Lg-4pX"; */
+"37L-Lg-4pX.text" = "Sviluppato da";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "3Z2-Ck-RNB"; */
+"3Z2-Ck-RNB.text" = "Indirizzo";
+
+/* Class = "UILabel"; text = "INTEREST AREA"; ObjectID = "4P9-h1-C3W"; */
+"4P9-h1-C3W.text" = "AREA DI INTERESSE";
+
+/* Class = "UIButton"; normalTitle = "Abort Registration"; ObjectID = "4Pi-5B-RCG"; */
+"4Pi-5B-RCG.normalTitle" = "Annulla Registrazione";
+
+/* Class = "UIButton"; normalTitle = "Change settings"; ObjectID = "564-GO-adb"; */
+"564-GO-adb.normalTitle" = "Applica modifiche";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "5PI-Zd-gug"; */
+"5PI-Zd-gug.text" = "Label";
+
+/* Class = "UILabel"; text = "New Bookings"; ObjectID = "72H-VW-lM0"; */
+"72H-VW-lM0.text" = "Nuove Prenotazioni";
+
+/* Class = "UIButton"; normalTitle = "Need Help?"; ObjectID = "74N-7U-cPR"; */
+"74N-7U-cPR.normalTitle" = "Hai bisogno di aiuto?";
+
+/* Class = "UIButton"; normalTitle = "10km"; ObjectID = "85s-uX-z0Y"; */
+"85s-uX-z0Y.normalTitle" = "10km";
+
+/* Class = "UILabel"; text = "BOOK"; ObjectID = "8Ze-WC-WNd"; */
+"8Ze-WC-WNd.text" = "PRENOTA";
+
+/* Class = "UILabel"; text = "Federico Badini and Stefano Bodini for"; ObjectID = "8e7-MW-0de"; */
+"8e7-MW-0de.text" = "Federico Badini e Stefano Bodini per";
+
+/* Class = "UIButton"; normalTitle = "About"; ObjectID = "8hI-UE-B6p"; */
+"8hI-UE-B6p.normalTitle" = "About";
+
+/* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "90e-RP-eXa"; */
+"90e-RP-eXa.normalTitle" = "Log In";
+
+/* Class = "UIButton"; normalTitle = "Apply changes"; ObjectID = "975-p7-UXZ"; */
+"975-p7-UXZ.normalTitle" = "Applica modifiche";
+
+/* Class = "UILabel"; text = "140.1"; ObjectID = "99S-3M-sDY"; */
+"99S-3M-sDY.text" = "140.1";
+
+/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "9RO-ks-84o"; */
+"9RO-ks-84o.normalTitle" = "Elimina";
+
+/* Class = "UILabel"; text = "140d"; ObjectID = "9kZ-hY-CcZ"; */
+"9kZ-hY-CcZ.text" = "140d";
+
+/* Class = "UIButton"; normalTitle = "Learn More about BringTheFood"; ObjectID = "9nj-dQ-lnP"; */
+"9nj-dQ-lnP.normalTitle" = "Non conosci BringTheFood?";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "APP-Cb-avO"; */
+"APP-Cb-avO.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "AUn-1k-yCb"; */
+"AUn-1k-yCb.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "AgH-ND-GjL"; */
+"AgH-ND-GjL.text" = "Label";
+
+/* Class = "UILabel"; text = "New Donations"; ObjectID = "BAR-j5-ASI"; */
+"BAR-j5-ASI.text" = "Nuove Donazioni";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "BU1-u1-hQb"; */
+"BU1-u1-hQb.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "C7I-Lg-3lX"; */
+"C7I-Lg-3lX.text" = "Label";
+
+/* Class = "UILabel"; text = "www.ict.fbk.eu"; ObjectID = "C8a-G4-frj"; */
+"C8a-G4-frj.text" = "www.ict.fbk.eu";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Cgo-7q-yLM"; */
+"Cgo-7q-yLM.text" = "Label";
+
+/* Class = "UILabel"; text = "Filter"; ObjectID = "Cme-bg-2hw"; */
+"Cme-bg-2hw.text" = "Filtro";
+
+/* Class = "UIButton"; normalTitle = "50km"; ObjectID = "Dqw-cq-zE1"; */
+"Dqw-cq-zE1.normalTitle" = "50km";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "EAX-aV-pUo"; */
+"EAX-aV-pUo.normalTitle" = "Avanti";
+
+/* Class = "UIButton"; normalTitle = "Change password"; ObjectID = "Ev9-Ms-i4e"; */
+"Ev9-Ms-i4e.normalTitle" = "Cambia password";
+
+/* Class = "UIButton"; normalTitle = "Change password"; ObjectID = "FbW-yV-uZ7"; */
+"FbW-yV-uZ7.normalTitle" = "Cambia password";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Fwl-gN-EAH"; */
+"Fwl-gN-EAH.text" = "Label";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "G9z-gd-ZC8"; */
+"G9z-gd-ZC8.text" = "Dettaglio";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "HB7-1E-vTW"; */
+"HB7-1E-vTW.text" = "Indirizzo";
+
+/* Class = "UIButton"; normalTitle = "Learn More about BringTheFood"; ObjectID = "HUH-Ga-aid"; */
+"HUH-Ga-aid.normalTitle" = "Non conosci BringTheFood?";
+
+/* Class = "UILabel"; text = "UNBOOK"; ObjectID = "JQb-sV-Nt5"; */
+"JQb-sV-Nt5.text" = "DISDICI";
+
+/* Class = "UIButton"; normalTitle = "Kg"; ObjectID = "KAQ-yG-8a9"; */
+"KAQ-yG-8a9.normalTitle" = "Kg";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "Kd5-iP-8dR"; */
+"Kd5-iP-8dR.normalTitle" = "Indietro";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Kj0-L2-DY7"; */
+"Kj0-L2-DY7.text" = "Label";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "LWM-K5-Rex"; */
+"LWM-K5-Rex.text" = "Impostazioni";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "M1y-zz-uyG"; */
+"M1y-zz-uyG.text" = "Label";
+
+/* Class = "UILabel"; text = "Fondazione Bruno Kessler\n"; ObjectID = "MIm-Yp-0bD"; */
+"MIm-Yp-0bD.text" = "Fondazione Bruno Kessler\n";
+
+/* Class = "UILabel"; text = "Bookings"; ObjectID = "MVk-q7-2Rv"; */
+"MVk-q7-2Rv.text" = "Prenotazioni";
+
+/* Class = "UITabBarItem"; title = "Booked"; ObjectID = "Mmq-XD-6u7"; */
+"Mmq-XD-6u7.title" = "Prenotate";
+
+/* Class = "UIButton"; normalTitle = "Portions"; ObjectID = "NKZ-7Q-oNY"; */
+"NKZ-7Q-oNY.normalTitle" = "Porzioni";
+
+/* Class = "UILabel"; text = "Food type"; ObjectID = "Naa-0k-8gu"; */
+"Naa-0k-8gu.text" = "Tipo di cibo";
+
+/* Class = "UIButton"; normalTitle = "5km"; ObjectID = "Q4X-ZC-sx0"; */
+"Q4X-ZC-sx0.normalTitle" = "5km";
+
+/* Class = "UILabel"; text = "New Donation"; ObjectID = "Q9R-wK-Fgg"; */
+"Q9R-wK-Fgg.text" = "Crea";
+
+/* Class = "UILabel"; text = "1240.1"; ObjectID = "QBP-Zn-dwM"; */
+"QBP-Zn-dwM.text" = "1240.1";
+
+/* Class = "UIButton"; normalTitle = "Submit donation"; ObjectID = "Qdv-pU-dXU"; */
+"Qdv-pU-dXU.normalTitle" = "Invia donazione";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "QoG-Ol-Bat"; */
+"QoG-Ol-Bat.text" = "Indirizzo";
+
+/* Class = "UILabel"; text = "Cancelled Bookings"; ObjectID = "QvA-XZ-8af"; */
+"QvA-XZ-8af.text" = "Prenotazioni annullate";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "QvA-rx-rcR"; */
+"QvA-rx-rcR.normalTitle" = "Indietro";
+
+/* Class = "UILabel"; text = "Update donation"; ObjectID = "RH0-q1-MAe"; */
+"RH0-q1-MAe.text" = "Aggiorna donazione";
+
+/* Class = "UILabel"; text = "Version 1.0.1\nCopyright © 2015\n"; ObjectID = "Rc4-WI-ojg"; */
+"Rc4-WI-ojg.text" = "Version 1.0.1\nCopyright © 2015\n";
+
+/* Class = "UILabel"; text = "NOTIFY ME FOR"; ObjectID = "SlU-Qi-R5T"; */
+"SlU-Qi-R5T.text" = "NOTIFICAMI RIGUARDO";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "T5B-qe-jjx"; */
+"T5B-qe-jjx.text" = "Label";
+
+/* Class = "UILabel"; text = "Change password"; ObjectID = "Txt-as-mFK"; */
+"Txt-as-mFK.text" = "Cambia password";
+
+/* Class = "UILabel"; text = "Lt"; ObjectID = "VpC-Q9-TpF"; */
+"VpC-Q9-TpF.text" = "Lt";
+
+/* Class = "UILabel"; text = "Kg"; ObjectID = "X5T-7K-f3Z"; */
+"X5T-7K-f3Z.text" = "Kg";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "XOe-8r-Abv"; */
+"XOe-8r-Abv.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "My donations"; ObjectID = "Xdk-Re-Xhg"; */
+"Xdk-Re-Xhg.title" = "Mie donazioni";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Xpm-pp-Yib"; */
+"Xpm-pp-Yib.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "25km"; ObjectID = "YFf-X0-jUC"; */
+"YFf-X0-jUC.normalTitle" = "25km";
+
+/* Class = "UILabel"; text = "Notifications"; ObjectID = "YVo-Hk-nK7"; */
+"YVo-Hk-nK7.text" = "Notifiche";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Zs8-Hg-8Hj"; */
+"Zs8-Hg-8Hj.text" = "Title";
+
+/* Class = "UILabel"; text = "My donations"; ObjectID = "ax8-6Z-6qL"; */
+"ax8-6Z-6qL.text" = "Mie donazioni";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "bPr-8j-U9Q"; */
+"bPr-8j-U9Q.normalTitle" = "Indietro";
+
+/* Class = "UITabBarItem"; title = "Explore"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "Esplora";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "cXe-Im-UVj"; */
+"cXe-Im-UVj.normalTitle" = "Indietro";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "cZN-Ki-9ZC"; */
+"cZN-Ki-9ZC.normalTitle" = "Indietro";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "crs-S8-BmX"; */
+"crs-S8-BmX.title" = "Impostazioni";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "dSl-O5-iaQ"; */
+"dSl-O5-iaQ.normalTitle" = "Annulla";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "dd2-zQ-53p"; */
+"dd2-zQ-53p.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "dxr-Uj-jSq"; */
+"dxr-Uj-jSq.normalTitle" = "Modifica";
+
+/* Class = "UIButton"; normalTitle = "Abort Registration"; ObjectID = "egO-hJ-pr1"; */
+"egO-hJ-pr1.normalTitle" = "Annulla registrazione";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "f5P-g5-fxc"; */
+"f5P-g5-fxc.normalTitle" = "Indietro";
+
+/* Class = "UIButton"; normalTitle = "Update donation"; ObjectID = "g1b-dt-jVg"; */
+"g1b-dt-jVg.normalTitle" = "Aggiorna donazione";
+
+/* Class = "UILabel"; text = "Copyright © 2015"; ObjectID = "gkm-6H-f1Q"; */
+"gkm-6H-f1Q.text" = "Copyright © 2015";
+
+/* Class = "UILabel"; text = "140d"; ObjectID = "h8H-Y9-zIR"; */
+"h8H-Y9-zIR.text" = "140d";
+
+/* Class = "UILabel"; text = "Explore"; ObjectID = "hfE-LA-465"; */
+"hfE-LA-465.text" = "Esplora";
+
+/* Class = "UIButton"; normalTitle = "Sign Up for BringTheFood "; ObjectID = "isd-O7-WqI"; */
+"isd-O7-WqI.normalTitle" = "Registrati a BringTheFood";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "jiM-ct-fQ1"; */
+"jiM-ct-fQ1.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Notifications settings"; ObjectID = "kWD-F1-35w"; */
+"kWD-F1-35w.normalTitle" = "Impostazioni notifiche";
+
+/* Class = "UILabel"; text = "Collected Donations"; ObjectID = "ltT-pq-hKb"; */
+"ltT-pq-hKb.text" = "Donazioni Ritirate";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "luM-qc-FiH"; */
+"luM-qc-FiH.text" = "Label";
+
+/* Class = "UILabel"; text = "Portions"; ObjectID = "mXG-th-xzo"; */
+"mXG-th-xzo.text" = "Porzioni";
+
+/* Class = "UIButton"; normalTitle = "Logout"; ObjectID = "mf1-Nl-dev"; */
+"mf1-Nl-dev.normalTitle" = "Logout";
+
+/* Class = "UILabel"; text = "Food type"; ObjectID = "mgC-TW-TlW"; */
+"mgC-TW-TlW.text" = "Tipo di cibo";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "mpE-jC-wkQ"; */
+"mpE-jC-wkQ.text" = "About";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "nnb-dd-PJP"; */
+"nnb-dd-PJP.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "nos-YD-rm3"; */
+"nos-YD-rm3.normalTitle" = "Avanti";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "oxX-7A-Qbd"; */
+"oxX-7A-Qbd.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "pYa-cU-tlm"; */
+"pYa-cU-tlm.normalTitle" = "Annulla";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "psp-w4-Bgw"; */
+"psp-w4-Bgw.text" = "Impostazioni";
+
+/* Class = "UILabel"; text = "140.1"; ObjectID = "pvh-Ha-gyK"; */
+"pvh-Ha-gyK.text" = "140.1";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "qBL-O2-K46"; */
+"qBL-O2-K46.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "qib-76-xi2"; */
+"qib-76-xi2.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "rYs-oQ-5n2"; */
+"rYs-oQ-5n2.normalTitle" = "Registrami";
+
+/* Class = "UILabel"; text = "Notifications"; ObjectID = "sMR-Xe-PI8"; */
+"sMR-Xe-PI8.text" = "Notifiche";
+
+/* Class = "UIButton"; normalTitle = "Apply Filters"; ObjectID = "si9-Tz-HwU"; */
+"si9-Tz-HwU.normalTitle" = "Applica filtri";
+
+/* Class = "UIButton"; normalTitle = "Lt"; ObjectID = "t3b-Hq-NEh"; */
+"t3b-Hq-NEh.normalTitle" = "Lt";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "tk3-pD-8AT"; */
+"tk3-pD-8AT.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "uDw-Ij-j7w"; */
+"uDw-Ij-j7w.normalTitle" = "Annulla";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "vEP-p8-heb"; */
+"vEP-p8-heb.normalTitle" = "Indietro";
+
+/* Class = "UIButton"; normalTitle = "Abort Registration"; ObjectID = "wko-63-W0W"; */
+"wko-63-W0W.normalTitle" = "Annulla Registrazione";
+
+/* Class = "UIButton"; normalTitle = "Learn More about BringTheFood"; ObjectID = "wwM-OV-xFf"; */
+"wwM-OV-xFf.normalTitle" = "Non conosci BringTheFood?";
+
+/* Class = "UIButton"; normalTitle = "Filter"; ObjectID = "x3l-pH-ClF"; */
+"x3l-pH-ClF.normalTitle" = "Filtra";
+
+/* Class = "UILabel"; text = "Take a selfie!"; ObjectID = "y0n-Yn-9yb"; */
+"y0n-Yn-9yb.text" = "Fatti un selfie";
+
+/* Class = "UILabel"; text = "Text"; ObjectID = "y1e-p9-ewU"; */
+"y1e-p9-ewU.text" = "Text";
+
+/* Class = "UILabel"; text = "60+"; ObjectID = "y8u-nN-ev0"; */
+"y8u-nN-ev0.text" = "60+";
+
+/* Class = "UILabel"; text = "140d"; ObjectID = "ye1-2V-o6l"; */
+"ye1-2V-o6l.text" = "140d";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "z7J-cM-5zs"; */
+"z7J-cM-5zs.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "zX5-7i-lPT"; */
+"zX5-7i-lPT.normalTitle" = "Modifica";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "zmA-Oe-Zi4"; */
+"zmA-Oe-Zi4.normalTitle" = "Indietro";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "zoi-nn-lD5"; */
+"zoi-nn-lD5.text" = "1";
