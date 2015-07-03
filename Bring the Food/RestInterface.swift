@@ -401,7 +401,7 @@ public class RestInterface : NSObject{
             if avatar != nil {
                 let imageData = UIImageJPEGRepresentation(avatar, 0)
                 let base64Avatar = imageData.base64EncodedStringWithOptions(.allZeros)
-                postString += " \"avatar\": \"\(base64Avatar)\", "
+                postString += ", \"avatar\": \"\(base64Avatar)\" "
             }
             
             if addressLabel != nil {
