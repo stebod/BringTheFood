@@ -81,14 +81,14 @@ class LoginViewController: UIViewController, UIActionSheetDelegate {
     // On focus textField behaviours
     @IBAction func emailOnFocus(sender: UITextField) {
         emailImageView.hidden = true
-        if(sender.text == "Email"){
+        if(sender.text == NSLocalizedString("EMAIL",comment:"Email")){
             sender.text = ""
         }
     }
     
     @IBAction func passwordOnFocus(sender: UITextField) {
         passwordImageView.hidden = true
-        if(sender.text == "Password"){
+        if(sender.text == NSLocalizedString("PASSWORD",comment:"Password")){
             sender.text! = ""
             sender.secureTextEntry = true
         }
@@ -98,14 +98,14 @@ class LoginViewController: UIViewController, UIActionSheetDelegate {
     @IBAction func emailOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
             emailImageView.hidden = false
-            sender.text = "Email"
+            sender.text = NSLocalizedString("EMAIL",comment:"Email")
         }
     }
     
     @IBAction func passwordOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
             passwordImageView.hidden = false
-            sender.text = "Password"
+            sender.text = NSLocalizedString("PASSWORD",comment:"Password")
             sender.secureTextEntry = false
         }
     }
@@ -145,12 +145,12 @@ class LoginViewController: UIViewController, UIActionSheetDelegate {
         emailTextField.layer.borderColor = textFieldBorderColor.CGColor
         emailTextField.layer.cornerRadius = 3
         emailTextField.textColor = UIMainColor
-        emailTextField.text = "Email"
+        emailTextField.text = NSLocalizedString("EMAIL",comment:"Email")
         passwordTextField.layer.borderWidth = 1
         passwordTextField.layer.borderColor = textFieldBorderColor.CGColor
         passwordTextField.layer.cornerRadius = 3
         passwordTextField.textColor = UIMainColor
-        passwordTextField.text = "Password"
+        passwordTextField.text = NSLocalizedString("PASSWORD",comment:"Password")
         logInButton.layer.borderWidth = 1
         logInButton.layer.borderColor = buttonBorderColor.CGColor
         logInButton.layer.cornerRadius = 3
@@ -168,9 +168,9 @@ class LoginViewController: UIViewController, UIActionSheetDelegate {
         }
         else if(response!.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Login failed"
-            alert.message = "The inserted email-password couple is wrong!"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("LOGIN_FAILED",comment:"Login failed")
+            alert.message = NSLocalizedString("LOGIN_FAILED_MESSAGE",comment:"Login failed message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         else{

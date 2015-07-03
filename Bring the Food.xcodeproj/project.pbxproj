@@ -87,7 +87,7 @@
 		B38216231B3AF5CD00E831C0 /* AddressCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38216221B3AF5CD00E831C0 /* AddressCommunicator.swift */; };
 		B384C5301B2F73CF007DDAA2 /* BookingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B384C52F1B2F73CF007DDAA2 /* BookingsViewController.swift */; };
 		B389263A1B35CF7100F4EAAF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38926391B35CF7100F4EAAF /* SettingsViewController.swift */; };
-		B3917E1B1B46EAE900D361BD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B3917E1A1B46EAE900D361BD /* Localizable.strings */; };
+		B3917E1C1B46EB4200D361BD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B3917E1E1B46EB4200D361BD /* Localizable.strings */; };
 		B39374EF1B30162E0034473B /* MyDonationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3541BBF1B2F496800AA7F65 /* MyDonationsViewController.swift */; };
 		B39682B81B3FF86100043898 /* ModifyDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39682B71B3FF86100043898 /* ModifyDonationViewController.swift */; };
 		B39682B91B40050D00043898 /* ModifyDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39682B71B3FF86100043898 /* ModifyDonationViewController.swift */; };
@@ -171,7 +171,8 @@
 		B38216221B3AF5CD00E831C0 /* AddressCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressCommunicator.swift; sourceTree = "<group>"; };
 		B384C52F1B2F73CF007DDAA2 /* BookingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingsViewController.swift; sourceTree = "<group>"; };
 		B38926391B35CF7100F4EAAF /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		B3917E1A1B46EAE900D361BD /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		B3917E1D1B46EB4200D361BD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B3917E1F1B46EB4600D361BD /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B39682B71B3FF86100043898 /* ModifyDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyDonationViewController.swift; sourceTree = "<group>"; };
 		B3A30B0E1B32BBE200F733E0 /* FilterState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterState.swift; sourceTree = "<group>"; };
 		B3BD162A1B3B4984003E755E /* ChangeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeSettingsViewController.swift; sourceTree = "<group>"; };
@@ -209,7 +210,7 @@
 		3B1B4F8C1B1EEE6400B9D705 = {
 			isa = PBXGroup;
 			children = (
-				B3917E1A1B46EAE900D361BD /* Localizable.strings */,
+				B3917E1E1B46EB4200D361BD /* Localizable.strings */,
 				3B1B4F971B1EEE6400B9D705 /* Bring the Food */,
 				3B1B4FAF1B1EEE6400B9D705 /* Bring the FoodTests */,
 				3B1B4F961B1EEE6400B9D705 /* Products */,
@@ -443,6 +444,7 @@
 			knownRegions = (
 				en,
 				Base,
+				it,
 			);
 			mainGroup = 3B1B4F8C1B1EEE6400B9D705;
 			productRefGroup = 3B1B4F961B1EEE6400B9D705 /* Products */;
@@ -461,7 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B1B4FA21B1EEE6400B9D705 /* Main.storyboard in Resources */,
-				B3917E1B1B46EAE900D361BD /* Localizable.strings in Resources */,
+				B3917E1C1B46EB4200D361BD /* Localizable.strings in Resources */,
 				3B1B4FA41B1EEE6400B9D705 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -662,6 +664,15 @@
 				B364B73B1B46B93C001CC557 /* it */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B3917E1E1B46EB4200D361BD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B3917E1D1B46EB4200D361BD /* en */,
+				B3917E1F1B46EB4600D361BD /* it */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

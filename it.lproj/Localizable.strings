@@ -5,3 +5,9 @@
   Created by federico badini on 03/07/15.
   Copyright (c) 2015 Federico Badini, Stefano Bodini. All rights reserved.
 */
+
+EMAIL="Email";
+PASSWORD="Password";
+LOGIN_FAILED="Login fallito";
+LOGIN_FAILED_MESSAGE="La coppia username/password inserita è errata";
+DISMISS="Ok";
