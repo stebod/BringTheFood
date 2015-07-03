@@ -1737,8 +1737,8 @@
                             <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjp-si-AA0">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Donation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RH0-q1-MAe">
-                                        <rect key="frame" x="240" y="29" width="120.5" height="22.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update donation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RH0-q1-MAe">
+                                        <rect key="frame" x="229" y="29" width="143" height="22.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1794,7 +1794,7 @@
                                         </connections>
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="08x-bi-8C0">
-                                        <rect key="frame" x="403" y="122.5" width="20" height="20"/>
+                                        <rect key="frame" x="403" y="122" width="20" height="20"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1996,8 +1996,8 @@
                             <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZYC-Hr-owx">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donations List" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cme-bg-2hw">
-                                        <rect key="frame" x="239" y="29" width="122" height="22.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cme-bg-2hw">
+                                        <rect key="frame" x="279" y="29" width="42" height="22.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -3484,7 +3484,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="xUK-nu-km6"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                                                <state key="normal" title="Impostazioni notifiche">
+                                                <state key="normal" title="Notifications settings">
                                                     <color key="titleColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -3498,7 +3498,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="s4G-9B-GhX"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                                                <state key="normal" title="Cambia password">
+                                                <state key="normal" title="Change password">
                                                     <color key="titleColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -4034,7 +4034,7 @@
                                                 <rect key="frame" x="524" y="409" width="51" height="31"/>
                                                 <color key="onTintColor" red="0.95686274510000002" green="0.62745098040000002" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                             </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nuova donazione" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAR-j5-ASI">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Donations" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAR-j5-ASI">
                                                 <rect key="frame" x="20" y="271" width="125" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19" id="5v2-b2-nQ2"/>
@@ -4063,7 +4063,7 @@
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nuova prenotazione" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72H-VW-lM0">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Bookings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72H-VW-lM0">
                                                 <rect key="frame" x="20" y="319" width="143.5" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19" id="HhM-d8-Txv"/>
@@ -4072,16 +4072,16 @@
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donazione ritirata" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltT-pq-hKb">
-                                                <rect key="frame" x="20" y="367" width="125.5" height="19"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collected Donations" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltT-pq-hKb">
+                                                <rect key="frame" x="20" y="367" width="131" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19" id="hnd-AY-krZ"/>
-                                                    <constraint firstAttribute="width" constant="125.5" id="sT4-gp-7Ga"/>
+                                                    <constraint firstAttribute="width" constant="131" id="sT4-gp-7Ga"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prenotazione annullata" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvA-XZ-8af">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancelled Bookings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvA-XZ-8af">
                                                 <rect key="frame" x="20" y="415" width="163" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19" id="H7y-T7-Lyd"/>
@@ -4330,7 +4330,7 @@
                                     <constraint firstAttribute="width" constant="109" id="0YR-xk-MWf"/>
                                     <constraint firstAttribute="height" constant="21" id="1MW-zU-etb"/>
                                 </constraints>
-                                <string key="text">Versione 1.0.1
+                                <string key="text">Version 1.0.1
 Copyright © 2015
 </string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -4347,11 +4347,11 @@ Copyright © 2015
                                 <color key="textColor" red="0.95686274510000002" green="0.62745098040000002" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Federico Badini e Stefano Bodini per" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8e7-MW-0de">
-                                <rect key="frame" x="191" y="482" width="218" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Federico Badini and Stefano Bodini for" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8e7-MW-0de">
+                                <rect key="frame" x="187" y="482" width="226" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="dMm-VP-fKg"/>
-                                    <constraint firstAttribute="width" constant="218" id="iWC-Q2-VD1"/>
+                                    <constraint firstAttribute="width" constant="226" id="iWC-Q2-VD1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" white="0.70999999999999996" alpha="1" colorSpace="calibratedWhite"/>
@@ -4379,17 +4379,12 @@ Copyright © 2015
                                 <color key="textColor" white="0.70999999999999996" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37L-Lg-4pX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developed by" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37L-Lg-4pX">
                                 <rect key="frame" x="259" y="465" width="83" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="83" id="Aet-G0-Gt0"/>
                                     <constraint firstAttribute="height" constant="21" id="xo3-bm-e1A"/>
                                 </constraints>
-                                <string key="text">Sviluppato da
-Federico Badini e Stefano Bodini per
-Fondazione Bruno Kessler
-www.ict.fbk.eu
-</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" white="0.70999999999999996" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>

@@ -23,11 +23,7 @@ public class Model : NSObject{
     private var settings: ApplicationSettings?
     private var myNotifications: BtfNotificationCenter!
     
-    
-    
-    deinit{
-        println("model deinit")
-    }
+
     
     // per fare in modo che il costruttore non sia accessibile all'esterno della classe
     private override init() {

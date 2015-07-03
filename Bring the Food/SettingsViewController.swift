@@ -48,10 +48,6 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
     
     
     
-    deinit{
-        println("settings deinit")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInterface()

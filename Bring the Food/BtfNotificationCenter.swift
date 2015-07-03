@@ -24,10 +24,6 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     
     
     
-    deinit{
-        println("notificationCenter deinit")
-    }
-    
     /// Loads the notifications that were previously
     /// persisted. In case no notification is found, initializes a
     /// new array containing no notifications
