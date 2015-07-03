@@ -132,10 +132,10 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
     // Set section titles
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(requestStatus == RequestStatus.SUCCESS){
-            return "Available donations"
+            return NSLocalizedString("AVAILABLE_DONATIONS",comment:"Available donations")
         }
         if(requestStatus == RequestStatus.CACHE){
-            return "Available donations" + " " + NSLocalizedString("OFFLINE_MODE",comment:"Offline mode")
+            return NSLocalizedString("AVAILABLE_DONATIONS",comment:"Available donations") + " " + NSLocalizedString("OFFLINE_MODE",comment:"Offline mode")
         }
         return nil
     }

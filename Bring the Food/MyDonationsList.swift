@@ -33,15 +33,15 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
         var sortedMyHistoricDonationsList = myHistoricDonationsList.sorted({(lhs: MyDonation, rhs: MyDonation) -> Bool in
             return lhs.getRemainingDays() < rhs.getRemainingDays()
         })
-        donations.append(DonationsList(donationName: "Available donations", donationList: sortedMyAvailableDonationsList))
-        donations.append(DonationsList(donationName: "Booked donations", donationList: sortedMyBookedDonationsList))
-        donations.append(DonationsList(donationName: "Historic donations", donationList: sortedMyHistoricDonationsList))
+        donations.append(DonationsList(donationName: NSLocalizedString("AVAILABLE_DONATIONS",comment:"Available donations"), donationList: sortedMyAvailableDonationsList))
+        donations.append(DonationsList(donationName: NSLocalizedString("BOOKED_DONATIONS",comment:"Booked donations"), donationList: sortedMyBookedDonationsList))
+        donations.append(DonationsList(donationName: NSLocalizedString("HISTORIC_DONATIONS",comment:"Historic donations"), donationList: sortedMyHistoricDonationsList))
     }
     
 
     public func getBookedOrHistoricDonationWithId(donationId : Int!) -> MyDonation? {
         for donList in donations {
-            if donList.donationName == "Booked donations" || donList.donationName == "Historic donations" {
+            if donList.donationName == NSLocalizedString("BOOKED_DONATIONS",comment:"Booked donations") || donList.donationName ==  NSLocalizedString("HISTORIC_DONATIONS",comment:"Historic donations") {
                 for temp in donList.donationsList {
                     if temp.getId() == donationId {
                         return temp

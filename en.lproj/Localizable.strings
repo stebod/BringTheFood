@@ -79,6 +79,11 @@ CHECK_CONNECTIVITY_SHORT="Check your connectivity";
 DAYS="d";
 OFFLINE_MODE="(offline mode)";
 CHANGE_FILTERING_CRITERIA="Change filtering criteria";
+PENDING_BOOKINGS="Pending bookings";
+COLLECTED_BOOKINGS="Collected bookings";
+AVAILABLE_DONATIONS="Available donations";
+BOOKED_DONATIONS="Booked donations";
+HISTORIC_DONATIONS="Historic donations";
 
 
 
