@@ -58,3 +58,11 @@ UNCOLLECTED_DONATION="Uncollected donation";
 COLLECTOR_RETRIEVAL_ERROR="Unable to retrieve collector";
 DROP="DROP";
 COLLECT="COLLECT";
+UNBOOK_ERROR="Impossible to unbook";
+UNBOOK_ERROR_MESSAGE="The donation is not unbookable anymore";
+UNBOOK_ACCOMPLISHED="Donation successfully unbooked!";
+
+
+
+
+
