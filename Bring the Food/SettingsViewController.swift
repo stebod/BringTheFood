@@ -211,11 +211,12 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
             alert.show()
         }
         else{
-            let appDelegate = UIApplication.sharedApplication().delegate
+            var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.removeNotificationObserver()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let rootViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
-            if appDelegate!.window != nil {
-                appDelegate!.window!!.rootViewController = rootViewController
+            if appDelegate.window != nil {
+                appDelegate.window!.rootViewController = rootViewController
             }
         }
         NSNotificationCenter.defaultCenter().removeObserver(logoutObserver)

@@ -162,6 +162,7 @@ class LoginViewController: UIViewController, UIActionSheetDelegate {
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response!.status == RequestStatus.SUCCESS){
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.addNotificationObserver()
             let rootController = storyboard?.instantiateInitialViewController() as! UIViewController
             appDelegate.window?.rootViewController = rootController
         }

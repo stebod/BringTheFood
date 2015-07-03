@@ -13,22 +13,33 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    private var mainViewController: UIViewController?
+    private var loginController: UIViewController?
+
+    // Observers
+    weak var notificationObserver: NSObjectProtocol!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         GMSServices.provideAPIKey(gMapsAPIKey)
         // Get reference to storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if (RestInterface.getInstance().isLoggedIn()){
-            let rootController = storyboard.instantiateViewControllerWithIdentifier("mainViewController") as! UIViewController
+            mainViewController = storyboard.instantiateViewControllerWithIdentifier("mainViewController") as? UIViewController
             if self.window != nil {
-                self.window!.rootViewController = rootController
+                self.window!.rootViewController = mainViewController
+                notificationObserver = NSNotificationCenter.defaultCenter().addObserverForName(getNotificationsResponseNotificationKey,
+                    object: ModelUpdater.getInstance(),
+                    queue: NSOperationQueue.mainQueue(),
+                    usingBlock: {(notification:NSNotification!) in self.handleNotifications(notification)})
+                Model.getInstance().downloadMyNotifications()
+                println("set")
             }
         }
         else
         {
-            let rootController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+            let loginController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
             if self.window != nil {
-                self.window!.rootViewController = rootController
+                self.window!.rootViewController = loginController
             }
         }
         return true
@@ -45,6 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
+        if(notificationObserver != nil){
+            Model.getInstance().downloadMyNotifications()
+        }
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
     
@@ -53,6 +67,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(application: UIApplication) {
+        if(notificationObserver != nil){
+            NSNotificationCenter.defaultCenter().removeObserver(notificationObserver)
+            println("removed")
+        }
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func handleNotifications(notification: NSNotification){
+        let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
+        if(response?.status == RequestStatus.SUCCESS){
+            let notifications = Model.getInstance().getMyNotifications()
+            let prova = notifications.getNumberOfNewNotifications()
+            let newNotifications = notifications.getNumberOfNewNotifications()
+            if(mainViewController != nil){
+                if(newNotifications > 0){
+                    mainViewController?.tabBarController?.tabBarItem.badgeValue = String(notifications.getNumberOfNewNotifications())
+                }
+                else{
+                    mainViewController?.tabBarController?.tabBarItem.badgeValue = nil
+                }
+                println("handled")
+            }
+        }
+    }
+    
+    func removeNotificationObserver(){
+        if(notificationObserver != nil){
+            NSNotificationCenter.defaultCenter().removeObserver(notificationObserver)
+            notificationObserver = nil
+            println("removed for reuse")
+        }
+    }
+    
+    func addNotificationObserver(){
+        notificationObserver = NSNotificationCenter.defaultCenter().addObserverForName(getNotificationsResponseNotificationKey,
+            object: ModelUpdater.getInstance(),
+            queue: NSOperationQueue.mainQueue(),
+            usingBlock: {(notification:NSNotification!) in self.handleNotifications(notification)})
+        Model.getInstance().downloadMyNotifications()
+        println("set")
     }
 }

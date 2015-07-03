@@ -51,6 +51,12 @@ class NotificationsViewController: UIViewController {
         if(notifications != nil){
             notifications!.markAllAsRead()
         }
+        if(notifications!.getNumberOfNewNotifications() == 0){
+            self.tabBarController?.tabBarItem.badgeValue = nil
+        }
+        else{
+            self.tabBarController?.tabBarItem.badgeValue = String(notifications!.getNumberOfNewNotifications())
+        }
         NSNotificationCenter.defaultCenter().removeObserver(notificationObserver!)
         super.viewWillDisappear(animated)
     }
