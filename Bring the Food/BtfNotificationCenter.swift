@@ -125,12 +125,12 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
             createEmptyView(tableView)
         }
         if(requestStatus == RequestStatus.SUCCESS || requestStatus == RequestStatus.CACHE){
-            mainMessageLabel?.text = "No notifications"
-            secondaryMessageLabel?.text = "Pull down to refresh"
+            mainMessageLabel?.text = NSLocalizedString("NO_DONATIONS",comment:"No donations")
+            secondaryMessageLabel?.text = NSLocalizedString("PULL_DOWN",comment:"Pull down to refresh")
         }
         else{
-            mainMessageLabel?.text = "Network error"
-            secondaryMessageLabel?.text = "Check your connectivity"
+            mainMessageLabel?.text = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            secondaryMessageLabel?.text = NSLocalizedString("CHECK_CONNECTIVITY_SHORT",comment:"Check your connectivity")
         }
         
         emptyTableView?.hidden = false
@@ -190,17 +190,17 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
         let alert = UIAlertView()
         alert.title = notification.getType().description
         alert.message = notification.getLabel()
-        alert.addButtonWithTitle("Dismiss")
+        alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
         alert.show()
     }
     
     // Set section titles
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(requestStatus == RequestStatus.SUCCESS){
-            return "Notifications"
+            return NSLocalizedString("NOTIFICATIONS",comment:"Notifications")
         }
         if(requestStatus == RequestStatus.DEVICE_ERROR){
-            return "Notifications (offline mode)"
+            return NSLocalizedString("NOTIFICATIONS",comment:"Notifications") + " " + NSLocalizedString("OFFLINE_MODE",comment:"Offline mode")
         }
         return nil
     }

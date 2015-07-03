@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     queue: NSOperationQueue.mainQueue(),
                     usingBlock: {(notification:NSNotification!) in self.handleNotifications(notification)})
                 Model.getInstance().downloadMyNotifications()
-                println("set")
             }
         }
         else
@@ -67,7 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         if(notificationObserver != nil){
             NSNotificationCenter.defaultCenter().removeObserver(notificationObserver)
-            println("removed")
         }
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
@@ -86,16 +84,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             else{
                 badge.badgeValue = nil
             }
-            println("handled")
         }
     }
     
     func removeNotificationObserver(){
         if(notificationObserver != nil){
             NSNotificationCenter.defaultCenter().removeObserver(notificationObserver)
-
             notificationObserver = nil
-            println("removed for reuse")
         }
     }
     
@@ -105,6 +100,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.handleNotifications(notification)})
         Model.getInstance().downloadMyNotifications()
-        println("set")
     }
 }

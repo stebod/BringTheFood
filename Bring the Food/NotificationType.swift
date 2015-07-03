@@ -22,12 +22,12 @@ public enum NotificationType : Printable {
     /// :returns: the string used to coomunicate the notification type to the GUI
     public var description : String {
         switch self {
-        case .DONATION_EXPIRED: return "Donation expired"
-        case .DONATION_EXPIRING: return "Donation expiring"
-        case .BOOKING_CREATED: return "Booking created"
-        case .BOOKING_CANCELED: return "Booking canceled"
-        case .BOOKING_COLLECTED: return "Booking collected"
-        case .CHARITY_NO_SHOW: return "Uncollected donation"
+        case .DONATION_EXPIRED: return NSLocalizedString("DONATION_EXPIRED",comment:"Donation expired")
+        case .DONATION_EXPIRING: return NSLocalizedString("DONATION_EXPIRING",comment:"Donation expiring")
+        case .BOOKING_CREATED: return NSLocalizedString("BOOKING_CREATED",comment:"Booking created")
+        case .BOOKING_CANCELED: return NSLocalizedString("BOOKING_CANCELLED",comment:"Booking cancelled")
+        case .BOOKING_COLLECTED: return NSLocalizedString("BOOKING_COLLECTED",comment:"Booking collected")
+        case .CHARITY_NO_SHOW: return NSLocalizedString("CHARITY_NO_SHOW",comment:"Uncollected donation")
         }
     }
     

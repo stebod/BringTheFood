@@ -84,6 +84,13 @@ COLLECTED_BOOKINGS="Collected bookings";
 AVAILABLE_DONATIONS="Available donations";
 BOOKED_DONATIONS="Booked donations";
 HISTORIC_DONATIONS="Historic donations";
+NOTIFICATIONS="Notifications";
+DONATION_EXPIRED="Donation expired";
+DONATION_EXPIRING="Donation expiring";
+BOOKING_CREATED="Booking created";
+BOOKING_CANCELLED="Booking cancelled";
+BOOKING_COLLECTED="Booking collected";
+CHARITY_NO_SHOW="Uncollected donation";
 
 
 
