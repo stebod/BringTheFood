@@ -374,7 +374,7 @@ public class RestInterface : NSObject{
         sendRequest(request, notification_key: createUserNotificationKey)
     }
     
-    public func updateUser(username:String!, email:String!, phoneNumber:String!, addressLabel:String?){
+    public func updateUser(username:String!, email:String!, phoneNumber:String!, avatar: UIImage?, addressLabel:String?){
         
         if(isLoggedIn()){
             
@@ -397,6 +397,12 @@ public class RestInterface : NSObject{
             postString += " \"name\": \"\(username)\", "
             postString += " \"email\": \"\(email)\", "
             postString += " \"phone\": \"\(phoneNumber)\" "
+            
+            if avatar != nil {
+                let imageData = UIImageJPEGRepresentation(avatar, 0)
+                let base64Avatar = imageData.base64EncodedStringWithOptions(.allZeros)
+                postString += " \"avatar\": \"\(base64Avatar)\", "
+            }
             
             if addressLabel != nil {
                 postString += " \", address\" : {  "

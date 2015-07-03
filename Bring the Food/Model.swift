@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 /// Singleton providing access to all data of interest for
 /// the application.
@@ -69,8 +69,8 @@ public class Model : NSObject{
     }
     
     
-    public func updateCurrentUser(username:String!, email:String!, phoneNumber:String!, addressLabel:String!){
-        RestInterface.getInstance().updateUser(username, email: email, phoneNumber: phoneNumber, addressLabel: addressLabel)
+    public func updateCurrentUser(username:String!, email:String!, phoneNumber:String!, avatar:UIImage?, addressLabel:String?){
+        RestInterface.getInstance().updateUser(username, email: email, phoneNumber: phoneNumber, avatar:avatar, addressLabel: addressLabel)
     }
     
     //*********************************************************************************
