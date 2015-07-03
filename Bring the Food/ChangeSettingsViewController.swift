@@ -185,13 +185,17 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
 
     // Enables register button
     @IBAction func reactToFieldsInteraction(sender: UITextField) {
+        checkIfEnableButton()
+    }
+    
+    private func checkIfEnableButton(){
         if (nameTextField.text != "" && nameTextField != "Name"
             && phoneTextField.text != "" && phoneTextField.text != "Phone"
             && emailTextField.text != "" && emailTextField.text != "Email"
             && addressTextField.text != "" && addressTextField.text != "Address"){
                 if(emailTextField.text != email || phoneTextField.text != phone
                     || nameTextField.text != name || addressTextField.text != address){
-                    changeSettingsButton.enabled = true
+                        changeSettingsButton.enabled = true
                 }
         }
         else{
@@ -379,6 +383,8 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         var clippedRect = CGRectMake((image.size.width - squareLength) / 2, (image.size.height - squareLength) / 2, squareLength, squareLength)
         customAvatar = UIImage(CGImage: CGImageCreateWithImageInRect(image.CGImage, clippedRect))
         changeAvatarButton.setImage(customAvatar, forState: .Normal)
+        changeSettingsButton.enabled = true
+        checkIfEnableButton()
     }
     
     // Action sheet display in iOS7
