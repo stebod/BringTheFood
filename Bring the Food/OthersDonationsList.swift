@@ -152,16 +152,16 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
     
     // Check if each donation match the filtering criteria
     private func respectFilter(filterState: FilterState, donation: OthersDonation) -> Bool {
-        if(donation.getProductType().description == "fresh" && !filterState.isFreshFood){
+        if(donation.getProductType() == ProductType.FRESH && !filterState.isFreshFood){
             return false
         }
-        if(donation.getProductType().description == "cooked" && !filterState.isCookedFood){
+        if(donation.getProductType() == ProductType.COOKED && !filterState.isCookedFood){
             return false
         }
-        if(donation.getProductType().description == "dried" && !filterState.isDriedFood){
+        if(donation.getProductType() == ProductType.DRIED && !filterState.isDriedFood){
             return false
         }
-        if(donation.getProductType().description == "frozen" && !filterState.isFrozenFood){
+        if(donation.getProductType() == ProductType.FROZEN && !filterState.isFrozenFood){
             return false
         }
         if(donation.getRemainingDays() > filterState.expiration && filterState.expiration < 60){

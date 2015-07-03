@@ -125,7 +125,7 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
             createEmptyView(tableView)
         }
         if(requestStatus == RequestStatus.SUCCESS || requestStatus == RequestStatus.CACHE){
-            mainMessageLabel?.text = NSLocalizedString("NO_DONATIONS",comment:"No donations")
+            mainMessageLabel?.text = NSLocalizedString("NO_NOTIFICATIONS",comment:"No notifications")
             secondaryMessageLabel?.text = NSLocalizedString("PULL_DOWN",comment:"Pull down to refresh")
         }
         else{

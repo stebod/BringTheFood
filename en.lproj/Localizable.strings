@@ -91,6 +91,12 @@ BOOKING_CREATED="Booking created";
 BOOKING_CANCELLED="Booking cancelled";
 BOOKING_COLLECTED="Booking collected";
 CHARITY_NO_SHOW="Uncollected donation";
+NO_NOTIFICATIONS="No notifications";
+DRIED="dried";
+FRESH="fresh";
+COOKED="cooked";
+FROZEN="frozen";
+
 
 
 

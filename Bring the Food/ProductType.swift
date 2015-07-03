@@ -20,10 +20,10 @@ public enum ProductType : Printable {
     /// :returns: the string used in POST requests to communicate the "product_type" data to the server
     public var description : String {
         switch self {
-        case .DRIED: return "dried"
-        case .FRESH: return "fresh"
-        case .COOKED: return "cooked"
-        case .FROZEN: return "frozen"
+        case .DRIED: return NSLocalizedString("DRIED",comment:"dried")
+        case .FRESH: return NSLocalizedString("FRESH",comment:"fresh")
+        case .COOKED: return NSLocalizedString("COOKED",comment:"cooked")
+        case .FROZEN: return NSLocalizedString("FROZEN",comment:"frozen")
         }
     }
 }

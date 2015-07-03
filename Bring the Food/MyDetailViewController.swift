@@ -181,7 +181,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
             foodQuantityLabel.text = foodQuantityLabel.text! + " " + NSLocalizedString("PORTIONS",comment:"Portions")
         }
         let remainingDays = donation!.getRemainingDays()
-        if(remainingDays > 0){
+        if(remainingDays >= 0){
             expirationLabel.text = String(donation!.getRemainingDays()) + " " + NSLocalizedString("DAYS_LEFT",comment:"Days left")
         }
         else{

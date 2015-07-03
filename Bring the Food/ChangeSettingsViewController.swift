@@ -194,7 +194,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             && emailTextField.text != "" && emailTextField.text != NSLocalizedString("EMAIL",comment:"Email")
             && addressTextField.text != "" && addressTextField.text != NSLocalizedString("ADDRESS",comment:"Address")){
                 if(emailTextField.text != email || phoneTextField.text != phone
-                    || nameTextField.text != name || addressTextField.text != address){
+                    || nameTextField.text != name || addressTextField.text != address || customAvatar != nil){
                         changeSettingsButton.enabled = true
                 }
         }

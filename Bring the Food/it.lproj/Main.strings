@@ -177,10 +177,10 @@
 "QvA-rx-rcR.normalTitle" = "Indietro";
 
 /* Class = "UILabel"; text = "Update donation"; ObjectID = "RH0-q1-MAe"; */
-"RH0-q1-MAe.text" = "Aggiorna donazione";
+"RH0-q1-MAe.text" = "Aggiorna";
 
 /* Class = "UILabel"; text = "Version 1.0.1\nCopyright © 2015\n"; ObjectID = "Rc4-WI-ojg"; */
-"Rc4-WI-ojg.text" = "Version 1.0.1\nCopyright © 2015\n";
+"Rc4-WI-ojg.text" = "Versione 1.0.1\nCopyright © 2015\n";
 
 /* Class = "UILabel"; text = "NOTIFY ME FOR"; ObjectID = "SlU-Qi-R5T"; */
 "SlU-Qi-R5T.text" = "NOTIFICAMI RIGUARDO";
