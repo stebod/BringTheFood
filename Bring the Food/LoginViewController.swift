@@ -175,9 +175,9 @@ class LoginViewController: UIViewController, UIActionSheetDelegate {
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Network error"
-            alert.message = "Check your internet connectivity"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         activityIndicatorView.stopAnimating()
@@ -202,15 +202,15 @@ class LoginViewController: UIViewController, UIActionSheetDelegate {
     // Action sheet display in iOS8
     private func displayIOS8ActionSheet() -> Void {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        let forgotPassword = UIAlertAction(title: "Forgot Password?", style: .Default, handler: {
+        let forgotPassword = UIAlertAction(title: NSLocalizedString("FORGOT_PASSWORD",comment:"Forgot password"), style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             UIApplication.sharedApplication().openURL(NSURL(string:"http://www.bringfood.org/")!)
         })
-        let helpCenter = UIAlertAction(title: "Help Center", style: .Default, handler: {
+        let helpCenter = UIAlertAction(title: NSLocalizedString("HELP_CENTER",comment:"Help center"), style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             UIApplication.sharedApplication().openURL(NSURL(string:"http://www.bringfood.org/public/guide")!)
         })
-        let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {(alert:UIAlertAction!) -> Void in}
+        let cancelButton = UIAlertAction(title: NSLocalizedString("CANCEL",comment:"Cancel"), style: UIAlertActionStyle.Cancel) {(alert:UIAlertAction!) -> Void in}
         optionMenu.addAction(forgotPassword)
         optionMenu.addAction(helpCenter)
         optionMenu.addAction(cancelButton)
@@ -220,9 +220,9 @@ class LoginViewController: UIViewController, UIActionSheetDelegate {
     // Action sheet display in iOS7
     private func displayIOS7ActionSheet() -> Void {
         var actionSheet:UIActionSheet
-        actionSheet = UIActionSheet(title: nil, delegate: nil, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil)
-        actionSheet.addButtonWithTitle("Forgot Password?")
-        actionSheet.addButtonWithTitle("Help Center")
+        actionSheet = UIActionSheet(title: nil, delegate: nil, cancelButtonTitle: NSLocalizedString("CANCEL",comment:"Cancel"), destructiveButtonTitle: nil)
+        actionSheet.addButtonWithTitle(NSLocalizedString("FORGOT_PASSWORD",comment:"Forgot password"))
+        actionSheet.addButtonWithTitle(NSLocalizedString("HELP_CENTER",comment:"Help center"))
         actionSheet.delegate = self
         actionSheet.showInView(self.view)
     }
