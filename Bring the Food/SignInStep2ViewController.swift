@@ -98,7 +98,7 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
     @IBAction func addressOnFocus(sender: UITextField) {
         addressImageView.hidden = true
         nextButton.hidden = true
-        if(sender.text == "Address"){
+        if(sender.text == NSLocalizedString("ADDRESS",comment:"Address")){
             sender.text! = ""
         }
         if(addressTextField.text != ""){
@@ -111,7 +111,7 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
     @IBAction func addressOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
             addressImageView.hidden = false
-            sender.text = "Address"
+            sender.text = NSLocalizedString("ADDRESS",comment:"Address")
         }
         nextButton.hidden = false
         autocompleteTableView.hidden = true
@@ -119,7 +119,7 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
     
     // Enables next button
     @IBAction func reactToFieldsInteraction(sender: UITextField) {
-        if (addressTextField.text != "" && addressTextField.text != "Address"){
+        if (addressTextField.text != "" && addressTextField.text != NSLocalizedString("ADDRESS",comment:"Address")){
                 nextButton.enabled = true
         }
         else{
@@ -144,7 +144,7 @@ class SignInStep2ViewController: UIViewController, UIGestureRecognizerDelegate, 
         addressTextField.layer.borderColor = textFieldBorderColor.CGColor
         addressTextField.layer.cornerRadius = 3
         addressTextField.textColor = UIMainColor
-        addressTextField.text = "Address"
+        addressTextField.text = NSLocalizedString("ADDRESS",comment:"Address")
         nextButton.layer.borderWidth = 1
         nextButton.layer.borderColor = buttonBorderColor.CGColor
         nextButton.layer.cornerRadius = 3
