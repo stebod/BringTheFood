@@ -78,6 +78,7 @@ PULL_DOWN="Pull down to refresh";
 CHECK_CONNECTIVITY_SHORT="Check your connectivity";
 DAYS="d";
 OFFLINE_MODE="(offline mode)";
+CHANGE_FILTERING_CRITERIA="Change filtering criteria";
 
 
 

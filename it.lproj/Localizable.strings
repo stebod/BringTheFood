@@ -78,3 +78,4 @@ PULL_DOWN="Trascina in basso per aggiornare";
 CHECK_CONNECTIVITY_SHORT="Controlla la tua connessione";
 DAYS="g";
 OFFLINE_MODE="(offline)";
+CHANGE_FILTERING_CRITERIA="Modifica i filtri";

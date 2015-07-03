@@ -47,17 +47,17 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
         }
         if(othersDonationsList.count == 0){
             if(requestStatus == RequestStatus.SUCCESS || requestStatus == RequestStatus.CACHE){
-                mainMessageLabel?.text = "No donations"
-                secondaryMessageLabel?.text = "Pull down to refresh"
+                mainMessageLabel?.text = NSLocalizedString("NO_DONATIONS",comment:"No donations")
+                secondaryMessageLabel?.text = NSLocalizedString("PULL_DOWN",comment:"Pull down to refresh")
             }
             else{
-                mainMessageLabel?.text = "Network error"
-                secondaryMessageLabel?.text = "Check your connectivity"
+                mainMessageLabel?.text = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+                secondaryMessageLabel?.text = NSLocalizedString("CHECK_CONNECTIVITY_SHORT",comment:"Check your connectivity")
             }
         }
         else{
-            mainMessageLabel?.text = "No donations"
-            secondaryMessageLabel?.text = "Change filtering criteria"
+            mainMessageLabel?.text = NSLocalizedString("NO_DONATIONS",comment:"No donations")
+            secondaryMessageLabel?.text = NSLocalizedString("CHANGE_FILTERING_CRITERIA",comment:"Change filtering criteria")
         }
         emptyTableView?.hidden = false
             
@@ -101,7 +101,7 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
         rest = advance(first,1)..<address.endIndex
         addressLabel.text = address[first...first].uppercaseString + address[rest]
         
-        expirationLabel.text = String(othersDonationsFilteredList[row].getRemainingDays()) + "d"
+        expirationLabel.text = String(othersDonationsFilteredList[row].getRemainingDays()) + NSLocalizedString("DAYS",comment:"d")
         amountLabel.text = "\(othersDonationsFilteredList[row].getParcelSize())"
         let parcelUnit = othersDonationsFilteredList[row].getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
@@ -135,7 +135,7 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
             return "Available donations"
         }
         if(requestStatus == RequestStatus.CACHE){
-            return "Available donations (offline mode)"
+            return "Available donations" + " " + NSLocalizedString("OFFLINE_MODE",comment:"Offline mode")
         }
         return nil
     }

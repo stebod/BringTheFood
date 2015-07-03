@@ -65,12 +65,12 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
             createEmptyView(tableView)
         }
         if(requestStatus == RequestStatus.SUCCESS || requestStatus == RequestStatus.CACHE){
-            mainMessageLabel?.text = "No donations"
-            secondaryMessageLabel?.text = "Pull down to refresh"
+            mainMessageLabel?.text = NSLocalizedString("NO_DONATIONS",comment:"No donations")
+            secondaryMessageLabel?.text = NSLocalizedString("PULL_DOWN",comment:"Pull down to refresh")
         }
         else{
-            mainMessageLabel?.text = "Network error"
-            secondaryMessageLabel?.text = "Check your connectivity"
+            mainMessageLabel?.text = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            secondaryMessageLabel?.text = NSLocalizedString("CHECK_CONNECTIVITY_SHORT",comment:"Check your connectivity")
         }
         emptyTableView?.hidden = false
         
@@ -117,10 +117,10 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
         addressLabel.text = address[first...first].uppercaseString + address[rest]
 
         if(donation.getRemainingDays() >= 0){
-            expirationLabel.text = String(donation.getRemainingDays()) + "d"
+            expirationLabel.text = String(donation.getRemainingDays()) + NSLocalizedString("DAYS",comment:"d")
         }
         else{
-            expirationLabel.text = "expired"
+            expirationLabel.text = NSLocalizedString("EXPIRED",comment:"Expired")
         }
         amountLabel.text = "\(donation.getParcelSize())"
         let parcelUnit = donation.getParcelUnit()
@@ -155,7 +155,7 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
             return donations[section].donationName
         }
         if(requestStatus == RequestStatus.CACHE && donations[section].donationsList.count > 0){
-            return donations[section].donationName  + " (offline mode)"
+            return donations[section].donationName  + " " + NSLocalizedString("OFFLINE_MODE",comment:"Offline mode")
         }
         return nil
     }
