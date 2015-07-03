@@ -69,6 +69,8 @@ NEW_PASSWORD="New Password";
 OLD_PASSWORD_WRONG="Error";
 OLD_PASSWORD_WRONG_MESSAGE="The current password is wrong";
 PASSWORD_CHANGED_SUCCESSFULLY="Password changed successfully!";
+SETTINGS_UPDATE_FAILED="Update failed";
+SETTINGS_UPDATE_FAILED_MESSAGE="Remember that if you have active donations you cannot change your address";
 
 
 

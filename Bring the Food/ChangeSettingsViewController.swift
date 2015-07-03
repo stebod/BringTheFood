@@ -124,25 +124,25 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     
     // On focus textField behaviours
     @IBAction func emailOnFocus(sender: UITextField) {
-        if(sender.text == "Email"){
+        if(sender.text == NSLocalizedString("EMAIL",comment:"Email")){
             sender.text = ""
         }
     }
     
     @IBAction func nameOnFocus(sender: UITextField) {
-        if(sender.text == "Name"){
+        if(sender.text == NSLocalizedString("NAME",comment:"Name")){
             sender.text = ""
         }
     }
     
     @IBAction func phoneOnFocus(sender: UITextField) {
-        if(sender.text == "Phone"){
+        if(sender.text == NSLocalizedString("PHONE",comment:"Phone")){
             sender.text! = ""
         }
     }
     
     @IBAction func addressOnFocus(sender: UITextField) {
-        if(sender.text == "Address"){
+        if(sender.text == NSLocalizedString("ADDRESS",comment:"Address")){
             sender.text! = ""
         }
         if(addressTextField.text != ""){
@@ -153,25 +153,25 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     // Off focus textField behaviours
     @IBAction func emailOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "Email"
+            sender.text = NSLocalizedString("EMAIL",comment:"Email")
         }
     }
     
     @IBAction func nameOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "Name"
+            sender.text = NSLocalizedString("NAME",comment:"Name")
         }
     }
     
     @IBAction func phoneOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "Phone"
+            sender.text = NSLocalizedString("PHONE",comment:"Phone")
         }
     }
     
     @IBAction func addressOffFocus(sender: UITextField) {
         if (sender.text.isEmpty){
-            sender.text = "Address"
+            sender.text = NSLocalizedString("ADDRESS",comment:"Address")
         }
         addressTableView.hidden = true
         if(isExpandedForTableView == true){
@@ -189,10 +189,10 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     }
     
     private func checkIfEnableButton(){
-        if (nameTextField.text != "" && nameTextField != "Name"
-            && phoneTextField.text != "" && phoneTextField.text != "Phone"
-            && emailTextField.text != "" && emailTextField.text != "Email"
-            && addressTextField.text != "" && addressTextField.text != "Address"){
+        if (nameTextField.text != "" && nameTextField != NSLocalizedString("NAME",comment:"Name")
+            && phoneTextField.text != "" && phoneTextField.text != NSLocalizedString("PHONE",comment:"Phone")
+            && emailTextField.text != "" && emailTextField.text != NSLocalizedString("EMAIL",comment:"Email")
+            && addressTextField.text != "" && addressTextField.text != NSLocalizedString("ADDRESS",comment:"Address")){
                 if(emailTextField.text != email || phoneTextField.text != phone
                     || nameTextField.text != name || addressTextField.text != address){
                         changeSettingsButton.enabled = true
@@ -213,9 +213,9 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     @IBAction func applyChangesButtonPressed(sender: UIButton) {
         if(!isValidEmail(emailTextField.text)){
             let alert = UIAlertView()
-            alert.title = "Error"
-            alert.message = "Invalid email"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("ERROR",comment:"Error")
+            alert.message = NSLocalizedString("INVALID_EMAIL",comment:"Invalid email")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         else{
@@ -249,15 +249,15 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         else {
             if (response!.status == RequestStatus.DATA_ERROR){
                 let alert = UIAlertView()
-                alert.title = "Email not available"
-                alert.message = "The inserted email is already taken!"
-                alert.addButtonWithTitle("Dismiss")
+                alert.title = NSLocalizedString("EMAIL_NOT_AVAILABLE",comment:"Email not available")
+                alert.message = NSLocalizedString("EMAIL_NOT_AVAILABLE_MESSAGE",comment:"Email not available message")
+                alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
                 alert.show()
             } else{
                 let alert = UIAlertView()
-                alert.title = "Network error"
-                alert.message = "Check your internet connectivity"
-                alert.addButtonWithTitle("Dismiss")
+                alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+                alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+                alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
                 alert.show()
             }
             changeSettingsActivityIndicator.stopAnimating()
@@ -347,24 +347,20 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         imageController.editing = false
         imageController.delegate = self;
         
-        let alert = UIAlertController(title: "Lets get a picture", message: "Simple Message", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let libButton = UIAlertAction(title: "Select photo from library", style: UIAlertActionStyle.Default) { (alert) -> Void in
+        let alert = UIAlertController(title: NSLocalizedString("CHOOSE_AVATAR",comment:"Choose avatar"), message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let libButton = UIAlertAction(title: NSLocalizedString("SELECT_FROM_LIBRARY",comment:"Select from library"), style: UIAlertActionStyle.Default) { (alert) -> Void in
             imageController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
             self.presentViewController(imageController, animated: true, completion: nil)
         }
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
-            let cameraButton = UIAlertAction(title: "Take a picture", style: UIAlertActionStyle.Default) { (alert) -> Void in
-                println("Take Photo")
+            let cameraButton = UIAlertAction(title: NSLocalizedString("TAKE_PICTURE",comment:"Take picture"), style: UIAlertActionStyle.Default) { (alert) -> Void in
                 imageController.sourceType = UIImagePickerControllerSourceType.Camera
                 self.presentViewController(imageController, animated: true, completion: nil)
-                
             }
             alert.addAction(cameraButton)
-        } else {
-            println("Camera not available")
         }
-        let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (alert) -> Void in
-            println("Cancel Pressed")
+        let cancelButton = UIAlertAction(title: NSLocalizedString("CANCEL",comment:"Cancel"), style: UIAlertActionStyle.Cancel) { (alert) -> Void in
+            return
         }
         alert.addAction(libButton)
         alert.addAction(cancelButton)
@@ -383,7 +379,6 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         var clippedRect = CGRectMake((image.size.width - squareLength) / 2, (image.size.height - squareLength) / 2, squareLength, squareLength)
         customAvatar = UIImage(CGImage: CGImageCreateWithImageInRect(image.CGImage, clippedRect))
         changeAvatarButton.setImage(customAvatar, forState: .Normal)
-        changeSettingsButton.enabled = true
         checkIfEnableButton()
     }
     
@@ -391,9 +386,9 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     private func displayIOS7ActionSheet() -> Void {
         var actionSheet:UIActionSheet
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
-            actionSheet = UIActionSheet(title: "Hello this is IOS7", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil,otherButtonTitles:"Select photo from library", "Take a picture")
+            actionSheet = UIActionSheet(title: NSLocalizedString("CHOOSE_AVATAR",comment:"Choose avatar"), delegate: self, cancelButtonTitle: NSLocalizedString("CANCEL",comment:"Cancel"), destructiveButtonTitle: nil,otherButtonTitles:NSLocalizedString("SELECT_FROM_LIBRARY",comment:"Select from library"), NSLocalizedString("TAKE_PICTURE",comment:"Take picture"))
         } else {
-            actionSheet = UIActionSheet(title: "Hello this is IOS7", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil,otherButtonTitles:"Select photo from library")
+            actionSheet = UIActionSheet(title: NSLocalizedString("CHOOSE_AVATAR",comment:"Choose avatar"), delegate: self, cancelButtonTitle: NSLocalizedString("CANCEL",comment:"Cancel"), destructiveButtonTitle: nil,otherButtonTitles:NSLocalizedString("SELECT_FROM_LIBRARY",comment:"Select from library"))
         }
         actionSheet.delegate = self
         actionSheet.showInView(self.view)
@@ -463,16 +458,16 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         }
         else if(response!.status == RequestStatus.DATA_ERROR){
             let alert = UIAlertView()
-            alert.title = "Update failed"
-            alert.message = "If you have active donations you cannot change your address"
+            alert.title = NSLocalizedString("SETTINGS_UPDATE_FAILED",comment:"Settings update failed")
+            alert.message = NSLocalizedString("SETTINGS_UPDATE_FAILED_MESSAGE",comment:"Settings update failed message")
             alert.addButtonWithTitle("Dismiss")
             alert.show()
         }
         else{
             let alert = UIAlertView()
-            alert.title = "Network error"
-            alert.message = "Check you network connectivity and try again"
-            alert.addButtonWithTitle("Dismiss")
+            alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         changeSettingsActivityIndicator.stopAnimating()
