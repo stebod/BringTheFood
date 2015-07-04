@@ -198,18 +198,19 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     
     // Set section titles
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if(requestStatus == RequestStatus.SUCCESS){
+        if(requestStatus == RequestStatus.SUCCESS && getNotifications().count > 0){
             return NSLocalizedString("NOTIFICATIONS",comment:"Notifications")
         }
-        if(requestStatus == RequestStatus.DEVICE_ERROR){
+        if(requestStatus == RequestStatus.DEVICE_ERROR && getNotifications().count > 0){
             return NSLocalizedString("NOTIFICATIONS",comment:"Notifications") + " " + NSLocalizedString("OFFLINE_MODE",comment:"Offline mode")
         }
         return nil
     }
 
     // Display a message in case of empty table view
-    private func createEmptyView(tableView: UITableView){
-        emptyTableView = UIView(frame: CGRectMake(0, 0, tableView.bounds.width, tableView.bounds.height))
+    func createEmptyView(tableView: UITableView){
+        let emptyViewHeight = UIScreen.mainScreen().bounds.height - 65 - 49
+        emptyTableView = UIView(frame: CGRectMake(0, 0, tableView.bounds.width, emptyViewHeight))
         mainMessageLabel = UILabel()
         mainMessageLabel!.textColor = UIColor.lightGrayColor()
         mainMessageLabel!.numberOfLines = 1

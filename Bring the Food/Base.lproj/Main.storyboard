@@ -3361,12 +3361,27 @@
                             <constraint firstAttribute="trailing" secondItem="AEW-lz-2DC" secondAttribute="trailing" id="Wc6-bM-i3u"/>
                             <constraint firstItem="AEW-lz-2DC" firstAttribute="leading" secondItem="euJ-R5-dPj" secondAttribute="leading" id="cxx-au-Fnx"/>
                             <constraint firstAttribute="trailing" secondItem="AEW-lz-2DC" secondAttribute="trailing" id="dk2-tb-Lxd"/>
+                            <constraint firstAttribute="trailing" secondItem="AEW-lz-2DC" secondAttribute="trailing" id="evl-1G-yYn"/>
                             <constraint firstItem="AEW-lz-2DC" firstAttribute="top" secondItem="W9K-na-7Nj" secondAttribute="bottom" id="hR5-og-hUs"/>
                             <constraint firstItem="AEW-lz-2DC" firstAttribute="leading" secondItem="euJ-R5-dPj" secondAttribute="leading" id="jne-Bp-ssd"/>
                             <constraint firstItem="W9K-na-7Nj" firstAttribute="leading" secondItem="euJ-R5-dPj" secondAttribute="leading" id="lBx-Kh-S3P"/>
                             <constraint firstAttribute="centerX" secondItem="AEW-lz-2DC" secondAttribute="centerX" id="q0B-uB-wgK"/>
+                            <constraint firstItem="AEW-lz-2DC" firstAttribute="top" secondItem="W9K-na-7Nj" secondAttribute="bottom" id="qnU-kM-zQU"/>
+                            <constraint firstItem="dIw-JS-099" firstAttribute="top" secondItem="AEW-lz-2DC" secondAttribute="bottom" id="tJj-H5-v0Y"/>
                             <constraint firstAttribute="centerX" secondItem="W9K-na-7Nj" secondAttribute="centerX" id="wWV-Hb-v41"/>
+                            <constraint firstItem="AEW-lz-2DC" firstAttribute="leading" secondItem="euJ-R5-dPj" secondAttribute="leading" id="wbp-UY-GcA"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Wc6-bM-i3u"/>
+                                <exclude reference="cxx-au-Fnx"/>
+                                <exclude reference="dk2-tb-Lxd"/>
+                                <exclude reference="hR5-og-hUs"/>
+                                <exclude reference="jne-Bp-ssd"/>
+                                <exclude reference="1bQ-BL-7qr"/>
+                                <exclude reference="31b-Un-Aaj"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Notifications" image="notifications" id="0Ml-Td-xOL">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
