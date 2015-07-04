@@ -151,7 +151,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
         secondaryMessageLabel.textAlignment = .Center
         secondaryMessageLabel.font = UIFont(name: "HelveticaNeue-Light", size: 13)
         secondaryMessageLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        secondaryMessageLabel.text =  NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+        secondaryMessageLabel.text =  NSLocalizedString("CHECK_CONNECTIVITY_SHORT",comment:"Check connectivity")
         widthConstraint = NSLayoutConstraint(item: secondaryMessageLabel, attribute: .Width, relatedBy: .Equal,
             toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 250)
         secondaryMessageLabel.addConstraint(widthConstraint)
@@ -205,7 +205,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
             let alert = UIAlertView()
             alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
-            alert.message = NSLocalizedString("CHECK_CONNECTIVITY_SHORT",comment:"Check connectivity")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
             alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()

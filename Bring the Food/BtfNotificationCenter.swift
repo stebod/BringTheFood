@@ -114,8 +114,8 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     
     // Set number of section in table
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        emptyTableView = tableView.viewWithTag(999)
         if(notifications.count > 0){
-            emptyTableView = tableView.viewWithTag(999)
             if(emptyTableView != nil){
                 emptyTableView?.hidden = true
             }
