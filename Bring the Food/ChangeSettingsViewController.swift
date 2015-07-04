@@ -291,6 +291,9 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         self.view.layoutIfNeeded()
         isExpandedForKeyboard = false
         isExpandedForTableView = false
+        openKeyboardMovement = 0
+        openTableViewMovement = 0
+        kbHeight = 0
     }
 
     // Delegate method for tapping
