@@ -169,6 +169,10 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     
     // Enables submit donation button
     @IBAction func reactToFieldsInteraction(sender: UITextField) {
+        checkIfEnableButton()
+    }
+    
+    private func checkIfEnableButton(){
         if (descriptionTextField.text != "" && descriptionTextField.text != NSLocalizedString("DESCRIPTION",comment:"Description")
             && amountTextField.text != "" && amountTextField.text != NSLocalizedString("AMOUNT",comment:"Amount")
             && expirationTextField.text != "" && expirationTextField.text != NSLocalizedString("EXPIRATION",comment:"Expiration")){
@@ -229,6 +233,8 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
             dateFormatter.dateFormat = "dd MMM yyyy"
             expirationTextField.text = dateFormatter.stringFromDate(currentDate)
             lastDateSelected = currentDate
+            checkIfEnableButton()
+            
         }
         else{
             cookedFoodButton.selected = false
