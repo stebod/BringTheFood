@@ -93,6 +93,7 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     
     /// empties the list of notifications
     public func deleteAllNotifications(){
+        self.markAllAsRead()
         self.notifications = [Int:BtfNotification]()
     }
     
