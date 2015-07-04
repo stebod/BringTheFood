@@ -102,7 +102,7 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
         addressLabel.text = address[first...first].uppercaseString + address[rest]
         
         expirationLabel.text = String(othersDonationsFilteredList[row].getRemainingDays()) + NSLocalizedString("DAYS",comment:"d")
-        amountLabel.text = "\(othersDonationsFilteredList[row].getParcelSize())"
+        amountLabel.text = "\(Int(othersDonationsFilteredList[row].getParcelSize()))"
         let parcelUnit = othersDonationsFilteredList[row].getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
             kgIcon.hidden = false

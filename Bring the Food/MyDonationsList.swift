@@ -122,7 +122,7 @@ public class MyDonationsList: NSObject, UITableViewDataSource, UITableViewDelega
         else{
             expirationLabel.text = NSLocalizedString("EXPIRED",comment:"Expired")
         }
-        amountLabel.text = "\(donation.getParcelSize())"
+        amountLabel.text = "\(Int(donation.getParcelSize()))"
         let parcelUnit = donation.getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
             kgIcon.hidden = false
