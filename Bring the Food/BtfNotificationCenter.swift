@@ -245,7 +245,6 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
         emptyTableView!.addConstraint(yConstraint)
         emptyTableView?.tag = 999
         tableView.addSubview(emptyTableView!)
-        tableView.bringSubviewToFront(emptyTableView!)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     

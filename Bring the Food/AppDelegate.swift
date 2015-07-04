@@ -19,8 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         GMSServices.provideAPIKey(gMapsAPIKey)
-        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge, categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        let iOS7 = floor(NSFoundationVersionNumber) <= floor(NSFoundationVersionNumber_iOS_7_1)
+        if(!iOS7){
+            let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge, categories: nil)
+            UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        }
         // Get reference to storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if (RestInterface.getInstance().isLoggedIn()){

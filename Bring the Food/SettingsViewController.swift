@@ -205,7 +205,7 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
             let alert = UIAlertView()
             alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
-            alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
+            alert.message = NSLocalizedString("CHECK_CONNECTIVITY_SHORT",comment:"Check connectivity")
             alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.delegate = self
             alert.show()
