@@ -134,6 +134,10 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     }
     
     func setUpInterface(){
+        freshFoodImageView.image = UIImage(named: NSLocalizedString("FRESH_GREY",comment:"Fresh grey"))
+        cookedFoodImageView.image = UIImage(named: NSLocalizedString("COOKED_GREY",comment:"Cooked grey"))
+        driedFoodImageView.image = UIImage(named: NSLocalizedString("DRIED_GREY",comment:"Dried grey"))
+        frozenFoodImageView.image = UIImage(named: NSLocalizedString("FROZEN_GREY",comment:"Frozen grey"))
         descriptionTextField.text = donation!.getDescription()
         amountTextField.text = String(stringInterpolationSegment: Int(donation!.getParcelSize()))
         var dateFormatter = NSDateFormatter()

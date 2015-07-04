@@ -199,13 +199,17 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         amountTextField.text = NSLocalizedString("AMOUNT",comment:"Amount")
         expirationTextField.text = NSLocalizedString("EXPIRATION",comment:"Expiration")
         productType = ProductType.FRESH
-        freshFoodButton.setImage(UIImage(named: "fresh"), forState: UIControlState.Selected)
+        freshFoodButton.setImage(UIImage(named: NSLocalizedString("FRESH",comment:"Fresh")), forState: UIControlState.Selected)
+        freshFoodButton.setImage(UIImage(named: NSLocalizedString("FRESH_GREY",comment:"Fresh grey")), forState: UIControlState.Normal)
         freshFoodButton.highlighted = false
-        cookedFoodButton.setImage(UIImage(named: "cooked"), forState: UIControlState.Selected)
+        cookedFoodButton.setImage(UIImage(named: NSLocalizedString("COOKED",comment:"Cooked")), forState: UIControlState.Selected)
+        cookedFoodButton.setImage(UIImage(named: NSLocalizedString("COOKED_GREY",comment:"Cooked grey")), forState: UIControlState.Normal)
         cookedFoodButton.highlighted = false
-        driedFoodButton.setImage(UIImage(named: "dried"), forState: UIControlState.Selected)
+        driedFoodButton.setImage(UIImage(named: NSLocalizedString("DRIED",comment:"Dried")), forState: UIControlState.Selected)
+        driedFoodButton.setImage(UIImage(named: NSLocalizedString("DRIED_GREY",comment:"Dried grey")), forState: UIControlState.Normal)
         driedFoodButton.highlighted = false
-        frozenFoodButton.setImage(UIImage(named: "frozen"), forState: UIControlState.Selected)
+        frozenFoodButton.setImage(UIImage(named: NSLocalizedString("FROZEN",comment:"Frozen")), forState: UIControlState.Selected)
+        frozenFoodButton.setImage(UIImage(named: NSLocalizedString("FROZEN_GREY",comment:"Frozen grey")), forState: UIControlState.Normal)
         frozenFoodButton.highlighted = false
         updateFoodType()
         parcelUnit = ParcelUnit.KILOGRAMS
