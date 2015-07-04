@@ -147,6 +147,7 @@ public class BtfNotificationCenter: NSObject, UITableViewDataSource, UITableView
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         let notification = getNotifications()[indexPath.row]
         let typeLabel = cell.viewWithTag(1000) as! UILabel
         let descriptionLabel = cell.viewWithTag(1001) as! UILabel

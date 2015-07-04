@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         GMSServices.provideAPIKey(gMapsAPIKey)
+        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge, categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         // Get reference to storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if (RestInterface.getInstance().isLoggedIn()){
@@ -80,9 +82,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let badge = (tabBarController.tabBar.items as! [UITabBarItem])[3]
             if(newNotifications > 0){
                 badge.badgeValue = String(notifications.getNumberOfNewNotifications())
+                UIApplication.sharedApplication().applicationIconBadgeNumber = notifications.getNumberOfNewNotifications()
             }
             else{
                 badge.badgeValue = nil
+                UIApplication.sharedApplication().applicationIconBadgeNumber = 0
             }
         }
     }
@@ -91,6 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if(notificationObserver != nil){
             NSNotificationCenter.defaultCenter().removeObserver(notificationObserver)
             notificationObserver = nil
+            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         }
     }
     

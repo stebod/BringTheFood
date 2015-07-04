@@ -53,9 +53,11 @@ class NotificationsViewController: UIViewController, UIAlertViewDelegate {
             notifications!.markAllAsRead()
             if(notifications!.getNumberOfNewNotifications() == 0){
                 (self.tabBarController?.tabBar.items as! [UITabBarItem])[3].badgeValue = nil
+                UIApplication.sharedApplication().applicationIconBadgeNumber = 0
             }
             else{
                 (self.tabBarController?.tabBar.items as! [UITabBarItem])[3].badgeValue = String(notifications!.getNumberOfNewNotifications())
+                UIApplication.sharedApplication().applicationIconBadgeNumber = notifications!.getNumberOfNewNotifications()
             }
         }
         NSNotificationCenter.defaultCenter().removeObserver(notificationObserver!)
@@ -111,6 +113,15 @@ class NotificationsViewController: UIViewController, UIAlertViewDelegate {
             Model.getInstance().downloadMyNotifications()
             refreshControl.beginRefreshing()
             tableView.allowsSelection = false
+            notifications!.markAllAsRead()
+            if(notifications!.getNumberOfNewNotifications() == 0){
+                (self.tabBarController?.tabBar.items as! [UITabBarItem])[3].badgeValue = nil
+                UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+            }
+            else{
+                (self.tabBarController?.tabBar.items as! [UITabBarItem])[3].badgeValue = String(notifications!.getNumberOfNewNotifications())
+                UIApplication.sharedApplication().applicationIconBadgeNumber = notifications!.getNumberOfNewNotifications()
+            }
         }
     }
 }
