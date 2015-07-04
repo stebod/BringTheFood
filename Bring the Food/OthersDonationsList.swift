@@ -35,8 +35,8 @@ public class OthersDonationsList: NSObject, UITableViewDataSource, UITableViewDe
     
     // Set number of section in table
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        emptyTableView = tableView.viewWithTag(999)
         if(othersDonationsFilteredList.count > 0){
-            emptyTableView = tableView.viewWithTag(999)
             if(emptyTableView != nil){
                 emptyTableView?.hidden = true
             }
