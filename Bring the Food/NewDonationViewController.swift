@@ -184,14 +184,23 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     }
     
     @IBAction func submitDonationButtonPressed(sender: UIButton) {
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dateFormatter.stringFromDate(lastDateSelected!)
-        let filteredDescription = descriptionTextField.text.stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        let donation = NewDonation(filteredDescription, parcelSize: (amountTextField.text as NSString).floatValue, parcelUnit: parcelUnit!, productDate: Date(dateString: dateString), productType: productType!)
-        RestInterface.getInstance().createDonation(donation)
-        submitDonationButton.enabled = false
-        activityIndicator.startAnimating()
+        if(amountTextField.text.toInt() < 1000000){
+            var dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateString = dateFormatter.stringFromDate(lastDateSelected!)
+            let filteredDescription = descriptionTextField.text.stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            let donation = NewDonation(filteredDescription, parcelSize: (amountTextField.text as NSString).floatValue, parcelUnit: parcelUnit!, productDate: Date(dateString: dateString), productType: productType!)
+            RestInterface.getInstance().createDonation(donation)
+            submitDonationButton.enabled = false
+            activityIndicator.startAnimating()
+        }
+        else{
+            let alert = UIAlertView()
+            alert.title = NSLocalizedString("EXCESSIVE_AMOUNT",comment:"Too many kg")
+            alert.message = NSLocalizedString("EXCESSIVE_AMOUNT_MESSAGE",comment:"Too many kg message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
+            alert.show()
+        }
     }
     
     func setUpInterface(){

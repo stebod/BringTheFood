@@ -103,3 +103,5 @@ FROZEN_GREY="surgelato_grey";
 WARNING="Attenzione";
 ERASE_ALL_MESSAGE="State per cancellare tutte le notifiche. Procedere?";
 OK="Ok";
+EXCESSIVE_AMOUNT="Quantitativo eccessivo";
+EXCESSIVE_AMOUNT_MESSAGE="Per effettuare una donazione di tale portata contattare direttamente i gestori di BringTheFood";

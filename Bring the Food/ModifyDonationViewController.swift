@@ -128,9 +128,18 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     }
     
     @IBAction func submitDonationButtonPressed(sender: UIButton) {
-        donation?.modify(descriptionTextField.text, newParcelSize: (amountTextField.text as NSString).floatValue)
-        updateDonationButton.enabled = false
-        activityIndicator.startAnimating()
+        if(amountTextField.text.toInt() < 1000000){
+            donation?.modify(descriptionTextField.text, newParcelSize: (amountTextField.text as NSString).floatValue)
+            updateDonationButton.enabled = false
+            activityIndicator.startAnimating()
+        }
+        else{
+            let alert = UIAlertView()
+            alert.title = NSLocalizedString("EXCESSIVE_AMOUNT",comment:"Too many kg")
+            alert.message = NSLocalizedString("EXCESSIVE_AMOUNT_MESSAGE",comment:"Too many kg message")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
+            alert.show()
+        }
     }
     
     func setUpInterface(){

@@ -103,7 +103,8 @@ FROZEN_GREY="frozen_grey";
 WARNING="Warning";
 ERASE_ALL_MESSAGE="You are about to delete your notification. Do you really want to proceed?";
 OK="Ok";
-
+EXCESSIVE_AMOUNT="Excessive amount";
+EXCESSIVE_AMOUNT_MESSAGE="To donate large amount of products, please contact BringTheFood representatives directly";
 
 
 
