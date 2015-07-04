@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsViewController: UIViewController {
+class NotificationsViewController: UIViewController, UIAlertViewDelegate {
     
     // Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -76,11 +76,14 @@ class NotificationsViewController: UIViewController {
     }
     
     @IBAction func clearButtonPressed(sender: UIButton) {
-        if(notifications != nil){
-            notifications?.deleteAllNotifications()
-            Model.getInstance().downloadMyNotifications()
-            refreshControl.beginRefreshing()
-        }
+        let alert = UIAlertView()
+        alert.title = NSLocalizedString("WARNING",comment:"Warning")
+        alert.message = NSLocalizedString("ERASE_ALL_MESSAGE",comment:"Erase all message")
+        alert.addButtonWithTitle(NSLocalizedString("OK",comment:"Ok"))
+        alert.addButtonWithTitle(NSLocalizedString("CANCEL",comment:"Cancel"))
+        alert.cancelButtonIndex = 1
+        alert.delegate = self
+        alert.show()
     }
     
     func handleNotifications(notification: NSNotification){
@@ -96,5 +99,14 @@ class NotificationsViewController: UIViewController {
     // Refresh table content
     func handleRefresh(refreshControl: UIRefreshControl) {
         Model.getInstance().downloadMyNotifications()
+    }
+    
+    // AlertView delegate
+    func alertView(View: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        if(notifications != nil && buttonIndex == 0){
+            notifications?.deleteAllNotifications()
+            Model.getInstance().downloadMyNotifications()
+            refreshControl.beginRefreshing()
+        }
     }
 }

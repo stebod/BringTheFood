@@ -96,3 +96,6 @@ DRIED="secco";
 FRESH="fresco";
 COOKED="cotto";
 FROZEN="surgelato";
+WARNING="Attenzione";
+ERASE_ALL_MESSAGE="State per cancellare tutte le notifiche. Procedere?";
+OK="Ok";

@@ -206,6 +206,7 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
         updateFoodType()
         parcelUnit = ParcelUnit.KILOGRAMS
         updateParcelUnit()
+        submitDonationButton.enabled = false
     }
     
     // Delegate method for tapping

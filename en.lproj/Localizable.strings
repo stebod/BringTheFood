@@ -96,6 +96,11 @@ DRIED="dried";
 FRESH="fresh";
 COOKED="cooked";
 FROZEN="frozen";
+WARNING="Warning";
+ERASE_ALL_MESSAGE="You are about to delete your notification. Do you really want to proceed?";
+OK="Ok";
+
+
 
 
 
