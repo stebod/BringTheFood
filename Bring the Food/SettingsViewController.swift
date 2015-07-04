@@ -166,7 +166,6 @@ class SettingsViewController: UIViewController, UIAlertViewDelegate {
         deltaLength = contentView.bounds.height - emptyViewHeight
         bottomLayoutConstraint.constant -= deltaLength!
         xConstraint = NSLayoutConstraint(item: emptyView!, attribute: .CenterX, relatedBy: .Equal, toItem: scrollView, attribute: .CenterX, multiplier: 1, constant: 0)
-        yConstraint = NSLayoutConstraint(item: emptyView!, attribute: .CenterY, relatedBy: .Equal, toItem: scrollView, attribute: .CenterY, multiplier: 1, constant: 0)
         scrollView.addSubview(emptyView!)
         scrollView.addConstraint(xConstraint)
         scrollView.addConstraint(yConstraint)

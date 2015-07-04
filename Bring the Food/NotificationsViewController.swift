@@ -111,7 +111,6 @@ class NotificationsViewController: UIViewController, UIAlertViewDelegate {
         if(notifications != nil && buttonIndex == 0){
             notifications?.deleteAllNotifications()
             Model.getInstance().downloadMyNotifications()
-            refreshControl.beginRefreshing()
             tableView.allowsSelection = false
             notifications!.markAllAsRead()
             if(notifications!.getNumberOfNewNotifications() == 0){
@@ -122,6 +121,7 @@ class NotificationsViewController: UIViewController, UIAlertViewDelegate {
                 (self.tabBarController?.tabBar.items as! [UITabBarItem])[3].badgeValue = String(notifications!.getNumberOfNewNotifications())
                 UIApplication.sharedApplication().applicationIconBadgeNumber = notifications!.getNumberOfNewNotifications()
             }
+            refreshControl.beginRefreshing()
         }
     }
 }

@@ -3567,7 +3567,6 @@
                                             <constraint firstAttribute="trailing" secondItem="kWD-F1-35w" secondAttribute="trailing" constant="1" id="JLh-ni-jr3"/>
                                             <constraint firstAttribute="centerX" secondItem="NXM-1V-l2M" secondAttribute="centerX" id="Jmk-Up-Sdn"/>
                                             <constraint firstAttribute="trailing" secondItem="8hI-UE-B6p" secondAttribute="trailing" constant="1" id="Kbe-sP-xBD"/>
-                                            <constraint firstItem="dd2-zQ-53p" firstAttribute="leading" secondItem="NXM-1V-l2M" secondAttribute="trailing" constant="-320" id="LhC-TD-j6x"/>
                                             <constraint firstItem="8hI-UE-B6p" firstAttribute="leading" secondItem="Ym4-cL-naq" secondAttribute="leading" constant="24" id="Nau-aW-RAa"/>
                                             <constraint firstItem="RPu-M6-0SM" firstAttribute="leading" secondItem="cHN-nC-Cfg" secondAttribute="leading" id="Ncd-fD-hy2"/>
                                             <constraint firstAttribute="trailing" secondItem="N8G-6h-b0g" secondAttribute="trailing" constant="20" id="UOb-EG-1eW"/>
@@ -3589,11 +3588,6 @@
                                             <constraint firstItem="knj-vp-yvo" firstAttribute="leading" secondItem="Ym4-cL-naq" secondAttribute="leading" constant="20" id="zA1-kD-APy"/>
                                             <constraint firstItem="dd2-zQ-53p" firstAttribute="leading" secondItem="Ym4-cL-naq" secondAttribute="leading" constant="20" id="zDS-YY-KzF"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="LhC-TD-j6x"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
