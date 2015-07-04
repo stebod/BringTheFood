@@ -44,6 +44,7 @@ class NotificationsViewController: UIViewController, UIAlertViewDelegate {
             usingBlock: {(notification:NSNotification!) in self.handleNotifications(notification)})
         Model.getInstance().downloadMyNotifications()
         refreshControl.beginRefreshing()
+        tableView.allowsSelection = false
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -94,11 +95,13 @@ class NotificationsViewController: UIViewController, UIAlertViewDelegate {
         tableView.delegate = notifications
         tableView.reloadData()
         refreshControl.endRefreshing()
+        tableView.allowsSelection = true
     }
     
     // Refresh table content
     func handleRefresh(refreshControl: UIRefreshControl) {
         Model.getInstance().downloadMyNotifications()
+        tableView.allowsSelection = false
     }
     
     // AlertView delegate
@@ -107,6 +110,7 @@ class NotificationsViewController: UIViewController, UIAlertViewDelegate {
             notifications?.deleteAllNotifications()
             Model.getInstance().downloadMyNotifications()
             refreshControl.beginRefreshing()
+            tableView.allowsSelection = false
         }
     }
 }

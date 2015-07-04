@@ -47,6 +47,7 @@ class MyDonationsViewController: UIViewController, DisplayMyDetail {
             usingBlock: {(notification:NSNotification!) in self.fillTableView(notification)})
         Model.getInstance().downloadMyDonationsList()
         refreshControl.beginRefreshing()
+        tableView.allowsSelection = false
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -85,11 +86,13 @@ class MyDonationsViewController: UIViewController, DisplayMyDetail {
         tableView.delegate = myDonationsList
         tableView.reloadData()
         refreshControl.endRefreshing()
+        tableView.allowsSelection = true
     }
     
     // Refresh table content
     func handleRefresh(refreshControl: UIRefreshControl) {
         Model.getInstance().downloadMyDonationsList()
+        tableView.allowsSelection = false
     }
     
     // Delegate for triggering detail segue

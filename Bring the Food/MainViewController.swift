@@ -49,6 +49,7 @@ class MainViewController: UIViewController, FilterProtocol, DisplayOthersDetail 
             usingBlock: {(notification:NSNotification!) in self.fillTableView(notification)})
         Model.getInstance().downloadOthersDonationsList()
         refreshControl.beginRefreshing()
+        tableView.allowsSelection = false
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -102,11 +103,13 @@ class MainViewController: UIViewController, FilterProtocol, DisplayOthersDetail 
         tableView.delegate = othersDonationsList
         tableView.reloadData()
         refreshControl.endRefreshing()
+        tableView.allowsSelection = true
     }
     
     // Refresh table content
     func handleRefresh(refreshControl: UIRefreshControl) {
         Model.getInstance().downloadOthersDonationsList()
+        tableView.allowsSelection = false
     }
     
     // Apply filters
@@ -117,6 +120,7 @@ class MainViewController: UIViewController, FilterProtocol, DisplayOthersDetail 
             tableView.dataSource = othersDonationsList
             tableView.delegate = othersDonationsList
             tableView.reloadData()
+            tableView.allowsSelection = true
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }

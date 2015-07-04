@@ -45,6 +45,7 @@ class BookingsViewController: UIViewController, DisplayBookedDetail {
             usingBlock: {(notification:NSNotification!) in self.fillTableView(notification)})
         Model.getInstance().downloadMyBookings()
         refreshControl.beginRefreshing()
+        tableView.allowsSelection = false
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -84,11 +85,13 @@ class BookingsViewController: UIViewController, DisplayBookedDetail {
         tableView.delegate = bookingsList
         tableView.reloadData()
         refreshControl.endRefreshing()
+        tableView.allowsSelection = true
     }
     
     // Refresh table content
     func handleRefresh(refreshControl: UIRefreshControl) {
         Model.getInstance().downloadMyBookings()
+        tableView.allowsSelection = false
     }
     
     // Delegate for triggering detail segue
