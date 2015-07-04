@@ -240,6 +240,7 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
             cookedFoodButton.selected = false
             expirationTextField.enabled = true
             expirationTextField.text = NSLocalizedString("EXPIRATION",comment:"Expiration")
+            checkIfEnableButton()
         }
         if(productType == ProductType.DRIED){
             driedFoodButton.selected = true
