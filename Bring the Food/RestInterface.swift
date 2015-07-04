@@ -160,7 +160,7 @@ public class RestInterface : NSObject{
             postString += "\"parcel_size\": \(donation.getParcelSize()),"
             postString += "\"unit\": \"\(donation.getParcelUnit().description)\","
             postString += "\"product_date\": \"\(donation.getProductDate().getDateString())\","
-            postString += "\"product_type\": \"\(donation.getProductType().description)\""
+            postString += "\"product_type\": \"\(donation.getProductType().serverDescription)\""
             postString += " } } "
            
             request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)

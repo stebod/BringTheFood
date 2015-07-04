@@ -17,8 +17,18 @@ public enum ProductType : Printable {
     case COOKED
     case FROZEN
     
-    /// :returns: the string used in POST requests to communicate the "product_type" data to the server
+    /// :returns: a strings describing the product type to the gui
     public var description : String {
+        switch self {
+        case .DRIED: return NSLocalizedString("DRIED",comment:"dried")
+        case .FRESH: return NSLocalizedString("FRESH",comment:"fresh")
+        case .COOKED: return NSLocalizedString("COOKED",comment:"cooked")
+        case .FROZEN: return NSLocalizedString("FROZEN",comment:"frozen")
+        }
+    }
+    
+    /// :returns: the string used in POST requests to communicate the "product_type" data to the server
+    public var serverDescription : String {
         switch self {
         case .DRIED: return NSLocalizedString("DRIED",comment:"dried")
         case .FRESH: return NSLocalizedString("FRESH",comment:"fresh")
