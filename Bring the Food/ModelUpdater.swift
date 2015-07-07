@@ -151,7 +151,16 @@ public class ModelUpdater : NSObject{
                 // general info about the donation
                 let donId = e["id"] as! Int!
                 let donDescription = e["description"] as! String!
-                let donParcelSize = e["parcel_size"] as! Float!
+                
+                let sizeDouble = e["parcel_size"] as! Double!
+                let donParcelSize : Float
+                if sizeDouble > Double(Int.max) {
+                    donParcelSize = Float(Int.max)
+                } else {
+                    donParcelSize = Float(sizeDouble)
+                }
+                
+                
                 let donParcelUnit = ParcelUnitFactory.getParcUnitFromString(e["unit"] as! String!)
                 let untilDate = e["until"] as! String!
                 let donProductDate = Date(dateString: prefix(untilDate, 10))
@@ -213,7 +222,16 @@ public class ModelUpdater : NSObject{
                     // general info about the donation
                     let donId = e["id"] as! Int!
                     let donDescription = e["description"] as! String!
-                    let donParcelSize = e["parcel_size"] as! Float!
+                    
+                    let sizeDouble = e["parcel_size"] as! Double!
+                    let donParcelSize : Float
+                    if sizeDouble > Double(Int.max) {
+                        donParcelSize = Float(Int.max)
+                    } else {
+                        donParcelSize = Float(sizeDouble)
+                    }
+                    
+                    
                     let donParcelUnit = ParcelUnitFactory.getParcUnitFromString(e["unit"] as! String!)
                     let untilDate = e["until"] as! String!
                     let donProductDate = Date(dateString: prefix(untilDate, 10))
@@ -292,7 +310,17 @@ public class ModelUpdater : NSObject{
                 // general info about the donation
                 let donId = e.valueForKeyPath("donation.id") as! Int!
                 let donDescription = e.valueForKeyPath("donation.description")  as! String!
-                let donParcelSize = e.valueForKeyPath("donation.parcel_size") as! Float!
+                
+                
+                let sizeDouble = e.valueForKeyPath("donation.parcel_size") as! Double!
+                let donParcelSize : Float
+                if sizeDouble > Double(Int.max) {
+                    donParcelSize = Float(Int.max)
+                } else {
+                    donParcelSize = Float(sizeDouble)
+                }
+                
+                
                 let donParcelUnit = ParcelUnitFactory.getParcUnitFromString(e.valueForKeyPath("donation.unit") as! String!)
                 let untilDate = e.valueForKeyPath("donation.until") as! String!
                 let donProductDate = Date(dateString: prefix(untilDate, 10))
