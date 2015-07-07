@@ -59,10 +59,6 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
         // Register notification center observer
-        updateDonationObserver = NSNotificationCenter.defaultCenter().addObserverForName(donationUpdatedNotificationKey,
-            object: ModelUpdater.getInstance(),
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.handleUpdateDonation(notification)})
         keyboardWillShowObserver = NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillShowNotification,
             object: nil, queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.keyboardWillShow(notification)})
@@ -75,7 +71,6 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     }
     
     override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(updateDonationObserver!)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillShowObserver!)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillHideObserver!)
         self.view.removeGestureRecognizer(tapRecognizer)
@@ -129,6 +124,12 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     
     @IBAction func submitDonationButtonPressed(sender: UIButton) {
         if((amountTextField.text as NSString).floatValue < Float(Int.max)){
+            if(updateDonationObserver == nil){
+                updateDonationObserver = NSNotificationCenter.defaultCenter().addObserverForName(donationUpdatedNotificationKey,
+                    object: ModelUpdater.getInstance(),
+                    queue: NSOperationQueue.mainQueue(),
+                    usingBlock: {(notification:NSNotification!) in self.handleUpdateDonation(notification)})
+            }
             donation?.modify(descriptionTextField.text, newParcelSize: (amountTextField.text as NSString).floatValue)
             updateDonationButton.enabled = false
             activityIndicator.startAnimating()
@@ -220,6 +221,7 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
         }
         activityIndicator.stopAnimating()
         updateDonationButton.enabled = true
+        NSNotificationCenter.defaultCenter().removeObserver(updateDonationObserver!)
     }
     
     // Called when keyboard appears on screen
