@@ -148,7 +148,7 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
         driedFoodImageView.image = UIImage(named: NSLocalizedString("DRIED_GREY",comment:"Dried grey"))
         frozenFoodImageView.image = UIImage(named: NSLocalizedString("FROZEN_GREY",comment:"Frozen grey"))
         descriptionTextField.text = donation!.getDescription()
-        amountTextField.text = String(stringInterpolationSegment: Int(donation!.getParcelSize()))
+        amountTextField.text = donation!.getParcelSize() < Float(Int.max) ? "\(Int(donation!.getParcelSize()))" : "\(Int.max)"
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd MMM yyyy"
         expirationLabel.text = dateFormatter.stringFromDate(donation!.getProductDate().getDate())
