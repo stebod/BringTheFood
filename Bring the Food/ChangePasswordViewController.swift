@@ -146,7 +146,7 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
             alert.show()
         }
         else{
-            if(passwordObserver != nil){
+            if(passwordObserver == nil){
                 passwordObserver = NSNotificationCenter.defaultCenter().addObserverForName(passwordChangedNotificationKey,
                     object: ModelUpdater.getInstance(),
                     queue: NSOperationQueue.mainQueue(),
