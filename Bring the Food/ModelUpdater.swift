@@ -155,7 +155,7 @@ public class ModelUpdater : NSObject{
                 let sizeDouble = e["parcel_size"] as! Double!
                 let donParcelSize : Float
                 if sizeDouble > Double(Int.max) {
-                    donParcelSize = Float(Int.max)
+                    donParcelSize = Float(Int.max - 1)
                 } else {
                     donParcelSize = Float(sizeDouble)
                 }
@@ -226,7 +226,7 @@ public class ModelUpdater : NSObject{
                     let sizeDouble = e["parcel_size"] as! Double!
                     let donParcelSize : Float
                     if sizeDouble > Double(Int.max) {
-                        donParcelSize = Float(Int.max)
+                        donParcelSize = Float(Int.max - 1)
                     } else {
                         donParcelSize = Float(sizeDouble)
                     }
@@ -315,7 +315,7 @@ public class ModelUpdater : NSObject{
                 let sizeDouble = e.valueForKeyPath("donation.parcel_size") as! Double!
                 let donParcelSize : Float
                 if sizeDouble > Double(Int.max) {
-                    donParcelSize = Float(Int.max)
+                    donParcelSize = Float(Int.max - 1)
                 } else {
                     donParcelSize = Float(sizeDouble)
                 }
