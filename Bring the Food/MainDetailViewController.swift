@@ -107,7 +107,7 @@ class MainDetailViewController: UIViewController, MKMapViewDelegate, UIAlertView
         infoPanelView.layer.borderColor = UIMainColor.CGColor
         infoPanelView.layer.borderWidth = 1.0
         foodTypeLabel.text = donation!.getProductType().description
-        foodQuantityLabel.text = String(stringInterpolationSegment: Int(donation!.getParcelSize()))
+        foodQuantityLabel.text = donation!.getParcelSize() < Float(Int.max) ? "\(Int(donation!.getParcelSize()))" : "\(Int.max)"
         let parcelUnit = donation!.getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
             quantityKgImageView.hidden = false
