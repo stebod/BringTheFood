@@ -99,10 +99,12 @@ class NotificationSettingsViewController: UIViewController, UIAlertViewDelegate 
     }
     
     @IBAction func applyButtonPressed(sender: UIButton) {
-        changeNotificationsObserver = NSNotificationCenter.defaultCenter().addObserverForName(settingsUpdatedNotificationKey,
-            object: ModelUpdater.getInstance(),
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.handleChangedSettings(notification)})
+        if(changeNotificationsObserver == nil){
+            changeNotificationsObserver = NSNotificationCenter.defaultCenter().addObserverForName(settingsUpdatedNotificationKey,
+                object: ModelUpdater.getInstance(),
+                queue: NSOperationQueue.mainQueue(),
+                usingBlock: {(notification:NSNotification!) in self.handleChangedSettings(notification)})
+        }
         RestInterface.getInstance().updateSettings(newDonationSwitch.on, bookedEmail: newBookingSwitch.on, retractedEmail: dropBookingSwitch.on, collectedEmail: collectedDonationSwitch.on, maxDistance: currentDistance)
         applyChangesButton.enabled = false
         applyChangesActivityIndicator.startAnimating()
