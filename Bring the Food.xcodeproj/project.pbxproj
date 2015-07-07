@@ -99,6 +99,8 @@
 		B3BEE6091B33431D001F7E7F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF98B11B2F97C000E79515 /* FilterViewController.swift */; };
 		B3BF98B21B2F97C000E79515 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF98B11B2F97C000E79515 /* FilterViewController.swift */; };
 		B3C46D741B3EB7FD003B602F /* NewDonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C46D731B3EB7FD003B602F /* NewDonationViewController.swift */; };
+		B3D62D6B1B4BD67100022A62 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D62D6A1B4BD67100022A62 /* UIImageExtension.swift */; };
+		B3D62D6C1B4BD68900022A62 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D62D6A1B4BD67100022A62 /* UIImageExtension.swift */; };
 		B3DD68D11B4426BD0049BF36 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD68D01B4426BD0049BF36 /* NotificationsViewController.swift */; };
 		B3DED4811B2CA00F00F9808D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DED4801B2CA00F00F9808D /* MainViewController.swift */; };
 		B3E762131B2488FC004C631F /* SignInStep1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E762121B2488FC004C631F /* SignInStep1ViewController.swift */; };
@@ -178,6 +180,7 @@
 		B3BD162A1B3B4984003E755E /* ChangeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeSettingsViewController.swift; sourceTree = "<group>"; };
 		B3BF98B11B2F97C000E79515 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		B3C46D731B3EB7FD003B602F /* NewDonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDonationViewController.swift; sourceTree = "<group>"; };
+		B3D62D6A1B4BD67100022A62 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		B3DD68D01B4426BD0049BF36 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		B3DED4801B2CA00F00F9808D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B3E762121B2488FC004C631F /* SignInStep1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInStep1ViewController.swift; sourceTree = "<group>"; };
@@ -300,6 +303,7 @@
 				3B3441441B300B420080360D /* NSUserDefaultsKeys.swift */,
 				B3A30B0E1B32BBE200F733E0 /* FilterState.swift */,
 				3B2C402B1B4532030064F56B /* NotificationType.swift */,
+				B3D62D6A1B4BD67100022A62 /* UIImageExtension.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -566,6 +570,7 @@
 				3B2C402C1B4532030064F56B /* NotificationType.swift in Sources */,
 				3BC327181B2DB8D0002F0DCE /* RestInterface.swift in Sources */,
 				3B9501C81B35FC5000D2DC97 /* OthersDonation.swift in Sources */,
+				B3D62D6B1B4BD67100022A62 /* UIImageExtension.swift in Sources */,
 				3B9FD1221B3AAE290016F56D /* LocationAutocompleter.swift in Sources */,
 				3B2727F21B2CA9BA0064F53A /* BookingsList.swift in Sources */,
 				3B4AE1621B2B5AF800436903 /* User.swift in Sources */,
@@ -627,6 +632,7 @@
 				3BD284751B2C089200D77319 /* ModelUpdater.swift in Sources */,
 				B3BEE6071B33412C001F7E7F /* OthersDonationsList.swift in Sources */,
 				3B132AA11B28CE8700D8A09F /* Date.swift in Sources */,
+				B3D62D6C1B4BD68900022A62 /* UIImageExtension.swift in Sources */,
 				B3BEE6081B3342BF001F7E7F /* MainViewController.swift in Sources */,
 				3BD2847A1B2C0C9C00D77319 /* ApplicationSettings.swift in Sources */,
 				3B9501C91B35FC5000D2DC97 /* OthersDonation.swift in Sources */,
