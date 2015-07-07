@@ -377,7 +377,8 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         changeAvatarButton.clipsToBounds = true
         changeAvatarButton.layer.borderWidth = 3.0;
         changeAvatarButton.layer.borderColor = UIMainColor.CGColor
-        customAvatar = image!.imageRotatedByDegrees(false)
+        customAvatar = image.fixOrientation()
+        let originalImage = image!
         println("Image size: \(customAvatar!.size)")
         // Use smallest side length as crop square length
         var squareLength = min(customAvatar!.size.width, customAvatar!.size.height)
@@ -386,6 +387,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         println("Rect: \(clippedRect.size)")
         customAvatar = UIImage(CGImage: CGImageCreateWithImageInRect(customAvatar!.CGImage, clippedRect))
         println("Cropped image size: \(customAvatar!.size)")
+        let customAvatarUnwrapped = customAvatar!
         changeAvatarButton.setImage(customAvatar, forState: .Normal)
         checkIfEnableButton()
     }
