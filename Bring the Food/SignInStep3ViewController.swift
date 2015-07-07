@@ -248,7 +248,7 @@ class SignInStep3ViewController: UIViewController, UINavigationControllerDelegat
         changeAvatarButton.clipsToBounds = true
         changeAvatarButton.layer.borderWidth = 3.0;
         changeAvatarButton.layer.borderColor = UIMainColor.CGColor
-        customAvatar = image!.imageRotatedByDegrees(false)
+        customAvatar = image.fixOrientation()
         // Use smallest side length as crop square length
         var squareLength = min(customAvatar!.size.width, customAvatar!.size.height)
         var clippedRect = CGRectMake((customAvatar!.size.width - squareLength) / 2, (customAvatar!.size.height - squareLength) / 2, squareLength, squareLength)
