@@ -381,7 +381,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         var squareLength = min(image.size.width, image.size.height)
         var clippedRect = CGRectMake((image.size.width - squareLength) / 2, (image.size.height - squareLength) / 2, squareLength, squareLength)
         customAvatar = UIImage(CGImage: CGImageCreateWithImageInRect(image.CGImage, clippedRect))
-        customAvatar = customAvatar?.imageRotatedByDegrees(false)
+        customAvatar = customAvatar!.imageRotatedByDegrees(false)
         changeAvatarButton.setImage(customAvatar, forState: .Normal)
         checkIfEnableButton()
     }
