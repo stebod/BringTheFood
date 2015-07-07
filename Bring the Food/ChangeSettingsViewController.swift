@@ -72,14 +72,6 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     override func viewWillAppear(animated: Bool) {
         locationAutocompleter = LocationAutocompleter(delegate: self)
         // Set tap recognizer on the view
-        mailObserver = NSNotificationCenter.defaultCenter().addObserverForName(mailAvailabilityResponseNotificationKey,
-            object: ModelUpdater.getInstance(),
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.emailAvailabilityHandler(notification)})
-        changeSettingsObserver = NSNotificationCenter.defaultCenter().addObserverForName(updateUserNotificationKey,
-            object: ModelUpdater.getInstance(),
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.handleChangeSettings(notification)})
         keyboardWillShowObserver = NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillShowNotification,
             object: nil, queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.keyboardWillShow(notification)})
@@ -94,8 +86,6 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     
     override func viewWillDisappear(animated: Bool) {
         // Unregister as notification center observer
-        NSNotificationCenter.defaultCenter().removeObserver(mailObserver!)
-        NSNotificationCenter.defaultCenter().removeObserver(changeSettingsObserver)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillShowObserver)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillHideObserver)
         self.view.removeGestureRecognizer(tapRecognizer)
@@ -220,9 +210,22 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         }
         else{
             if(emailTextField.text != email){
+                if(mailObserver == nil){
+                    mailObserver = NSNotificationCenter.defaultCenter().addObserverForName(mailAvailabilityResponseNotificationKey,
+                        object: ModelUpdater.getInstance(),
+                        queue: NSOperationQueue.mainQueue(),
+                        usingBlock: {(notification:NSNotification!) in self.emailAvailabilityHandler(notification)})
+                }
                 RestInterface.getInstance().getEmailAvailability(emailTextField.text)
             }
             else{
+                if(changeSettingsObserver == nil){
+                    changeSettingsObserver = NSNotificationCenter.defaultCenter().addObserverForName(updateUserNotificationKey,
+                        object: ModelUpdater.getInstance(),
+                        queue: NSOperationQueue.mainQueue(),
+                        usingBlock: {(notification:NSNotification!) in self.handleChangeSettings(notification)})
+
+                }
                 if(addressTextField.text != address){
                     RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, avatar: customAvatar == nil ? nil : customAvatar, addressLabel: addressTextField.text)
                 }
@@ -239,6 +242,12 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
     private func emailAvailabilityHandler(notification: NSNotification){
         let response = (notification.userInfo as! [String : HTTPResponseData])["info"]
         if(response!.status == RequestStatus.SUCCESS){
+            if(changeSettingsObserver == nil){
+                changeSettingsObserver = NSNotificationCenter.defaultCenter().addObserverForName(updateUserNotificationKey,
+                    object: ModelUpdater.getInstance(),
+                    queue: NSOperationQueue.mainQueue(),
+                    usingBlock: {(notification:NSNotification!) in self.handleChangeSettings(notification)})
+            }
             if(addressTextField.text != address){
                 RestInterface.getInstance().updateUser(nameTextField.text, email: emailTextField.text, phoneNumber: phoneTextField.text, avatar: customAvatar == nil ? nil : customAvatar, addressLabel: addressTextField.text)
             }
@@ -262,6 +271,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             }
             changeSettingsActivityIndicator.stopAnimating()
             changeSettingsButton.enabled = true
+            NSNotificationCenter.defaultCenter().removeObserver(mailObserver!)
         }
     }
     
@@ -482,5 +492,6 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         }
         changeSettingsActivityIndicator.stopAnimating()
         changeSettingsButton.enabled = true
+        NSNotificationCenter.defaultCenter().removeObserver(changeSettingsObserver)
     }
 }
