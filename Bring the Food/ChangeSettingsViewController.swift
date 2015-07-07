@@ -380,7 +380,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
         // Use smallest side length as crop square length
         var squareLength = min(image.size.width, image.size.height)
         var clippedRect = CGRectMake((image.size.width - squareLength) / 2, (image.size.height - squareLength) / 2, squareLength, squareLength)
-        customAvatar = UIImage(CGImage: CGImageCreateWithImageInRect(image.CGImage, clippedRect))
+        customAvatar = UIImage(CGImage: CGImageCreateWithImageInRect(image.CGImage, clippedRect), scale: 1.0, orientation: image.imageOrientation)
         changeAvatarButton.setImage(customAvatar, forState: .Normal)
         checkIfEnableButton()
     }
