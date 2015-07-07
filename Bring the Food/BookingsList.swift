@@ -104,7 +104,7 @@ public class BookingsList: NSObject, UITableViewDataSource, UITableViewDelegate 
         else{
             expirationLabel.text = NSLocalizedString("EXPIRED",comment:"Expired")
         }
-        amountLabel.text = "\(Int(donation.getParcelSize()))"
+        amountLabel.text = donation.getParcelSize() < Float(Int.max) ? "\(Int(donation.getParcelSize()))" : "\(Int.max)"
         let parcelUnit = donation.getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
             kgIcon.hidden = false

@@ -117,7 +117,7 @@ class BookedDetailViewController: UIViewController, MKMapViewDelegate, UIAlertVi
         infoPanelView.layer.borderWidth = 1.0
         addressLabel.numberOfLines = 2
         foodTypeLabel.text = donation!.getProductType().description
-        foodQuantityLabel.text = String(stringInterpolationSegment: Int(donation!.getParcelSize()))
+        foodQuantityLabel.text = donation!.getParcelSize() < Float(Int.max) ? "\(Int(donation!.getParcelSize()))" : "\(Int.max)"
         let parcelUnit = donation!.getParcelUnit()
         if(parcelUnit == ParcelUnit.KILOGRAMS){
             quantityKgImageView.hidden = false

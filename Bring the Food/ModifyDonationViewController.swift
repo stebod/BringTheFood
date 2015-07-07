@@ -128,7 +128,7 @@ class ModifyDonationViewController: UIViewController, UIAlertViewDelegate {
     }
     
     @IBAction func submitDonationButtonPressed(sender: UIButton) {
-        if(amountTextField.text.toInt() < 1000000){
+        if((amountTextField.text as NSString).floatValue < Float(Int.max)){
             donation?.modify(descriptionTextField.text, newParcelSize: (amountTextField.text as NSString).floatValue)
             updateDonationButton.enabled = false
             activityIndicator.startAnimating()

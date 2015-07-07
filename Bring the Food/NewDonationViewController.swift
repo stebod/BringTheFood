@@ -184,7 +184,7 @@ class NewDonationViewController: UIViewController, UIAlertViewDelegate {
     }
     
     @IBAction func submitDonationButtonPressed(sender: UIButton) {
-        if(amountTextField.text.toInt() < 1000000){
+        if((amountTextField.text as NSString).floatValue < Float(Int.max)){
             var dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.stringFromDate(lastDateSelected!)
