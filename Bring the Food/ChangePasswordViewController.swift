@@ -40,10 +40,6 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
         // Register as notification center observer
-        passwordObserver = NSNotificationCenter.defaultCenter().addObserverForName(passwordChangedNotificationKey,
-            object: ModelUpdater.getInstance(),
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: {(notification:NSNotification!) in self.handleChangePassword(notification)})
         keyboardWillShowObserver = NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillShowNotification,
             object: nil, queue: NSOperationQueue.mainQueue(),
             usingBlock: {(notification:NSNotification!) in self.keyboardWillShow(notification)})
@@ -59,7 +55,6 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
     
     override func viewWillDisappear(animated: Bool) {
         // Unregister as notification center observer
-        NSNotificationCenter.defaultCenter().removeObserver(passwordObserver)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillShowObserver)
         NSNotificationCenter.defaultCenter().removeObserver(keyboardWillHideObserver)
         self.view.removeGestureRecognizer(tapRecognizer)
@@ -151,6 +146,12 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
             alert.show()
         }
         else{
+            if(passwordObserver != nil){
+                passwordObserver = NSNotificationCenter.defaultCenter().addObserverForName(passwordChangedNotificationKey,
+                    object: ModelUpdater.getInstance(),
+                    queue: NSOperationQueue.mainQueue(),
+                    usingBlock: {(notification:NSNotification!) in self.handleChangePassword(notification)})
+            }
             RestInterface.getInstance().changePassword(oldPasswordTextField.text, new_password: passwordTextField.text)
             changePasswordButton.enabled = false
             changePasswordActivityIndicator.startAnimating()
@@ -175,7 +176,6 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
             alert.title = NSLocalizedString("OLD_PASSWORD_WRONG",comment:"Old password wrong")
             alert.message = NSLocalizedString("OLD_PASSWORD_WRONG_MESSAGE",comment:"Old password wrong message")
             alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
-            alert.delegate = self
             alert.show()
         }
         else if(response?.status == RequestStatus.DEVICE_ERROR || response?.status == RequestStatus.NETWORK_ERROR){
@@ -183,7 +183,6 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
             alert.title = NSLocalizedString("NETWORK_ERROR",comment:"Network error")
             alert.message = NSLocalizedString("CHECK_CONNECTIVITY",comment:"Check connectivity")
             alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
-            alert.delegate = self
             alert.show()
         }
         else{
@@ -196,6 +195,7 @@ class ChangePasswordViewController: UIViewController, UIAlertViewDelegate, UIGes
         }
         changePasswordButton.enabled = true
         changePasswordActivityIndicator.stopAnimating()
+        NSNotificationCenter.defaultCenter().removeObserver(passwordObserver)
     }
     
     // Called when keyboard appears on screen
