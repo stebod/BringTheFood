@@ -405,7 +405,7 @@ public class RestInterface : NSObject{
             }
             
             if addressLabel != nil {
-                postString += " \", address\" : {  "
+                postString += ", \"address\" : {  "
                 postString += " \"label\": \"\(addressLabel!)\" "
                 postString += "} "
             }
