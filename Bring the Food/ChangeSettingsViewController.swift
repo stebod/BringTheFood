@@ -480,7 +480,7 @@ class ChangeSettingsViewController: UIViewController,UINavigationControllerDeleg
             let alert = UIAlertView()
             alert.title = NSLocalizedString("SETTINGS_UPDATE_FAILED",comment:"Settings update failed")
             alert.message = NSLocalizedString("SETTINGS_UPDATE_FAILED_MESSAGE",comment:"Settings update failed message")
-            alert.addButtonWithTitle("Dismiss")
+            alert.addButtonWithTitle(NSLocalizedString("DISMISS",comment:"Dismiss"))
             alert.show()
         }
         else{
