@@ -333,7 +333,7 @@ class MyDetailViewController: UIViewController, MKMapViewDelegate, UIAlertViewDe
         if(response?.status == RequestStatus.SUCCESS){
             let collector = donation?.getCollector()
             if(collector != nil){
-                imageDownloader = ImageDownloader(url: donation!.getSupplier().getImageURL())
+                imageDownloader = ImageDownloader(url: donation!.getCollector()!.getImageURL())
                 userImageObserver = NSNotificationCenter.defaultCenter().addObserverForName(imageDownloadNotificationKey,
                     object: imageDownloader,
                     queue: NSOperationQueue.mainQueue(),
