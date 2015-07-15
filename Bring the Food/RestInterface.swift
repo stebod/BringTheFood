@@ -379,7 +379,7 @@ public class RestInterface : NSObject{
         if(isLoggedIn()){
             
             var parameters:String = "?user_credentials=\(singleAccessToken)"
-            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/users/\(self.userId)" + parameters)!)
+            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/user" + parameters)!)
             request.HTTPMethod = "PUT"
             
             //preparo il body
@@ -468,7 +468,7 @@ public class RestInterface : NSObject{
     public func getUserInfo(){
         if(isLoggedIn()){
             var parameters:String = "?user_credentials=\(singleAccessToken)"
-            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/users/\(userId)" + parameters)!)
+            var request = NSMutableURLRequest(URL: NSURL(string: serverAddress + "/user" + parameters)!)
             request.HTTPMethod = "GET"
             sendRequest(request, notification_key: userInfoResponseNotificationKey)
         }
